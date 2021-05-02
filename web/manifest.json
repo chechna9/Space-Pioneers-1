@@ -1,6 +1,6 @@
 {
-    "name": "space_pioneers",
-    "short_name": "space_pioneers",
+    "name": "astro01",
+    "short_name": "astro01",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

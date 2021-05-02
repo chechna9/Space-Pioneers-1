@@ -1,3 +1,5 @@
+import 'package:astro01/components/constants.dart';
+
 import 'testing.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -50,8 +52,8 @@ class _InscriptionState extends State<Inscription> {
                     myBlue: myBlue,
                   ),
                   Positioned(
-                      top: -MediaQuery.of(context).size.height * 0.185,
-                      left: MediaQuery.of(context).size.width * 0.28,
+                      top: -Dimens.Height * 0.185,
+                      left: Dimens.Width * 0.28,
                       child: Image.asset('assets/images/other/astro.png')),
                 ],
               ),

@@ -1,5 +1,6 @@
 import 'package:animated_widgets/animated_widgets.dart';
 import 'package:animated_widgets/widgets/shake_animated_widget.dart';
+import 'package:astro01/components/constants.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +20,10 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     DH = MediaQuery.of(context).size.height;
     DW = MediaQuery.of(context).size.width;
+    Dimens.Height = MediaQuery.of(context)
+        .size
+        .height; // Global variabl to use everywhere in code instead of using MediaQuery
+    Dimens.Width = MediaQuery.of(context).size.width;
     return Material(
       child: Container(
         color: myRed,

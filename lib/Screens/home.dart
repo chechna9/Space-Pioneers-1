@@ -2,7 +2,7 @@ import 'package:animated_widgets/animated_widgets.dart';
 import 'package:animated_widgets/widgets/shake_animated_widget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:astro01/components/cst.dart';
+import 'package:astro01/components/constants.dart';
 
 class Home extends StatefulWidget {
   @override

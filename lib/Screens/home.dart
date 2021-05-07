@@ -1,8 +1,8 @@
 import 'package:animated_widgets/animated_widgets.dart';
 import 'package:animated_widgets/widgets/shake_animated_widget.dart';
-import 'package:astro01/components/constants.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:astro01/components/cst.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -10,10 +10,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final Color myYellow = Color(0xffffcc00);
-  final Color myBlue = Color(0xff0c0026);
-  final Color myRed = Color(0xffe6023d);
-
   @override
   Widget build(BuildContext context) {
     return Material(

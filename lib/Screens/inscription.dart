@@ -1,4 +1,3 @@
-import 'testing.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
@@ -41,20 +40,24 @@ class _InscriptionState extends State<Inscription> {
                 fontSize: 30,
               ),
             ),
-            Container(
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  RegCard(
-                    myRed: myRed,
-                    myBlue: myBlue,
+            Stack(
+              clipBehavior: Clip.none,
+              children: [
+                RegCard(
+                  myRed: myRed,
+                  myBlue: myBlue,
+                ),
+                Positioned(
+                  top: -100,
+                  left: MediaQuery.of(context).size.width * 0.31,
+                  child: Image(
+                    height: 150,
+                    width: 150,
+                    fit: BoxFit.scaleDown,
+                    image: AssetImage('assets/images/other/astro.png'),
                   ),
-                  Positioned(
-                      top: -MediaQuery.of(context).size.height * 0.185,
-                      left: MediaQuery.of(context).size.width * 0.28,
-                      child: Image.asset('assets/images/other/astro.png')),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         ),

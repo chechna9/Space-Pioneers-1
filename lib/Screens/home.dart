@@ -13,103 +13,51 @@ class _HomeState extends State<Home> {
   final Color myYellow = Color(0xffffcc00);
   final Color myBlue = Color(0xff0c0026);
   final Color myRed = Color(0xffe6023d);
-  double DH; //device height
-  double DW; //device width
 
   @override
   Widget build(BuildContext context) {
-    DH = MediaQuery.of(context).size.height;
-    DW = MediaQuery.of(context).size.width;
-    Dimens.Height = MediaQuery.of(context)
-        .size
-        .height; // Global variabl to use everywhere in code instead of using MediaQuery
-    Dimens.Width = MediaQuery.of(context).size.width;
     return Material(
       child: Container(
         color: myRed,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            SizedBox(),
+            Logo(myBlue: myBlue),
+            Midle(),
+            Footer(myRed: myRed),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Footer extends StatelessWidget {
+  const Footer({
+    Key key,
+    @required this.myRed,
+  }) : super(key: key);
+
+  final Color myRed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Row(
+          children: [
             Expanded(
-              flex: 12,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Expanded(child: Container()),
-                  Expanded(
-                      flex: 2,
-                      child: Stack(
-                        clipBehavior: Clip.none,
-                        children: [
-                          //first logo star row
-                          Positioned(
-                            top: -DH * 0.03,
-                            left: DW * 0.17,
-                            child: Star(
-                              scale: 2.5,
-                              angle: -50,
-                            ),
-                          ),
-                          Positioned(
-                            top: -DH * 0.03,
-                            left: DW * 0.32,
-                            child: Star(
-                              scale: 2.5,
-                              angle: -50,
-                            ),
-                          ),
-                          //Second logo star row
-                          Positioned(
-                            top: DH * 0.017,
-                            left: DW * 0.023,
-                            child: Star(
-                              scale: 2.5,
-                              angle: -48,
-                            ),
-                          ),
-                          Positioned(
-                            top: DH * 0.017,
-                            left: DW * 0.425,
-                            child: Star(
-                              scale: 2.5,
-                              angle: -47,
-                            ),
-                          ),
-//i had a problem whith the third star
-//row so i need to implement it another place
-                          Container(child: Title(myBlue: myBlue)),
-                        ],
-                      )),
-                  Expanded(
-                    flex: 3,
-                    child: Midle(DW: DW, DH: DH),
-                  ),
-                  Expanded(child: Container()),
-                ],
-              ),
+              child: Inscrire(myRed: myRed),
+            ),
+            SizedBox(
+              width: 15,
             ),
             Expanded(
-              flex: 2,
-              child: Container(
-                width: double.infinity,
-                color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.all(30.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Inscrire(myRed: myRed),
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Expanded(
-                        child: SeConnecter(myRed: myRed),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              child: SeConnecter(myRed: myRed),
             ),
           ],
         ),
@@ -118,101 +66,150 @@ class _HomeState extends State<Home> {
   }
 }
 
-class Midle extends StatelessWidget {
-  const Midle({
+class Logo extends StatelessWidget {
+  const Logo({
     Key key,
-    @required this.DW,
-    @required this.DH,
+    @required this.myBlue,
   }) : super(key: key);
 
-  final double DW;
-  final double DH;
+  final Color myBlue;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       clipBehavior: Clip.none,
       children: [
-        Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/other/astroInBox.png'),
-              fit: BoxFit.scaleDown,
-            ),
-          ),
-        ),
-        //Third logo star row
+        //first logo star row
         Positioned(
-          top: -DH * 0.17,
-          left: DW * 0.17,
-          child: Star(
-            scale: 2.5,
-            angle: -48,
-          ),
-        ),
-        Positioned(
-          top: -DH * 0.17,
-          left: DW * 0.452,
+          top: -25,
+          left: 75,
           child: Star(
             scale: 2.5,
             angle: -50,
           ),
         ),
         Positioned(
-          top: -DH * 0.17,
-          left: DW * 0.695,
+          top: -25,
+          left: 135,
+          child: Star(
+            scale: 2.5,
+            angle: -50,
+          ),
+        ),
+        //Second logo star row
+        Positioned(
+          top: 14,
+          left: 10,
+          child: Star(
+            scale: 2.5,
+            angle: -48,
+          ),
+        ),
+        Positioned(
+          top: 14,
+          left: 175,
           child: Star(
             scale: 2.5,
             angle: -47,
           ),
         ),
 
+        Container(child: Title(myBlue: myBlue)),
+        //Third logo star row
+        Positioned(
+          top: 65,
+          left: -25,
+          child: Star(
+            scale: 2.5,
+            angle: -48,
+          ),
+        ),
+
+        Positioned(
+          top: 65,
+          left: 93,
+          child: Star(
+            scale: 2.5,
+            angle: -50,
+          ),
+        ),
+        Positioned(
+          top: 65,
+          left: 209,
+          child: Star(
+            scale: 2.5,
+            angle: -47,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class Midle extends StatelessWidget {
+  const Midle({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        Image(
+          image: AssetImage('assets/images/other/astroInBox.png'),
+        ),
         //first star row
         Positioned(
           top: 0,
-          left: DW * 0.3,
+          left: 40,
           child: Star(
             angle: -80,
             scale: 2.8,
           ),
         ),
+
         Positioned(
           top: 0,
-          left: DW * 0.65,
+          left: 180,
           child: Star(
             angle: -80,
             scale: 1.7,
           ),
         ),
         //Second star row
+
         Positioned(
-          top: DH * 0.05,
-          left: DW * 0.18,
+          top: 44,
+          left: -15,
           child: Star(
             angle: -80,
             scale: 1.7,
           ),
         ),
+
         Positioned(
-          top: DH * 0.065,
-          left: DW * 0.79,
+          top: 56,
+          left: 235,
           child: Star(
             angle: -80,
             scale: 2.8,
           ),
         ),
         //Third star row
+
         Positioned(
-          top: DH * 0.128,
-          left: DW * 0.28,
+          top: 109,
+          left: 25,
           child: Star(
             angle: -80,
             scale: 2.8,
           ),
         ),
+
         Positioned(
-          top: DH * 0.125,
-          left: DW * 0.7,
+          top: 105,
+          left: 198,
           child: Star(
             angle: -80,
             scale: 2.2,
@@ -279,7 +276,6 @@ class Star extends StatelessWidget {
         enabled: true,
         shakeAngle: Rotation.deg(z: 15),
         duration: Duration(milliseconds: 1500),
-        //shakeAngle: Rotation.deg(z: 40),
         curve: Curves.linear,
         child: Image.asset(
           'assets/images/other/star.png',

@@ -1,3 +1,9 @@
+// <<<<<<< master
+// =======
+// import 'package:astro01/components/constants.dart';
+
+// import 'testing.dart';
+// >>>>>>> master
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
@@ -56,8 +62,17 @@ class _InscriptionState extends State<Inscription> {
                     fit: BoxFit.scaleDown,
                     image: AssetImage('assets/images/other/astro.png'),
                   ),
-                ),
-              ],
+// <<<<<<< master
+//                 ),
+//               ],
+// =======
+//                   Positioned(
+//                       top: -Dimens.Height * 0.185,
+//                       left: Dimens.Width * 0.28,
+//                       child: Image.asset('assets/images/other/astro.png')),
+//                 ],
+//               ),
+// >>>>>>> master
             ),
           ],
         ),

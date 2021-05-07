@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:astro01/components/constants.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -12,9 +13,6 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    final Color myYellow = Color(0xffffcc00);
-    final Color myBlue = Color(0xff0c0026);
-    final Color myRed = Color(0xffe6023d);
     return Material(
       child: Container(
         padding:

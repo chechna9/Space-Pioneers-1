@@ -1,11 +1,7 @@
-// <<<<<<< master
-// =======
-// import 'package:astro01/components/constants.dart';
-
-// import 'testing.dart';
-// >>>>>>> master
+import 'testing.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:astro01/components/constants.dart';
 
 class Inscription extends StatefulWidget {
   @override
@@ -13,10 +9,6 @@ class Inscription extends StatefulWidget {
 }
 
 class _InscriptionState extends State<Inscription> {
-  final Color myYellow = Color(0xffffcc00);
-  final Color myBlue = Color(0xff0c0026);
-  final Color myRed = Color(0xffe6023d);
-
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -62,17 +54,8 @@ class _InscriptionState extends State<Inscription> {
                     fit: BoxFit.scaleDown,
                     image: AssetImage('assets/images/other/astro.png'),
                   ),
-// <<<<<<< master
-//                 ),
-//               ],
-// =======
-//                   Positioned(
-//                       top: -Dimens.Height * 0.185,
-//                       left: Dimens.Width * 0.28,
-//                       child: Image.asset('assets/images/other/astro.png')),
-//                 ],
-//               ),
-// >>>>>>> master
+                ),
+              ],
             ),
           ],
         ),

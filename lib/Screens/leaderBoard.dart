@@ -8,6 +8,27 @@ class LeaderBoard extends StatefulWidget {
 }
 
 class _LeaderBoardState extends State<LeaderBoard> {
+  List<String> nameList = <String>[
+    'name1',
+    'name2',
+    'name3',
+  ];
+  List<String> photoList = <String>[
+    'ridingRocket',
+    'ridingMoon',
+    'ridingRocket',
+  ];
+  List<int> pointList = <int>[
+    255,
+    25,
+    12,
+  ];
+  List<int> rankList = <int>[
+    1,
+    2,
+    3,
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,6 +57,32 @@ class _LeaderBoardState extends State<LeaderBoard> {
                   color: Colors.white,
                   fontWeight: FontWeight.w900,
                 ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: 15,
+                  itemBuilder: (BuildContext context, int ind) {
+                    return Column(
+                      children: [
+                        ClassementCard(
+                          name: "name$ind",
+                          photo: photoList[ind % 3],
+                          rank: ind + 1,
+                          point: 1000 - ind * ind,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              ClassementCard(
+                name: "curentUser",
               ),
             ],
           ),

@@ -2,6 +2,7 @@ import 'testing.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
+import '../components/TextInput.dart';
 
 class Inscription extends StatefulWidget {
   @override
@@ -9,12 +10,22 @@ class Inscription extends StatefulWidget {
 }
 
 class _InscriptionState extends State<Inscription> {
+  GlobalKey _formKey;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _formKey = GlobalKey<FormState>();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
       child: Container(
-        padding:
-            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        padding: EdgeInsets.only(
+            bottom: (MediaQuery.of(context).viewInsets.bottom - 100) > 0
+                ? MediaQuery.of(context).viewInsets.bottom - 100
+                : MediaQuery.of(context).viewInsets.bottom),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -40,14 +51,13 @@ class _InscriptionState extends State<Inscription> {
             ),
             Stack(
               clipBehavior: Clip.none,
+              alignment: AlignmentDirectional.topCenter,
               children: [
                 RegCard(
-                  myRed: myRed,
-                  myBlue: myBlue,
+                  formKey: _formKey,
                 ),
                 Positioned(
                   top: -100,
-                  left: MediaQuery.of(context).size.width * 0.31,
                   child: Image(
                     height: 150,
                     width: 150,
@@ -64,16 +74,20 @@ class _InscriptionState extends State<Inscription> {
   }
 }
 
-class RegCard extends StatelessWidget {
-  const RegCard({
+class RegCard extends StatefulWidget {
+  RegCard({
     Key key,
-    @required this.myRed,
-    @required this.myBlue,
+    this.formKey,
   }) : super(key: key);
+  GlobalKey<FormState> formKey;
 
-  final Color myRed;
-  final Color myBlue;
+  @override
+  _RegCardState createState() => _RegCardState();
+}
 
+class _RegCardState extends State<RegCard> {
+  DateTime _dateTime;
+  String _dateValidate = "Date de Naissance";
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -82,137 +96,130 @@ class RegCard extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextFormField(
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w100,
+          child: Form(
+            key: widget.formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CustomTextForm(
+                  labelText: "Username",
                 ),
-                decoration: InputDecoration(
-                  labelText: 'Username',
-                  alignLabelWithHint: true,
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: myRed, width: 2),
-                      borderRadius: BorderRadius.circular(100)),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: myBlue, width: 2),
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  contentPadding:
-                      EdgeInsets.only(left: 25, top: 20, bottom: 20),
+                SizedBox(
+                  height: 12,
                 ),
-                //onChanged: (val) => userName = val,
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              TextFormField(
-                obscureText: true,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w100,
+
+                CustomTextForm(
+                  labelText: "Email",
                 ),
-                decoration: InputDecoration(
-                  alignLabelWithHint: true,
-                  labelText: 'Mot de passe',
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: myRed, width: 2),
-                      borderRadius: BorderRadius.circular(100)),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: myBlue, width: 2),
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  contentPadding:
-                      EdgeInsets.only(left: 25, top: 20, bottom: 20),
+                SizedBox(
+                  height: 12,
                 ),
-                //onChanged: (val) => password = val,
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              TextFormField(
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w100,
+                CustomTextForm(
+                  obscured: true,
+                  labelText: "Mot de Passe",
                 ),
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  alignLabelWithHint: true,
-                  labelText: 'Date de naissance',
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: myRed, width: 2),
-                      borderRadius: BorderRadius.circular(100)),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: myBlue, width: 2),
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  contentPadding:
-                      EdgeInsets.only(left: 25, top: 20, bottom: 20),
+
+                SizedBox(
+                  height: 12,
                 ),
-                //onChanged: (val) => dateNessance = int.parse(val),
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              TextFormField(
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w100,
-                ),
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  alignLabelWithHint: true,
-                  labelText: 'Email',
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: myRed, width: 2),
-                      borderRadius: BorderRadius.circular(100)),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: myBlue, width: 2),
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  contentPadding:
-                      EdgeInsets.only(left: 25, top: 20, bottom: 20),
-                ),
-                //onChanged: (val) => email = val,
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextButton(
-                        child: Text(
-                          'S\'inscrire',
+                //date de naissance
+                FormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (e) {
+                    _dateValidate = _dateTime == null
+                        ? 'Il faut selectionner une date'
+                        : "";
+                  },
+                  builder: (FormFieldState<dynamic> e) => Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      border: Border.all(
+                        color: myRed,
+                        width: 2,
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.calendar_today,
+                            color:
+                                _dateValidate != "Il faut selectionner une date"
+                                    ? myBlue
+                                    : myYellow,
+                            size: 30,
+                          ),
+                          onPressed: () {
+                            showDatePicker(
+                              initialEntryMode: DatePickerEntryMode.input,
+                              context: context,
+                              initialDate: _dateTime == null
+                                  ? DateTime.now()
+                                  : _dateTime,
+                              firstDate: DateTime(2000),
+                              lastDate: DateTime.now(),
+                            ).then((value) {
+                              setState(() {
+                                _dateTime = value;
+                              });
+                            });
+                          },
+                        ),
+                        Text(
+                          _dateTime == null
+                              ? _dateValidate
+                              : _dateTime.toString().split(" ")[0],
                           style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w900,
-                            fontSize: 20,
+                            color:
+                                _dateValidate == "Il faut selectionner une date"
+                                    ? Colors.red
+                                    : null,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w100,
                           ),
                         ),
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 50, vertical: 20),
-                          backgroundColor: myRed,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(100),
-                            side: BorderSide(
-                              color: myRed,
-                              width: 2,
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 12,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextButton(
+                          child: Text(
+                            'S\'inscrire',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w900,
+                              fontSize: 20,
                             ),
                           ),
-                        ),
-                        onPressed: () {
-                          print('S\'inscrire');
-                        }),
-                  ),
-                ],
-              ),
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 50, vertical: 20),
+                            backgroundColor: myRed,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(100),
+                              side: BorderSide(
+                                color: myRed,
+                                width: 2,
+                              ),
+                            ),
+                          ),
+                          onPressed: () {
+                            print('S\'inscrire');
+                            widget.formKey.currentState.validate();
+                          }),
+                    ),
+                  ],
+                ),
 
-              ///tested
-            ],
+                ///tested
+              ],
+            ),
           ),
         ),
         color: Colors.white,

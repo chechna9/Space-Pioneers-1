@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
+import '../components/TextInput.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -10,13 +11,22 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  GlobalKey _formKey;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _formKey = GlobalKey<FormState>();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Material(
       child: Container(
-        padding:
-            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        padding: EdgeInsets.only(
+            bottom: (MediaQuery.of(context).viewInsets.bottom - 100) > 0
+                ? MediaQuery.of(context).viewInsets.bottom - 100
+                : MediaQuery.of(context).viewInsets.bottom),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -41,15 +51,14 @@ class _LoginState extends State<Login> {
               ),
             ),
             Stack(
+              alignment: AlignmentDirectional.topCenter,
               clipBehavior: Clip.none,
               children: [
                 LogCard(
-                  myRed: myRed,
-                  myBlue: myBlue,
+                  formKey: _formKey,
                 ),
                 Positioned(
                   top: -100,
-                  left: MediaQuery.of(context).size.width * 0.31,
                   child: Image(
                     height: 150,
                     width: 150,
@@ -67,15 +76,11 @@ class _LoginState extends State<Login> {
 }
 
 class LogCard extends StatelessWidget {
-  const LogCard({
+  LogCard({
     Key key,
-    @required this.myRed,
-    @required this.myBlue,
+    this.formKey,
   }) : super(key: key);
-
-  final Color myRed;
-  final Color myBlue;
-
+  GlobalKey<FormState> formKey;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -84,87 +89,58 @@ class LogCard extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextFormField(
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w100,
-                ),
-                decoration: InputDecoration(
+          child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CustomTextForm(
                   labelText: 'Username',
-                  alignLabelWithHint: true,
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: myRed, width: 2),
-                      borderRadius: BorderRadius.circular(100)),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: myBlue, width: 2),
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  contentPadding:
-                      EdgeInsets.only(left: 25, top: 20, bottom: 20),
                 ),
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              TextFormField(
-                obscureText: true,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w100,
+                SizedBox(
+                  height: 12,
                 ),
-                decoration: InputDecoration(
-                  alignLabelWithHint: true,
-                  labelText: 'Mot de passe',
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: myRed, width: 2),
-                      borderRadius: BorderRadius.circular(100)),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: myBlue, width: 2),
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  contentPadding:
-                      EdgeInsets.only(left: 25, top: 20, bottom: 20),
+                CustomTextForm(
+                  labelText: 'Email',
                 ),
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextButton(
-                        child: Text(
-                          'Se connecter',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w900,
-                            fontSize: 20,
-                          ),
-                        ),
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 50, vertical: 20),
-                          backgroundColor: myRed,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(100),
-                            side: BorderSide(
-                              color: myRed,
-                              width: 2,
+                SizedBox(
+                  height: 12,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextButton(
+                          child: Text(
+                            'Se connecter',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w900,
+                              fontSize: 20,
                             ),
                           ),
-                        ),
-                        onPressed: () {
-                          print('se connecter');
-                        }),
-                  ),
-                ],
-              ),
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 50, vertical: 20),
+                            backgroundColor: myRed,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(100),
+                              side: BorderSide(
+                                color: myRed,
+                                width: 2,
+                              ),
+                            ),
+                          ),
+                          onPressed: () {
+                            print('se connecter');
+                            formKey.currentState.validate();
+                          }),
+                    ),
+                  ],
+                ),
 
-              ///tested
-            ],
+                ///tested
+              ],
+            ),
           ),
         ),
         color: Colors.white,

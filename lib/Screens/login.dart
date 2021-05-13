@@ -28,15 +28,7 @@ class _LoginState extends State<Login> {
                 ? MediaQuery.of(context).viewInsets.bottom - 100
                 : MediaQuery.of(context).viewInsets.bottom),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            stops: [0, 1],
-            colors: [
-              myBlue,
-              Color(0xff50012d),
-            ],
-          ),
+          gradient: myGradiant,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -132,7 +124,8 @@ class LogCard extends StatelessWidget {
                           ),
                           onPressed: () {
                             print('se connecter');
-                            formKey.currentState.validate();
+                            //formKey.currentState.validate();
+                            Navigator.pushNamed(context, '/homeScreen');
                           }),
                     ),
                   ],

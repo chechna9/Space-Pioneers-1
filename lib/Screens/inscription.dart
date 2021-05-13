@@ -27,15 +27,7 @@ class _InscriptionState extends State<Inscription> {
                 ? MediaQuery.of(context).viewInsets.bottom - 100
                 : MediaQuery.of(context).viewInsets.bottom),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            stops: [0, 1],
-            colors: [
-              myBlue,
-              Color(0xff50012d),
-            ],
-          ),
+          gradient: myGradiant,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -211,7 +203,8 @@ class _RegCardState extends State<RegCard> {
                           ),
                           onPressed: () {
                             print('S\'inscrire');
-                            widget.formKey.currentState.validate();
+                            //widget.formKey.currentState.validate();
+                            Navigator.pushNamed(context, '/homeScreen');
                           }),
                     ),
                   ],

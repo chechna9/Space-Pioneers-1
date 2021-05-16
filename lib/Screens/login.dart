@@ -2,6 +2,15 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import '../components/TextInput.dart';
+import 'package:injector/injector.dart';
+import 'package:supabase/supabase.dart';
+
+import 'splashScreen.dart';
+
+const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
+const supabaseKey =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDQ3OTY4MiwiZXhwIjoxOTM2MDU1NjgyfQ.IoKgpB9APMw5Te9DYgbJZIbYcvPOwl41dl4-IKFjpVk';
+final supabaseclient = SupabaseClient(supabaseUrl, supabaseKey);
 
 class Login extends StatefulWidget {
   @override
@@ -12,10 +21,12 @@ class _LoginState extends State<Login> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   GlobalKey _formKey;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
     _formKey = GlobalKey<FormState>();
   }
 
@@ -28,7 +39,15 @@ class _LoginState extends State<Login> {
                 ? MediaQuery.of(context).viewInsets.bottom - 100
                 : MediaQuery.of(context).viewInsets.bottom),
         decoration: BoxDecoration(
-          gradient: myGradiant,
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: [0, 1],
+            colors: [
+              myBlue,
+              Color(0xff50012d),
+            ],
+          ),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -67,12 +86,27 @@ class _LoginState extends State<Login> {
   }
 }
 
-class LogCard extends StatelessWidget {
+class LogCard extends StatefulWidget {
   LogCard({
     Key key,
     this.formKey,
   }) : super(key: key);
   GlobalKey<FormState> formKey;
+
+  @override
+  _LogCardState createState() => _LogCardState();
+}
+
+class _LogCardState extends State<LogCard> {
+  TextEditingController _email;
+  TextEditingController _password;
+  @override
+  void initState() {
+    super.initState();
+    _email = TextEditingController();
+    _password = TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -82,18 +116,21 @@ class LogCard extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Form(
-            key: formKey,
+            key: widget.formKey,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 CustomTextForm(
-                  labelText: 'Username',
+                  labelText: 'Email',
+                  controller: _email,
                 ),
                 SizedBox(
                   height: 12,
                 ),
                 CustomTextForm(
-                  labelText: 'Email',
+                  labelText: 'Password',
+                  controller: _password,
+                  obscured: true,
                 ),
                 SizedBox(
                   height: 12,
@@ -122,11 +159,7 @@ class LogCard extends StatelessWidget {
                               ),
                             ),
                           ),
-                          onPressed: () {
-                            print('se connecter');
-                            //formKey.currentState.validate();
-                            Navigator.pushNamed(context, '/homeScreen');
-                          }),
+                          onPressed: _login),
                     ),
                   ],
                 ),
@@ -139,5 +172,21 @@ class LogCard extends StatelessWidget {
         color: Colors.white,
       ),
     );
+  }
+
+  Future _login() async {
+    final signInResult = await Injector.appInstance
+        .get<SupabaseClient>()
+        .auth
+        .signIn(email: _email.text, password: _password.text);
+
+    if (signInResult != null && signInResult.user != null) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => SplashScreen()));
+    } else if (signInResult.error.message != null) {
+      TextButton(onPressed: () {}, child: Text(' erreur dans le mot ed passe'));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(signInResult.error.message)));
+    }
   }
 }

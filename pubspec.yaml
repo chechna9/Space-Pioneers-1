@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  injector: ^2.0.0
+  supabase: ^0.0.1-dev.14
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -31,7 +33,6 @@ dependencies:
   auto_size_text: ^2.1.0
   bordered_text: ^1.0.1
   animated_widgets: ^1.0.6
-  polygon_clipper: ^1.0.2
 
 dev_dependencies:
   flutter_test:

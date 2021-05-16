@@ -6,13 +6,16 @@ class CustomTextForm extends StatelessWidget {
     Key key,
     this.labelText,
     this.obscured: false,
+    this.controller,
   }) : super(key: key);
 
   final String labelText;
   final bool obscured;
+  final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       obscureText: obscured,
       style: TextStyle(

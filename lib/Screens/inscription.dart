@@ -1,8 +1,18 @@
+import 'package:astro01/Screens/splashScreen.dart';
+
+import 'splashScreen.dart';
 import 'testing.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import '../components/TextInput.dart';
+import 'package:injector/injector.dart';
+import 'package:supabase/supabase.dart';
+
+const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
+const supabaseKey =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDQ3OTY4MiwiZXhwIjoxOTM2MDU1NjgyfQ.IoKgpB9APMw5Te9DYgbJZIbYcvPOwl41dl4-IKFjpVk';
+final supabaseclient = SupabaseClient(supabaseUrl, supabaseKey);
 
 class Inscription extends StatefulWidget {
   @override
@@ -10,14 +20,7 @@ class Inscription extends StatefulWidget {
 }
 
 class _InscriptionState extends State<Inscription> {
-  GlobalKey _formKey;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _formKey = GlobalKey<FormState>();
-  }
-
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -88,6 +91,19 @@ class RegCard extends StatefulWidget {
 class _RegCardState extends State<RegCard> {
   DateTime _dateTime;
   String _dateValidate = "Date de Naissance";
+  TextEditingController _email;
+  TextEditingController _password;
+  TextEditingController _username;
+
+  final _formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    super.initState();
+    _email = TextEditingController();
+    _password = TextEditingController();
+    _username = TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -97,12 +113,14 @@ class _RegCardState extends State<RegCard> {
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Form(
-            key: widget.formKey,
+            key: _formKey,
+            //key: widget.formKey,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 CustomTextForm(
                   labelText: "Username",
+                  controller: _username,
                 ),
                 SizedBox(
                   height: 12,
@@ -110,6 +128,7 @@ class _RegCardState extends State<RegCard> {
 
                 CustomTextForm(
                   labelText: "Email",
+                  controller: _email,
                 ),
                 SizedBox(
                   height: 12,
@@ -117,6 +136,7 @@ class _RegCardState extends State<RegCard> {
                 CustomTextForm(
                   obscured: true,
                   labelText: "Mot de Passe",
+                  controller: _password,
                 ),
 
                 SizedBox(
@@ -210,6 +230,8 @@ class _RegCardState extends State<RegCard> {
                             ),
                           ),
                           onPressed: () {
+                            print(_email.text);
+                            _signup;
                             print('S\'inscrire');
                             widget.formKey.currentState.validate();
                           }),
@@ -225,5 +247,31 @@ class _RegCardState extends State<RegCard> {
         color: Colors.white,
       ),
     );
+  }
+
+  Future _signup() async {
+    if (_formKey.currentState.validate()) {
+      final signInResult = await Injector.appInstance
+          .get<SupabaseClient>()
+          .auth
+          .signUp(_email.text, _password.text);
+
+      if (signInResult != null && signInResult.user != null) {
+        await supabaseclient.from("user").insert({
+          "name": _username.text,
+          "email": _email.text,
+          'points': 0,
+          'etoiles': 0,
+          'naissance': _dateTime.timeZoneName
+        }).execute();
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => SplashScreen()));
+      } else if (signInResult.error.message != null) {
+        TextButton(
+            onPressed: () {}, child: Text(' erreur dans le mot ed passe'));
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(signInResult.error.message)));
+      }
+    }
   }
 }

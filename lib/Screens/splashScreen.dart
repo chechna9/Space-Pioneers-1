@@ -4,12 +4,12 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 
-class Home extends StatefulWidget {
+class SplashScreen extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _HomeState extends State<Home> {
+class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Material(

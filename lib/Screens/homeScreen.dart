@@ -18,15 +18,15 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: Stack(
-            alignment: Alignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
+              Stack(
+                clipBehavior: Clip.none,
+                alignment: Alignment.topRight,
                 children: [
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AutoSizeText(
                         'Salut Anis !',
@@ -49,6 +49,22 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
+                  Positioned(
+                    bottom: -35,
+                    right: -100,
+                    child: Star(angle: 8, scale: 2.8),
+                  ),
+                  Positioned(
+                    top: -50,
+                    right: -10,
+                    child: Star(angle: 8, scale: 2.8),
+                  ),
+                ],
+              ),
+              Stack(
+                alignment: Alignment.bottomCenter,
+                clipBehavior: Clip.none,
+                children: [
                   Column(
                     children: [
                       SelectBox(
@@ -74,32 +90,22 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
+                  Positioned(
+                    bottom: -70,
+                    left: 50,
+                    child: Star(angle: 8, scale: 2.8),
+                  ),
+                  Positioned(
+                    bottom: -50,
+                    right: 10,
+                    child: Star(angle: 8, scale: 2.8),
+                  ),
+                  Positioned(
+                    bottom: 130,
+                    left: 0,
+                    child: Star(angle: 8, scale: 2.8),
+                  ),
                 ],
-              ),
-              Positioned(
-                top: 20,
-                left: 235,
-                child: Star(angle: 8, scale: 2.8),
-              ),
-              Positioned(
-                top: 150,
-                left: 330,
-                child: Star(angle: 5, scale: 2.8),
-              ),
-              Positioned(
-                top: 550,
-                left: 0,
-                child: Star(angle: 8, scale: 2.8),
-              ),
-              Positioned(
-                top: 750,
-                left: 330,
-                child: Star(angle: 8, scale: 2.8),
-              ),
-              Positioned(
-                top: 780,
-                left: 40,
-                child: Star(angle: 8, scale: 2.8),
               ),
             ],
           ),

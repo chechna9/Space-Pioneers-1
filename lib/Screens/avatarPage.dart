@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import '../components/constants.dart';
 
 String avatar = "default";
-StreamController<String> avatarController = StreamController();
+StreamController<String> avatarController =
+    StreamController<String>.broadcast();
 
 class AvatarPage extends StatefulWidget {
   AvatarPage(this.stream);
@@ -32,7 +33,7 @@ class AvatarPageState extends State<AvatarPage> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/profilePage');
+            Navigator.pushReplacementNamed(context, '/profilePage');
           },
           icon: Icon(
             Icons.arrow_back,

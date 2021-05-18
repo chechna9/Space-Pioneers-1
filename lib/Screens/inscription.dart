@@ -1,5 +1,4 @@
 import 'package:astro01/Screens/splashScreen.dart';
-
 import 'splashScreen.dart';
 import 'testing.dart';
 import 'package:auto_size_text/auto_size_text.dart';

@@ -31,7 +31,9 @@ class AvatarPageState extends State<AvatarPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, '/profilePage');
+          },
           icon: Icon(
             Icons.arrow_back,
             size: 30,

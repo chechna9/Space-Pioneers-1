@@ -71,6 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         image: 'astroReading',
                         text: 'Decouvrire',
                         color: myRed,
+                        onPressed: () {},
                       ),
                       SizedBox(
                         height: 30,
@@ -79,6 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         image: 'ridingRocket',
                         text: 'Jouer',
                         color: Color(0xffAB02E6),
+                        onPressed: () {},
                       ),
                       SizedBox(
                         height: 30,
@@ -87,6 +89,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         image: 'ridingMoon',
                         text: 'Profile',
                         color: Color(0xff1759BC),
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/profilePage');
+                        },
                       ),
                     ],
                   ),
@@ -116,15 +121,16 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class SelectBox extends StatelessWidget {
-  SelectBox({Key key, this.color, this.image, this.text}) : super(key: key);
+  SelectBox({Key key, this.color, this.image, this.text, this.onPressed})
+      : super(key: key);
   final String image;
   final String text;
   final Color color;
-
+  final Function onPressed;
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {},
+      onPressed: onPressed,
       style: TextButton.styleFrom(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),

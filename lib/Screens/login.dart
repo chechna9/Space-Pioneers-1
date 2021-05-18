@@ -159,7 +159,8 @@ class _LogCardState extends State<LogCard> {
                               ),
                             ),
                           ),
-                          onPressed: _login),
+                          onPressed: () {_login;
+                          Navigator.pushNamed(context, '/quiz');}),
                     ),
                   ],
                 ),

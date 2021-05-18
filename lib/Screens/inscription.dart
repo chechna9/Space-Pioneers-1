@@ -1,5 +1,4 @@
 import 'package:astro01/Screens/splashScreen.dart';
-
 import 'splashScreen.dart';
 import 'testing.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -234,6 +233,7 @@ class _RegCardState extends State<RegCard> {
                             _signup;
                             print('S\'inscrire');
                             widget.formKey.currentState.validate();
+                            Navigator.pushNamed(context, '/quiz');
                           }),
                     ),
                   ],

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'inscription.dart';
 import 'SplashScreen.dart';
-import 'testing.dart';
 import 'login.dart';
+import 'testing.dart';
 import 'quiz.dart';
+import 'bravoBadge.dart';
+import 'bravoNiveau.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -17,5 +19,7 @@ void main() => runApp(MaterialApp(
         '/login': (context) => Login(),
         '/quiz' : (context) => Quiz(),
         '/testing': (context) => Testing(),
-      },
+        '/bravoBdg' : (context) => BravoBadge(),
+        '/bravoNiv' : (context) => BravoNiveau(),
+              },
     ));

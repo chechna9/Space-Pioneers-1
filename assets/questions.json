@@ -1,0 +1,26 @@
+{
+    "questions": [
+      {
+        "planete": "p1",
+        "correct": "c11",
+        "choice1": "ch11",
+        "choice2": "ch12",
+        "choice3": "ch13"
+
+      },
+      {
+        "planete": "p2",
+        "correct": "c21",
+        "choice1": "ch21",
+        "choice2": "ch22",
+        "choice3": "ch23"
+      },
+      {
+        "planete": "p3",
+        "correct": "c31",
+        "choice1": "ch31",
+        "choice2": "ch32",
+        "choice3": "ch33"
+      }
+    ]
+  }

@@ -14,7 +14,7 @@ class SshopPageState extends State<ShopPage> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.pushReplacementNamed(context, '/profilePage');
+            Navigator.pop(context);
           },
           icon: Icon(
             Icons.arrow_back,
@@ -112,12 +112,10 @@ class ShopCard extends StatelessWidget {
     this.image,
     this.price,
     this.credit,
-    this.locked,
   }) : super(key: key);
   final String image;
   final int price;
   final int credit;
-  final bool locked;
   @override
   Widget build(BuildContext context) {
     return Container(

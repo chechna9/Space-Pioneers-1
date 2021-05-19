@@ -40,7 +40,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
           iconSize: 35,
           onPressed: () {
             print("Go back");
-            Navigator.pushReplacementNamed(context, '/profilePage');
+            Navigator.pop(context);
           },
         ),
         leadingWidth: 70,

@@ -161,8 +161,7 @@ class _LogCardState extends State<LogCard> {
                         ),
                         onPressed: () {
                           _login;
-                          Navigator.pushReplacementNamed(
-                              context, '/homeScreen');
+                          Navigator.pushNamed(context, '/homeScreen');
                         },
                       ),
                     ),

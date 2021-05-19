@@ -80,7 +80,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         image: 'ridingRocket',
                         text: 'Jouer',
                         color: Color(0xffAB02E6),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/planetChoice');
+                        },
                       ),
                       SizedBox(
                         height: 30,

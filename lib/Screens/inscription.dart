@@ -232,7 +232,8 @@ class _RegCardState extends State<RegCard> {
                             print(_email.text);
                             _signup;
                             print('S\'inscrire');
-                            widget.formKey.currentState.validate();
+                            //widget.formKey.currentState.validate();
+                            Navigator.pushNamed(context, '/homeScreen');
                           }),
                     ),
                   ],

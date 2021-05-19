@@ -313,7 +313,7 @@ class SeConnecter extends StatelessWidget {
           ),
         ),
       ),
-      onPressed: () => Navigator.pushNamed(context, '/bravoBdg'),
+      onPressed: () => Navigator.pushNamed(context, '/login'),
     );
   }
 }
@@ -349,7 +349,7 @@ class Inscrire extends StatelessWidget {
           ),
         ),
       ),
-      onPressed: () => Navigator.pushNamed(context, '/bravoNiv'),
+      onPressed: () => Navigator.pushNamed(context, '/inscription'),
     );
   }
 }

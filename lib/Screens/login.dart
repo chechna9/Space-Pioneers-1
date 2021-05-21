@@ -1,10 +1,8 @@
-import 'package:astro01/Screens/inscription.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'package:flutter/rendering.dart';
-
 import '../components/TextInput.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
@@ -163,8 +161,10 @@ class _LogCardState extends State<LogCard> {
                               ),
                             ),
                           ),
-                          onPressed: () {_login;
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => Inscription()));}),
+                          onPressed: () {
+                            _login();
+                           widget.formKey.currentState.validate();
+                          }),
                     ),
                   ],
                 ),
@@ -179,14 +179,12 @@ class _LogCardState extends State<LogCard> {
     );
   }
     Future _login() async{ 
-   final signInResult = await Injector.appInstance
-      .get<SupabaseClient> ()
-      .auth.
-      signIn(   email:_email.text, password:_password.text);
-
+   final signInResult = await Injector.appInstance.get<SupabaseClient>().auth.signIn(email: _email.text,password: _password.text);
       if(signInResult != null && signInResult.user != null)
         {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => HomeScreen()));}
+          print("done");
+          //Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => HomeScreen()));
+          }
       else if (signInResult.error.message != null)
       { 
         TextButton(onPressed: () {  },

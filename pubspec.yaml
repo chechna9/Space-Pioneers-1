@@ -62,7 +62,10 @@ flutter:
   assets:
     - assets/images/avatars/
     - assets/images/other/
+<<<<<<< HEAD
     - assets/music.mp3
+=======
+>>>>>>> parent of 5f852dd (Merge pull request #9 from chechna9/master)
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

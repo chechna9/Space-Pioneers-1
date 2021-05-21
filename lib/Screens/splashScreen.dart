@@ -318,7 +318,11 @@ class SeConnecter extends StatelessWidget {
           ),
         ),
       ),
+<<<<<<< HEAD
       onPressed: () => Navigator.push(context, MaterialPageRoute(builder:(context) =>Login())),
+=======
+      onPressed: () => Navigator.pushNamed(context, '/bravoBdg'),
+>>>>>>> parent of 5f852dd (Merge pull request #9 from chechna9/master)
     );
   }
 }
@@ -364,10 +368,14 @@ assetsAudioPlayer.open(
         ),
         
       ),
+<<<<<<< HEAD
       onPressed: () {
         playaudio();
         Navigator.push(context, MaterialPageRoute(builder:(context) =>Inscription()),);
       }
+=======
+      onPressed: () => Navigator.pushNamed(context, '/bravoNiv'),
+>>>>>>> parent of 5f852dd (Merge pull request #9 from chechna9/master)
     );
   }
   

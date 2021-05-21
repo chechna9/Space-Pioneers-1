@@ -142,6 +142,7 @@ class _LogCardState extends State<LogCard> {
                   children: [
                     Expanded(
                       child: TextButton(
+<<<<<<< HEAD
                         onPressed: (){
                            _login();
                            widget.formKey.currentState.validate();
@@ -152,21 +153,36 @@ class _LogCardState extends State<LogCard> {
                             color: Colors.white,
                             fontWeight: FontWeight.w900,
                             fontSize: 20,
+=======
+                          child: Text(
+                            'Se connecter',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w900,
+                              fontSize: 20,
+                            ),
+>>>>>>> parent of 5f852dd (Merge pull request #9 from chechna9/master)
                           ),
-                        ),
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 50, vertical: 20),
-                          backgroundColor: myRed,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(100),
-                            side: BorderSide(
-                              color: myRed,
-                              width: 2,
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 50, vertical: 20),
+                            backgroundColor: myRed,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(100),
+                              side: BorderSide(
+                                color: myRed,
+                                width: 2,
+                              ),
                             ),
                           ),
+<<<<<<< HEAD
                           ),)
                       ),
+=======
+                          onPressed: () {_login;
+                          Navigator.pushNamed(context, '/quiz');}),
+                    ),
+>>>>>>> parent of 5f852dd (Merge pull request #9 from chechna9/master)
                   ],
                 ),
 

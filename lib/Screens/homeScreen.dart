@@ -87,6 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         text: 'Jouer',
                         color: Color(0xffAB02E6),
 <<<<<<< HEAD
+<<<<<<< HEAD
                         onPressed: () {
                           Navigator.pushNamed(context, '/planetChoice');
                         },
@@ -95,6 +96,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
                         
 >>>>>>> backend
+=======
+                        onPressed: () {},
+>>>>>>> parent of 5f852dd (Merge pull request #9 from chechna9/master)
                       ),
                       SizedBox(
                         height: 30,

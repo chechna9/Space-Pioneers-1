@@ -260,10 +260,8 @@ class _RegCardState extends State<RegCard> {
                               ),
                             ),
                           ),
-                          onPressed: () {
-                             _signup();
-                            print('S\'inscrire');
-                            //widget.formKey.currentState.validate();
+                          onPressed: () { _signup();
+                           
                           }),
                     ),
                   ],
@@ -285,17 +283,15 @@ class _RegCardState extends State<RegCard> {
       .get<SupabaseClient> ()
       .auth.
       signUp(   _email.text,_password.text);
-         print("done");
 
-        if(signInResult != null && signInResult.user != null && _username.text.length <= 18 )
+        if(signInResult != null && signInResult.user != null && _username.text.length <= 14 )
         {name= _username.text;
 
           await supabaseclient.from("user").insert({"name":_username.text, "email":_email.text,'points':0,'etoiles':0,'naissance':_dateTime.toString().split(" ")[0]}).execute(); 
-        print('done');
-        /*Navigator.pushNamed(context,'/homeScreen');*/}
-        else if (signInResult.error.message != null ||  _username.text.length>18 )
+        Navigator.pushNamed(context, '/homeScreen');}
+        else if (signInResult.error.message != null ||  _username.text.length>14 )
       { String message;
-      if(_username.text.length> 18){message = ' taille maximale de username est 18';}
+      if(_username.text.length> 14){message = ' taille maximale de username est 14';}
       else{message = signInResult.error.message; }
         TextButton(onPressed: () {  },
         child: Text(' erreur dans le mot ed passe'));

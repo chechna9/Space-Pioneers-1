@@ -10,8 +10,7 @@ import 'homeScreen.dart';
 const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
   const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDQ3OTY4MiwiZXhwIjoxOTM2MDU1NjgyfQ.IoKgpB9APMw5Te9DYgbJZIbYcvPOwl41dl4-IKFjpVk';
   final supabaseclient = SupabaseClient(supabaseUrl, supabaseKey);
-    TextEditingController _email;
-TextEditingController _password;
+
 String name;
 
 class Login extends StatefulWidget {
@@ -99,7 +98,8 @@ class LogCard extends StatefulWidget {
 }
 
 class _LogCardState extends State<LogCard> {
-
+    TextEditingController _email;
+TextEditingController _password;
 
    @override
   void initState()
@@ -182,8 +182,8 @@ class _LogCardState extends State<LogCard> {
    final signInResult = await Injector.appInstance.get<SupabaseClient>().auth.signIn(email: _email.text,password: _password.text);
       if(signInResult != null && signInResult.user != null)
         {
-          print("done");
-          //Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => HomeScreen()));
+          
+          Navigator.pushNamed(context, '/homeScreen');
           }
       else if (signInResult.error.message != null)
       { 

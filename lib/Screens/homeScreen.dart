@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         image: 'ridingRocket',
                         text: 'Jouer',
                         color: Color(0xffAB02E6),
-                        onPressed: (){        Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => Quiz()));}
+                        onPressed: (){        Navigator.pushNamed(context, '/planetChoice');}
 
                         
                       ),
@@ -98,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         image: 'ridingMoon',
                         text: 'Profile',
                         color: Color(0xff1759BC),
-                                                onPressed: (){       Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => ProfilePage()));}
+                                                onPressed: (){      Navigator.pushNamed(context, '/profilePage');}
 
                       ),
                     ],

@@ -5,8 +5,7 @@ class CustomTextForm extends StatelessWidget {
   const CustomTextForm({
     Key key,
     this.labelText,
-    this.obscured: false,
-    this.controller,
+    this.obscured: false, this.controller , String Function(String) validator,
   }) : super(key: key);
 
   final String labelText;

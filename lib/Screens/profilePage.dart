@@ -34,7 +34,7 @@ class _ProfilePageState extends State<ProfilePage> {
               iconSize: 30,
               onPressed: () {
                 print("shop");
-                Navigator.pushNamed(context, '/shopPage');
+                Navigator.pushNamed(context, '/shopePage');
               },
             ),
             Transform.rotate(

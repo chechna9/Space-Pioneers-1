@@ -34,6 +34,10 @@ dependencies:
   bordered_text: ^1.0.1
   animated_widgets: ^1.0.6
   polygon_clipper: ^1.0.2
+  assets_audio_player: ^3.0.3
+
+  flash: ^2.0.0
+
 
 dev_dependencies:
   flutter_test:
@@ -59,6 +63,7 @@ flutter:
     - assets/images/avatars/
     - assets/images/other/
     - assets/images/planets/
+    - assets/music.mp3
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

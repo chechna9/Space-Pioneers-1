@@ -139,23 +139,26 @@ class _LogCardState extends State<LogCard> {
                   children: [
                     Expanded(
                       child: TextButton(
+                        onPressed: (){
+                           _login();
+                           widget.formKey.currentState.validate();
+                        },
                         child: Text(
                           'Se connecter',
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w900,
                             fontSize: 20,
-                          ),
-                        ),
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 50, vertical: 20),
-                          backgroundColor: myRed,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(100),
-                            side: BorderSide(
-                              color: myRed,
-                              width: 2,
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 50, vertical: 20),
+                            backgroundColor: myRed,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(100),
+                              side: BorderSide(
+                                color: myRed,
+                                width: 2,
+                              ),
                             ),
                           ),
                         ),

@@ -1,13 +1,8 @@
 import 'package:animated_widgets/animated_widgets.dart';
 import 'package:animated_widgets/widgets/shake_animated_widget.dart';
-import 'package:astro01/Screens/leaderBoard.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
-import 'package:assets_audio_player/assets_audio_player.dart';
-
-import 'inscription.dart';
-import 'login.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -318,29 +313,20 @@ class SeConnecter extends StatelessWidget {
           ),
         ),
       ),
-      onPressed: () => Navigator.push(context, MaterialPageRoute(builder:(context) =>Login())),
+      onPressed: () => Navigator.pushNamed(context, '/login'),
     );
   }
 }
 
-
-
-
- class Inscrire extends StatelessWidget {
+class Inscrire extends StatelessWidget {
   const Inscrire({
     Key key,
     @required this.myRed,
   }) : super(key: key);
 
   final Color myRed;
-void playaudio() async{
-AssetsAudioPlayer  assetsAudioPlayer  =AssetsAudioPlayer();
-assetsAudioPlayer.open(
-  Audio("assets/music.mp3")
-);
-}
 
- @override
+  @override
   Widget build(BuildContext context) {
     return TextButton(
       child: AutoSizeText(
@@ -362,13 +348,8 @@ assetsAudioPlayer.open(
             width: 2,
           ),
         ),
-        
       ),
-      onPressed: () {
-        playaudio();
-        Navigator.push(context, MaterialPageRoute(builder:(context) =>Inscription()),);
-      }
+      onPressed: () => Navigator.pushNamed(context, '/inscription'),
     );
   }
-  
 }

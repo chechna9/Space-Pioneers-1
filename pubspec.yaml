@@ -25,8 +25,6 @@ dependencies:
     sdk: flutter
   injector: ^2.0.0
   supabase: ^0.0.1-dev.14
-  #audioplayers: ^0.19.0
-  assets_audio_player: ^3.0.3
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -35,14 +33,11 @@ dependencies:
   auto_size_text: ^2.1.0
   bordered_text: ^1.0.1
   animated_widgets: ^1.0.6
-  fluttertoast: ^8.0.6
-  flash: ^2.0.0
   polygon_clipper: ^1.0.2
-  
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
- 
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -56,13 +51,14 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  
-     
+  # assets:
+  #   - images/a_dot_burr.jpeg
+  #   - images/a_dot_ham.jpeg
 
   assets:
     - assets/images/avatars/
     - assets/images/other/
-    - assets/music.mp3
+    - assets/images/planets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -1,14 +1,19 @@
+import 'package:astro01/Screens/profilPge.dart';
+import 'package:astro01/Screens/quiz.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'splashScreen.dart';
-
+import 'inscription.dart';
+import 'inscription.dart';
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  get audioCache => null;
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -34,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: myRed,
                           fontWeight: FontWeight.w900,
                           fontSize: 45,
+                          
                         ),
                       ),
                       SizedBox(
@@ -80,9 +86,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         image: 'ridingRocket',
                         text: 'Jouer',
                         color: Color(0xffAB02E6),
+<<<<<<< HEAD
                         onPressed: () {
                           Navigator.pushNamed(context, '/planetChoice');
                         },
+=======
+                        onPressed: (){       Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => Quiz()));}
+
+                        
+>>>>>>> backend
                       ),
                       SizedBox(
                         height: 30,
@@ -91,9 +103,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         image: 'ridingMoon',
                         text: 'Profile',
                         color: Color(0xff1759BC),
+<<<<<<< HEAD
                         onPressed: () {
                           Navigator.pushNamed(context, '/profilePage');
                         },
+=======
+                                                onPressed: (){       Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => ProfilePage()));}
+
+>>>>>>> backend
                       ),
                     ],
                   ),
@@ -123,8 +140,12 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class SelectBox extends StatelessWidget {
+<<<<<<< HEAD
   SelectBox({Key key, this.color, this.image, this.text, this.onPressed})
       : super(key: key);
+=======
+  SelectBox({Key key, this.color, this.image, this.text,this.onPressed}) : super(key: key);
+>>>>>>> backend
   final String image;
   final String text;
   final Color color;

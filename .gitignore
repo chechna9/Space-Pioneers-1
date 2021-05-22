@@ -44,3 +44,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+<<<<<<< HEAD
+=======
+
+>>>>>>> 14490262d0657401c266d971a8c5ace4046cf9fa

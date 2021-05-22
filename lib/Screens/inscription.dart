@@ -1,17 +1,20 @@
-import 'package:astro01/Screens/splashScreen.dart';
-import 'splashScreen.dart';
-import 'testing.dart';
+
+
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import '../components/TextInput.dart';
+import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
 
+import 'homeScreen.dart';
 const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
-const supabaseKey =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDQ3OTY4MiwiZXhwIjoxOTM2MDU1NjgyfQ.IoKgpB9APMw5Te9DYgbJZIbYcvPOwl41dl4-IKFjpVk';
-final supabaseclient = SupabaseClient(supabaseUrl, supabaseKey);
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDQ3OTY4MiwiZXhwIjoxOTM2MDU1NjgyfQ.IoKgpB9APMw5Te9DYgbJZIbYcvPOwl41dl4-IKFjpVk';
+  final supabaseclient = SupabaseClient(supabaseUrl, supabaseKey);
+   
+  String name;
 
 class Inscription extends StatefulWidget {
   @override
@@ -19,7 +22,14 @@ class Inscription extends StatefulWidget {
 }
 
 class _InscriptionState extends State<Inscription> {
-  final _formKey = GlobalKey<FormState>();
+  GlobalKey _formKey;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _formKey = GlobalKey<FormState>();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -90,19 +100,21 @@ class RegCard extends StatefulWidget {
 class _RegCardState extends State<RegCard> {
   DateTime _dateTime;
   String _dateValidate = "Date de Naissance";
+  
   TextEditingController _email;
   TextEditingController _password;
-  TextEditingController _username;
-
+   TextEditingController _username;
+  
+ 
   final _formKey = GlobalKey<FormState>();
   @override
-  void initState() {
+  void initState()
+  {
     super.initState();
-    _email = TextEditingController();
-    _password = TextEditingController();
-    _username = TextEditingController();
+  _email = TextEditingController();
+ _password = TextEditingController();
+  _username = TextEditingController();
   }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -113,13 +125,21 @@ class _RegCardState extends State<RegCard> {
           padding: const EdgeInsets.all(20.0),
           child: Form(
             key: _formKey,
-            //key: widget.formKey,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 CustomTextForm(
                   labelText: "Username",
                   controller: _username,
+                          
+                            validator: (value){
+                            if(value == null || value.isEmpty)
+                            {return ' please enter your name '; }
+                            
+                         
+                           
+                               return null; 
+                            }
                 ),
                 SizedBox(
                   height: 12,
@@ -128,6 +148,12 @@ class _RegCardState extends State<RegCard> {
                 CustomTextForm(
                   labelText: "Email",
                   controller: _email,
+                           
+                            validator: (value){
+                            if(value == null || value.isEmpty)
+                            {return ' please enter your email '; }
+                               else return null; 
+                            }
                 ),
                 SizedBox(
                   height: 12,
@@ -136,6 +162,12 @@ class _RegCardState extends State<RegCard> {
                   obscured: true,
                   labelText: "Mot de Passe",
                   controller: _password,
+                  validator: (value){
+                            if(value == null || value.isEmpty)
+                            {return ' please enter your mot de passe '; }
+                            
+                             return null; 
+                            }
                 ),
 
                 SizedBox(
@@ -228,11 +260,7 @@ class _RegCardState extends State<RegCard> {
                               ),
                             ),
                           ),
-                          onPressed: () {
-                            print(_email.text);
-                            _signup;
-                            print('S\'inscrire');
-                            widget.formKey.currentState.validate();
+                          onPressed: () { _signup();                       
                           }),
                     ),
                   ],
@@ -247,30 +275,57 @@ class _RegCardState extends State<RegCard> {
       ),
     );
   }
-
   Future _signup() async {
-    if (_formKey.currentState.validate()) {
+    
+    if(_formKey.currentState.validate()){
       final signInResult = await Injector.appInstance
-          .get<SupabaseClient>()
-          .auth
-          .signUp(_email.text, _password.text);
+      .get<SupabaseClient> ()
+      .auth.
+      signUp(   _email.text,_password.text);
 
-      if (signInResult != null && signInResult.user != null) {
-        await supabaseclient.from("user").insert({
-          "name": _username.text,
-          "email": _email.text,
-          'points': 0,
-          'etoiles': 0,
-          'naissance': _dateTime.timeZoneName
-        }).execute();
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SplashScreen()));
-      } else if (signInResult.error.message != null) {
-        TextButton(
-            onPressed: () {}, child: Text(' erreur dans le mot ed passe'));
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(signInResult.error.message)));
-      }
-    }
+        if(signInResult != null && signInResult.user != null && _username.text.length <= 14 )
+        {name= _username.text;
+
+          await supabaseclient.from("user").insert({"name":_username.text, "email":_email.text,'points':0,'etoiles':0,'naissance':_dateTime.toString().split(" ")[0]}).execute(); 
+        Navigator.pushNamed(context, '/homeScreen');}
+        else if (signInResult.error.message != null ||  _username.text.length>14 )
+      { String message;
+      if(_username.text.length> 14){message = ' taille maximale de username est 14';}
+      else{message = signInResult.error.message; }
+        TextButton(onPressed: () {  },
+        child: Text(' erreur dans le mot ed passe'));
+      
+               showFlash(context: context,
+        
+        duration: const Duration(seconds:2),
+         builder: (context , controller){
+
+  return Flash.dialog(controller: controller, 
+  borderRadius: const BorderRadius.all(Radius.circular(8)),
+  backgroundGradient: LinearGradient(colors: [myRed, myRed] ),
+  alignment: Alignment.bottomCenter,
+  child: Padding(
+    padding: const EdgeInsets.all(8.0),
+  
+    child: Text( message, style: const TextStyle(
+      color: Colors.white,
+      fontSize: 16,
+      backgroundColor: myRed,
+      
+
+    ),),
+  ) );
+
+
+
+        });
+       }
+      
+      
+      }    
+     
+  } 
+  
+  
+  
   }
-}

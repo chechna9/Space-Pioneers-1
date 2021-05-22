@@ -1,16 +1,19 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
+import 'package:flutter/rendering.dart';
 import '../components/TextInput.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
-
-import 'splashScreen.dart';
+import 'homeScreen.dart';
 
 const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
 const supabaseKey =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDQ3OTY4MiwiZXhwIjoxOTM2MDU1NjgyfQ.IoKgpB9APMw5Te9DYgbJZIbYcvPOwl41dl4-IKFjpVk';
 final supabaseclient = SupabaseClient(supabaseUrl, supabaseKey);
+
+String name;
 
 class Login extends StatefulWidget {
   @override
@@ -21,12 +24,10 @@ class _LoginState extends State<Login> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   GlobalKey _formKey;
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
     _formKey = GlobalKey<FormState>();
   }
 
@@ -100,6 +101,7 @@ class LogCard extends StatefulWidget {
 class _LogCardState extends State<LogCard> {
   TextEditingController _email;
   TextEditingController _password;
+
   @override
   void initState() {
     super.initState();
@@ -183,13 +185,32 @@ class _LogCardState extends State<LogCard> {
         .get<SupabaseClient>()
         .auth
         .signIn(email: _email.text, password: _password.text);
-
     if (signInResult != null && signInResult.user != null) {
       Navigator.pushNamed(context, '/homeScreen');
     } else if (signInResult.error.message != null) {
-      TextButton(onPressed: () {}, child: Text(' erreur dans le mot ed passe'));
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(signInResult.error.message)));
+      TextButton(
+          onPressed: () {},
+          child: Text(' erreur dans le mot ed passe ou le mail'));
+      showFlash(
+          context: context,
+          duration: const Duration(seconds: 2),
+          builder: (context, controller) {
+            return Flash.dialog(
+                controller: controller,
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
+                backgroundGradient: LinearGradient(colors: [myRed, myRed]),
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    signInResult.error.message,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        backgroundColor: myRed),
+                  ),
+                ));
+          });
     }
   }
 }

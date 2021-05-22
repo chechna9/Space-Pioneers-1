@@ -329,30 +329,29 @@ class Inscrire extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      child: AutoSizeText(
-        'S\'inscrire',
-        style: TextStyle(
-          color: myRed,
-          fontWeight: FontWeight.w500,
-          fontSize: 20,
-        ),
-        maxLines: 1,
-      ),
-      style: TextButton.styleFrom(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-        backgroundColor: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(100),
-          side: BorderSide(
+        child: AutoSizeText(
+          'S\'inscrire',
+          style: TextStyle(
             color: myRed,
-            width: 2,
+            fontWeight: FontWeight.w500,
+            fontSize: 20,
+          ),
+          maxLines: 1,
+        ),
+        style: TextButton.styleFrom(
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(100),
+            side: BorderSide(
+              color: myRed,
+              width: 2,
+            ),
           ),
         ),
-      ),
         onPressed: () {
-        playaudio();
-        Navigator.pushNamed(context, '/inscription'),
-      }
-    );
+          // playaudio();
+          Navigator.pushNamed(context, '/inscription');
+        });
   }
 }

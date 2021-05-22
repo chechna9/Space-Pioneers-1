@@ -5,8 +5,18 @@ const Color myBlue = Color(0xff0c0026);
 const Color myRed = Color(0xffe6023d);
 const Color myRed2 = Color(0xffe1023c);
 const Color myGrey = Color(0xffccd2e3);
-
-
+const MaterialColor calendarColor = MaterialColor(0xffe6023d, {
+  50: Color(0xffe6023d),
+  100: Color(0xffe6023d),
+  200: Color(0xffe6023d),
+  300: Color(0xffe6023d),
+  400: Color(0xffe6023d),
+  500: Color(0xffe6023d),
+  600: Color(0xffe6023d),
+  700: Color(0xffe6023d),
+  800: Color(0xffe6023d),
+  900: Color(0xffe6023d),
+});
 const LinearGradient myGradiant = LinearGradient(
   begin: Alignment.topCenter,
   end: Alignment.bottomCenter,

@@ -1,3 +1,4 @@
+import 'package:astro01/Screens/levelChoice.dart';
 import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
@@ -11,7 +12,7 @@ import 'Screens/homeScreen.dart';
 import 'Screens/shopPage.dart';
 import 'Screens/avatarPage.dart';
 import 'Screens/profilePage.dart';
-// import 'Screens/planetChoice.dart';
+import 'Screens/planetChoice.dart';
 
 const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
 const supabaseKey =
@@ -25,8 +26,11 @@ void main() {
     theme: ThemeData(
       fontFamily: 'Gotham', //setting default font
       primaryColor: myBlue,
+      // 0xffe6023d
+      // to change calendar color
+      primarySwatch: calendarColor,
     ),
-    initialRoute: '/splashScreen',
+    initialRoute: '/homeScreen',
     routes: {
       '/splashScreen': (context) => SplashScreen(),
       '/inscription': (context) => Inscription(),
@@ -36,7 +40,8 @@ void main() {
       '/shopPage': (context) => ShopPage(),
       '/avatarPage': (context) => AvatarPage(avatarController.stream),
       '/profilePage': (context) => ProfilePage(),
-      // '/planetChoice': (context) => PlanetChoice(),
+      '/planetChoice': (context) => PlanetChoice(),
+      '/levelChoice': (context) => LevelChoice(),
       '/testing': (context) => Testing(),
     },
   ));

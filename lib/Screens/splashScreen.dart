@@ -351,7 +351,7 @@ class Inscrire extends StatelessWidget {
       ),
         onPressed: () {
         playaudio();
-        Navigator.pushNamed(context, '/inscription'),
+        Navigator.pushNamed(context, '/inscription');
       }
     );
   }

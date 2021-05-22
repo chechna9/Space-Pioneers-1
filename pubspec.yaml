@@ -25,6 +25,9 @@ dependencies:
     sdk: flutter
   injector: ^2.0.0
   supabase: ^0.0.1-dev.14
+  assets_audio_player: ^3.0.3
+
+  flash: ^2.0.0
 
 
   # The following adds the Cupertino Icons font to your application.

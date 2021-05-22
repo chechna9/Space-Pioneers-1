@@ -7,9 +7,11 @@ import '../components/TextInput.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
 import 'homeScreen.dart';
+
 const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
-  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDQ3OTY4MiwiZXhwIjoxOTM2MDU1NjgyfQ.IoKgpB9APMw5Te9DYgbJZIbYcvPOwl41dl4-IKFjpVk';
-  final supabaseclient = SupabaseClient(supabaseUrl, supabaseKey);
+const supabaseKey =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDQ3OTY4MiwiZXhwIjoxOTM2MDU1NjgyfQ.IoKgpB9APMw5Te9DYgbJZIbYcvPOwl41dl4-IKFjpVk';
+final supabaseclient = SupabaseClient(supabaseUrl, supabaseKey);
 
 String name;
 
@@ -86,7 +88,6 @@ class _LoginState extends State<Login> {
 }
 
 class LogCard extends StatefulWidget {
-  
   LogCard({
     Key key,
     this.formKey,
@@ -98,15 +99,14 @@ class LogCard extends StatefulWidget {
 }
 
 class _LogCardState extends State<LogCard> {
-    TextEditingController _email;
-TextEditingController _password;
+  TextEditingController _email;
+  TextEditingController _password;
 
-   @override
-  void initState()
-  {
+  @override
+  void initState() {
     super.initState();
-  _email = TextEditingController();
- _password = TextEditingController();
+    _email = TextEditingController();
+    _password = TextEditingController();
   }
 
   @override
@@ -141,31 +141,31 @@ TextEditingController _password;
                   children: [
                     Expanded(
                       child: TextButton(
-                          child: Text(
-                            'Se connecter',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w900,
-                              fontSize: 20,
-                            ),
+                        child: Text(
+                          'Se connecter',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 20,
                           ),
-                        onPressed: (){
-                           _login();
-                           widget.formKey.currentState.validate();
+                        ),
+                        onPressed: () {
+                          _login();
+                          widget.formKey.currentState.validate();
                         },
-                         style: TextButton.styleFrom(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 50, vertical: 20),
-                            backgroundColor: myRed,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(100),
-                              side: BorderSide(
-                                color: myRed,
-                                width: 2,
-                              ),
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 50, vertical: 20),
+                          backgroundColor: myRed,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(100),
+                            side: BorderSide(
+                              color: myRed,
+                              width: 2,
                             ),
                           ),
                         ),
+                      ),
                     ),
                   ],
                 ),
@@ -179,47 +179,38 @@ TextEditingController _password;
       ),
     );
   }
-    Future _login() async{ 
-   final signInResult = await Injector.appInstance.get<SupabaseClient>().auth.signIn(email: _email.text,password: _password.text);
-      if(signInResult != null && signInResult.user != null)
-        {
-          
-          Navigator.pushNamed(context, '/homeScreen');
-          }
-      else if (signInResult.error.message != null)
-      { 
-        TextButton(onPressed: () {  },
-        child: Text(' erreur dans le mot ed passe ou le mail' ));
-              showFlash(context: context,
-        
-        duration: const Duration(seconds:2),
-         builder: (context , controller){
 
-          return Flash.dialog(controller: controller, 
-                               borderRadius: const BorderRadius.all(Radius.circular(8)),
-                                backgroundGradient: LinearGradient(colors: [myRed, myRed] ),
-                               alignment: Alignment.bottomCenter,
-                                child: Padding(
-                                               padding: const EdgeInsets.all(8.0),
-                                               child: Text( signInResult.error.message , style: const TextStyle(
-                                               color:Colors.white,
-                                               fontSize: 16,
-                                               backgroundColor: myRed
-      
-
-                                              ),
-                                              ),
-                                           ) 
-                              );
-
-
-
-        });
-    
-        
-
-        
-       }
-      
-    }   
+  Future _login() async {
+    final signInResult = await Injector.appInstance
+        .get<SupabaseClient>()
+        .auth
+        .signIn(email: _email.text, password: _password.text);
+    if (signInResult != null && signInResult.user != null) {
+      Navigator.pushNamed(context, '/homeScreen');
+    } else if (signInResult.error.message != null) {
+      TextButton(
+          onPressed: () {},
+          child: Text(' erreur dans le mot ed passe ou le mail'));
+      showFlash(
+          context: context,
+          duration: const Duration(seconds: 2),
+          builder: (context, controller) {
+            return Flash.dialog(
+                controller: controller,
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
+                backgroundGradient: LinearGradient(colors: [myRed, myRed]),
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    signInResult.error.message,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        backgroundColor: myRed),
+                  ),
+                ));
+          });
     }
+  }
+}

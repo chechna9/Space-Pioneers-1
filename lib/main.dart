@@ -1,3 +1,4 @@
+import 'package:astro01/Screens/levelChoice.dart';
 import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
@@ -29,7 +30,7 @@ void main() {
       // to change calendar color
       primarySwatch: calendarColor,
     ),
-    initialRoute: '/splashScreen',
+    initialRoute: '/homeScreen',
     routes: {
       '/splashScreen': (context) => SplashScreen(),
       '/inscription': (context) => Inscription(),
@@ -40,6 +41,7 @@ void main() {
       '/avatarPage': (context) => AvatarPage(avatarController.stream),
       '/profilePage': (context) => ProfilePage(),
       '/planetChoice': (context) => PlanetChoice(),
+      '/levelChoice': (context) => LevelChoice(),
       '/testing': (context) => Testing(),
     },
   ));

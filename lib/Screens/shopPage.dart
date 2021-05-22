@@ -14,7 +14,7 @@ class SshopPageState extends State<ShopPage> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/profilePage');
+            Navigator.pop(context);
           },
           icon: Icon(
             Icons.arrow_back,

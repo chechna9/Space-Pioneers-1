@@ -260,8 +260,7 @@ class _RegCardState extends State<RegCard> {
                               ),
                             ),
                           ),
-                          onPressed: () { _signup();
-                           
+                          onPressed: () { _signup();                       
                           }),
                     ),
                   ],

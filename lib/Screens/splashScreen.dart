@@ -364,7 +364,10 @@ assetsAudioPlayer.open(
         ),
         
       ),
-      onPressed: () => Navigator.pushNamed(context, '/inscription'),
+        onPressed: () {
+        playaudio();
+        Navigator.pushNamed(context, '/inscription'),
+      }
     );
   }
   

@@ -149,7 +149,11 @@ TextEditingController _password;
                               fontSize: 20,
                             ),
                           ),
-                          style: TextButton.styleFrom(
+                        onPressed: (){
+                           _login();
+                           widget.formKey.currentState.validate();
+                        },
+                         style: TextButton.styleFrom(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 50, vertical: 20),
                             backgroundColor: myRed,
@@ -161,10 +165,7 @@ TextEditingController _password;
                               ),
                             ),
                           ),
-                          onPressed: () {
-                            _login();
-                           widget.formKey.currentState.validate();
-                          }),
+                        ),
                     ),
                   ],
                 ),

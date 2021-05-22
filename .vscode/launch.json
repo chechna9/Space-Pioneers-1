@@ -8,7 +8,7 @@
             "name": "Space-Pioneers-1",
             "request": "launch",
             "type": "dart",
-            "program": "lib/Screens/main.dart",
+            "program": "lib/main.dart",
 
         }
     ]

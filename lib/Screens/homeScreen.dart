@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'splashScreen.dart';
 import 'inscription.dart';
-import 'inscription.dart';
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -76,9 +76,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       SelectBox(
                         image: 'astroReading',
-                        text: 'Decouvrire',
+                        text: 'Decouvrir',
                         color: myRed,
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/difficulté');
+                          },
                       ),
                       SizedBox(
                         height: 30,
@@ -87,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         image: 'ridingRocket',
                         text: 'Jouer',
                         color: Color(0xffAB02E6),
-                        onPressed: (){        Navigator.pushNamed(context, '/planetChoice');}
+                        onPressed: (){ Navigator.pushNamed(context, '/planetChoice');}
 
                         
                       ),
@@ -98,7 +100,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         image: 'ridingMoon',
                         text: 'Profile',
                         color: Color(0xff1759BC),
-                                                onPressed: (){      Navigator.pushNamed(context, '/profilePage');}
 
                       ),
                     ],

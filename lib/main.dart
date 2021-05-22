@@ -1,3 +1,5 @@
+// import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';

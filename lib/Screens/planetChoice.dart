@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
-// import '../../components/RoundedCard.dart';
+// import '../components/RoundedCard.dart';
 
 class PlanetChoice extends StatefulWidget {
   @override
@@ -23,17 +23,7 @@ class _PlanetChoiceState extends State<PlanetChoice> {
             size: 30,
           ),
         ),
-        centerTitle: true,
-        title: AutoSizeText(
-          'Choisir le quiz',
-          style: TextStyle(
-            fontWeight: FontWeight.w900,
-            color: myRed,
-            fontSize: 30,
-          ),
-        ),
-        backgroundColor: Color(0xff160030),
-        elevation: 10,
+        elevation: 0,
         leadingWidth: 70,
         toolbarHeight: 70,
       ),
@@ -41,7 +31,27 @@ class _PlanetChoiceState extends State<PlanetChoice> {
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            AutoSizeText(
+              'Choisir le quiz !',
+              style: TextStyle(
+                fontWeight: FontWeight.w900,
+                color: myRed,
+                fontSize: 40,
+              ),
+            ),
+            AutoSizeText(
+              'Pour commencer l\'aventure.',
+              style: TextStyle(
+                fontWeight: FontWeight.w100,
+                color: Colors.white,
+                fontSize: 20,
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
@@ -121,7 +131,7 @@ class PlanetCard extends StatelessWidget {
     this.title,
   }) : super(key: key);
   final String image;
-  final int price; //we should change it
+  final int price; //we should chnage it
   final int credit;
   final String title;
 

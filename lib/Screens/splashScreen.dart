@@ -1,13 +1,8 @@
 import 'package:animated_widgets/animated_widgets.dart';
 import 'package:animated_widgets/widgets/shake_animated_widget.dart';
-import 'package:astro01/Screens/leaderBoard.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
-import 'package:assets_audio_player/assets_audio_player.dart';
-
-import 'inscription.dart';
-import 'login.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -323,52 +318,40 @@ class SeConnecter extends StatelessWidget {
   }
 }
 
-
-
-
- class Inscrire extends StatelessWidget {
+class Inscrire extends StatelessWidget {
   const Inscrire({
     Key key,
     @required this.myRed,
   }) : super(key: key);
 
   final Color myRed;
-void playaudio() async{
-AssetsAudioPlayer  assetsAudioPlayer  =AssetsAudioPlayer();
-assetsAudioPlayer.open(
-  Audio("assets/music.mp3")
-);
-}
 
- @override
+  @override
   Widget build(BuildContext context) {
     return TextButton(
-      child: AutoSizeText(
-        'S\'inscrire',
-        style: TextStyle(
-          color: myRed,
-          fontWeight: FontWeight.w500,
-          fontSize: 20,
-        ),
-        maxLines: 1,
-      ),
-      style: TextButton.styleFrom(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-        backgroundColor: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(100),
-          side: BorderSide(
+        child: AutoSizeText(
+          'S\'inscrire',
+          style: TextStyle(
             color: myRed,
-            width: 2,
+            fontWeight: FontWeight.w500,
+            fontSize: 20,
+          ),
+          maxLines: 1,
+        ),
+        style: TextButton.styleFrom(
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(100),
+            side: BorderSide(
+              color: myRed,
+              width: 2,
+            ),
           ),
         ),
-        
-      ),
         onPressed: () {
-        playaudio();
-        Navigator.pushNamed(context, '/inscription');
-      }
-    );
+          // playaudio();
+          Navigator.pushNamed(context, '/inscription');
+        });
   }
-  
 }

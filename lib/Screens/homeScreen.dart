@@ -1,4 +1,3 @@
-
 import 'package:astro01/Screens/profilePage.dart';
 import 'package:astro01/Screens/quiz.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -40,7 +39,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: myRed,
                           fontWeight: FontWeight.w900,
                           fontSize: 45,
-                          
                         ),
                       ),
                       SizedBox(
@@ -97,11 +95,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 30,
                       ),
                       SelectBox(
-                        image: 'ridingMoon',
-                        text: 'Profile',
-                        color: Color(0xff1759BC),
-
-                      ),
+                          image: 'ridingMoon',
+                          text: 'Profile',
+                          color: Color(0xff1759BC),
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/profilePage');
+                          }),
                     ],
                   ),
                   Positioned(
@@ -130,7 +129,8 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class SelectBox extends StatelessWidget {
-  SelectBox({Key key, this.color, this.image, this.text,this.onPressed}) : super(key: key);
+  SelectBox({Key key, this.color, this.image, this.text, this.onPressed})
+      : super(key: key);
   final String image;
   final String text;
   final Color color;

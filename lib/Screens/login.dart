@@ -1,19 +1,17 @@
-import 'package:astro01/Screens/inscription.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'package:flutter/rendering.dart';
-
 import '../components/TextInput.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
 import 'homeScreen.dart';
+
 const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
   const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDQ3OTY4MiwiZXhwIjoxOTM2MDU1NjgyfQ.IoKgpB9APMw5Te9DYgbJZIbYcvPOwl41dl4-IKFjpVk';
   final supabaseclient = SupabaseClient(supabaseUrl, supabaseKey);
-    TextEditingController _email;
-TextEditingController _password;
+
 String name;
 
 class Login extends StatefulWidget {
@@ -27,6 +25,7 @@ class _LoginState extends State<Login> {
   GlobalKey _formKey;
   @override
   void initState() {
+    // ignore: todo
     // TODO: implement initState
     super.initState();
     _formKey = GlobalKey<FormState>();
@@ -88,6 +87,7 @@ class _LoginState extends State<Login> {
   }
 }
 
+// ignore: must_be_immutable
 class LogCard extends StatefulWidget {
   
   LogCard({
@@ -101,7 +101,8 @@ class LogCard extends StatefulWidget {
 }
 
 class _LogCardState extends State<LogCard> {
-
+    TextEditingController _email;
+TextEditingController _password;
 
    @override
   void initState()
@@ -151,7 +152,11 @@ class _LogCardState extends State<LogCard> {
                               fontSize: 20,
                             ),
                           ),
-                          style: TextButton.styleFrom(
+                        onPressed: (){
+                           _login();
+                           widget.formKey.currentState.validate();
+                        },
+                         style: TextButton.styleFrom(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 50, vertical: 20),
                             backgroundColor: myRed,
@@ -163,13 +168,10 @@ class _LogCardState extends State<LogCard> {
                               ),
                             ),
                           ),
-                          onPressed: () {_login;
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => Inscription()));}),
+                        ),
                     ),
                   ],
                 ),
-
-                ///tested
               ],
             ),
           ),
@@ -179,14 +181,12 @@ class _LogCardState extends State<LogCard> {
     );
   }
     Future _login() async{ 
-   final signInResult = await Injector.appInstance
-      .get<SupabaseClient> ()
-      .auth.
-      signIn(   email:_email.text, password:_password.text);
-
+   final signInResult = await Injector.appInstance.get<SupabaseClient>().auth.signIn(email: _email.text,password: _password.text);
       if(signInResult != null && signInResult.user != null)
         {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => HomeScreen()));}
+          
+          Navigator.pushNamed(context, '/homeScreen');
+          }
       else if (signInResult.error.message != null)
       { 
         TextButton(onPressed: () {  },
@@ -205,12 +205,14 @@ class _LogCardState extends State<LogCard> {
                                                child: Text( signInResult.error.message , style: const TextStyle(
                                                color:Colors.white,
                                                fontSize: 16,
-                                               backgroundColor: myRed),
+                                               backgroundColor: myRed
+      
+
+                                              ),
                                               ),
                                            ) 
                               );
-        });
-       }      
+        });      
+       }
     }   
     }
-

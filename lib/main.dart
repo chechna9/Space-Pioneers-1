@@ -11,7 +11,7 @@ import 'Screens/homeScreen.dart';
 import 'Screens/shopPage.dart';
 import 'Screens/avatarPage.dart';
 import 'Screens/profilePage.dart';
-// import 'Screens/planetChoice.dart';
+import 'Screens/planetChoice.dart';
 
 const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
 const supabaseKey =
@@ -25,6 +25,9 @@ void main() {
     theme: ThemeData(
       fontFamily: 'Gotham', //setting default font
       primaryColor: myBlue,
+      // 0xffe6023d
+      // to change calendar color
+      primarySwatch: calendarColor,
     ),
     initialRoute: '/splashScreen',
     routes: {
@@ -36,7 +39,7 @@ void main() {
       '/shopPage': (context) => ShopPage(),
       '/avatarPage': (context) => AvatarPage(avatarController.stream),
       '/profilePage': (context) => ProfilePage(),
-      // '/planetChoice': (context) => PlanetChoice(),
+      '/planetChoice': (context) => PlanetChoice(),
       '/testing': (context) => Testing(),
     },
   ));

@@ -313,7 +313,7 @@ class SeConnecter extends StatelessWidget {
           ),
         ),
       ),
-      onPressed: () => Navigator.pushNamed(context, '/difficulté'),
+      onPressed: () => Navigator.pushNamed(context, '/login'),
     );
   }
 }

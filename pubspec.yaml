@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_swiper: ^1.1.6
   injector: ^2.0.0
   supabase: ^0.0.1-dev.14
   assets_audio_player: ^3.0.3
@@ -37,6 +38,7 @@ dependencies:
   bordered_text: ^1.0.1
   animated_widgets: ^1.0.6
   polygon_clipper: ^1.0.2
+  flutter_svg: ^0.22.0
 
 
 
@@ -64,6 +66,27 @@ flutter:
     - assets/images/avatars/
     - assets/images/other/
     - assets/images/planets/
+    - assets/images/doc/
+    - assets/images/icons/
+    - assets/images/doc/terre/
+    - assets/images/doc/terre/galerie/
+    - assets/images/doc/mercure/
+    - assets/images/doc/mercure/galerie/
+    - assets/images/doc/jupiter/
+    - assets/images/doc/jupiter/galerie/
+    - assets/images/doc/mars/
+    - assets/images/doc/mars/galerie/
+    - assets/images/doc/neptune/
+    - assets/images/doc/neptune/galerie/
+    - assets/images/doc/saturn/
+    - assets/images/doc/saturn/galerie/
+    - assets/images/doc/soleil/
+    - assets/images/doc/terre/
+    - assets/images/doc/terre/galerie/
+    - assets/images/doc/uranus/
+    - assets/images/doc/uranus/galerie/
+    - assets/images/doc/venus/
+    - assets/images/doc/venus/galerie/
     # - assets/music.mp3
 
   # An image asset can refer to one or more resolution-specific "variants", see

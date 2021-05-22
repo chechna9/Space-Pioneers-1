@@ -6,7 +6,6 @@ import 'package:flutter/rendering.dart';
 import '../components/TextInput.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
-import 'homeScreen.dart';
 
 const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
 const supabaseKey =
@@ -205,8 +204,6 @@ class _LogCardState extends State<LogCard> {
                                                color:Colors.white,
                                                fontSize: 16,
                                                backgroundColor: myRed
-      
-
                                               ),
                                               ),
                                            ) 

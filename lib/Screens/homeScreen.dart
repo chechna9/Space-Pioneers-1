@@ -77,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         text: 'Decouvrir',
                         color: myRed,
                         onPressed: () {
-                          Navigator.pushNamed(context, '/difficulté');
+                          Navigator.pushNamed(context, '/documentation');
                           },
                       ),
                       SizedBox(

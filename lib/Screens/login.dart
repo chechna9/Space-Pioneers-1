@@ -139,33 +139,30 @@ class _LogCardState extends State<LogCard> {
                   children: [
                     Expanded(
                       child: TextButton(
-                        onPressed: (){
-                           _login();
-                           widget.formKey.currentState.validate();
-                        },
                         child: Text(
                           'Se connecter',
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w900,
                             fontSize: 20,
-                          style: TextButton.styleFrom(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 50, vertical: 20),
-                            backgroundColor: myRed,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(100),
-                              side: BorderSide(
-                                color: myRed,
-                                width: 2,
-                              ),
-                            ),
                           ),
                         ),
                         onPressed: () {
-                          _login;
-                          Navigator.pushNamed(context, '/homeScreen');
+                          _login();
+                          widget.formKey.currentState.validate();
                         },
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 50, vertical: 20),
+                          backgroundColor: myRed,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(100),
+                            side: BorderSide(
+                              color: myRed,
+                              width: 2,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -188,8 +185,7 @@ class _LogCardState extends State<LogCard> {
         .signIn(email: _email.text, password: _password.text);
 
     if (signInResult != null && signInResult.user != null) {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => SplashScreen()));
+      Navigator.pushNamed(context, '/homeScreen');
     } else if (signInResult.error.message != null) {
       TextButton(onPressed: () {}, child: Text(' erreur dans le mot ed passe'));
       ScaffoldMessenger.of(context)

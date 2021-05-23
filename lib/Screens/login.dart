@@ -6,7 +6,6 @@ import 'package:flutter/rendering.dart';
 import '../components/TextInput.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
-import 'homeScreen.dart';
 
 const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
 const supabaseKey =
@@ -26,6 +25,7 @@ class _LoginState extends State<Login> {
   GlobalKey _formKey;
   @override
   void initState() {
+    // ignore: todo
     // TODO: implement initState
     super.initState();
     _formKey = GlobalKey<FormState>();
@@ -87,6 +87,7 @@ class _LoginState extends State<Login> {
   }
 }
 
+// ignore: must_be_immutable
 class LogCard extends StatefulWidget {
   LogCard({
     Key key,
@@ -169,8 +170,6 @@ class _LogCardState extends State<LogCard> {
                     ),
                   ],
                 ),
-
-                ///tested
               ],
             ),
           ),
@@ -179,38 +178,37 @@ class _LogCardState extends State<LogCard> {
       ),
     );
   }
+    Future _login() async{ 
+   final signInResult = await Injector.appInstance.get<SupabaseClient>().auth.signIn(email: _email.text,password: _password.text);
+      if(signInResult != null && signInResult.user != null)
+        {
+          
+          Navigator.pushNamed(context, '/homeScreen');
+          }
+      else if (signInResult.error.message != null)
+      { 
+        TextButton(onPressed: () {  },
+        child: Text(' erreur dans le mot ed passe ou le mail' ));
+              showFlash(context: context,
+        
+        duration: const Duration(seconds:2),
+         builder: (context , controller){
 
-  Future _login() async {
-    final signInResult = await Injector.appInstance
-        .get<SupabaseClient>()
-        .auth
-        .signIn(email: _email.text, password: _password.text);
-    if (signInResult != null && signInResult.user != null) {
-      Navigator.pushNamed(context, '/homeScreen');
-    } else if (signInResult.error.message != null) {
-      TextButton(
-          onPressed: () {},
-          child: Text(' erreur dans le mot ed passe ou le mail'));
-      showFlash(
-          context: context,
-          duration: const Duration(seconds: 2),
-          builder: (context, controller) {
-            return Flash.dialog(
-                controller: controller,
-                borderRadius: const BorderRadius.all(Radius.circular(8)),
-                backgroundGradient: LinearGradient(colors: [myRed, myRed]),
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    signInResult.error.message,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        backgroundColor: myRed),
-                  ),
-                ));
-          });
+          return Flash.dialog(controller: controller, 
+                               borderRadius: const BorderRadius.all(Radius.circular(8)),
+                                backgroundGradient: LinearGradient(colors: [myRed, myRed] ),
+                               alignment: Alignment.bottomCenter,
+                                child: Padding(
+                                               padding: const EdgeInsets.all(8.0),
+                                               child: Text( signInResult.error.message , style: const TextStyle(
+                                               color:Colors.white,
+                                               fontSize: 16,
+                                               backgroundColor: myRed
+                                              ),
+                                              ),
+                                           ) 
+                              );
+        });      
+       }
+    }   
     }
-  }
-}

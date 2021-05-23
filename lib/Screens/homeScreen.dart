@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'splashScreen.dart';
 import 'inscription.dart';
-import 'inscription.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -24,18 +23,14 @@ class _HomeScreenState extends State<HomeScreen> {
           gradient: myGradiant,
         ),
         child: Column(
-          //mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: 50,
+              height: MediaQuery.of(context).size.height * 0.03,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                SoundCntrl(),
-              ],
-            ),
+            Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+              SoundCntrl(),
+            ]),
             Stack(
               clipBehavior: Clip.none,
               alignment: Alignment.topRight,
@@ -76,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             SizedBox(
-              height: 50,
+              height: MediaQuery.of(context).size.height * 0.1,
             ),
             Stack(
               alignment: Alignment.bottomCenter,
@@ -86,9 +81,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     SelectBox(
                       image: 'astroReading',
-                      text: 'Decouvrire',
+                      text: 'Decouvrir',
                       color: myRed,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/documentation');
+                      },
                     ),
                     SizedBox(
                       height: 30,

@@ -13,7 +13,7 @@ class BravoBadge extends StatefulWidget {
 
 class _BravoBadgeState extends State<BravoBadge> {
   @override
-  Widget build(BuildContext context) {
+ Widget build(BuildContext context) {
         return Scaffold(
         appBar: AppBar(
         automaticallyImplyLeading: false,

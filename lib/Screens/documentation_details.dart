@@ -10,13 +10,16 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double sh = MediaQuery.of(context).size.height; //screen height
+    double sw = MediaQuery.of(context).size.width; //screen width
+
     return Scaffold(
       backgroundColor: myBlue,
       body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height / 1.97,
+              height: sh / 1.97,
               decoration: BoxDecoration(color: myBlue),
               child: Stack(
                 children: [
@@ -45,7 +48,7 @@ class DetailPage extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    top: 260,
+                    bottom: 35,
                     left: 32,
                     child: Container(
                       child: Text(
@@ -61,11 +64,11 @@ class DetailPage extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    height: MediaQuery.of(context).size.height / 1,
+                    height: sh / 1,
                     child: Stack(
                       children: [
                         Positioned(
-                          top: 330,
+                          bottom: 0,
                           left: 32,
                           child: Text(
                             'Système solaire',
@@ -82,12 +85,11 @@ class DetailPage extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    top: 80,
+                    bottom: 20,
                     left: 35,
                     child: Text(
                       planetInfo.position.toString(),
                       style: TextStyle(
-                        fontFamily: 'Avenir',
                         fontSize: 247,
                         color: Colors.white.withOpacity(0.08),
                         fontWeight: FontWeight.w900,

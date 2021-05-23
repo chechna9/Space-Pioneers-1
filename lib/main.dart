@@ -18,7 +18,8 @@ import 'Screens/documentation_data.dart';
 import 'Screens/documentation_swiper.dart';
 
 const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDQ3OTY4MiwiZXhwIjoxOTM2MDU1NjgyfQ.IoKgpB9APMw5Te9DYgbJZIbYcvPOwl41dl4-IKFjpVk';
+const supabaseKey =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDQ3OTY4MiwiZXhwIjoxOTM2MDU1NjgyfQ.IoKgpB9APMw5Te9DYgbJZIbYcvPOwl41dl4-IKFjpVk';
 final supabaseclient = SupabaseClient(supabaseUrl, supabaseKey);
 void main() {
   Injector.appInstance.registerSingleton<SupabaseClient>(() => supabaseclient);
@@ -32,7 +33,7 @@ void main() {
       // to change calendar color
       primarySwatch: calendarColor,
     ),
-    initialRoute: '/splashScreen',
+    initialRoute: '/documentation',
     routes: {
       '/splashScreen': (context) => SplashScreen(),
       '/inscription': (context) => Inscription(),
@@ -45,7 +46,7 @@ void main() {
       '/planetChoice': (context) => PlanetChoice(),
       '/levelChoice': (context) => LevelChoice(),
       '/testing': (context) => Testing(),
-      '/documentation' : (context) => Documentation(),
+      '/documentation': (context) => Documentation(),
     },
   ));
 }

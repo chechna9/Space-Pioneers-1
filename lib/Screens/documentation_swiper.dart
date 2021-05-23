@@ -15,7 +15,7 @@ class _DocumentationState extends State<Documentation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
+      appBar: AppBar(
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_outlined),
@@ -23,7 +23,7 @@ class _DocumentationState extends State<Documentation> {
           iconSize: 35,
           onPressed: () {
             print("Go back");
-            Navigator.pushNamed(context, '/homeScreen');
+            Navigator.pop(context);
           },
         ),
         leadingWidth: 70,

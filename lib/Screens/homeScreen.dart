@@ -18,111 +18,145 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Material(
       child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
         decoration: BoxDecoration(
           gradient: myGradiant,
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Stack(
-                clipBehavior: Clip.none,
-                alignment: Alignment.topRight,
-                children: [
-                  Column(
-                    children: [
-                      AutoSizeText(
-                        'Salut Anis !',
-                        style: TextStyle(
-                          color: myRed,
-                          fontWeight: FontWeight.w900,
-                          fontSize: 45,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      AutoSizeText(
-                        'Zinou nhar el lyoum mabrok idkom',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w100,
-                          fontSize: 15,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Positioned(
-                    bottom: -35,
-                    right: -100,
-                    child: Star(angle: 8, scale: 2.8),
-                  ),
-                  Positioned(
-                    top: -50,
-                    right: -10,
-                    child: Star(angle: 8, scale: 2.8),
-                  ),
-                ],
-              ),
-              Stack(
-                alignment: Alignment.bottomCenter,
-                clipBehavior: Clip.none,
-                children: [
-                  Column(
-                    children: [
-                      SelectBox(
-                        image: 'astroReading',
-                        text: 'Decouvrir',
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.03,
+            ),
+            Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+              SoundCntrl(),
+            ]),
+            Stack(
+              clipBehavior: Clip.none,
+              alignment: Alignment.topRight,
+              children: [
+                Column(
+                  children: [
+                    AutoSizeText(
+                      'Salut Anis !',
+                      style: TextStyle(
                         color: myRed,
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/documentation');
-                          },
+                        fontWeight: FontWeight.w900,
+                        fontSize: 45,
                       ),
-                      SizedBox(
-                        height: 30,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    AutoSizeText(
+                      'Zinou nhar el lyoum mabrok idkom',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w100,
+                        fontSize: 15,
                       ),
-                      SelectBox(
+                    ),
+                  ],
+                ),
+                Positioned(
+                  bottom: -35,
+                  right: -100,
+                  child: Star(angle: 8, scale: 2.8),
+                ),
+                Positioned(
+                  top: -50,
+                  right: -10,
+                  child: Star(angle: 8, scale: 2.8),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.1,
+            ),
+            Stack(
+              alignment: Alignment.bottomCenter,
+              clipBehavior: Clip.none,
+              children: [
+                Column(
+                  children: [
+                    SelectBox(
+                      image: 'astroReading',
+                      text: 'Decouvrir',
+                      color: myRed,
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/documentation');
+                      },
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    SelectBox(
                         image: 'ridingRocket',
                         text: 'Jouer',
                         color: Color(0xffAB02E6),
-                        onPressed: (){ Navigator.pushNamed(context, '/planetChoice');}
-
-                        
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      SelectBox(
-                          image: 'ridingMoon',
-                          text: 'Profile',
-                          color: Color(0xff1759BC),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/profilePage');
-                          }),
-                    ],
-                  ),
-                  Positioned(
-                    bottom: -70,
-                    left: 50,
-                    child: Star(angle: 8, scale: 2.8),
-                  ),
-                  Positioned(
-                    bottom: -50,
-                    right: 10,
-                    child: Star(angle: 8, scale: 2.8),
-                  ),
-                  Positioned(
-                    bottom: 130,
-                    left: 0,
-                    child: Star(angle: 8, scale: 2.8),
-                  ),
-                ],
-              ),
-            ],
-          ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/levelChoice');
+                        }),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    SelectBox(
+                        image: 'ridingMoon',
+                        text: 'Profile',
+                        color: Color(0xff1759BC),
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/profilePage');
+                        }),
+                  ],
+                ),
+                Positioned(
+                  bottom: -70,
+                  left: 50,
+                  child: Star(angle: 8, scale: 2.8),
+                ),
+                Positioned(
+                  bottom: -50,
+                  right: 10,
+                  child: Star(angle: 8, scale: 2.8),
+                ),
+                Positioned(
+                  bottom: 130,
+                  left: 0,
+                  child: Star(angle: 8, scale: 2.8),
+                ),
+              ],
+            ),
+          ],
         ),
+      ),
+    );
+  }
+}
+
+class SoundCntrl extends StatefulWidget {
+  SoundCntrl({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  _SoundCntrlState createState() => _SoundCntrlState();
+}
+
+class _SoundCntrlState extends State<SoundCntrl> {
+  bool mute = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: () {
+        setState(() {
+          mute = mute ? false : true;
+        });
+      },
+      icon: Icon(
+        !mute ? Icons.music_note_rounded : Icons.music_off_rounded,
+        color: Colors.white,
+        size: 30,
       ),
     );
   }

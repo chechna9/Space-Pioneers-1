@@ -33,7 +33,7 @@ void main() {
       // to change calendar color
       primarySwatch: calendarColor,
     ),
-    initialRoute: '/documentation',
+    initialRoute: '/splashScreen',
     routes: {
       '/splashScreen': (context) => SplashScreen(),
       '/inscription': (context) => Inscription(),

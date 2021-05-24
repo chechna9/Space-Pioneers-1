@@ -37,7 +37,7 @@ class AvatarPageState extends State<AvatarPage> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushNamed(context, '/profilePage');
           },
           icon: Icon(
             Icons.arrow_back,

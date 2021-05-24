@@ -13,11 +13,11 @@ int etoiles;
 String naissance;
 String avatar;
 Users({///
-@required this.name, 
-@required this.email ,
-@required this.etoiles,
-@required this.naissance ,
-@required this.avatar ,
+ this.name, 
+this.email ,
+ this.etoiles,
+ this.naissance ,
+ this.avatar ,
 
 });
 factory Users.fromJson(Map<String, dynamic> map){

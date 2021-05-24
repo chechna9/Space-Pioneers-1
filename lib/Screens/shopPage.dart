@@ -113,10 +113,12 @@ class ShopCard extends StatelessWidget {
     this.image,
     this.price,
     this.credit,
+    this.locked,
   }) : super(key: key);
   final String image;
   final int price;
   final int credit;
+  final bool locked;
   @override
   Widget build(BuildContext context) {
     return Container(

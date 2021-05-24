@@ -1,4 +1,3 @@
-
 import 'package:astro01/Screens/profilePage.dart';
 import 'package:astro01/Screens/quiz.dart';
 import 'package:astro01/classes/User.dart';
@@ -10,7 +9,7 @@ import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
 import 'splashScreen.dart';
 import 'inscription.dart';
-import 'inscription.dart';
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -32,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
           user=snapshot.data[0];
             return Material(
       child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
         decoration: BoxDecoration(
           gradient: myGradiant,
         ),
@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Stack(
+            Stack(
                 clipBehavior: Clip.none,
                 alignment: Alignment.topRight,
                 children: [
@@ -81,63 +81,66 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-              Stack(
-                alignment: Alignment.bottomCenter,
-                clipBehavior: Clip.none,
-                children: [
-                  Column(
-                    children: [
-                      SelectBox(
-                        image: 'astroReading',
-                        text: 'Decouvrire',
-                        color: myRed,
-                        onPressed: () {},
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      SelectBox(
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.1,
+            ),
+            Stack(
+              alignment: Alignment.bottomCenter,
+              clipBehavior: Clip.none,
+              children: [
+                Column(
+                  children: [
+                    SelectBox(
+                      image: 'astroReading',
+                      text: 'Decouvrir',
+                      color: myRed,
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/documentation');
+                      },
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    SelectBox(
                         image: 'ridingRocket',
                         text: 'Jouer',
                         color: Color(0xffAB02E6),
-                        onPressed: (){        Navigator.pushNamed(context, '/planetChoice');}
-
-                        
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      SelectBox(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/levelChoice');
+                        }),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    SelectBox(
                         image: 'ridingMoon',
                         text: 'Profile',
                         color: Color(0xff1759BC),
-                                                onPressed: (){      Navigator.pushNamed(context, '/profilePage');}
-
-                      ),
-                    ],
-                  ),
-                  Positioned(
-                    bottom: -70,
-                    left: 50,
-                    child: Star(angle: 8, scale: 2.8),
-                  ),
-                  Positioned(
-                    bottom: -50,
-                    right: 10,
-                    child: Star(angle: 8, scale: 2.8),
-                  ),
-                  Positioned(
-                    bottom: 130,
-                    left: 0,
-                    child: Star(angle: 8, scale: 2.8),
-                  ),
-                ],
-              ),
-            ],
-          ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/profilePage');
+                        }),
+                  ],
+                ),
+                Positioned(
+                  bottom: -70,
+                  left: 50,
+                  child: Star(angle: 8, scale: 2.8),
+                ),
+                Positioned(
+                  bottom: -50,
+                  right: 10,
+                  child: Star(angle: 8, scale: 2.8),
+                ),
+                Positioned(
+                  bottom: 130,
+                  left: 0,
+                  child: Star(angle: 8, scale: 2.8),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
-    );
+    ),);
            
           
           
@@ -159,8 +162,38 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
 
+class SoundCntrl extends StatefulWidget {
+  SoundCntrl({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  _SoundCntrlState createState() => _SoundCntrlState();
+}
+
+class _SoundCntrlState extends State<SoundCntrl> {
+  bool mute = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: () {
+        setState(() {
+          mute = mute ? false : true;
+        });
+      },
+      icon: Icon(
+        !mute ? Icons.music_note_rounded : Icons.music_off_rounded,
+        color: Colors.white,
+        size: 30,
+      ),
+    );
+  }
+}
+
 class SelectBox extends StatelessWidget {
-  SelectBox({Key key, this.color, this.image, this.text,this.onPressed}) : super(key: key);
+  SelectBox({Key key, this.color, this.image, this.text, this.onPressed})
+      : super(key: key);
   final String image;
   final String text;
   final Color color;

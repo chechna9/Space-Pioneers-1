@@ -1,4 +1,5 @@
 import 'package:astro01/Screens/levelChoice.dart';
+import 'package:astro01/Screens/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
@@ -29,8 +30,7 @@ void main() {
     theme: ThemeData(
       fontFamily: 'Gotham', //setting default font
       primaryColor: myBlue,
-      // 0xffe6023d
-      // to change calendar color
+
       primarySwatch: calendarColor,
     ),
     initialRoute: '/splashScreen',
@@ -46,6 +46,7 @@ void main() {
       '/planetChoice': (context) => PlanetChoice(),
       '/levelChoice': (context) => LevelChoice(),
       '/testing': (context) => Testing(),
+      '/loadingScreen': (context) => LoadingScreen(),
       '/documentation': (context) => Documentation(),
     },
   ));

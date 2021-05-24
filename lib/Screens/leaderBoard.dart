@@ -64,7 +64,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
               ),
               Expanded(
                 child: ListView.builder(
-                  itemCount: 15,
+                  itemCount: 50,
                   itemBuilder: (BuildContext context, int ind) {
                     return Column(
                       children: [

@@ -1,9 +1,13 @@
 
 import 'package:astro01/Screens/profilePage.dart';
 import 'package:astro01/Screens/quiz.dart';
+import 'package:astro01/classes/User.dart';
+import 'package:astro01/variable_globale/variable.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
+import 'package:injector/injector.dart';
+import 'package:supabase/supabase.dart';
 import 'splashScreen.dart';
 import 'inscription.dart';
 import 'inscription.dart';
@@ -14,10 +18,19 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   get audioCache => null;
-
-  @override
+@override
   Widget build(BuildContext context) {
-    return Material(
+   Users user1 = new Users();
+    return Scaffold(
+     backgroundColor: Colors.blue,
+      body :   FutureBuilder<List<Users>>(
+      
+        future:getUsers(user.email),
+        
+        builder: (context,  AsyncSnapshot <List<Users>>  snapshot) {
+          if(snapshot.hasData == false){return null;}
+          user=snapshot.data[0];
+            return Material(
       child: Container(
         decoration: BoxDecoration(
           gradient: myGradiant,
@@ -35,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Column(
                     children: [
                       AutoSizeText(
-                        'Salut Anis !',
+                        'Salut ${user.name} !',
                         style: TextStyle(
                           color: myRed,
                           fontWeight: FontWeight.w900,
@@ -125,8 +138,26 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+           
+          
+          
+         
+        }
+      )
+      
+    );
   }
-}
+  
+
+ 
+        
+        
+
+
+
+    
+  }
+
 
 class SelectBox extends StatelessWidget {
   SelectBox({Key key, this.color, this.image, this.text,this.onPressed}) : super(key: key);
@@ -183,3 +214,16 @@ class SelectBox extends StatelessWidget {
     );
   }
 }
+Future<List <Users>> getUsers(String email_ ) async {
+       
+       final response = await Injector.appInstance
+       .get<SupabaseClient>()
+       .from('user')
+       .select()
+      
+       .execute();   
+      final dataList = response.data as List;
+      return dataList.map((map) => Users.fromJson(map) ).where((dataList) => dataList.email_ver(email_)).toList();
+   }
+
+   

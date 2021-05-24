@@ -1,3 +1,4 @@
+import 'package:astro01/classes/User.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/rendering.dart';
 import '../components/TextInput.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
+import '../variable_globale/variable.dart';
 import 'homeScreen.dart';
 const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
   const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDQ3OTY4MiwiZXhwIjoxOTM2MDU1NjgyfQ.IoKgpB9APMw5Te9DYgbJZIbYcvPOwl41dl4-IKFjpVk';
@@ -178,11 +180,12 @@ TextEditingController _password;
       ),
     );
   }
+    
     Future _login() async{ 
-   final signInResult = await Injector.appInstance.get<SupabaseClient>().auth.signIn(email: _email.text,password: _password.text);
+   final signInResult = await Injector.appInstance.get<SupabaseClient>().auth.signIn(email: _email.text.split(" ")[0],password: _password.text);
       if(signInResult != null && signInResult.user != null)
-        {
-          
+        {user.email=_email.text.split(" ")[0];
+        
           Navigator.pushNamed(context, '/homeScreen');
           }
       else if (signInResult.error.message != null)

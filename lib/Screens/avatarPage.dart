@@ -1,9 +1,10 @@
 import 'dart:async';
 
+import 'package:astro01/variable_globale/variable.dart';
 import 'package:flutter/material.dart';
 import '../components/constants.dart';
 
-String avatar = "default";
+String avatar = user.avatar;
 StreamController<String> avatarController =
     StreamController<String>.broadcast();
 
@@ -15,7 +16,8 @@ class AvatarPage extends StatefulWidget {
 }
 
 class AvatarPageState extends State<AvatarPage> {
-  int credit = 75;
+  int credit = user.etoiles;
+ 
   @override
   void initState() {
     // TODO: implement initState
@@ -23,6 +25,8 @@ class AvatarPageState extends State<AvatarPage> {
     widget.stream.listen((event) {
       setState(() {
         avatar = event;
+        user.avatar = event;
+        
       });
     });
   }
@@ -99,12 +103,12 @@ class AvatarPageState extends State<AvatarPage> {
                     AvatarCard(
                       credit: credit,
                       image: 'default',
-                      price: 20,
+                      price: -1,
                     ),
                     AvatarCard(
                       credit: credit,
                       image: 'ridingRocket',
-                      price: 50,
+                      price: -1,
                     ),
                     AvatarCard(
                       credit: credit,
@@ -153,6 +157,7 @@ class AvatarCard extends StatelessWidget {
       onPressed: () {
         if (credit >= price) {
           avatarController.add(image);
+          user.avatar=image;
         }
       },
       child: Container(

@@ -40,7 +40,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
           iconSize: 35,
           onPressed: () {
             print("Go back");
-            Navigator.pushNamed(context, '/profilePage');
+            Navigator.pop(context);
           },
         ),
         leadingWidth: 70,
@@ -64,7 +64,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
               ),
               Expanded(
                 child: ListView.builder(
-                  itemCount: 15,
+                  itemCount: 50,
                   itemBuilder: (BuildContext context, int ind) {
                     return Column(
                       children: [

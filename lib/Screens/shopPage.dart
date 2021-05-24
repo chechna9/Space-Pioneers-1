@@ -1,3 +1,4 @@
+import 'package:astro01/variable_globale/variable.dart';
 import 'package:flutter/material.dart';
 import '../components/constants.dart';
 
@@ -7,7 +8,7 @@ class ShopPage extends StatefulWidget {
 }
 
 class SshopPageState extends State<ShopPage> {
-  int credit = 75;
+  int credit = user.etoiles;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,8 +1,12 @@
 import 'package:astro01/Screens/profilePage.dart';
 import 'package:astro01/Screens/quiz.dart';
+import 'package:astro01/classes/User.dart';
+import 'package:astro01/variable_globale/variable.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
+import 'package:injector/injector.dart';
+import 'package:supabase/supabase.dart';
 import 'splashScreen.dart';
 import 'inscription.dart';
 
@@ -13,63 +17,70 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   get audioCache => null;
-
-  @override
+@override
   Widget build(BuildContext context) {
-    return Material(
+   Users user1 = new Users();
+    return Scaffold(
+     backgroundColor: Colors.blue,
+      body :   FutureBuilder<List<Users>>(
+      
+        future:getUsers(user.email),
+        
+        builder: (context,  AsyncSnapshot <List<Users>>  snapshot) {
+          if(snapshot.hasData == false){return null;}
+          user=snapshot.data[0];
+            return Material(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         decoration: BoxDecoration(
           gradient: myGradiant,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.03,
-            ),
-            Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-              SoundCntrl(),
-            ]),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
             Stack(
-              clipBehavior: Clip.none,
-              alignment: Alignment.topRight,
-              children: [
-                Column(
-                  children: [
-                    AutoSizeText(
-                      'Salut Anis !',
-                      style: TextStyle(
-                        color: myRed,
-                        fontWeight: FontWeight.w900,
-                        fontSize: 45,
+                clipBehavior: Clip.none,
+                alignment: Alignment.topRight,
+                children: [
+                  Column(
+                    children: [
+                      AutoSizeText(
+                        'Salut ${user.name} !',
+                        style: TextStyle(
+                          color: myRed,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 45,
+                          
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    AutoSizeText(
-                      'Zinou nhar el lyoum mabrok idkom',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w100,
-                        fontSize: 15,
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                  ],
-                ),
-                Positioned(
-                  bottom: -35,
-                  right: -100,
-                  child: Star(angle: 8, scale: 2.8),
-                ),
-                Positioned(
-                  top: -50,
-                  right: -10,
-                  child: Star(angle: 8, scale: 2.8),
-                ),
-              ],
-            ),
+                      AutoSizeText(
+                        'Zinou nhar el lyoum mabrok idkom',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w100,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Positioned(
+                    bottom: -35,
+                    right: -100,
+                    child: Star(angle: 8, scale: 2.8),
+                  ),
+                  Positioned(
+                    top: -50,
+                    right: -10,
+                    child: Star(angle: 8, scale: 2.8),
+                  ),
+                ],
+              ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.1,
             ),
@@ -129,9 +140,27 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+    ),);
+           
+          
+          
+         
+        }
+      )
+      
     );
   }
-}
+  
+
+ 
+        
+        
+
+
+
+    
+  }
+
 
 class SoundCntrl extends StatefulWidget {
   SoundCntrl({
@@ -218,3 +247,16 @@ class SelectBox extends StatelessWidget {
     );
   }
 }
+Future<List <Users>> getUsers(String email_ ) async {
+       
+       final response = await Injector.appInstance
+       .get<SupabaseClient>()
+       .from('user')
+       .select()
+      
+       .execute();   
+      final dataList = response.data as List;
+      return dataList.map((map) => Users.fromJson(map) ).where((dataList) => dataList.email_ver(email_)).toList();
+   }
+
+   

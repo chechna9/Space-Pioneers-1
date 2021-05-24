@@ -1,3 +1,6 @@
+
+
+import 'package:astro01/variable_globale/variable.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
@@ -10,11 +13,10 @@ import 'levelChoice.dart';
 import 'homeScreen.dart';
 
 const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
-const supabaseKey =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDQ3OTY4MiwiZXhwIjoxOTM2MDU1NjgyfQ.IoKgpB9APMw5Te9DYgbJZIbYcvPOwl41dl4-IKFjpVk';
-final supabaseclient = SupabaseClient(supabaseUrl, supabaseKey);
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDQ3OTY4MiwiZXhwIjoxOTM2MDU1NjgyfQ.IoKgpB9APMw5Te9DYgbJZIbYcvPOwl41dl4-IKFjpVk';
+  final supabaseclient = SupabaseClient(supabaseUrl, supabaseKey);
+   
 
-String name;
 
 class Inscription extends StatefulWidget {
   @override
@@ -275,24 +277,16 @@ class _RegCardState extends State<RegCard> {
   Future _signup() async {
     if (_formKey.currentState.validate()) {
       final signInResult = await Injector.appInstance
-          .get<SupabaseClient>()
-          .auth
-          .signUp(_email.text, _password.text);
+      .get<SupabaseClient> ()
+      .auth.
+      signUp(   _email.text,_password.text);
 
-      if (signInResult != null &&
-          signInResult.user != null &&
-          _username.text.length <= 14) {
-        name = _username.text;
-
-        await supabaseclient.from("user").insert({
-          "name": _username.text,
-          "email": _email.text,
-          'points': 0,
-          'etoiles': 0,
-          'naissance': _dateTime.toString().split(" ")[0]
-        }).execute();
-        Navigator.pushNamed(context, '/homeScreen');
-      } else if (signInResult.error.message != null ||
+        if(signInResult != null && signInResult.user != null && _username.text.length <= 14 )
+        {  user.email=_email.text;
+          await supabaseclient.from("Trace").insert({ "email":_email.text,'earth':0,'jupiter':0 ,'mars':0 , 'mercury':0 ,'neptune':0,'saturn':0, 'uranus':0, 'venus':0}).execute(); 
+          await supabaseclient.from("user").insert({"name":_username.text, "email":_email.text,'etoiles':0,'naissance':_dateTime.toString().split(" ")[0],'avatar':'default'}).execute(); 
+        Navigator.pushNamed(context, '/homeScreen');}
+        else if (signInResult.error.message != null ||
           _username.text.length > 14) {
         String message;
         if (_username.text.length > 14) {
@@ -325,6 +319,7 @@ class _RegCardState extends State<RegCard> {
                   ));
             });
       }
-    }
+       
   }
+}
 }

@@ -1,6 +1,7 @@
 // import 'dart:js';
 
 import 'package:astro01/Screens/levelChoice.dart';
+import 'package:astro01/Screens/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
@@ -21,8 +22,7 @@ import 'Screens/documentation_data.dart';
 import 'Screens/documentation_swiper.dart';
 
 const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
-const supabaseKey =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDQ3OTY4MiwiZXhwIjoxOTM2MDU1NjgyfQ.IoKgpB9APMw5Te9DYgbJZIbYcvPOwl41dl4-IKFjpVk';
+const supabaseKey ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDQ3OTY4MiwiZXhwIjoxOTM2MDU1NjgyfQ.IoKgpB9APMw5Te9DYgbJZIbYcvPOwl41dl4-IKFjpVk';
 final supabaseclient = SupabaseClient(supabaseUrl, supabaseKey);
 void main() {
   Injector.appInstance.registerSingleton<SupabaseClient>(() => supabaseclient);
@@ -32,8 +32,7 @@ void main() {
     theme: ThemeData(
       fontFamily: 'Gotham', //setting default font
       primaryColor: myBlue,
-      // 0xffe6023d
-      // to change calendar color
+
       primarySwatch: calendarColor,
     ),
     initialRoute: '/splashScreen',
@@ -50,6 +49,7 @@ void main() {
       '/planetChoice': (context) => PlanetChoice(),
       '/levelChoice': (context) => LevelChoice(),
       '/testing': (context) => Testing(),
+      '/loadingScreen': (context) => LoadingScreen(),
       '/documentation': (context) => Documentation(),
     },
   ));

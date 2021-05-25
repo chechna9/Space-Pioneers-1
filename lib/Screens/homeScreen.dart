@@ -1,6 +1,7 @@
 import 'package:astro01/Screens/profilePage.dart';
 import 'package:astro01/Screens/quiz.dart';
 import 'package:astro01/classes/User.dart';
+import 'package:astro01/classes/trace.dart';
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -17,150 +18,148 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   get audioCache => null;
-@override
+  @override
   Widget build(BuildContext context) {
-   Users user1 = new Users();
+    double sh = MediaQuery.of(context).size.height; //screen height
+    double sw = MediaQuery.of(context).size.width; //screen width
+    Users user1 = new Users();
     return Scaffold(
-     backgroundColor: Colors.blue,
-      body :   FutureBuilder<List<Users>>(
-      
-        future:getUsers(user.email),
-        
-        builder: (context,  AsyncSnapshot <List<Users>>  snapshot) {
-          if(snapshot.hasData == false){return null;}
-          user=snapshot.data[0];
-            return Material(
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        decoration: BoxDecoration(
-          gradient: myGradiant,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-            Stack(
-                clipBehavior: Clip.none,
-                alignment: Alignment.topRight,
+      backgroundColor: Colors.blue,
+      body: FutureBuilder<List<Users>>(
+        future: getUsers(user.email),
+        builder: (context, AsyncSnapshot<List<Users>> snapshot) {
+          if (snapshot.hasData == false) {
+            return null;
+          }
+          user = snapshot.data[0];
+          return Material(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              decoration: BoxDecoration(
+                gradient: myGradiant,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
+                  SizedBox(
+                    height: sh * 0.03,
+                  ),
+                  Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                    SoundCntrl(),
+                  ]),
+                  Stack(
+                    clipBehavior: Clip.none,
+                    alignment: Alignment.topRight,
                     children: [
-                      AutoSizeText(
-                        'Salut ${user.name} !',
-                        style: TextStyle(
-                          color: myRed,
-                          fontWeight: FontWeight.w900,
-                          fontSize: 45,
-                          
-                        ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AutoSizeText(
+                            'Salut ${user.name} !',
+                            style: TextStyle(
+                              color: myRed,
+                              fontWeight: FontWeight.w900,
+                              fontSize: 45,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          AutoSizeText(
+                            'Zinou nhar el lyoum mabrok idkom',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w100,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(
-                        height: 10,
+                      Positioned(
+                        bottom: -35,
+                        left: sw * 0.8,
+                        child: Star(angle: 8, scale: 2.8),
                       ),
-                      AutoSizeText(
-                        'Zinou nhar el lyoum mabrok idkom',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w100,
-                          fontSize: 15,
-                        ),
+                      Positioned(
+                        top: -50,
+                        right: -10,
+                        child: Star(angle: 8, scale: 2.8),
                       ),
                     ],
                   ),
-                  Positioned(
-                    bottom: -35,
-                    right: -100,
-                    child: Star(angle: 8, scale: 2.8),
+                  SizedBox(
+                    height: sh * 0.1,
                   ),
-                  Positioned(
-                    top: -50,
-                    right: -10,
-                    child: Star(angle: 8, scale: 2.8),
+                  Expanded(
+                    child: ListView(
+                      children: [
+                        Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            Column(
+                              children: [
+                                SelectBox(
+                                  image: 'astroReading',
+                                  text: 'Decouvrir',
+                                  color: myRed,
+                                  onPressed: () {
+                                    Navigator.pushNamed(
+                                        context, '/documentation');
+                                  },
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                SelectBox(
+                                    image: 'ridingRocket',
+                                    text: 'Jouer',
+                                    color: Color(0xffAB02E6),
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                          context, '/levelChoice');
+                                    }),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                SelectBox(
+                                    image: 'ridingMoon',
+                                    text: 'Profile',
+                                    color: Color(0xff1759BC),
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                          context, '/profilePage');
+                                    }),
+                              ],
+                            ),
+                            Positioned(
+                              bottom: -100,
+                              left: 50,
+                              child: Star(angle: 8, scale: 2.8),
+                            ),
+                            Positioned(
+                              bottom: -50,
+                              right: 10,
+                              child: Star(angle: 8, scale: 2.8),
+                            ),
+                            Positioned(
+                              bottom: 130,
+                              left: 0,
+                              child: Star(angle: 8, scale: 2.8),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.1,
             ),
-            Stack(
-              alignment: Alignment.bottomCenter,
-              clipBehavior: Clip.none,
-              children: [
-                Column(
-                  children: [
-                    SelectBox(
-                      image: 'astroReading',
-                      text: 'Decouvrir',
-                      color: myRed,
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/documentation');
-                      },
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    SelectBox(
-                        image: 'ridingRocket',
-                        text: 'Jouer',
-                        color: Color(0xffAB02E6),
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/quiz');
-                        }),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    SelectBox(
-                        image: 'ridingMoon',
-                        text: 'Profile',
-                        color: Color(0xff1759BC),
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/profilePage');
-                        }),
-                  ],
-                ),
-                Positioned(
-                  bottom: -70,
-                  left: 50,
-                  child: Star(angle: 8, scale: 2.8),
-                ),
-                Positioned(
-                  bottom: -50,
-                  right: 10,
-                  child: Star(angle: 8, scale: 2.8),
-                ),
-                Positioned(
-                  bottom: 130,
-                  left: 0,
-                  child: Star(angle: 8, scale: 2.8),
-                ),
-              ],
-            ),
-          ],
-        ),
+          );
+        },
       ),
-    ),);
-           
-          
-          
-         
-        }
-      )
-      
     );
   }
-  
-
- 
-        
-        
-
-
-
-    
-  }
-
+}
 
 class SoundCntrl extends StatefulWidget {
   SoundCntrl({
@@ -247,16 +246,16 @@ class SelectBox extends StatelessWidget {
     );
   }
 }
-Future<List <Users>> getUsers(String email_ ) async {
-       
-       final response = await Injector.appInstance
-       .get<SupabaseClient>()
-       .from('user')
-       .select()
-      
-       .execute();   
-      final dataList = response.data as List;
-      return dataList.map((map) => Users.fromJson(map) ).where((dataList) => dataList.email_ver(email_)).toList();
-   }
 
-   
+Future<List<Users>> getUsers(String email_) async {
+  final response = await Injector.appInstance
+      .get<SupabaseClient>()
+      .from('user')
+      .select()
+      .execute();
+  final dataList = response.data as List;
+  return dataList
+      .map((map) => Users.fromJson(map))
+      .where((dataList) => dataList.email_ver(email_))
+      .toList();
+}

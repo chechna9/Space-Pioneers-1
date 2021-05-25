@@ -17,7 +17,7 @@ class AvatarPage extends StatefulWidget {
 
 class AvatarPageState extends State<AvatarPage> {
   int credit = user.etoiles;
- 
+
   @override
   void initState() {
     // TODO: implement initState
@@ -26,7 +26,6 @@ class AvatarPageState extends State<AvatarPage> {
       setState(() {
         avatar = event;
         user.avatar = event;
-        
       });
     });
   }
@@ -37,7 +36,7 @@ class AvatarPageState extends State<AvatarPage> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/profilePage');
+            Navigator.pop(context);
           },
           icon: Icon(
             Icons.arrow_back,
@@ -157,7 +156,7 @@ class AvatarCard extends StatelessWidget {
       onPressed: () {
         if (credit >= price) {
           avatarController.add(image);
-          user.avatar=image;
+          user.avatar = image;
         }
       },
       child: Container(

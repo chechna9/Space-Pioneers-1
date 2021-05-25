@@ -37,10 +37,13 @@ class DetailPage extends StatelessWidget {
                     bottom: -20,
                   ),
                   Positioned(
-                    top: 31,
-                    left: 5,
+                    top: 26.5,
+                    left: 9.5,
                     child: IconButton(
-                      icon: Icon(Icons.arrow_back_ios),
+                      icon: Icon(
+                        Icons.arrow_back,
+                        size: 35,
+                      ),
                       color: Colors.white,
                       onPressed: () {
                         Navigator.pop(context);

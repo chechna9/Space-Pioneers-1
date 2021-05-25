@@ -9,6 +9,7 @@ import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
 import '../variable_globale/variable.dart';
 import 'homeScreen.dart';
+
 const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
 const supabaseKey =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDQ3OTY4MiwiZXhwIjoxOTM2MDU1NjgyfQ.IoKgpB9APMw5Te9DYgbJZIbYcvPOwl41dl4-IKFjpVk';
@@ -42,15 +43,7 @@ class _LoginState extends State<Login> {
                 ? MediaQuery.of(context).viewInsets.bottom - 100
                 : MediaQuery.of(context).viewInsets.bottom),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            stops: [0, 1],
-            colors: [
-              myBlue,
-              Color(0xff50012d),
-            ],
-          ),
+          gradient: myGradiant,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -180,38 +173,40 @@ class _LogCardState extends State<LogCard> {
       ),
     );
   }
-    
-    Future _login() async{ 
-   final signInResult = await Injector.appInstance.get<SupabaseClient>().auth.signIn(email: _email.text.split(" ")[0],password: _password.text);
-      if(signInResult != null && signInResult.user != null)
-        {user.email=_email.text.split(" ")[0];
-        
-          Navigator.pushNamed(context, '/homeScreen');
-          }
-      else if (signInResult.error.message != null)
-      { 
-        TextButton(onPressed: () {  },
-        child: Text(' erreur dans le mot ed passe ou le mail' ));
-              showFlash(context: context,
-        
-        duration: const Duration(seconds:2),
-         builder: (context , controller){
 
-          return Flash.dialog(controller: controller, 
-                               borderRadius: const BorderRadius.all(Radius.circular(8)),
-                                backgroundGradient: LinearGradient(colors: [myRed, myRed] ),
-                               alignment: Alignment.bottomCenter,
-                                child: Padding(
-                                               padding: const EdgeInsets.all(8.0),
-                                               child: Text( signInResult.error.message , style: const TextStyle(
-                                               color:Colors.white,
-                                               fontSize: 16,
-                                               backgroundColor: myRed
-                                              ),
-                                              ),
-                                           ) 
-                              );
-        });      
-       }
-    }   
+  Future _login() async {
+    final signInResult = await Injector.appInstance
+        .get<SupabaseClient>()
+        .auth
+        .signIn(email: _email.text.split(" ")[0], password: _password.text);
+    if (signInResult != null && signInResult.user != null) {
+      user.email = _email.text.split(" ")[0];
+
+      Navigator.pushNamed(context, '/homeScreen');
+    } else if (signInResult.error.message != null) {
+      TextButton(
+          onPressed: () {},
+          child: Text(' erreur dans le mot ed passe ou le mail'));
+      showFlash(
+          context: context,
+          duration: const Duration(seconds: 2),
+          builder: (context, controller) {
+            return Flash.dialog(
+                controller: controller,
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
+                backgroundGradient: LinearGradient(colors: [myRed, myRed]),
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    signInResult.error.message,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        backgroundColor: myRed),
+                  ),
+                ));
+          });
     }
+  }
+}

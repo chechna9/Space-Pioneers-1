@@ -1,6 +1,7 @@
 import 'package:astro01/Screens/profilePage.dart';
 import 'package:astro01/Screens/quiz.dart';
 import 'package:astro01/classes/User.dart';
+import 'package:astro01/classes/trace.dart';
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,34 @@ class _HomeScreenState extends State<HomeScreen> {
   get audioCache => null;
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
+  
+    return Scaffold(
+     backgroundColor: Colors.blue,
+      body :   FutureBuilder<List<Users>>(
+      
+        future:getUsers(user.email),
+        
+        builder: (context,  AsyncSnapshot <List<Users>>  snapshot) {
+          if(snapshot.hasData == false){return null;}
+          user=snapshot.data[0];
+          trace.email=user.email ;
+            return Material(
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        decoration: BoxDecoration(
+          gradient: myGradiant,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+            Stack(
+                clipBehavior: Clip.none,
+                alignment: Alignment.topRight,
+=======
     double sh = MediaQuery.of(context).size.height; //screen height
     double sw = MediaQuery.of(context).size.width; //screen width
     Users user1 = new Users();
@@ -39,6 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+>>>>>>> 28d4d1dd955cf92dad37bef6255b34c8c928629c
                 children: [
                   SizedBox(
                     height: sh * 0.03,

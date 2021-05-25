@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  http: ^0.13.3
   flutter_swiper: ^1.1.6
   injector: ^2.0.0
   supabase: ^0.0.1-dev.14

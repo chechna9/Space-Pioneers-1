@@ -1,3 +1,5 @@
+// import 'dart:js';
+
 import 'package:astro01/Screens/levelChoice.dart';
 import 'package:astro01/Screens/loading.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +7,7 @@ import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
 import 'Screens/inscription.dart';
 import 'Screens/splashScreen.dart';
+import 'Screens/quiz.dart';
 import 'Screens/testing.dart';
 import 'Screens/login.dart';
 import 'Screens/leaderBoard.dart';
@@ -37,6 +40,7 @@ void main() {
       '/splashScreen': (context) => SplashScreen(),
       '/inscription': (context) => Inscription(),
       '/login': (context) => Login(),
+      '/quiz' : (context) => Quiz(),
       '/leaderBoard': (context) => LeaderBoard(),
       '/homeScreen': (context) => HomeScreen(),
       '/shopPage': (context) => ShopPage(),

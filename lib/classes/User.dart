@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+
+//import 'dart:html';
+
+
+=======
+>>>>>>> ca542dc5987c99ac499eb7677df123c006d1b9d4
 import 'package:flutter/cupertino.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';

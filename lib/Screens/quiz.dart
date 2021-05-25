@@ -1,3 +1,7 @@
+// import 'dart:js';
+
+// import 'dart:js';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
@@ -13,17 +17,14 @@ import 'package:flutter/src/widgets/framework.dart';
 // }
 
 class Quiz extends StatefulWidget {
-
   @override
   _QuizState createState() => _QuizState();
 }
 
-class _QuizState extends State<Quiz> {
+ class _QuizState extends State<Quiz> {
+// Future fetchQuestions() async {
 
-Future fetchQuestions() async {
-
-}
-
+// }
 
 @override
   Widget build(BuildContext context) {
@@ -33,31 +34,48 @@ Future fetchQuestions() async {
           children: [
             Container(
                 decoration: BoxDecoration(
-                gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                stops: [0, 1],
-                colors: [
-                myBlue,
-                Color(0xff50012d), ], ), ),
+                gradient: myGradiant,),
                 child: Scaffold(
                   backgroundColor: Colors.transparent,
-                  body:  AppbarCustomed(myBlue: myBlue, myRed2: myRed2),
+          //         body: ListView.builder(
+          // itemBuilder: (context, index) {
+          //   return Card(child: Column(
+          //     children: [
+          //       Text('Nom'),
+          //       Text('Prenom'),
+          //     ],
+          //   ),);
+          // },
+          // itemCount: 4,
+          // ),
+                  body: AppbarCustomed(myBlue: myBlue, myRed2: myRed2),
                 ),
              ),
+            //  Column QuestBox(
+            //     quest: "cv chwia ?",
+            //     ),
                 Padding(
                   padding: const EdgeInsets.only(top: 90),
-                  child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                  QuestBox(),
-                  AnswerBoxA(),
-                  AnswerBoxB(),
-                  AnswerBoxC(),
-                  AnswerBoxD(),
-          ],
+                  child: ListView.builder(
+                    itemCount: 4,
+                    itemBuilder: (BuildContext context, int myindex) {
+                        return Column(
+                             mainAxisAlignment: MainAxisAlignment.center,
+                             children: [
+                               AnswerBox(
+                                 answer: 'cv pas $myindex',
+                                 answerLetter: '$myindex',
+                               ),
+                             ],
+                        );
+                    },
+                  // QuestBox(),
+                  // AnswerBoxA(),
+                  // AnswerBoxB(),
+                  // AnswerBoxC(),
+                  // AnswerBoxD(),
         ),
-                ),
+        ),
       ],
     );
 }}
@@ -66,9 +84,13 @@ Future fetchQuestions() async {
 
 
 
-class AnswerBoxA extends StatelessWidget {
-  const AnswerBoxA({
+class AnswerBox extends StatelessWidget {
+  final String answer;
+  final String answerLetter;
+  AnswerBox({
     Key key,
+    this.answer : 'answer',
+    this.answerLetter : 'A',
   }) : super(key: key);
 
   @override
@@ -92,7 +114,7 @@ class AnswerBoxA extends StatelessWidget {
                 color: myRed2,
                 shape: BoxShape.circle,),
                 child: Center(
-                  child: Text('A', 
+                  child: Text('$answerLetter', 
                       style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w700,
@@ -100,7 +122,7 @@ class AnswerBoxA extends StatelessWidget {
                 ),),
               ),
                 Text(
-                   'Planète',
+                   '$answer',
                     style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w700,
@@ -124,184 +146,186 @@ class AnswerBoxA extends StatelessWidget {
 }
 
 
-class AnswerBoxB extends StatelessWidget {
-  const AnswerBoxB({
-    Key key,
-  }) : super(key: key);
+// class AnswerBoxB extends StatelessWidget {
+//   const AnswerBoxB({
+//     Key key,
+//   }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-     children: [
-     Padding(
-       padding: const EdgeInsets.only(top: 18, left: 20, right: 20),
-        child: SizedBox(
-         width: double.infinity,
-         height: 69,
-         child: TextButton(
-          child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 8, left: 8, bottom: 8, right: 15),
-                child: Container(
-                  width: 41,
-                  height: 41,
-                decoration: BoxDecoration(
-                color: myRed2,
-                shape: BoxShape.circle,),
-                child: Center(
-                  child: Text('B', 
-                      style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20,),),
-                ),),
-              ),
-                Text(
-                   'Lune',
-                    style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 20,),
-                    ),
-            ],
-          ),
-              style: TextButton.styleFrom(
-              backgroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//      children: [
+//      Padding(
+//        padding: const EdgeInsets.only(top: 18, left: 20, right: 20),
+//         child: SizedBox(
+//          width: double.infinity,
+//          height: 69,
+//          child: TextButton(
+//           child: Row(
+//             children: [
+//               Padding(
+//                 padding: const EdgeInsets.only(top: 8, left: 8, bottom: 8, right: 15),
+//                 child: Container(
+//                   width: 41,
+//                   height: 41,
+//                 decoration: BoxDecoration(
+//                 color: myRed2,
+//                 shape: BoxShape.circle,),
+//                 child: Center(
+//                   child: Text('B', 
+//                       style: TextStyle(
+//                       color: Colors.white,
+//                       fontWeight: FontWeight.w700,
+//                       fontSize: 20,),),
+//                 ),),
+//               ),
+//                 Text(
+//                    'Lune',
+//                     style: TextStyle(
+//                     color: Colors.black,
+//                     fontWeight: FontWeight.w700,
+//                     fontSize: 20,),
+//                     ),
+//             ],
+//           ),
+//               style: TextButton.styleFrom(
+//               backgroundColor: Colors.white,
+//               shape: RoundedRectangleBorder(
+//               borderRadius: BorderRadius.circular(10),
 
-            ),
-          ),
-                onPressed: () => Navigator.pushNamed(context, '/'),),
-       ),
-     ),
-     ],
-    );
-  }
-}
-
-
-class AnswerBoxC extends StatelessWidget {
-  const AnswerBoxC({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-     children: [
-     Padding(
-       padding: const EdgeInsets.only(top: 18, left: 20, right: 20),
-       child: SizedBox(
-         width: double.infinity,
-         height: 69,
-         child: TextButton(
-          child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 8, left: 8, bottom: 8, right: 15),
-                child: Container(
-                  width: 41,
-                  height: 41,
-                decoration: BoxDecoration(
-                color: myRed2,
-                shape: BoxShape.circle,),
-                child: Center(
-                  child: Text('C', 
-                      style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20,),),
-                ),),
-              ),
-                Text(
-                   'Etoile',
-                    style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 20,),
-                    ),
-            ],
-          ),
-              style: TextButton.styleFrom(
-              backgroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-
-            ),
-          ),
-                onPressed: () => Navigator.pushNamed(context, '/'),),
-       ),
-     ),
-     ],
-    );
-  }
-}
+//             ),
+//           ),
+//                 onPressed: () => Navigator.pushNamed(context, '/'),),
+//        ),
+//      ),
+//      ],
+//     );
+//   }
+// }
 
 
-class AnswerBoxD extends StatelessWidget {
-  const AnswerBoxD({
-    Key key,
-  }) : super(key: key);
+// class AnswerBoxC extends StatelessWidget {
+//   const AnswerBoxC({
+//     Key key,
+//   }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-     children: [
-     Padding(
-       padding: const EdgeInsets.only(top: 18, left: 20, right: 20),
-       child: SizedBox(
-         width: double.infinity,
-         height: 69,
-         child: TextButton(
-          child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 8, left: 8, bottom: 8, right: 15),
-                child: Container(
-                  width: 41,
-                  height: 41,
-                decoration: BoxDecoration(
-                color: myRed2,
-                shape: BoxShape.circle,),
-                child: Center(
-                  child: Text('D', 
-                      style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20,),),
-                ),),
-              ),
-                Text(
-                   "Boule d'energie",
-                    style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 20,),
-                    ),
-            ],
-          ),
-              style: TextButton.styleFrom(
-              backgroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//      children: [
+//      Padding(
+//        padding: const EdgeInsets.only(top: 18, left: 20, right: 20),
+//        child: SizedBox(
+//          width: double.infinity,
+//          height: 69,
+//          child: TextButton(
+//           child: Row(
+//             children: [
+//               Padding(
+//                 padding: const EdgeInsets.only(top: 8, left: 8, bottom: 8, right: 15),
+//                 child: Container(
+//                   width: 41,
+//                   height: 41,
+//                 decoration: BoxDecoration(
+//                 color: myRed2,
+//                 shape: BoxShape.circle,),
+//                 child: Center(
+//                   child: Text('C', 
+//                       style: TextStyle(
+//                       color: Colors.white,
+//                       fontWeight: FontWeight.w700,
+//                       fontSize: 20,),),
+//                 ),),
+//               ),
+//                 Text(
+//                    'Etoile',
+//                     style: TextStyle(
+//                     color: Colors.black,
+//                     fontWeight: FontWeight.w700,
+//                     fontSize: 20,),
+//                     ),
+//             ],
+//           ),
+//               style: TextButton.styleFrom(
+//               backgroundColor: Colors.white,
+//               shape: RoundedRectangleBorder(
+//               borderRadius: BorderRadius.circular(10),
 
-            ),
-          ),
-                onPressed: () => Navigator.pushNamed(context, '/'),),
-       ),
-     ),
-     ],
-    );
-  }
-}
+//             ),
+//           ),
+//                 onPressed: () => Navigator.pushNamed(context, '/'),),
+//        ),
+//      ),
+//      ],
+//     );
+//   }
+// }
+
+
+// class AnswerBoxD extends StatelessWidget {
+//   const AnswerBoxD({
+//     Key key,
+//   }) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//      children: [
+//      Padding(
+//        padding: const EdgeInsets.only(top: 18, left: 20, right: 20),
+//        child: SizedBox(
+//          width: double.infinity,
+//          height: 69,
+//          child: TextButton(
+//           child: Row(
+//             children: [
+//               Padding(
+//                 padding: const EdgeInsets.only(top: 8, left: 8, bottom: 8, right: 15),
+//                 child: Container(
+//                   width: 41,
+//                   height: 41,
+//                 decoration: BoxDecoration(
+//                 color: myRed2,
+//                 shape: BoxShape.circle,),
+//                 child: Center(
+//                   child: Text('D', 
+//                       style: TextStyle(
+//                       color: Colors.white,
+//                       fontWeight: FontWeight.w700,
+//                       fontSize: 20,),),
+//                 ),),
+//               ),
+//                 Text(
+//                    "Boule d'energie",
+//                     style: TextStyle(
+//                     color: Colors.black,
+//                     fontWeight: FontWeight.w700,
+//                     fontSize: 20,),
+//                     ),
+//             ],
+//           ),
+//               style: TextButton.styleFrom(
+//               backgroundColor: Colors.white,
+//               shape: RoundedRectangleBorder(
+//               borderRadius: BorderRadius.circular(10),
+
+//             ),
+//           ),
+//                 onPressed: () => Navigator.pushNamed(context, '/'),),
+//        ),
+//      ),
+//      ],
+//     );
+//   }
+// }
 
 class QuestBox extends StatelessWidget {
   const QuestBox({
+    this.quest : 'Quelle est la couleur du Soleil',
     Key key,
   }) : super(key: key);
 
+final String quest;
   @override
   Widget build(BuildContext context) {
     return 
@@ -316,7 +340,7 @@ class QuestBox extends StatelessWidget {
           color: myRed2,
           child: Center(
             child: Text(
-         'Le soleil est une ....',
+         '$quest',
             style: TextStyle(
             fontFamily: 'Gotham',
             color: Colors.white,
@@ -336,10 +360,14 @@ class AppbarCustomed extends StatelessWidget {
     Key key,
     @required this.myBlue,
     @required this.myRed2,
+    this.planete : 'Soleil',
+    this.numero : 5,
   }) : super(key: key);
 
   final Color myBlue;
   final Color myRed2;
+  final String planete;
+  final int numero;
 
   @override
   Widget build(BuildContext context) {
@@ -362,7 +390,7 @@ class AppbarCustomed extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                   Spacer(flex: 2),
-                  Text('2/10', textAlign: TextAlign.start,
+                  Text('$numero/10', textAlign: TextAlign.start,
                   style: TextStyle(
                   color: myRed2,
                   fontSize: 13,
@@ -370,7 +398,7 @@ class AppbarCustomed extends StatelessWidget {
                   fontWeight: FontWeight.normal,
                   ),),
                   Spacer(flex: 5),
-                  Text("Soleil", textAlign: TextAlign.center,
+                  Text("$planete", textAlign: TextAlign.center,
                   style: TextStyle(
                   color: Colors.white,
                   fontSize: 17,

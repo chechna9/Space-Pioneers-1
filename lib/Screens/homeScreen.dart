@@ -106,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         text: 'Jouer',
                         color: Color(0xffAB02E6),
                         onPressed: () {
-                          Navigator.pushNamed(context, '/levelChoice');
+                          Navigator.pushNamed(context, '/quiz');
                         }),
                     SizedBox(
                       height: 30,
@@ -190,36 +190,6 @@ class _SoundCntrlState extends State<SoundCntrl> {
     );
   }
 }
-
-class SoundCntrl extends StatefulWidget {
-  SoundCntrl({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  _SoundCntrlState createState() => _SoundCntrlState();
-}
-
-class _SoundCntrlState extends State<SoundCntrl> {
-  bool mute = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: () {
-        setState(() {
-          mute = mute ? false : true;
-        });
-      },
-      icon: Icon(
-        !mute ? Icons.music_note_rounded : Icons.music_off_rounded,
-        color: Colors.white,
-        size: 30,
-      ),
-    );
-  }
-}
-
 
 class SelectBox extends StatelessWidget {
   SelectBox({Key key, this.color, this.image, this.text, this.onPressed})

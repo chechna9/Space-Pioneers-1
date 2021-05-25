@@ -2,12 +2,13 @@
 
 // import 'dart:js';
 
-import 'package:auto_size_text/auto_size_text.dart';
+import 'package:astro01/classes/questions.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:http/http.dart' as http;
 
 // import 'package:http/http.dart' as http;
 // import 'package:flutter/services.dart' show rootBundle;
@@ -22,13 +23,38 @@ class Quiz extends StatefulWidget {
 }
 
  class _QuizState extends State<Quiz> {
-// Future fetchQuestions() async {
 
-// }
+// ignore: unused_field
+List<Question> _questions = <Question>[];
+
+Future<List<Question>> fetchQuestions() async {
+
+var url = Uri.parse('https://nadir-ogd.github.io/Quiz-API/questions.json');
+var response = await http.get(url);
+
+// ignore: deprecated_member_use
+var questions = List<Question>();
+if (response.statusCode == 200) {
+ var questionsJson  = json.decode(response.body);
+ for (var questionJson in questionsJson) {
+   questions.add(Question.fromJson(questionJson));
+ }
+}
+return questions;
+}
+
+@override
+void initState() {
+  fetchQuestions().then((value) {
+      setState(() {
+      _questions.addAll(value);
+      });
+    });
+    super.initState();
+}
 
 @override
   Widget build(BuildContext context) {
-    
     return Stack(
           fit: StackFit.expand,
           children: [
@@ -45,7 +71,7 @@ class Quiz extends StatefulWidget {
                   child: Column(
                     children : [
                         QuestBox(
-                        quest: "cv chwia ?",),
+                        quest: "the question",),
                     Expanded(
                         child: ListView.builder(
                         itemCount: 4,
@@ -53,7 +79,7 @@ class Quiz extends StatefulWidget {
                             return Column(
                                  children: [ 
                                    AnswerBox(
-                                     answer: 'cv pas $myindex',
+                                     answer: 'choice $myindex',
                                      answerLetter: '$myindex',
                                    ),]
                             );

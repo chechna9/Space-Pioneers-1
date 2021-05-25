@@ -12,24 +12,28 @@ class LoadingScreen extends StatefulWidget {
 class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: myGradiant,
-      ),
-      child: Transform.rotate(
-        angle: 4,
-        child: ShakeAnimatedWidget(
-          enabled: true,
-          shakeAngle: Rotation.deg(z: 15),
-          duration: Duration(milliseconds: 900),
-          curve: Curves.linear,
-          child: ScaleAnimatedWidget.tween(
-            duration: Duration(milliseconds: 2600),
-            scaleDisabled: 0.2,
-            scaleEnabled: 1,
-            child: Image.asset(
-              'assets/images/other/star.png',
-              scale: 0.7,
+    return Scaffold(
+          body: Container(
+        decoration: BoxDecoration(
+          gradient: myGradiant,
+        ),
+        child: Center(
+          child: Transform.rotate(
+            angle: 4,
+            child: ShakeAnimatedWidget(
+              enabled: true,
+              shakeAngle: Rotation.deg(z: 15),
+              duration: Duration(milliseconds: 900),
+              curve: Curves.linear,
+              child: ScaleAnimatedWidget.tween(
+                duration: Duration(milliseconds: 2600),
+                scaleDisabled: 0.2,
+                scaleEnabled: 1,
+                child: Image.asset(
+                  'assets/images/other/star.png',
+                  scale: 0.7,
+                ),
+              ),
             ),
           ),
         ),

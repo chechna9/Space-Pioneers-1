@@ -1,3 +1,4 @@
+import 'package:astro01/Screens/loading.dart';
 import 'package:astro01/classes/trace.dart';
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -25,7 +26,7 @@ class _LevelChoiceState extends State<LevelChoice> {
         future:gettrace("ja_khenfouf@esi.dz"),
         
         builder: (context,  AsyncSnapshot <List<Trace>>  snapshot) {
-          if(snapshot.hasData == false){return CircularProgressIndicator();}
+          if(snapshot.hasData == false){return LoadingScreen();}
           trace=snapshot.data[0];
           print(trace.jupiter);
             return Scaffold(

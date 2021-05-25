@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:astro01/Screens/loading.dart';
 import 'package:astro01/classes/User.dart';
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -49,7 +50,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
         
         builder: (context,  AsyncSnapshot <List<Users>>  snapshot) {print(user.etoiles);
         list=snapshot.data;
-          if(snapshot.hasData == false){return CircularProgressIndicator();}
+          if(snapshot.hasData == false){return LoadingScreen();}
             return Scaffold(
       appBar: AppBar(
         elevation: 0,

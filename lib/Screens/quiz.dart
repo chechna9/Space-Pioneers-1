@@ -37,52 +37,34 @@ class Quiz extends StatefulWidget {
                 gradient: myGradiant,),
                 child: Scaffold(
                   backgroundColor: Colors.transparent,
-          //         body: ListView.builder(
-          // itemBuilder: (context, index) {
-          //   return Card(child: Column(
-          //     children: [
-          //       Text('Nom'),
-          //       Text('Prenom'),
-          //     ],
-          //   ),);
-          // },
-          // itemCount: 4,
-          // ),
                   body: AppbarCustomed(myBlue: myBlue, myRed2: myRed2),
                 ),
              ),
-            //  Column QuestBox(
-            //     quest: "cv chwia ?",
-            //     ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 90),
-                  child: ListView.builder(
-                    itemCount: 4,
-                    itemBuilder: (BuildContext context, int myindex) {
-                        return Column(
-                             mainAxisAlignment: MainAxisAlignment.center,
-                             children: [
-                               AnswerBox(
-                                 answer: 'cv pas $myindex',
-                                 answerLetter: '$myindex',
-                               ),
-                             ],
-                        );
-                    },
-                  // QuestBox(),
-                  // AnswerBoxA(),
-                  // AnswerBoxB(),
-                  // AnswerBoxC(),
-                  // AnswerBoxD(),
+                  padding: const EdgeInsets.only(top: 160),
+                  child: Column(
+                    children : [
+                        QuestBox(
+                        quest: "cv chwia ?",),
+                    Expanded(
+                        child: ListView.builder(
+                        itemCount: 4,
+                        itemBuilder: (BuildContext context, int myindex) {
+                            return Column(
+                                 children: [ 
+                                   AnswerBox(
+                                     answer: 'cv pas $myindex',
+                                     answerLetter: '$myindex',
+                                   ),]
+                            );
+                        },
         ),
-        ),
+                    ),
+                    ]),
+                ),
       ],
     );
 }}
-
-
-
-
 
 class AnswerBox extends StatelessWidget {
   final String answer;
@@ -98,7 +80,7 @@ class AnswerBox extends StatelessWidget {
     return Column(
      children: [
     Padding(
-    padding: const EdgeInsets.only(top: 40, left: 20, right: 20),
+    padding: const EdgeInsets.only(top: 22, left: 20, right: 20),
        child: SizedBox(
          width: double.infinity,
          height: 69,

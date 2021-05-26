@@ -36,6 +36,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  bloc:
+    dependency: transitive
+    description:
+      name: bloc
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "7.0.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -125,6 +132,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_bloc:
+    dependency: "direct main"
+    description:
+      name: flutter_bloc
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "7.0.0"
   flutter_page_indicator:
     dependency: transitive
     description:
@@ -209,6 +223,13 @@ packages:
     dependency: transitive
     description:
       name: mime
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
+  nested:
+    dependency: transitive
+    description:
+      name: nested
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
@@ -317,6 +338,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.1"
+  provider:
+    dependency: "direct main"
+    description:
+      name: provider
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.0.0"
   realtime_client:
     dependency: transitive
     description:

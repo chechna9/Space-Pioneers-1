@@ -39,6 +39,8 @@ dependencies:
   animated_widgets: ^1.0.6
   polygon_clipper: ^1.0.2
   flutter_svg: ^0.22.0
+  flutter_bloc: ^7.0.0
+  provider: ^5.0.0
 
 
 

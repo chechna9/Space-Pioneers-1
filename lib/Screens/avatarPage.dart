@@ -1,16 +1,22 @@
 import 'dart:async';
 
+import 'package:astro01/Screens/bravoBadge.dart';
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../components/constants.dart';
 
-String avatar = user.avatar;
-StreamController<String> avatarController =
-    StreamController<String>.broadcast();
+// String avatar = user.avatar;
+class TempAvatar extends ChangeNotifier {
+  //to update avatar in avatarPage
+  String avatar = user.avatar;
+  void updateAvatar(String newAvatar) {
+    avatar = newAvatar;
+    notifyListeners();
+  }
+}
 
 class AvatarPage extends StatefulWidget {
-  AvatarPage(this.stream);
-  final Stream<String> stream;
   @override
   AvatarPageState createState() => AvatarPageState();
 }
@@ -19,123 +25,120 @@ class AvatarPageState extends State<AvatarPage> {
   int credit = user.etoiles;
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    widget.stream.listen((event) {
-      setState(() {
-        avatar = event;
-        user.avatar = event;
-      });
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(
-            Icons.arrow_back,
-            size: 30,
-          ),
-        ),
-        centerTitle: true,
-        title: Text(
-          'Avatar',
-          style: TextStyle(
-            fontWeight: FontWeight.w100,
-          ),
-        ),
-        backgroundColor: Color(0xff160030),
-        elevation: 10,
-        leadingWidth: 70,
-        toolbarHeight: 70,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.save),
+    return ChangeNotifierProvider<TempAvatar>(
+      create: (context) => TempAvatar(),
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
             onPressed: () {
-              setState(() {});
-              print('saved');
+              Navigator.pushReplacementNamed(context, '/profilePage');
             },
+            icon: Icon(
+              Icons.arrow_back,
+              size: 30,
+            ),
           ),
-          SizedBox(
-            width: 20,
+          centerTitle: true,
+          title: Text(
+            'Avatar',
+            style: TextStyle(
+              fontWeight: FontWeight.w100,
+            ),
           ),
-        ],
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: myGradiant,
+          backgroundColor: Color(0xff160030),
+          elevation: 10,
+          leadingWidth: 70,
+          toolbarHeight: 70,
+          actions: [
+            IconButton(
+              icon: Icon(Icons.save),
+              onPressed: () {
+                user.avatar = avatar;
+              },
+            ),
+            SizedBox(
+              width: 20,
+            ),
+          ],
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
-                  border: Border.all(
-                    color: myRed,
-                    width: 3,
+        body: Container(
+          decoration: BoxDecoration(
+            gradient: myGradiant,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    border: Border.all(
+                      color: myRed,
+                      width: 3,
+                    ),
+                  ),
+                  child: CurrentAvatar(),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Expanded(
+                  child: GridView.count(
+                    padding: EdgeInsets.only(top: 50),
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 30,
+                    children: [
+                      AvatarCard(
+                        credit: credit,
+                        image: 'default',
+                        price: -1,
+                      ),
+                      AvatarCard(
+                        credit: credit,
+                        image: 'ridingRocket',
+                        price: -1,
+                      ),
+                      AvatarCard(
+                        credit: credit,
+                        image: 'ridingMoon',
+                        price: 75,
+                      ),
+                      AvatarCard(
+                        credit: credit,
+                        image: 'ridingRocket',
+                        price: 150,
+                      ),
+                      AvatarCard(
+                        credit: credit,
+                        image: 'default',
+                        price: 2000,
+                      ),
+                      AvatarCard(
+                        credit: credit,
+                        image: 'default',
+                        price: 2000,
+                      ),
+                    ],
                   ),
                 ),
-                child: CircleAvatar(
-                  backgroundImage:
-                      AssetImage('assets/images/avatars/$avatar.png'),
-                  radius: 100,
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Expanded(
-                child: GridView.count(
-                  padding: EdgeInsets.only(top: 50),
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 20,
-                  mainAxisSpacing: 30,
-                  children: [
-                    AvatarCard(
-                      credit: credit,
-                      image: 'default',
-                      price: -1,
-                    ),
-                    AvatarCard(
-                      credit: credit,
-                      image: 'ridingRocket',
-                      price: -1,
-                    ),
-                    AvatarCard(
-                      credit: credit,
-                      image: 'ridingMoon',
-                      price: 75,
-                    ),
-                    AvatarCard(
-                      credit: credit,
-                      image: 'ridingRocket',
-                      price: 150,
-                    ),
-                    AvatarCard(
-                      credit: credit,
-                      image: 'default',
-                      price: 2000,
-                    ),
-                    AvatarCard(
-                      credit: credit,
-                      image: 'default',
-                      price: 2000,
-                    ),
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class CurrentAvatar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return CircleAvatar(
+      backgroundImage: AssetImage(
+          'assets/images/avatars/${Provider.of<TempAvatar>(context).avatar}.png'),
+      radius: 100,
     );
   }
 }
@@ -155,8 +158,8 @@ class AvatarCard extends StatelessWidget {
     return TextButton(
       onPressed: () {
         if (credit >= price) {
-          avatarController.add(image);
-          user.avatar = image;
+          avatar = image;
+          Provider.of<TempAvatar>(context, listen: false).updateAvatar(image);
         }
       },
       child: Container(

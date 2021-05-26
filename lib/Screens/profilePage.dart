@@ -1,31 +1,29 @@
+import 'dart:async';
+
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:polygon_clipper/polygon_border.dart';
+import 'package:provider/provider.dart';
 import '../components/constants.dart';
+import '../variable_globale/variable.dart';
 
 String avatar = user.avatar;
-String userName =user.name;
+String userName = user.name;
 
 class ProfilePage extends StatefulWidget {
-  
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  
-   /*void refresh(){
-     initState(){
-       avatar=user.avatar;
-     }
-   }*/
   List<String> photoList = <String>[
     'ridingRocket',
     'ridingMoon',
     'ridingRocket',
   ];
   int credit = user.etoiles;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +39,6 @@ class _ProfilePageState extends State<ProfilePage> {
               color: myRed,
               iconSize: 30,
               onPressed: () {
-                
                 Navigator.pushNamed(context, '/shopPage');
               },
             ),
@@ -72,7 +69,6 @@ class _ProfilePageState extends State<ProfilePage> {
             color: myRed,
             iconSize: 30,
             onPressed: () {
-         
               Navigator.pushNamed(context, '/leaderBoard');
             },
           ),
@@ -96,8 +92,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                     child: CircleAvatar(
-                      backgroundImage:
-                          AssetImage('assets/images/avatars/$avatar.png'),
+                      backgroundImage: AssetImage(
+                          'assets/images/avatars/${user.avatar}.png'),
                       radius: 100,
                     ),
                   ),
@@ -107,9 +103,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       color: Colors.white,
                       iconSize: 30,
                       onPressed: () {
-                     
-
-                        Navigator.pushNamed(context, '/avatarPage');
+                        Navigator.pushReplacementNamed(context, '/avatarPage');
                       },
                     ),
                   ),

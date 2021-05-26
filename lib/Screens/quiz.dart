@@ -77,11 +77,10 @@ class _QuizState extends State<Quiz> {
                         child: ListView.builder(
                           itemCount: 4,
                           itemBuilder: (BuildContext context, int myindex) {
-                            int indx = myindex + 1;
                             return Column(children: [
                               AnswerBox(
                                 answer: snapshot.data[8].choice1,
-                                answerLetter: '$indx',
+                                 answerLetter: '${myindex + 1}',
                               ),
                             ]);
                           },

@@ -44,15 +44,6 @@ class _QuizState extends State<Quiz> {
     return questions;
   }
 
-  @override
-/*void initState() {
-  fetchQuestions().then((value) {
-      setState(() {
-      _questions.addAll(value);
-      });
-    });
-    super.initState();
-}*/
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +94,7 @@ class _QuizState extends State<Quiz> {
   }
 }
 
-class AnswerBox extends StatelessWidget {
+class AnswerBox extends StatefulWidget {
   final String answer;
   final String answerLetter;
   AnswerBox({
@@ -113,9 +104,50 @@ class AnswerBox extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _AnswerBoxState createState() => _AnswerBoxState();
+}
+
+class _AnswerBoxState extends State<AnswerBox> {
+  Color choiceColor = Colors.white;
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Container(
+          color: choiceColor,
+          child: ListTile(
+            onTap: () { setState(() {
+              choiceColor= Colors.orange;
+              print("object");
+             });},
+            selectedTileColor: choiceColor,
+            leading:                   
+            Padding(
+                      padding: const EdgeInsets.only(
+                          top: 8, left: 8, bottom: 8, right: 15),
+                      child: Container(
+                        width: 41,
+                        height: 41,
+                        decoration: BoxDecoration(
+                          color: myRed2,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: Text(
+                            '${widget.answerLetter}',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+            title: Text( ),
+          ),
+          
+        ),
         Padding(
           padding: const EdgeInsets.only(top: 22, left: 20, right: 20),
           child: SizedBox(
@@ -136,7 +168,7 @@ class AnswerBox extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          '$answerLetter',
+                          '${widget.answerLetter}',
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w700,
@@ -147,12 +179,13 @@ class AnswerBox extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '$answer',
+                    '${widget.answer}',
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.w700,
-                      fontSize: 20,
+                      fontSize: MediaQuery.of(context).size.width/29,
                     ),
+                    maxLines: 3,
                   ),
                 ],
               ),
@@ -170,177 +203,6 @@ class AnswerBox extends StatelessWidget {
     );
   }
 }
-
-// class AnswerBoxB extends StatelessWidget {
-//   const AnswerBoxB({
-//     Key key,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//      children: [
-//      Padding(
-//        padding: const EdgeInsets.only(top: 18, left: 20, right: 20),
-//         child: SizedBox(
-//          width: double.infinity,
-//          height: 69,
-//          child: TextButton(
-//           child: Row(
-//             children: [
-//               Padding(
-//                 padding: const EdgeInsets.only(top: 8, left: 8, bottom: 8, right: 15),
-//                 child: Container(
-//                   width: 41,
-//                   height: 41,
-//                 decoration: BoxDecoration(
-//                 color: myRed2,
-//                 shape: BoxShape.circle,),
-//                 child: Center(
-//                   child: Text('B',
-//                       style: TextStyle(
-//                       color: Colors.white,
-//                       fontWeight: FontWeight.w700,
-//                       fontSize: 20,),),
-//                 ),),
-//               ),
-//                 Text(
-//                    'Lune',
-//                     style: TextStyle(
-//                     color: Colors.black,
-//                     fontWeight: FontWeight.w700,
-//                     fontSize: 20,),
-//                     ),
-//             ],
-//           ),
-//               style: TextButton.styleFrom(
-//               backgroundColor: Colors.white,
-//               shape: RoundedRectangleBorder(
-//               borderRadius: BorderRadius.circular(10),
-
-//             ),
-//           ),
-//                 onPressed: () => Navigator.pushNamed(context, '/'),),
-//        ),
-//      ),
-//      ],
-//     );
-//   }
-// }
-
-// class AnswerBoxC extends StatelessWidget {
-//   const AnswerBoxC({
-//     Key key,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//      children: [
-//      Padding(
-//        padding: const EdgeInsets.only(top: 18, left: 20, right: 20),
-//        child: SizedBox(
-//          width: double.infinity,
-//          height: 69,
-//          child: TextButton(
-//           child: Row(
-//             children: [
-//               Padding(
-//                 padding: const EdgeInsets.only(top: 8, left: 8, bottom: 8, right: 15),
-//                 child: Container(
-//                   width: 41,
-//                   height: 41,
-//                 decoration: BoxDecoration(
-//                 color: myRed2,
-//                 shape: BoxShape.circle,),
-//                 child: Center(
-//                   child: Text('C',
-//                       style: TextStyle(
-//                       color: Colors.white,
-//                       fontWeight: FontWeight.w700,
-//                       fontSize: 20,),),
-//                 ),),
-//               ),
-//                 Text(
-//                    'Etoile',
-//                     style: TextStyle(
-//                     color: Colors.black,
-//                     fontWeight: FontWeight.w700,
-//                     fontSize: 20,),
-//                     ),
-//             ],
-//           ),
-//               style: TextButton.styleFrom(
-//               backgroundColor: Colors.white,
-//               shape: RoundedRectangleBorder(
-//               borderRadius: BorderRadius.circular(10),
-
-//             ),
-//           ),
-//                 onPressed: () => Navigator.pushNamed(context, '/'),),
-//        ),
-//      ),
-//      ],
-//     );
-//   }
-// }
-
-// class AnswerBoxD extends StatelessWidget {
-//   const AnswerBoxD({
-//     Key key,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//      children: [
-//      Padding(
-//        padding: const EdgeInsets.only(top: 18, left: 20, right: 20),
-//        child: SizedBox(
-//          width: double.infinity,
-//          height: 69,
-//          child: TextButton(
-//           child: Row(
-//             children: [
-//               Padding(
-//                 padding: const EdgeInsets.only(top: 8, left: 8, bottom: 8, right: 15),
-//                 child: Container(
-//                   width: 41,
-//                   height: 41,
-//                 decoration: BoxDecoration(
-//                 color: myRed2,
-//                 shape: BoxShape.circle,),
-//                 child: Center(
-//                   child: Text('D',
-//                       style: TextStyle(
-//                       color: Colors.white,
-//                       fontWeight: FontWeight.w700,
-//                       fontSize: 20,),),
-//                 ),),
-//               ),
-//                 Text(
-//                    "Boule d'energie",
-//                     style: TextStyle(
-//                     color: Colors.black,
-//                     fontWeight: FontWeight.w700,
-//                     fontSize: 20,),
-//                     ),
-//             ],
-//           ),
-//               style: TextButton.styleFrom(
-//               backgroundColor: Colors.white,
-//               shape: RoundedRectangleBorder(
-//               borderRadius: BorderRadius.circular(10),
-
-//             ),
-//           ),
-//                 onPressed: () => Navigator.pushNamed(context, '/'),),
-//        ),
-//      ),
-//      ],
-//     );
-//   }
-// }
 
 class QuestBox extends StatelessWidget {
   const QuestBox({
@@ -367,9 +229,10 @@ class QuestBox extends StatelessWidget {
                 fontFamily: 'Gotham',
                 color: Colors.white,
                 fontWeight: FontWeight.w700,
-                fontSize: 20,
+                fontSize: 19,
               ),
-              maxLines: 1,
+              maxLines: 3,
+              textAlign: TextAlign.center,
             ),
           ),
         ),

@@ -1,17 +1,14 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:astro01/Screens/loading.dart';
-import 'package:astro01/Screens/profilePage.dart';
-import 'package:astro01/Screens/quiz.dart';
 import 'package:astro01/classes/User.dart';
-import 'package:astro01/classes/trace.dart';
 import 'package:astro01/variable_globale/variable.dart';
-
+import 'package:audioplayers/audioplayers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
 import 'splashScreen.dart';
-import 'inscription.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -19,12 +16,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  get audioCache => null;
   @override
   Widget build(BuildContext context) {
     double sh = MediaQuery.of(context).size.height; //screen height
     double sw = MediaQuery.of(context).size.width; //screen width
     Users user1 = new Users();
+
     return Scaffold(
       backgroundColor: Colors.blue,
       body: FutureBuilder<List<Users>>(
@@ -174,36 +171,47 @@ class SoundCntrl extends StatefulWidget {
 
 class _SoundCntrlState extends State<SoundCntrl> {
   bool mute = false;
-  Duration _duration = new Duration();
-  Duration _position = new Duration();
-  /*AudioPlayer advancedPlayer;
-  AudioCache audioCache;*/
-
-  /* @override
+  AudioPlayer _audioPlayer = AudioPlayer();
+  bool isPlaying = false;
+  String currentTime = "00:00";
+  String completeTime = "00:00";
+  @override
   void initState() {
+    // TODO: implement initState
     super.initState();
-    initPlayer();
+
+    _audioPlayer.onAudioPositionChanged.listen((Duration duration) {
+      setState(() {
+        currentTime = duration.toString().split(".")[0];
+      });
+    });
+
+    _audioPlayer.onDurationChanged.listen((Duration duration) {
+      setState(() {
+        completeTime = duration.toString().split(".")[0];
+      });
+    });
   }
 
-  void initPlayer() {
-    advancedPlayer = new AudioPlayer();
-    audioCache = new AudioCache(fixedPlayer: advancedPlayer);
-
-    advancedPlayer.durationHandler = (d) => setState(() {
-          _duration = d;
-        });
-
-    advancedPlayer.positionHandler = (p) => setState(() {
-          _position = p;
-        });
-  }*/
-
-  @override
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () {
+        if (isPlaying) {
+          _audioPlayer.pause();
+
+          setState(() {
+            isPlaying = false;
+          });
+        } else {
+          _audioPlayer.resume();
+
+          setState(() {
+            isPlaying = true;
+          });
+        }
         setState(() {
           mute = mute ? false : true;
+          playaudio();
         });
       },
       icon: Icon(
@@ -283,4 +291,9 @@ Future<List<Users>> getUsers(String email_) async {
       .map((map) => Users.fromJson(map))
       .where((dataList) => dataList.email_ver(email_))
       .toList();
+}
+
+void playaudio() async {
+  AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
+  assetsAudioPlayer.open(Audio("assets/music/music.mp3"));
 }

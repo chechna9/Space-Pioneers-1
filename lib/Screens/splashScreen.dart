@@ -352,6 +352,7 @@ class Inscrire extends StatelessWidget {
         ),
         onPressed: () {
           playaudio();
+          // stopaudio();
           Navigator.pushNamed(context, '/inscription');
         });
   }
@@ -359,5 +360,5 @@ class Inscrire extends StatelessWidget {
 
 void playaudio() async {
   AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
-  assetsAudioPlayer.open(Audio("assets/music.mp3"));
+  assetsAudioPlayer.open(Audio("assets/music/music.mp3"));
 }

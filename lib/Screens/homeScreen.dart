@@ -4,6 +4,7 @@ import 'package:astro01/Screens/quiz.dart';
 import 'package:astro01/classes/User.dart';
 import 'package:astro01/classes/trace.dart';
 import 'package:astro01/variable_globale/variable.dart';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
@@ -173,6 +174,29 @@ class SoundCntrl extends StatefulWidget {
 
 class _SoundCntrlState extends State<SoundCntrl> {
   bool mute = false;
+  Duration _duration = new Duration();
+  Duration _position = new Duration();
+  /*AudioPlayer advancedPlayer;
+  AudioCache audioCache;*/
+
+  /* @override
+  void initState() {
+    super.initState();
+    initPlayer();
+  }
+
+  void initPlayer() {
+    advancedPlayer = new AudioPlayer();
+    audioCache = new AudioCache(fixedPlayer: advancedPlayer);
+
+    advancedPlayer.durationHandler = (d) => setState(() {
+          _duration = d;
+        });
+
+    advancedPlayer.positionHandler = (p) => setState(() {
+          _position = p;
+        });
+  }*/
 
   @override
   Widget build(BuildContext context) {

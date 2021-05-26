@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 const Color myYellow = Color(0xffffcc00);
@@ -5,6 +7,10 @@ const Color myBlue = Color(0xff0c0026);
 const Color myRed = Color(0xffe6023d);
 const Color myRed2 = Color(0xffe1023c);
 const Color myGrey = Color(0xffccd2e3);
+const Color choiceBlue = Color(0xff1759bc);
+const Color choiceYellow = Color(0xffffcc00);
+const Color choiceRed = Color(0xffff0e0e);
+const Color choiceGreen = Color(0xff1bffbc);
 const MaterialColor calendarColor = MaterialColor(0xffe6023d, {
   50: Color(0xffe6023d),
   100: Color(0xffe6023d),

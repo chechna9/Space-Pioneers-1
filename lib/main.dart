@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:astro01/Screens/levelChoice.dart';
 
 import 'package:astro01/Screens/quiz.dart';
@@ -5,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
 import 'Screens/inscription.dart';
+import 'Screens/loading.dart';
+import 'Screens/quiz.dart';
 import 'Screens/splashScreen.dart';
 import 'Screens/testing.dart';
 import 'Screens/login.dart';
@@ -23,6 +27,7 @@ const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
 const supabaseKey =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDQ3OTY4MiwiZXhwIjoxOTM2MDU1NjgyfQ.IoKgpB9APMw5Te9DYgbJZIbYcvPOwl41dl4-IKFjpVk';
 final supabaseclient = SupabaseClient(supabaseUrl, supabaseKey);
+
 void main() {
   Injector.appInstance.registerSingleton<SupabaseClient>(() => supabaseclient);
 
@@ -35,7 +40,7 @@ void main() {
       // to change calendar color
       primarySwatch: calendarColor,
     ),
-    initialRoute: '/quiz',
+    initialRoute: '/splashScreen',
     routes: {
       '/splashScreen': (context) => SplashScreen(),
       '/inscription': (context) => Inscription(),
@@ -43,11 +48,13 @@ void main() {
       '/leaderBoard': (context) => LeaderBoard(),
       '/homeScreen': (context) => HomeScreen(),
       '/shopPage': (context) => ShopPage(),
-      '/avatarPage': (context) => AvatarPage(avatarController.stream),
+      '/avatarPage': (context) => AvatarPage(),
       '/profilePage': (context) => ProfilePage(),
       '/planetChoice': (context) => PlanetChoice(),
       '/levelChoice': (context) => LevelChoice(),
       '/testing': (context) => Testing(),
+      '/quiz': (context) => Quiz(),
+      '/loadingScreen': (context) => LoadingScreen(),
       '/documentation': (context) => Documentation(),
       '/quiz': (context) => Quiz(),
     },

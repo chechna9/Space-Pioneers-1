@@ -1,6 +1,13 @@
+import 'dart:math';
+
+import 'package:astro01/Screens/loading.dart';
+import 'package:astro01/classes/User.dart';
+import 'package:astro01/variable_globale/variable.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
+import 'package:injector/injector.dart';
+import 'package:supabase/supabase.dart';
 
 class LeaderBoard extends StatefulWidget {
   @override
@@ -31,7 +38,20 @@ class _LeaderBoardState extends State<LeaderBoard> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+       bool existe = false;
+       int ind=0;
+       List <Users> list;
+       return Scaffold(
+     backgroundColor: Colors.blue,
+      body :   FutureBuilder<List<Users>>(
+        
+        future:getleaders(),
+     
+        
+        builder: (context,  AsyncSnapshot <List<Users>>  snapshot) {print(user.etoiles);
+        list=snapshot.data;
+          if(snapshot.hasData == false){return LoadingScreen();}
+            return Scaffold(
       appBar: AppBar(
         elevation: 0,
         leading: IconButton(
@@ -64,32 +84,57 @@ class _LeaderBoardState extends State<LeaderBoard> {
               ),
               Expanded(
                 child: ListView.builder(
-                  itemCount: 50,
-                  itemBuilder: (BuildContext context, int ind) {
+              
+                  itemCount: min(10, snapshot.data.length),
+                    
+                  itemBuilder: (BuildContext context,  ind) {
                     return Column(
                       children: [
                         ClassementCard(
-                          name: "name$ind",
-                          photo: photoList[ind % 3],
+                          name: snapshot.data[ind].name,
+                          photo: snapshot.data[ind].avatar,
                           rank: ind + 1,
-                          point: 1000 - ind * ind,
+                          point: snapshot.data[ind].etoiles,
                         ),
                         SizedBox(
                           height: 10,
+                          
                         ),
                       ],
                     );
                   },
                 ),
               ),
-              ClassementCard(
-                name: "curentUser",
-              ),
+              
+             
+              (leaders(user.email, snapshot.data,min(10, snapshot.data.length) ) !=-1 )?
+               ClassementCard(
+                 rank: leaders(user.email, snapshot.data,ind )+1,
+               name: user.name,
+                photo: user.avatar,
+                point: user.etoiles,
+              ):Container(),
+             
+             
+              
+   
             ],
           ),
         ),
       ),
     );
+          
+          
+          
+         
+        }
+      )
+      
+    );
+    
+    
+    
+    
   }
 }
 
@@ -179,3 +224,31 @@ class ClassementCard extends StatelessWidget {
     );
   }
 }
+Future<List <Users>> getleaders( ) async {
+       
+       final response = await Injector.appInstance
+       .get<SupabaseClient>()
+       .from('user')
+       .select()
+       .order('etoiles', ascending: false)
+       .execute();   
+      final dataList = response.data as List;
+      return dataList.map((map) => Users.fromJson(map) ).toList();
+   }
+   int leaders(String email , List<Users> list , int indice )
+   {bool trouv = false;
+   int i =0;
+   print('indice =');
+   print(indice);
+      for( i; i!=list.length ;i++)
+      { 
+        if(user.email == list[i].email ){trouv= true;
+        break;}
+       
+      }
+      if(trouv == true && i >= indice) return i;
+      else return -1;
+
+
+
+   }

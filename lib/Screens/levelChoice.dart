@@ -1,6 +1,11 @@
+import 'package:astro01/Screens/loading.dart';
+import 'package:astro01/classes/trace.dart';
+import 'package:astro01/variable_globale/variable.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
+import 'package:injector/injector.dart';
+import 'package:supabase/supabase.dart';
 import 'splashScreen.dart';
 
 class LevelChoice extends StatefulWidget {
@@ -13,7 +18,18 @@ class _LevelChoiceState extends State<LevelChoice> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    
+      return Scaffold(
+     backgroundColor: Colors.blue,
+      body :   FutureBuilder<List<Trace>>(
+        
+        future:gettrace("ja_khenfouf@esi.dz"),
+        
+        builder: (context,  AsyncSnapshot <List<Trace>>  snapshot) {
+          if(snapshot.hasData == false){return LoadingScreen();}
+          trace=snapshot.data[0];
+          print(trace.jupiter);
+            return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -95,6 +111,21 @@ class _LevelChoiceState extends State<LevelChoice> {
         ),
       ),
     );
+          
+          
+          
+         
+        }
+      )
+      
+    );
+    
+    
+    
+    
+    
+    
+  
   }
 }
 
@@ -133,3 +164,14 @@ class SelectLevelBox extends StatelessWidget {
     );
   }
 }
+Future<List <Trace>> gettrace(String email_ ) async {
+       
+       final response = await Injector.appInstance
+       .get<SupabaseClient>()
+       .from('Trace')
+       .select()
+      
+       .execute();   
+      final dataList = response.data as List;
+      return dataList.map((map) => Trace.fromJson(map) ).where((dataList) => dataList.email_ver(email_)).toList();
+   }

@@ -1,11 +1,13 @@
 import 'dart:async';
 
 import 'package:astro01/Screens/levelChoice.dart';
-import 'package:astro01/Screens/loading.dart';
+
+import 'package:astro01/Screens/quiz.dart';
 import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
 import 'Screens/inscription.dart';
+import 'Screens/loading.dart';
 import 'Screens/quiz.dart';
 import 'Screens/splashScreen.dart';
 import 'Screens/testing.dart';
@@ -34,10 +36,11 @@ void main() {
     theme: ThemeData(
       fontFamily: 'Gotham', //setting default font
       primaryColor: myBlue,
-
+      // 0xffe6023d
+      // to change calendar color
       primarySwatch: calendarColor,
     ),
-    initialRoute: '/profilePage',
+    initialRoute: '/quiz',
     routes: {
       '/splashScreen': (context) => SplashScreen(),
       '/inscription': (context) => Inscription(),
@@ -53,6 +56,7 @@ void main() {
       '/quiz': (context) => Quiz(),
       '/loadingScreen': (context) => LoadingScreen(),
       '/documentation': (context) => Documentation(),
+      '/quiz': (context) => Quiz(),
     },
   ));
 }

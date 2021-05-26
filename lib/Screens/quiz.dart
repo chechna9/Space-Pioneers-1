@@ -71,16 +71,17 @@ class _QuizState extends State<Quiz> {
                     padding: const EdgeInsets.only(top: 160),
                     child: Column(children: [
                       QuestBox(
-                        quest: snapshot.data[0].question,
+                        quest: snapshot.data[8].question,
                       ),
                       Expanded(
                         child: ListView.builder(
                           itemCount: 4,
                           itemBuilder: (BuildContext context, int myindex) {
+                            int indx = myindex + 1;
                             return Column(children: [
                               AnswerBox(
-                                answer: snapshot.data[10].choice1,
-                                answerLetter: '$myindex',
+                                answer: snapshot.data[8].choice1,
+                                answerLetter: '$indx',
                               ),
                             ]);
                           },
@@ -113,92 +114,105 @@ class _AnswerBoxState extends State<AnswerBox> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          color: choiceColor,
-          child: ListTile(
-            onTap: () { setState(() {
-              choiceColor= Colors.orange;
-              print("object");
-             });},
-            selectedTileColor: choiceColor,
-            leading:                   
-            Padding(
-                      padding: const EdgeInsets.only(
-                          top: 8, left: 8, bottom: 8, right: 15),
-                      child: Container(
-                        width: 41,
-                        height: 41,
-                        decoration: BoxDecoration(
-                          color: myRed2,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Center(
-                          child: Text(
-                            '${widget.answerLetter}',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 20,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-            title: Text( ),
-          ),
-          
-        ),
         Padding(
           padding: const EdgeInsets.only(top: 22, left: 20, right: 20),
-          child: SizedBox(
+          child: Container(
             width: double.infinity,
             height: 69,
-            child: TextButton(
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 8, left: 8, bottom: 8, right: 15),
-                    child: Container(
+            decoration: BoxDecoration(
+               color: choiceColor,
+               borderRadius: BorderRadius.circular(10),
+               ),
+            child: Center(
+              child: ListTile(
+                onTap: () { setState(() {
+                  choiceColor= Colors.orange;
+                  print("object");
+                 });},
+                selectedTileColor: choiceColor,
+                leading: Padding(
+                      padding: const EdgeInsets.only(top: 8, left: 8, bottom: 8, right: 15),
+                      child: Container(
                       width: 41,
                       height: 41,
                       decoration: BoxDecoration(
-                        color: myRed2,
-                        shape: BoxShape.circle,
-                      ),
+                      color: myRed2,
+                      shape: BoxShape.circle,),
                       child: Center(
                         child: Text(
-                          '${widget.answerLetter}',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 20,
-                          ),
+                        '${widget.answerLetter}',
+                        style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20,
                         ),
                       ),
                     ),
                   ),
-                  Text(
+                ),
+                title: Text(
                     '${widget.answer}',
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.w700,
-                      fontSize: MediaQuery.of(context).size.width/29,
+                      fontSize: 18,
                     ),
-                    maxLines: 3,
-                  ),
-                ],
               ),
-              style: TextButton.styleFrom(
-                backgroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              onPressed: () => Navigator.pushNamed(context, '/'),
             ),
           ),
         ),
+        // Padding(
+        //   padding: const EdgeInsets.only(top: 22, left: 20, right: 20),
+        //   child: SizedBox(
+        //     width: double.infinity,
+        //     height: 69,
+        //     child: TextButton(
+        //       child: Row(
+        //         children: [
+        //           Padding(
+        //             padding: const EdgeInsets.only(
+        //                 top: 8, left: 8, bottom: 8, right: 15),
+        //             child: Container(
+        //               width: 41,
+        //               height: 41,
+        //               decoration: BoxDecoration(
+        //                 color: myRed2,
+        //                 shape: BoxShape.circle,
+        //               ),
+        //               child: Center(
+        //                 child: Text(
+        //                   '${widget.answerLetter}',
+        //                   style: TextStyle(
+        //                     color: Colors.white,
+        //                     fontWeight: FontWeight.w700,
+        //                     fontSize: 20,
+        //                   ),
+        //                 ),
+        //               ),
+        //             ),
+        //           ),
+        //           Text(
+        //             '${widget.answer}',
+        //             style: TextStyle(
+        //               color: Colors.black,
+        //               fontWeight: FontWeight.w700,
+        //               fontSize: MediaQuery.of(context).size.width/29,
+        //             ),
+        //             maxLines: 3,
+        //           ),
+        //         ],
+        //       ),
+        //       style: TextButton.styleFrom(
+        //         backgroundColor: Colors.white,
+        //         shape: RoundedRectangleBorder(
+        //           borderRadius: BorderRadius.circular(10),
+        //         ),
+        //       ),
+        //       onPressed: () => Navigator.pushNamed(context, '/'),
+        //     ),
+        //   ),
+        // ),
+        )
       ],
     );
   }

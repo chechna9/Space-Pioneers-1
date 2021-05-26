@@ -14,7 +14,7 @@ class Users {
     this.email,
     this.etoiles,
     this.naissance,
-    this.avatar,
+    this.avatar: 'default',
   });
   factory Users.fromJson(Map<String, dynamic> map) {
     return Users(

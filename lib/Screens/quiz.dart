@@ -109,6 +109,7 @@ class AnswerBox extends StatefulWidget {
 
 class _AnswerBoxState extends State<AnswerBox> {
   Color choiceColor = Colors.white;
+  List<Color> choiceColors = [choiceBlue, choiceYellow, choiceGreen, choiceRed]; 
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -126,7 +127,7 @@ class _AnswerBoxState extends State<AnswerBox> {
               child: ListTile(
                 onTap: () { setState(() {
                   choiceColor= Colors.orange;
-                  print("object");
+                  // print("object");
                  });},
                 selectedTileColor: choiceColor,
                 leading: Padding(

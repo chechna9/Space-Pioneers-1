@@ -2,6 +2,8 @@
 
 // import 'dart:js';
 
+import 'dart:math';
+
 import 'package:astro01/Screens/loading.dart';
 import 'package:astro01/classes/questions.dart';
 import 'package:flutter/material.dart';
@@ -10,23 +12,29 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:astro01/variable_globale/variable.dart';
 // import 'package:http/http.dart' as http;
 // import 'package:flutter/services.dart' show rootBundle;
 
 // Future<String> getJson() {
 //   return rootBundle.loadString('questions.json');
 // }
+List<String> propo = ['a', 'b', 'c', 'd'];
+int indice = 0;
+List<int> ind = [0,1,2,3,4,5,6,7,8,9];
 
 class Quiz extends StatefulWidget {
   @override
+  final int indice;
+
+  Quiz({Key key, this.indice}) : super(key: key);
   _QuizState createState() => _QuizState();
 }
 
 class _QuizState extends State<Quiz> {
 // ignore: unused_field
-  List<Question> _questions = <Question>[];
 
+  List<Question> _questions = <Question>[];
   Future<List<Question>> fetchQuestions() async {
     var url = Uri.parse('https://nadir-ogd.github.io/Quiz-API/questions.json');
     var response = await http.get(url);
@@ -36,14 +44,11 @@ class _QuizState extends State<Quiz> {
     if (response.statusCode == 200) {
       var questionsJson = json.decode(response.body);
       for (var questionsJson in questionsJson) {
-        //Question questions= Question(questionsJson['planete'], quest['quest'], quest['correct'] ,quest['choice1'] , quest['choice2'] ,emp['infosupp']);
-
         questions.add(Question.fromJson(questionsJson));
       }
     }
     return questions;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +60,14 @@ class _QuizState extends State<Quiz> {
               if (snapshot.hasData == false) {
                 return LoadingScreen();
               }
+              List<int> indices = [0, 1, 2, 3];
+              indices = shuffle(indices);
+              print("indices :");
+              print(indices);
+              ind = shuffle(ind);
+              print("ind :");
+              print(ind);
+              RemplirChoices(propo, snapshot.data[ind[0]]);
               return Stack(
                 fit: StackFit.expand,
                 children: [
@@ -64,14 +77,15 @@ class _QuizState extends State<Quiz> {
                     ),
                     child: Scaffold(
                       backgroundColor: Colors.transparent,
-                      body: AppbarCustomed(myBlue: myBlue, myRed2: myRed2),
+                      body: AppbarCustomed(myBlue: myBlue, myRed2: myRed2, planete: snapshot.data[ind[0]].planete,),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 160),
                     child: Column(children: [
                       QuestBox(
-                        quest: snapshot.data[8].question,
+                        quest: snapshot.data[ind[0]].question,
+                        
                       ),
                       Expanded(
                         child: ListView.builder(
@@ -79,8 +93,8 @@ class _QuizState extends State<Quiz> {
                           itemBuilder: (BuildContext context, int myindex) {
                             return Column(children: [
                               AnswerBox(
-                                answer: snapshot.data[8].choice1,
-                                 answerLetter: '${myindex + 1}',
+                                answer: propo[indices[myindex]],
+                                answerLetter: '${myindex + 1}',
                               ),
                             ]);
                           },
@@ -109,7 +123,7 @@ class AnswerBox extends StatefulWidget {
 
 class _AnswerBoxState extends State<AnswerBox> {
   Color choiceColor = Colors.white;
-  List<Color> choiceColors = [choiceBlue, choiceYellow, choiceGreen, choiceRed]; 
+  List<Color> choiceColors = [choiceGreen, choiceRed, choiceYellow, choiceBlue];
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -120,98 +134,79 @@ class _AnswerBoxState extends State<AnswerBox> {
             width: double.infinity,
             height: 69,
             decoration: BoxDecoration(
-               color: choiceColor,
-               borderRadius: BorderRadius.circular(10),
-               ),
+              color: choiceColor,
+              borderRadius: BorderRadius.circular(10),
+            ),
             child: Center(
               child: ListTile(
-                onTap: () { setState(() {
-                  choiceColor= Colors.orange;
-                  // print("object");
-                 });},
+                onTap: () {
+                  if (widget.answer == propo[0]) {
+                    setState(() {
+                      ind.removeAt(0);
+                      choiceColor = choiceColors[0];
+                      if (ind.isEmpty) {
+                        Navigator.pushNamed(context, '/planetChoice');
+                      } else {
+                        var route = new MaterialPageRoute(
+                            builder: (BuildContext context) => new Quiz(
+                                  indice: indice,
+                                ));
+                        Navigator.of(context).push(route);
+                      }
+                    });
+                  } else if (widget.answer == propo[1])
+                    setState(() {
+                      choiceColor = choiceColors[1];
+                    });
+                  else if (widget.answer == propo[2])
+                    setState(() {
+                      choiceColor = choiceColors[2];
+                    });
+                  else if (widget.answer == propo[3])
+                    setState(() {
+                      choiceColor = choiceColors[3];
+                    });
+
+                  Timer(Duration(seconds: 1), () {
+                    setState(() {
+                      choiceColor = Colors.white;
+                    });
+                  });
+                },
                 selectedTileColor: choiceColor,
                 leading: Padding(
-                      padding: const EdgeInsets.only(top: 8, left: 8, bottom: 8, right: 15),
-                      child: Container(
-                      width: 41,
-                      height: 41,
-                      decoration: BoxDecoration(
+                  padding: const EdgeInsets.only(
+                      top: 8, left: 8, bottom: 8, right: 15),
+                  child: Container(
+                    width: 41,
+                    height: 41,
+                    decoration: BoxDecoration(
                       color: myRed2,
-                      shape: BoxShape.circle,),
-                      child: Center(
-                        child: Text(
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: Text(
                         '${widget.answerLetter}',
                         style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 20,
                         ),
                       ),
                     ),
                   ),
                 ),
                 title: Text(
-                    '${widget.answer}',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 18,
-                    ),
+                  '${widget.answer}',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 18,
+                  ),
+                ),
               ),
             ),
           ),
-        ),
-        // Padding(
-        //   padding: const EdgeInsets.only(top: 22, left: 20, right: 20),
-        //   child: SizedBox(
-        //     width: double.infinity,
-        //     height: 69,
-        //     child: TextButton(
-        //       child: Row(
-        //         children: [
-        //           Padding(
-        //             padding: const EdgeInsets.only(
-        //                 top: 8, left: 8, bottom: 8, right: 15),
-        //             child: Container(
-        //               width: 41,
-        //               height: 41,
-        //               decoration: BoxDecoration(
-        //                 color: myRed2,
-        //                 shape: BoxShape.circle,
-        //               ),
-        //               child: Center(
-        //                 child: Text(
-        //                   '${widget.answerLetter}',
-        //                   style: TextStyle(
-        //                     color: Colors.white,
-        //                     fontWeight: FontWeight.w700,
-        //                     fontSize: 20,
-        //                   ),
-        //                 ),
-        //               ),
-        //             ),
-        //           ),
-        //           Text(
-        //             '${widget.answer}',
-        //             style: TextStyle(
-        //               color: Colors.black,
-        //               fontWeight: FontWeight.w700,
-        //               fontSize: MediaQuery.of(context).size.width/29,
-        //             ),
-        //             maxLines: 3,
-        //           ),
-        //         ],
-        //       ),
-        //       style: TextButton.styleFrom(
-        //         backgroundColor: Colors.white,
-        //         shape: RoundedRectangleBorder(
-        //           borderRadius: BorderRadius.circular(10),
-        //         ),
-        //       ),
-        //       onPressed: () => Navigator.pushNamed(context, '/'),
-        //     ),
-        //   ),
-        // ),
         )
       ],
     );
@@ -301,7 +296,7 @@ class AppbarCustomed extends StatelessWidget {
                     ),
                     Spacer(flex: 5),
                     Text(
-                      "$planete",
+                      '$planete',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,
@@ -315,7 +310,8 @@ class AppbarCustomed extends StatelessWidget {
                       icon: Icon(Icons.clear),
                       color: myRed2,
                       iconSize: 20,
-                      onPressed: () => Navigator.of(context).pop(true),
+                      onPressed: () => Navigator.pushNamed(context, '/planetChoice'),
+
                     ),
                   ],
                 ),
@@ -335,8 +331,6 @@ class AppbarCustomed extends StatelessWidget {
 
 class ProgressBar extends StatelessWidget {
   final double width;
-// final int value;
-// final int totalValue;
 
   ProgressBar({this.width});
 
@@ -376,4 +370,29 @@ class ProgressBar extends StatelessWidget {
       ],
     );
   }
+}
+
+void RemplirChoices(List<String> choices, Question myquestion) {
+  choices[0] = myquestion.correct;
+  choices[1] = myquestion.choice1;
+  choices[2] = myquestion.choice2;
+  choices[3] = myquestion.choice3;
+  print(choices[0]);
+  print(choices[1]);
+  print(choices[2]);
+  print(choices[3]);
+}
+
+List shuffle(List<int> indices) {
+  var random = new Random();
+
+  for (var i = indices.length - 1; i >= 0; i--) {
+    var n = random.nextInt(i + 1);
+    
+    var temp = indices[i];
+    indices[i] = indices[n];
+    indices[n] = temp;
+  }
+
+  return indices;
 }

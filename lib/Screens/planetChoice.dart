@@ -111,7 +111,7 @@ class _PlanetChoiceState extends State<PlanetChoice> {
                   PlanetCard(
                     credit: credit,
                     image: 'saturn',
-                    title: 'saturn',
+                    title: 'saturne',
                     price: 20,
                     choiceInd: 6,
 

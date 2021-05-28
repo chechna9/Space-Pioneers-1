@@ -6,6 +6,7 @@ import 'dart:math';
 import 'dart:io';
 
 import 'package:astro01/Screens/loading.dart';
+import 'package:astro01/Screens/planetChoice.dart';
 import 'package:astro01/classes/questions.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
@@ -77,12 +78,16 @@ class _QuizState extends State<Quiz> {
                   List<int> indices = [0, 1, 2, 3];
 
                   indices = shuffle(indices);
-                  //  ind = Provider.of<Ind>(context).ind;
                   print(indices);
                   ind = Provider.of<Ind>(context).ind;
                   ind = shuffle(ind);
+                  RemplirChoices(propo, snapshot.data[ind[0] + 10*planeteInd]);
+                  int i = 4;
+                  if (propo[2] == null && propo[1] == null) {
+                    i = 2;
+                    ind = shuffle([0, 3]);
+                  }
 
-                  RemplirChoices(propo, snapshot.data[ind[0]]);
                   return Stack(
                     fit: StackFit.expand,
                     children: [
@@ -95,7 +100,7 @@ class _QuizState extends State<Quiz> {
                           body: AppbarCustomed(
                             myBlue: myBlue,
                             myRed2: myRed2,
-                            planete: snapshot.data[ind[0]].planete,
+                            planete: snapshot.data[ind[0] + 10*planeteInd].planete,
                             numero: questNum,
                           ),
                         ),
@@ -104,11 +109,11 @@ class _QuizState extends State<Quiz> {
                         padding: const EdgeInsets.only(top: 160),
                         child: Column(children: [
                           QuestBox(
-                            quest: snapshot.data[ind[0]].question,
+                            quest: snapshot.data[ind[0] + 10*planeteInd].question,
                           ),
                           Expanded(
                             child: ListView.builder(
-                              itemCount: 4,
+                              itemCount: min(4,i),
                               itemBuilder: (BuildContext context, int myindex) {
                                 return Column(children: [
                                   AnswerBox(
@@ -163,8 +168,13 @@ class _AnswerBoxState extends State<AnswerBox> {
                     setState(() {
                       choiceColor = choiceColors[0];
                        questNum++;
-                      if (ind.isEmpty) {
-                        Navigator.pushNamed(context, '/planetChoice');
+                      // if ((ind.isEmpty) && (questNum == 10)) {
+                      if  (questNum == 10) {
+                      Navigator.pop(context);
+                      print("ani lha9t");
+                      print("questnum : ");
+                      print(questNum);
+                        questNum = 1;
                       } else {
                         //var route = new MaterialPageRoute(
                         //builder: (BuildContext context) => new Quiz(

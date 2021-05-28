@@ -102,7 +102,7 @@ class _LevelChoiceState extends State<LevelChoice> {
                       text: 'Difficile',
                       color: Color(0xffE1023C),
                       onPressed: () {
-                        Navigator.pushNamed(context, '/quiz');
+                        Navigator.pushNamed(context, '/planetChoice');
                       }),
                 ],
               ),

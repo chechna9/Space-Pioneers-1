@@ -3,6 +3,7 @@
 // import 'dart:js';
 
 import 'dart:math';
+import 'dart:io';
 
 import 'package:astro01/Screens/loading.dart';
 import 'package:astro01/classes/questions.dart';
@@ -13,6 +14,7 @@ import 'dart:convert';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 import 'package:astro01/variable_globale/variable.dart';
+import 'package:provider/provider.dart';
 // import 'package:http/http.dart' as http;
 // import 'package:flutter/services.dart' show rootBundle;
 
@@ -20,8 +22,18 @@ import 'package:astro01/variable_globale/variable.dart';
 //   return rootBundle.loadString('questions.json');
 // }
 List<String> propo = ['a', 'b', 'c', 'd'];
-int indice = 0;
-List<int> ind = [0,1,2,3,4,5,6,7,8,9];
+
+List<int> ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+class Ind extends ChangeNotifier {
+  List<int> ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+  void updateAvatar(List<int> newindice) {
+    ind = newindice;
+    notifyListeners();
+  }
+}
+int questNum = 1;
 
 class Quiz extends StatefulWidget {
   @override
@@ -52,59 +64,66 @@ class _QuizState extends State<Quiz> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.blue,
-        body: FutureBuilder<List<Question>>(
-            future: fetchQuestions(),
-            builder: (context, AsyncSnapshot<List<Question>> snapshot) {
-              if (snapshot.hasData == false) {
-                return LoadingScreen();
-              }
-              List<int> indices = [0, 1, 2, 3];
-              indices = shuffle(indices);
-              print("indices :");
-              print(indices);
-              ind = shuffle(ind);
-              print("ind :");
-              print(ind);
-              RemplirChoices(propo, snapshot.data[ind[0]]);
-              return Stack(
-                fit: StackFit.expand,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      gradient: myGradiant,
-                    ),
-                    child: Scaffold(
-                      backgroundColor: Colors.transparent,
-                      body: AppbarCustomed(myBlue: myBlue, myRed2: myRed2, planete: snapshot.data[ind[0]].planete,),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 160),
-                    child: Column(children: [
-                      QuestBox(
-                        quest: snapshot.data[ind[0]].question,
-                        
-                      ),
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: 4,
-                          itemBuilder: (BuildContext context, int myindex) {
-                            return Column(children: [
-                              AnswerBox(
-                                answer: propo[indices[myindex]],
-                                answerLetter: '${myindex + 1}',
-                              ),
-                            ]);
-                          },
+    return ChangeNotifierProvider<Ind>(
+        create: (context) => Ind(),
+        child: Scaffold(
+            backgroundColor: Colors.blue,
+            body: FutureBuilder<List<Question>>(
+                future: fetchQuestions(),
+                builder: (context, AsyncSnapshot<List<Question>> snapshot) {
+                  if (snapshot.hasData == false) {
+                    return LoadingScreen();
+                  }
+                  List<int> indices = [0, 1, 2, 3];
+
+                  indices = shuffle(indices);
+                  //  ind = Provider.of<Ind>(context).ind;
+                  print(indices);
+                  ind = Provider.of<Ind>(context).ind;
+                  ind = shuffle(ind);
+
+                  RemplirChoices(propo, snapshot.data[ind[0]]);
+                  return Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          gradient: myGradiant,
+                        ),
+                        child: Scaffold(
+                          backgroundColor: Colors.transparent,
+                          body: AppbarCustomed(
+                            myBlue: myBlue,
+                            myRed2: myRed2,
+                            planete: snapshot.data[ind[0]].planete,
+                            numero: questNum,
+                          ),
                         ),
                       ),
-                    ]),
-                  ),
-                ],
-              );
-            }));
+                      Padding(
+                        padding: const EdgeInsets.only(top: 160),
+                        child: Column(children: [
+                          QuestBox(
+                            quest: snapshot.data[ind[0]].question,
+                          ),
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: 4,
+                              itemBuilder: (BuildContext context, int myindex) {
+                                return Column(children: [
+                                  AnswerBox(
+                                    answer: propo[indices[myindex]],
+                                    answerLetter: '${myindex + 1}',
+                                  ),
+                                ]);
+                              },
+                            ),
+                          ),
+                        ]),
+                      ),
+                    ],
+                  );
+                })));
   }
 }
 
@@ -142,16 +161,16 @@ class _AnswerBoxState extends State<AnswerBox> {
                 onTap: () {
                   if (widget.answer == propo[0]) {
                     setState(() {
-                      ind.removeAt(0);
                       choiceColor = choiceColors[0];
+                       questNum++;
                       if (ind.isEmpty) {
                         Navigator.pushNamed(context, '/planetChoice');
                       } else {
-                        var route = new MaterialPageRoute(
-                            builder: (BuildContext context) => new Quiz(
-                                  indice: indice,
-                                ));
-                        Navigator.of(context).push(route);
+                        //var route = new MaterialPageRoute(
+                        //builder: (BuildContext context) => new Quiz(
+                        //      indice: indice,
+                        //      ));
+                        //Navigator.of(context).pushReplacement(route);
                       }
                     });
                   } else if (widget.answer == propo[1])
@@ -167,11 +186,21 @@ class _AnswerBoxState extends State<AnswerBox> {
                       choiceColor = choiceColors[3];
                     });
 
-                  Timer(Duration(seconds: 1), () {
+                  Timer(Duration(milliseconds: 600), () {
                     setState(() {
                       choiceColor = Colors.white;
                     });
                   });
+
+                  if (widget.answer == propo[0]) {
+                    Timer(Duration(milliseconds: 600), () {
+                    setState(() {
+                      ind.removeAt(0);
+                      Provider.of<Ind>(context, listen: false)
+                          .updateAvatar(ind);
+                    });
+                  });
+                  }
                 },
                 selectedTileColor: choiceColor,
                 leading: Padding(
@@ -310,8 +339,8 @@ class AppbarCustomed extends StatelessWidget {
                       icon: Icon(Icons.clear),
                       color: myRed2,
                       iconSize: 20,
-                      onPressed: () => Navigator.pushNamed(context, '/planetChoice'),
-
+                      onPressed: () =>
+                          Navigator.pushNamed(context, '/planetChoice'),
                     ),
                   ],
                 ),
@@ -331,6 +360,8 @@ class AppbarCustomed extends StatelessWidget {
 
 class ProgressBar extends StatelessWidget {
   final double width;
+// final int value;
+// final int totalValue;
 
   ProgressBar({this.width});
 
@@ -377,18 +408,15 @@ void RemplirChoices(List<String> choices, Question myquestion) {
   choices[1] = myquestion.choice1;
   choices[2] = myquestion.choice2;
   choices[3] = myquestion.choice3;
-  print(choices[0]);
-  print(choices[1]);
-  print(choices[2]);
-  print(choices[3]);
 }
 
 List shuffle(List<int> indices) {
   var random = new Random();
 
+  // Go through all elements.
   for (var i = indices.length - 1; i >= 0; i--) {
+    // Pick a pseudorandom number according to the list length
     var n = random.nextInt(i + 1);
-    
     var temp = indices[i];
     indices[i] = indices[n];
     indices[n] = temp;

@@ -63,6 +63,7 @@ class _PlanetChoiceState extends State<PlanetChoice> {
                     image: 'earth',
                     title: 'earth',
                     price: 20,
+
                   ),
                   PlanetCard(
                     credit: credit,
@@ -138,7 +139,9 @@ class PlanetCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {},
+      onPressed: () {
+        
+      },
       child: Container(
         decoration: BoxDecoration(
             color: Colors.white,

@@ -174,9 +174,11 @@ class _AnswerBoxState extends State<AnswerBox> {
                     setState(() {
                       choiceColor = choiceColors[0];
                       questNum++;
+                      ind.removeAt(0);
                       // if ((ind.isEmpty) && (questNum == 10)) {
-                      if (questNum > 10) {
-                        Navigator.pop(context);
+                      if (ind.isEmpty) {
+                        print('ok');
+                        Navigator.pushNamed(context, '/planetChoice');
                         questNum = 1;
                       } else {
                         //var route = new MaterialPageRoute(
@@ -212,7 +214,6 @@ class _AnswerBoxState extends State<AnswerBox> {
                       });
                       if (ind.isNotEmpty)
                         setState(() {
-                          ind.removeAt(0);
                           Provider.of<Ind>(context, listen: false)
                               .updateAvatar(ind);
                         });

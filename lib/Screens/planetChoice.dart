@@ -8,6 +8,8 @@ class PlanetChoice extends StatefulWidget {
   _PlanetChoiceState createState() => _PlanetChoiceState();
 }
 
+int planeteInd;
+
 class _PlanetChoiceState extends State<PlanetChoice> {
   int credit = 75;
   @override
@@ -60,8 +62,15 @@ class _PlanetChoiceState extends State<PlanetChoice> {
                 children: [
                   PlanetCard(
                     credit: credit,
+                    image: 'soleil',
+                    title: 'soleil',
+                    price: 20,
+
+                  ),
+                  PlanetCard(
+                    credit: credit,
                     image: 'earth',
-                    title: 'earth',
+                    title: 'terre',
                     price: 20,
 
                   ),
@@ -80,7 +89,7 @@ class _PlanetChoiceState extends State<PlanetChoice> {
                   PlanetCard(
                     credit: credit,
                     image: 'mercury',
-                    title: 'mercury',
+                    title: 'mercure',
                     price: 20,
                   ),
                   PlanetCard(

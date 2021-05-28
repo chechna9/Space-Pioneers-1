@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 // import '../components/RoundedCard.dart';
+import 'quiz.dart';
 
 class PlanetChoice extends StatefulWidget {
   @override
@@ -9,6 +10,7 @@ class PlanetChoice extends StatefulWidget {
 }
 
 int planeteInd;
+
 
 
 class _PlanetChoiceState extends State<PlanetChoice> {
@@ -167,6 +169,7 @@ class PlanetCard extends StatelessWidget {
     return TextButton(
       onPressed: () {
         planeteInd = choiceInd;
+        questNum = 1;
         Navigator.pushNamed(context, '/quiz');
       },
       child: Container(

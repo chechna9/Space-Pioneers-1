@@ -34,6 +34,7 @@ class Ind extends ChangeNotifier {
     notifyListeners();
   }
 }
+
 int questNum = 1;
 
 class Quiz extends StatefulWidget {
@@ -81,11 +82,14 @@ class _QuizState extends State<Quiz> {
                   print(indices);
                   ind = Provider.of<Ind>(context).ind;
                   ind = shuffle(ind);
-                  RemplirChoices(propo, snapshot.data[ind[0] + 10*planeteInd]);
+                  RemplirChoices(
+                      propo, snapshot.data[ind[0] + 10 * planeteInd]);
+                  print(propo);
                   int i = 4;
                   if (propo[2] == null && propo[1] == null) {
                     i = 2;
-                    ind = shuffle([0, 3]);
+
+                    indices = shuffle([0, 3]);
                   }
 
                   return Stack(
@@ -100,7 +104,8 @@ class _QuizState extends State<Quiz> {
                           body: AppbarCustomed(
                             myBlue: myBlue,
                             myRed2: myRed2,
-                            planete: snapshot.data[ind[0] + 10*planeteInd].planete,
+                            planete:
+                                snapshot.data[ind[0] + 10 * planeteInd].planete,
                             numero: questNum,
                           ),
                         ),
@@ -109,11 +114,12 @@ class _QuizState extends State<Quiz> {
                         padding: const EdgeInsets.only(top: 160),
                         child: Column(children: [
                           QuestBox(
-                            quest: snapshot.data[ind[0] + 10*planeteInd].question,
+                            quest: snapshot
+                                .data[ind[0] + 10 * planeteInd].question,
                           ),
                           Expanded(
                             child: ListView.builder(
-                              itemCount: min(4,i),
+                              itemCount: min(4, i),
                               itemBuilder: (BuildContext context, int myindex) {
                                 return Column(children: [
                                   AnswerBox(
@@ -167,13 +173,10 @@ class _AnswerBoxState extends State<AnswerBox> {
                   if (widget.answer == propo[0]) {
                     setState(() {
                       choiceColor = choiceColors[0];
-                       questNum++;
+                      questNum++;
                       // if ((ind.isEmpty) && (questNum == 10)) {
-                      if  (questNum == 10) {
-                      Navigator.pop(context);
-                      print("ani lha9t");
-                      print("questnum : ");
-                      print(questNum);
+                      if (questNum > 10) {
+                        Navigator.pop(context);
                         questNum = 1;
                       } else {
                         //var route = new MaterialPageRoute(
@@ -202,15 +205,19 @@ class _AnswerBoxState extends State<AnswerBox> {
                     });
                   });
 
-                  if (widget.answer == propo[0]) {
-                    Timer(Duration(milliseconds: 600), () {
-                    setState(() {
-                      ind.removeAt(0);
-                      Provider.of<Ind>(context, listen: false)
-                          .updateAvatar(ind);
-                    });
+                  Timer(Duration(seconds: 1), () {
+                    if (widget.answer == propo[0]) {
+                      setState(() {
+                        choiceColor = Colors.white;
+                      });
+                      if (ind.isNotEmpty)
+                        setState(() {
+                          ind.removeAt(0);
+                          Provider.of<Ind>(context, listen: false)
+                              .updateAvatar(ind);
+                        });
+                    }
                   });
-                  }
                 },
                 selectedTileColor: choiceColor,
                 leading: Padding(

@@ -44,7 +44,6 @@ class _QuizState extends State<Quiz> {
     return questions;
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,7 +79,7 @@ class _QuizState extends State<Quiz> {
                             return Column(children: [
                               AnswerBox(
                                 answer: snapshot.data[8].choice1,
-                                 answerLetter: '${myindex + 1}',
+                                answerLetter: '${myindex + 1}',
                               ),
                             ]);
                           },
@@ -109,7 +108,7 @@ class AnswerBox extends StatefulWidget {
 
 class _AnswerBoxState extends State<AnswerBox> {
   Color choiceColor = Colors.white;
-  List<Color> choiceColors = [choiceBlue, choiceYellow, choiceGreen, choiceRed]; 
+  List<Color> choiceColors = [choiceBlue, choiceYellow, choiceGreen, choiceRed];
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -120,98 +119,102 @@ class _AnswerBoxState extends State<AnswerBox> {
             width: double.infinity,
             height: 69,
             decoration: BoxDecoration(
-               color: choiceColor,
-               borderRadius: BorderRadius.circular(10),
-               ),
+              color: choiceColor,
+              borderRadius: BorderRadius.circular(10),
+            ),
             child: Center(
               child: ListTile(
-                onTap: () { setState(() {
-                  choiceColor= Colors.orange;
-                  // print("object");
-                 });},
+                onTap: () {
+                  setState(() {
+                    choiceColor = Colors.orange;
+                    // print("object");
+                  });
+                },
                 selectedTileColor: choiceColor,
                 leading: Padding(
-                      padding: const EdgeInsets.only(top: 8, left: 8, bottom: 8, right: 15),
-                      child: Container(
-                      width: 41,
-                      height: 41,
-                      decoration: BoxDecoration(
+                  padding: const EdgeInsets.only(
+                      top: 8, left: 8, bottom: 8, right: 15),
+                  child: Container(
+                    width: 41,
+                    height: 41,
+                    decoration: BoxDecoration(
                       color: myRed2,
-                      shape: BoxShape.circle,),
-                      child: Center(
-                        child: Text(
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: Text(
                         '${widget.answerLetter}',
                         style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 20,
                         ),
                       ),
                     ),
                   ),
                 ),
                 title: Text(
-                    '${widget.answer}',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 18,
-                    ),
+                  '${widget.answer}',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 18,
+                  ),
+                ),
               ),
             ),
           ),
-        ),
-        // Padding(
-        //   padding: const EdgeInsets.only(top: 22, left: 20, right: 20),
-        //   child: SizedBox(
-        //     width: double.infinity,
-        //     height: 69,
-        //     child: TextButton(
-        //       child: Row(
-        //         children: [
-        //           Padding(
-        //             padding: const EdgeInsets.only(
-        //                 top: 8, left: 8, bottom: 8, right: 15),
-        //             child: Container(
-        //               width: 41,
-        //               height: 41,
-        //               decoration: BoxDecoration(
-        //                 color: myRed2,
-        //                 shape: BoxShape.circle,
-        //               ),
-        //               child: Center(
-        //                 child: Text(
-        //                   '${widget.answerLetter}',
-        //                   style: TextStyle(
-        //                     color: Colors.white,
-        //                     fontWeight: FontWeight.w700,
-        //                     fontSize: 20,
-        //                   ),
-        //                 ),
-        //               ),
-        //             ),
-        //           ),
-        //           Text(
-        //             '${widget.answer}',
-        //             style: TextStyle(
-        //               color: Colors.black,
-        //               fontWeight: FontWeight.w700,
-        //               fontSize: MediaQuery.of(context).size.width/29,
-        //             ),
-        //             maxLines: 3,
-        //           ),
-        //         ],
-        //       ),
-        //       style: TextButton.styleFrom(
-        //         backgroundColor: Colors.white,
-        //         shape: RoundedRectangleBorder(
-        //           borderRadius: BorderRadius.circular(10),
-        //         ),
-        //       ),
-        //       onPressed: () => Navigator.pushNamed(context, '/'),
-        //     ),
-        //   ),
-        // ),
+          // Padding(
+          //   padding: const EdgeInsets.only(top: 22, left: 20, right: 20),
+          //   child: SizedBox(
+          //     width: double.infinity,
+          //     height: 69,
+          //     child: TextButton(
+          //       child: Row(
+          //         children: [
+          //           Padding(
+          //             padding: const EdgeInsets.only(
+          //                 top: 8, left: 8, bottom: 8, right: 15),
+          //             child: Container(
+          //               width: 41,
+          //               height: 41,
+          //               decoration: BoxDecoration(
+          //                 color: myRed2,
+          //                 shape: BoxShape.circle,
+          //               ),
+          //               child: Center(
+          //                 child: Text(
+          //                   '${widget.answerLetter}',
+          //                   style: TextStyle(
+          //                     color: Colors.white,
+          //                     fontWeight: FontWeight.w700,
+          //                     fontSize: 20,
+          //                   ),
+          //                 ),
+          //               ),
+          //             ),
+          //           ),
+          //           Text(
+          //             '${widget.answer}',
+          //             style: TextStyle(
+          //               color: Colors.black,
+          //               fontWeight: FontWeight.w700,
+          //               fontSize: MediaQuery.of(context).size.width/29,
+          //             ),
+          //             maxLines: 3,
+          //           ),
+          //         ],
+          //       ),
+          //       style: TextButton.styleFrom(
+          //         backgroundColor: Colors.white,
+          //         shape: RoundedRectangleBorder(
+          //           borderRadius: BorderRadius.circular(10),
+          //         ),
+          //       ),
+          //       onPressed: () => Navigator.pushNamed(context, '/'),
+          //     ),
+          //   ),
+          // ),
         )
       ],
     );

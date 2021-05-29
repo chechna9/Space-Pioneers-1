@@ -175,47 +175,49 @@ class _RegCardState extends State<RegCard> {
                         width: 2,
                       ),
                     ),
-                    child: Row(
-                      children: [
-                        IconButton(
-                          icon: Icon(
-                            Icons.calendar_today,
-                            color:
-                                _dateValidate != "Il faut selectionner une date"
-                                    ? myBlue
-                                    : myYellow,
-                            size: 30,
-                          ),
-                          onPressed: () {
-                            showDatePicker(
-                              initialEntryMode: DatePickerEntryMode.input,
-                              context: context,
-                              initialDate: _dateTime == null
-                                  ? DateTime.now()
-                                  : _dateTime,
-                              firstDate: DateTime(2000),
-                              lastDate: DateTime.now(),
-                            ).then((value) {
-                              setState(() {
-                                _dateTime = value;
-                              });
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: InkWell(
+                        onTap: () {
+                          showDatePicker(
+                            initialEntryMode: DatePickerEntryMode.input,
+                            context: context,
+                            initialDate:
+                                _dateTime == null ? DateTime.now() : _dateTime,
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime.now(),
+                          ).then((value) {
+                            setState(() {
+                              _dateTime = value;
                             });
-                          },
-                        ),
-                        Text(
-                          _dateTime == null
-                              ? _dateValidate
-                              : _dateTime.toString().split(" ")[0],
-                          style: TextStyle(
-                            color:
-                                _dateValidate == "Il faut selectionner une date"
+                          });
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.calendar_today,
+                              color: _dateValidate !=
+                                      "Il faut selectionner une date"
+                                  ? myBlue
+                                  : myYellow,
+                              size: 30,
+                            ),
+                            Text(
+                              _dateTime == null
+                                  ? _dateValidate
+                                  : _dateTime.toString().split(" ")[0],
+                              style: TextStyle(
+                                color: _dateValidate ==
+                                        "Il faut selectionner une date"
                                     ? Colors.red
                                     : null,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w100,
-                          ),
+                                fontSize: 17,
+                                fontWeight: FontWeight.w100,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ),

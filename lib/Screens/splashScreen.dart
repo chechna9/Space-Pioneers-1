@@ -1,16 +1,32 @@
 import 'package:animated_widgets/animated_widgets.dart';
 import 'package:animated_widgets/widgets/shake_animated_widget.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:astro01/variable_globale/variable.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 
 class SplashScreen extends StatefulWidget {
+  final AudioPlayer audioPlayer;
+  SplashScreen({@required this.audioPlayer});
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  Future<void> playMusic() async {
+    await widget.audioPlayer.play("assets/shortMusic.mp3");
+    await widget.audioPlayer.setReleaseMode(ReleaseMode.LOOP);
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    playMusic();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -314,7 +330,9 @@ class SeConnecter extends StatelessWidget {
           ),
         ),
       ),
-      onPressed: () => Navigator.pushNamed(context, '/login'),
+      onPressed: () {
+        Navigator.pushNamed(context, '/login');
+      },
     );
   }
 }

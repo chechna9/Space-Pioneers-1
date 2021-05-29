@@ -4,6 +4,7 @@ import 'package:astro01/Screens/quiz.dart';
 import 'package:astro01/classes/User.dart';
 import 'package:astro01/classes/trace.dart';
 import 'package:astro01/variable_globale/variable.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -14,12 +15,13 @@ import 'splashScreen.dart';
 import 'inscription.dart';
 
 class HomeScreen extends StatefulWidget {
+  final AudioPlayer audioPlayer;
+  HomeScreen({@required this.audioPlayer});
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  get audioCache => null;
   @override
   Widget build(BuildContext context) {
     double sh = MediaQuery.of(context).size.height; //screen height
@@ -47,7 +49,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: sh * 0.03,
                   ),
                   Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                    SoundCntrl(),
+                    SoundCntrl(
+                      audioPlayer: widget.audioPlayer,
+                    ),
                   ]),
                   Stack(
                     clipBehavior: Clip.none,
@@ -105,6 +109,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   text: 'Decouvrir',
                                   color: myRed,
                                   onPressed: () {
+                                    setState(() {
+                                      widget.audioPlayer.stop();
+                                      widget.audioPlayer
+                                          .play("assets/music.mp3");
+                                      widget.audioPlayer
+                                          .setReleaseMode(ReleaseMode.LOOP);
+                                    });
+
                                     Navigator.pushNamed(
                                         context, '/documentation');
                                   },
@@ -164,45 +176,22 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class SoundCntrl extends StatefulWidget {
-  SoundCntrl({
-    Key key,
-  }) : super(key: key);
+  final AudioPlayer audioPlayer;
+  SoundCntrl({Key key, @required this.audioPlayer}) : super(key: key);
 
   @override
   _SoundCntrlState createState() => _SoundCntrlState();
 }
 
 class _SoundCntrlState extends State<SoundCntrl> {
-  bool mute = false;
-  Duration _duration = new Duration();
-  Duration _position = new Duration();
-  /*AudioPlayer advancedPlayer;
-  AudioCache audioCache;*/
-
-  /* @override
-  void initState() {
-    super.initState();
-    initPlayer();
-  }
-
-  void initPlayer() {
-    advancedPlayer = new AudioPlayer();
-    audioCache = new AudioCache(fixedPlayer: advancedPlayer);
-
-    advancedPlayer.durationHandler = (d) => setState(() {
-          _duration = d;
-        });
-
-    advancedPlayer.positionHandler = (p) => setState(() {
-          _position = p;
-        });
-  }*/
-
   @override
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () {
         setState(() {
+          mute
+              ? widget.audioPlayer.setVolume(1)
+              : widget.audioPlayer.setVolume(0);
           mute = mute ? false : true;
         });
       },

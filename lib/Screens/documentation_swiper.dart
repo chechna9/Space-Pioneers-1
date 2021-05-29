@@ -1,3 +1,5 @@
+import 'package:astro01/variable_globale/variable.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -9,11 +11,23 @@ import 'documentation_details.dart';
 import 'splashScreen.dart';
 
 class Documentation extends StatefulWidget {
+  final AudioPlayer audioPlayer;
+  Documentation({@required this.audioPlayer});
   @override
   _DocumentationState createState() => _DocumentationState();
 }
 
 class _DocumentationState extends State<Documentation> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if (!mute) {
+      widget.audioPlayer.play("assets/shortMusic.mp3");
+      widget.audioPlayer.setReleaseMode(ReleaseMode.LOOP);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double sh = MediaQuery.of(context).size.height; //screen height

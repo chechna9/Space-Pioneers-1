@@ -1,12 +1,18 @@
+import 'package:astro01/classes/trace.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
+import 'package:injector/injector.dart';
+import 'package:supabase/supabase.dart';
 // import '../components/RoundedCard.dart';
+import 'quiz.dart';
 
 class PlanetChoice extends StatefulWidget {
   @override
   _PlanetChoiceState createState() => _PlanetChoiceState();
 }
+
+int planeteInd;
 
 class _PlanetChoiceState extends State<PlanetChoice> {
   int credit = 75;
@@ -60,57 +66,73 @@ class _PlanetChoiceState extends State<PlanetChoice> {
                 children: [
                   PlanetCard(
                     credit: credit,
-                    image: 'earth',
-                    title: 'earth',
+                    image: 'soleil',
+                    title: 'soleil',
                     price: 20,
+                    choiceInd: 0,
+                  ),
+                  PlanetCard(
+                    credit: credit,
+                    image: 'earth',
+                    title: 'terre',
+                    price: 20,
+                    choiceInd: 3,
                   ),
                   PlanetCard(
                     credit: credit,
                     image: 'jupiter',
                     title: 'jupiter',
                     price: 20,
+                    choiceInd: 5,
                   ),
                   PlanetCard(
                     credit: credit,
                     image: 'mars',
                     title: 'mars',
                     price: 20,
+                    choiceInd: 4,
                   ),
                   PlanetCard(
                     credit: credit,
                     image: 'mercury',
-                    title: 'mercury',
+                    title: 'mercure',
                     price: 20,
+                    choiceInd: 1,
                   ),
                   PlanetCard(
                     credit: credit,
                     image: 'neptune',
                     title: 'neptune',
                     price: 20,
+                    choiceInd: 8,
                   ),
                   PlanetCard(
                     credit: credit,
                     image: 'saturn',
                     title: 'saturn',
                     price: 20,
+                    choiceInd: 6,
                   ),
                   PlanetCard(
                     credit: credit,
                     image: 'uranus',
                     title: 'uranus',
                     price: 20,
+                    choiceInd: 7,
                   ),
                   PlanetCard(
                     credit: credit,
                     image: 'venus',
                     title: 'venus',
                     price: 20,
+                    choiceInd: 2,
                   ),
                   PlanetCard(
                     credit: credit,
                     title: 'Random',
                     image: 'astroInBox',
                     price: 20,
+                    choiceInd: 9,
                   ),
                 ],
               ),
@@ -129,16 +151,22 @@ class PlanetCard extends StatelessWidget {
     this.credit: 0,
     @required this.image,
     this.title,
+    this.choiceInd,
   }) : super(key: key);
   final String image;
   final int price; //we should chnage it
   final int credit;
   final String title;
+  final int choiceInd;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {},
+      onPressed: () {
+        planeteInd = choiceInd;
+        questNum = 1;
+        Navigator.pushNamed(context, '/levelChoice');
+      },
       child: Container(
         decoration: BoxDecoration(
             color: Colors.white,

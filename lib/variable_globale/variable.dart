@@ -4,3 +4,4 @@ import 'package:flutter/material.dart';
 
 Users user = new Users();
 Trace trace = new Trace();
+int indice = 0;

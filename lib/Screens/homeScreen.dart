@@ -115,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     color: Color(0xffAB02E6),
                                     onPressed: () {
                                       Navigator.pushNamed(
-                                          context, '/levelChoice');
+                                          context, '/planetChoice');
                                     }),
                                 SizedBox(
                                   height: 30,

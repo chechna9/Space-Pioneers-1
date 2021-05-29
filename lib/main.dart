@@ -56,7 +56,6 @@ void main() {
       '/quiz': (context) => Quiz(),
       '/loadingScreen': (context) => LoadingScreen(),
       '/documentation': (context) => Documentation(),
-      '/quiz': (context) => Quiz(),
     },
   ));
 }

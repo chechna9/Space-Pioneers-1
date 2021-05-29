@@ -1,6 +1,5 @@
 import 'package:animated_widgets/animated_widgets.dart';
 import 'package:animated_widgets/widgets/shake_animated_widget.dart';
-import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -369,13 +368,7 @@ class Inscrire extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          playaudio();
           Navigator.pushNamed(context, '/inscription');
         });
   }
-}
-
-void playaudio() async {
-  AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
-  assetsAudioPlayer.open(Audio("assets/music.mp3"));
 }

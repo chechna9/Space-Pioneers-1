@@ -17,6 +17,7 @@ class Trace {
   int venus;
   int soleil;
 
+<<<<<<< HEAD
   Trace({
     ///
     this.email,
@@ -63,4 +64,25 @@ class Trace {
     } else
       return false;
   }
+=======
+);
+
+}
+Map<String, dynamic> toJson() =>
+{ 'email':email,
+         'earth': earth,
+         'mars':mars,
+         'jupiter':jupiter,
+         'mercury':mercury,
+         'neptune':neptune,
+         'saturn':saturn,
+         'uranus':uranus,
+         'venus':venus,
+};
+bool email_ver(String _email)
+{
+  // print(this.email);
+ if(this.email == _email){return true;}
+ else return false;
+>>>>>>> d815ee1542266a4ac14070a8130c16b0b9d64648
 }

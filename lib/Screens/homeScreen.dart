@@ -107,8 +107,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   onPressed: () {
                                     setState(() {
                                       widget.audioPlayer.stop();
-                                      widget.audioPlayer
-                                          .play("assets/music.mp3");
+                                      widget.audioPlayer.play(
+                                          "assets/music.mp3",
+                                          isLocal: true);
                                       widget.audioPlayer
                                           .setReleaseMode(ReleaseMode.LOOP);
                                     });

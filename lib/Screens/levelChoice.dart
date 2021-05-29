@@ -18,114 +18,99 @@ class _LevelChoiceState extends State<LevelChoice> {
 
   @override
   Widget build(BuildContext context) {
-    
-      return Scaffold(
-     backgroundColor: Colors.blue,
-      body :   FutureBuilder<List<Trace>>(
-        
-        future:gettrace("ja_khenfouf@esi.dz"),
-        
-        builder: (context,  AsyncSnapshot <List<Trace>>  snapshot) {
-          if(snapshot.hasData == false){return LoadingScreen();}
-          trace=snapshot.data[0];
-          print(trace.jupiter);
-            return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(
-            Icons.arrow_back,
-            size: 30,
-          ),
-        ),
-        elevation: 0,
-        leadingWidth: 70,
-        toolbarHeight: 70,
-      ),
-      backgroundColor: myBlue,
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AutoSizeText(
-                    'Choisir\nla difficulté !',
-                    style: TextStyle(
-                      color: myRed,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 45,
-                    ),
-                  ),
-                  AutoSizeText(
-                    'Selon votre niveau.',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w100,
-                      letterSpacing: 2,
-                      fontSize: 20,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              flex: 3,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  SelectLevelBox(
-                    text: 'Facile',
-                    color: Color(0xff1BEFBC),
+    return Scaffold(
+        backgroundColor: Colors.blue,
+        body: FutureBuilder<List<Trace>>(
+            future: gettrace(user.email),
+            builder: (context, AsyncSnapshot<List<Trace>> snapshot) {
+              if (snapshot.hasData == false) {
+                return LoadingScreen();
+              }
+              trace = snapshot.data[0];
+              print(trace.jupiter);
+              return Scaffold(
+                appBar: AppBar(
+                  leading: IconButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/planetChoice');
+                      Navigator.pop(context);
                     },
+                    icon: Icon(
+                      Icons.arrow_back,
+                      size: 30,
+                    ),
                   ),
-                  SizedBox(
-                    height: 30,
+                  elevation: 0,
+                  leadingWidth: 70,
+                  toolbarHeight: 70,
+                ),
+                backgroundColor: myBlue,
+                body: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AutoSizeText(
+                              'Choisir\nla difficulté !',
+                              style: TextStyle(
+                                color: myRed,
+                                fontWeight: FontWeight.w900,
+                                fontSize: 45,
+                              ),
+                            ),
+                            AutoSizeText(
+                              'Selon votre niveau.',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w100,
+                                letterSpacing: 2,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            SelectLevelBox(
+                              text: 'Facile',
+                              color: Color(0xff1BEFBC),
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/planetChoice');
+                              },
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            SelectLevelBox(
+                                text: 'Moyen',
+                                color: Color(0xff1759BC),
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/planetChoice');
+                                }),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            SelectLevelBox(
+                                text: 'Difficile',
+                                color: Color(0xffE1023C),
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/quiz');
+                                }),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                  SelectLevelBox(
-                      text: 'Moyen',
-                      color: Color(0xff1759BC),
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/planetChoice');
-                      }),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  SelectLevelBox(
-                      text: 'Difficile',
-                      color: Color(0xffE1023C),
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/planetChoice');
-                      }),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-          
-          
-          
-         
-        }
-      )
-      
-    );
-    
-    
-    
-    
-    
-    
-  
+                ),
+              );
+            }));
   }
 }
 
@@ -164,14 +149,16 @@ class SelectLevelBox extends StatelessWidget {
     );
   }
 }
-Future<List <Trace>> gettrace(String email_ ) async {
-       
-       final response = await Injector.appInstance
-       .get<SupabaseClient>()
-       .from('Trace')
-       .select()
-      
-       .execute();   
-      final dataList = response.data as List;
-      return dataList.map((map) => Trace.fromJson(map) ).where((dataList) => dataList.email_ver(email_)).toList();
-   }
+
+Future<List<Trace>> gettrace(String email_) async {
+  final response = await Injector.appInstance
+      .get<SupabaseClient>()
+      .from('Trace')
+      .select()
+      .execute();
+  final dataList = response.data as List;
+  return dataList
+      .map((map) => Trace.fromJson(map))
+      .where((dataList) => dataList.email_ver(email_))
+      .toList();
+}

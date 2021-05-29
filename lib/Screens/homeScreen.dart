@@ -1,18 +1,13 @@
 import 'package:astro01/Screens/loading.dart';
-import 'package:astro01/Screens/profilePage.dart';
-import 'package:astro01/Screens/quiz.dart';
 import 'package:astro01/classes/User.dart';
-import 'package:astro01/classes/trace.dart';
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:audioplayers/audioplayers.dart';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
 import 'splashScreen.dart';
-import 'inscription.dart';
 
 class HomeScreen extends StatefulWidget {
   final AudioPlayer audioPlayer;
@@ -27,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
     double sh = MediaQuery.of(context).size.height; //screen height
     double sw = MediaQuery.of(context).size.width; //screen width
     Users user1 = new Users();
+
     return Scaffold(
       backgroundColor: Colors.blue,
       body: FutureBuilder<List<Users>>(
@@ -130,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     color: Color(0xffAB02E6),
                                     onPressed: () {
                                       Navigator.pushNamed(
-                                          context, '/levelChoice');
+                                          context, '/planetChoice');
                                     }),
                                 SizedBox(
                                   height: 30,

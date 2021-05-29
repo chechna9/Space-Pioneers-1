@@ -14,9 +14,9 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  Future<void> playMusic() async {
-    await widget.audioPlayer.play("assets/shortMusic.mp3");
-    await widget.audioPlayer.setReleaseMode(ReleaseMode.LOOP);
+  void playMusic() {
+    widget.audioPlayer.play("assets/shortMusic.mp3");
+    widget.audioPlayer.setReleaseMode(ReleaseMode.LOOP);
   }
 
   @override

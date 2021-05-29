@@ -1,6 +1,9 @@
+import 'package:astro01/classes/trace.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
+import 'package:injector/injector.dart';
+import 'package:supabase/supabase.dart';
 // import '../components/RoundedCard.dart';
 import 'quiz.dart';
 
@@ -10,8 +13,6 @@ class PlanetChoice extends StatefulWidget {
 }
 
 int planeteInd;
-
-
 
 class _PlanetChoiceState extends State<PlanetChoice> {
   int credit = 75;
@@ -69,7 +70,6 @@ class _PlanetChoiceState extends State<PlanetChoice> {
                     title: 'soleil',
                     price: 20,
                     choiceInd: 0,
-
                   ),
                   PlanetCard(
                     credit: credit,
@@ -77,7 +77,6 @@ class _PlanetChoiceState extends State<PlanetChoice> {
                     title: 'terre',
                     price: 20,
                     choiceInd: 3,
-
                   ),
                   PlanetCard(
                     credit: credit,
@@ -85,7 +84,6 @@ class _PlanetChoiceState extends State<PlanetChoice> {
                     title: 'jupiter',
                     price: 20,
                     choiceInd: 5,
-
                   ),
                   PlanetCard(
                     credit: credit,
@@ -114,7 +112,6 @@ class _PlanetChoiceState extends State<PlanetChoice> {
                     title: 'saturne',
                     price: 20,
                     choiceInd: 6,
-
                   ),
                   PlanetCard(
                     credit: credit,
@@ -122,7 +119,6 @@ class _PlanetChoiceState extends State<PlanetChoice> {
                     title: 'uranus',
                     price: 20,
                     choiceInd: 7,
-
                   ),
                   PlanetCard(
                     credit: credit,
@@ -130,7 +126,6 @@ class _PlanetChoiceState extends State<PlanetChoice> {
                     title: 'venus',
                     price: 20,
                     choiceInd: 2,
-
                   ),
                   PlanetCard(
                     credit: credit,
@@ -170,7 +165,7 @@ class PlanetCard extends StatelessWidget {
       onPressed: () {
         planeteInd = choiceInd;
         questNum = 1;
-        Navigator.pushNamed(context, '/quiz');
+        Navigator.pushNamed(context, '/levelChoice');
       },
       child: Container(
         decoration: BoxDecoration(
@@ -235,6 +230,3 @@ class PlanetCard extends StatelessWidget {
     );
   }
 }
-
-
-

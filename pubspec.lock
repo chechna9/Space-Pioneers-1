@@ -21,7 +21,11 @@ packages:
       name: audioplayer
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "0.8.1"
+=======
+    version: "2.5.0"
+>>>>>>> 78e2671746fcc123b676438cb94ec1da85ba9b02
   audioplayers:
     dependency: "direct main"
     description:

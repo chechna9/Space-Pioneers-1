@@ -60,7 +60,8 @@ Map<String, dynamic> toJson() =>
          'venus':venus,
 };
 bool email_ver(String _email)
-{print(this.email);
+{
+  // print(this.email);
  if(this.email == _email){return true;}
  else return false;
 }

@@ -14,8 +14,6 @@ class LevelChoice extends StatefulWidget {
 }
 
 class _LevelChoiceState extends State<LevelChoice> {
-  get audioCache => null;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +80,7 @@ class _LevelChoiceState extends State<LevelChoice> {
                               text: 'Facile',
                               color: Color(0xff1BEFBC),
                               onPressed: () {
-                                Navigator.pushNamed(context, '/planetChoice');
+                                Navigator.pushNamed(context, '/quiz');
                               },
                             ),
                             SizedBox(
@@ -92,7 +90,7 @@ class _LevelChoiceState extends State<LevelChoice> {
                                 text: 'Moyen',
                                 color: Color(0xff1759BC),
                                 onPressed: () {
-                                  Navigator.pushNamed(context, '/planetChoice');
+                                  Navigator.pushNamed(context, '/quiz');
                                 }),
                             SizedBox(
                               height: 30,

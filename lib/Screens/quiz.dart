@@ -24,6 +24,8 @@ import 'package:provider/provider.dart';
 //   return rootBundle.loadString('questions.json');
 // }
 List<String> propo = ['a', 'b', 'c', 'd'];
+int points = 0;
+bool cliquer = false;
 List<int> ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 class Ind extends ChangeNotifier {
@@ -172,14 +174,18 @@ class _AnswerBoxState extends State<AnswerBox> {
                 onTap: () {
                   if (widget.answer == propo[0]) {
                     setState(() {
+                      if (cliquer == false) {
+                        points++;
+                      }
                       choiceColor = choiceColors[0];
                       questNum++;
                       ind.removeAt(0);
+                      cliquer = false;
                       // if ((ind.isEmpty) && (questNum == 10)) {
                       if (ind.isEmpty) {
-                        print('ok');
-                        Navigator.pushNamed(context, '/planetChoice');
-                        questNum = 1;
+                        if (verification(points) == 1) {
+                          update();
+                        }
                       } else {
                         //var route = new MaterialPageRoute(
                         //builder: (BuildContext context) => new Quiz(
@@ -190,6 +196,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                     });
                   } else if (widget.answer == propo[1])
                     setState(() {
+                      cliquer = true;
                       choiceColor = choiceColors[1];
                     });
                   else if (widget.answer == propo[2])
@@ -198,6 +205,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                     });
                   else if (widget.answer == propo[3])
                     setState(() {
+                      cliquer = true;
                       choiceColor = choiceColors[3];
                     });
 
@@ -217,6 +225,12 @@ class _AnswerBoxState extends State<AnswerBox> {
                           Provider.of<Ind>(context, listen: false)
                               .updateAvatar(ind);
                         });
+                      else {
+                        Navigator.pushReplacementNamed(
+                            context, '/planetChoice');
+                        questNum = 1;
+                        points = 0;
+                      }
                     }
                   });
                 },
@@ -354,12 +368,13 @@ class AppbarCustomed extends StatelessWidget {
                     ),
                     Spacer(flex: 5),
                     IconButton(
-                      icon: Icon(Icons.clear),
-                      color: myRed2,
-                      iconSize: 20,
-                      onPressed: () =>
-                          Navigator.pushNamed(context, '/planetChoice'),
-                    ),
+                        icon: Icon(Icons.clear),
+                        color: myRed2,
+                        iconSize: 20,
+                        onPressed: () {
+                          points = 0;
+                          Navigator.pushNamed(context, '/planetChoice');
+                        }),
                   ],
                 ),
               ]),
@@ -441,4 +456,105 @@ List shuffle(List<int> indices) {
   }
 
   return indices;
+}
+
+int verification(int point) {
+  if (planeteInd == 0) {
+    if (trace.mercury < point) {
+      trace.mercury = point;
+      return 1;
+    } else
+      return -1;
+  }
+  if (planeteInd == 1) {
+    if (trace.earth < point) {
+      trace.earth = point;
+      return 1;
+    } else
+      return -1;
+  }
+  if (planeteInd == 2) {
+    if (trace.venus < point) {
+      trace.venus = point;
+      return 1;
+    } else
+      return -1;
+  }
+  if (planeteInd == 3) {
+    if (trace.earth < point) {
+      trace.earth = point;
+      return 1;
+    } else
+      return -1;
+  }
+  if (planeteInd == 4) {
+    if (trace.mars < point) {
+      trace.mars = point;
+      return 1;
+    } else
+      return -1;
+  }
+  if (planeteInd == 5) {
+    if (trace.jupiter < point) {
+      trace.jupiter = point;
+      return 1;
+    } else
+      return -1;
+  }
+  if (planeteInd == 6) {
+    if (trace.saturn < point) {
+      trace.saturn = point;
+      return 1;
+    } else
+      return -1;
+  }
+  if (planeteInd == 7) {
+    if (trace.soleil < point) {
+      trace.soleil = point;
+      return 1;
+    } else
+      return -1;
+  }
+  if (planeteInd == 8) {
+    if (trace.neptune < point) {
+      trace.neptune = point;
+      return 1;
+    } else
+      return -1;
+  }
+}
+
+void update() async {
+  await supabaseclient
+      .from("Trace")
+      .update({
+        "email": trace.email,
+        "jupiter": trace.jupiter,
+        "earth": trace.earth,
+        "venus": trace.venus,
+        "soleil": trace.soleil,
+        "uranus": trace.uranus,
+        "saturn": trace.saturn,
+        "neptune": trace.neptune,
+        "mercury": trace.mercury,
+        "mars": trace.mars
+      })
+      .eq("email", trace.email)
+      .execute();
+  await supabaseclient
+      .from("user")
+      .update({
+        "etoiles": trace.earth +
+            trace.jupiter +
+            trace.mars +
+            trace.mercury +
+            trace.neptune +
+            trace.neptune +
+            trace.saturn +
+            trace.soleil +
+            trace.uranus +
+            trace.venus,
+      })
+      .eq("email", user.email)
+      .execute();
 }

@@ -1,3 +1,4 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:astro01/classes/User.dart';
 import 'package:astro01/classes/trace.dart';
 import 'package:audioplayer/audioplayer.dart';

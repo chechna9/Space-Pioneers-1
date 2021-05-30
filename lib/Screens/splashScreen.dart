@@ -8,16 +8,16 @@ import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 
 class SplashScreen extends StatefulWidget {
-  final AudioPlayer audioPlayer;
-  SplashScreen({@required this.audioPlayer});
+  final AudioPlayer mainAudioPlayer;
+  SplashScreen({@required this.mainAudioPlayer});
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
   void playMusic() {
-    widget.audioPlayer.play("assets/shortMusic.mp3", isLocal: true);
-    widget.audioPlayer.setReleaseMode(ReleaseMode.LOOP);
+    widget.mainAudioPlayer.play(mainMusicPath, isLocal: true);
+    widget.mainAudioPlayer.setReleaseMode(ReleaseMode.LOOP);
   }
 
   @override
@@ -369,13 +369,7 @@ class Inscrire extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          playaudio();
           Navigator.pushNamed(context, '/inscription');
         });
   }
-}
-
-void playaudio() async {
-  AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
-  assetsAudioPlayer.open(Audio("assets/music.mp3"));
 }

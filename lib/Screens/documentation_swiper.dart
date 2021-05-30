@@ -11,8 +11,10 @@ import 'documentation_details.dart';
 import 'splashScreen.dart';
 
 class Documentation extends StatefulWidget {
-  final AudioPlayer audioPlayer;
-  Documentation({@required this.audioPlayer});
+  final AudioPlayer docAudioPlayer;
+  final AudioPlayer mainAudioPlayer;
+  Documentation(
+      {@required this.docAudioPlayer, @required this.mainAudioPlayer});
   @override
   _DocumentationState createState() => _DocumentationState();
 }
@@ -23,8 +25,8 @@ class _DocumentationState extends State<Documentation> {
     // TODO: implement initState
     super.initState();
     if (!mute) {
-      widget.audioPlayer.play("assets/shortMusic.mp3");
-      widget.audioPlayer.setReleaseMode(ReleaseMode.LOOP);
+      widget.docAudioPlayer.play(docMusicPath, isLocal: true);
+      widget.docAudioPlayer.setReleaseMode(ReleaseMode.LOOP);
     }
   }
 
@@ -49,7 +51,12 @@ class _DocumentationState extends State<Documentation> {
           color: Colors.white,
           iconSize: 35,
           onPressed: () {
-            print("Go back");
+            setState(() {
+              widget.docAudioPlayer.pause();
+              widget.mainAudioPlayer.resume();
+              // widget.docAudioPlayer.setReleaseMode(ReleaseMode.LOOP);
+            });
+
             Navigator.pop(context);
           },
         ),

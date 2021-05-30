@@ -30,7 +30,8 @@ const supabaseKey =
 final supabaseclient = SupabaseClient(supabaseUrl, supabaseKey);
 void main() {
   Injector.appInstance.registerSingleton<SupabaseClient>(() => supabaseclient);
-  AudioPlayer audioPlayer = AudioPlayer();
+  AudioPlayer mainAudioPlayer = AudioPlayer();
+  AudioPlayer docAudioPlayer = AudioPlayer();
   // AudioCache musicCache;
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
@@ -44,13 +45,13 @@ void main() {
     initialRoute: '/splashScreen',
     routes: {
       '/splashScreen': (context) => SplashScreen(
-            audioPlayer: audioPlayer,
+            mainAudioPlayer: mainAudioPlayer,
           ),
       '/inscription': (context) => Inscription(),
       '/login': (context) => Login(),
       '/leaderBoard': (context) => LeaderBoard(),
       '/homeScreen': (context) => HomeScreen(
-            audioPlayer: audioPlayer,
+            mainAudioPlayer: mainAudioPlayer,
           ),
       '/shopPage': (context) => ShopPage(),
       '/avatarPage': (context) => AvatarPage(),
@@ -61,7 +62,8 @@ void main() {
       '/quiz': (context) => Quiz(),
       '/loadingScreen': (context) => LoadingScreen(),
       '/documentation': (context) => Documentation(
-            audioPlayer: audioPlayer,
+            docAudioPlayer: docAudioPlayer,
+            mainAudioPlayer: mainAudioPlayer,
           ),
     },
   ));

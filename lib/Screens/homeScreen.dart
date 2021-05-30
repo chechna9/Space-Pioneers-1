@@ -10,8 +10,8 @@ import 'package:supabase/supabase.dart';
 import 'splashScreen.dart';
 
 class HomeScreen extends StatefulWidget {
-  final AudioPlayer audioPlayer;
-  HomeScreen({@required this.audioPlayer});
+  final AudioPlayer mainAudioPlayer;
+  HomeScreen({@required this.mainAudioPlayer});
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                     SoundCntrl(
-                      audioPlayer: widget.audioPlayer,
+                      mainAudioPlayer: widget.mainAudioPlayer,
                     ),
                   ]),
                   Stack(
@@ -105,15 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   text: 'Decouvrir',
                                   color: myRed,
                                   onPressed: () {
-                                    setState(() {
-                                      widget.audioPlayer.stop();
-                                      widget.audioPlayer.play(
-                                          "assets/music.mp3",
-                                          isLocal: true);
-                                      widget.audioPlayer
-                                          .setReleaseMode(ReleaseMode.LOOP);
-                                    });
-
+                                    widget.mainAudioPlayer.pause();
                                     Navigator.pushNamed(
                                         context, '/documentation');
                                   },
@@ -173,8 +165,8 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class SoundCntrl extends StatefulWidget {
-  final AudioPlayer audioPlayer;
-  SoundCntrl({Key key, @required this.audioPlayer}) : super(key: key);
+  final AudioPlayer mainAudioPlayer;
+  SoundCntrl({Key key, @required this.mainAudioPlayer}) : super(key: key);
 
   @override
   _SoundCntrlState createState() => _SoundCntrlState();
@@ -187,8 +179,8 @@ class _SoundCntrlState extends State<SoundCntrl> {
       onPressed: () {
         setState(() {
           mute
-              ? widget.audioPlayer.setVolume(1)
-              : widget.audioPlayer.setVolume(0);
+              ? widget.mainAudioPlayer.setVolume(1)
+              : widget.mainAudioPlayer.setVolume(0);
           mute = mute ? false : true;
         });
       },

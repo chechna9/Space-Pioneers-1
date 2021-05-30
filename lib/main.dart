@@ -42,7 +42,7 @@ void main() {
       // to change calendar color
       primarySwatch: calendarColor,
     ),
-    initialRoute: '/splashScreen',
+    initialRoute: '/testing',
     routes: {
       '/splashScreen': (context) => SplashScreen(
             mainAudioPlayer: mainAudioPlayer,

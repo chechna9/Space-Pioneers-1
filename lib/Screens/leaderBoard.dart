@@ -15,27 +15,6 @@ class LeaderBoard extends StatefulWidget {
 }
 
 class _LeaderBoardState extends State<LeaderBoard> {
-  List<String> nameList = <String>[
-    'name1',
-    'name2',
-    'name3',
-  ];
-  List<String> photoList = <String>[
-    'ridingRocket',
-    'ridingMoon',
-    'ridingRocket',
-  ];
-  List<int> pointList = <int>[
-    255,
-    25,
-    12,
-  ];
-  List<int> rankList = <int>[
-    1,
-    2,
-    3,
-  ];
-
   @override
   Widget build(BuildContext context) {
     bool existe = false;

@@ -201,6 +201,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                     });
                   else if (widget.answer == propo[2])
                     setState(() {
+                      cliquer = true;
                       choiceColor = choiceColors[2];
                     });
                   else if (widget.answer == propo[3])
@@ -333,58 +334,58 @@ class AppbarCustomed extends StatelessWidget {
           automaticallyImplyLeading: false,
           backgroundColor: myBlue,
           pinned: true,
+          elevation: 15,
+          shadowColor: Colors.black,
           expandedHeight: 91,
           brightness: Brightness.dark,
+          leading:  Padding(
+                      padding: const EdgeInsets.only(top: 34, left: 11),
+                      child: Text(
+                          '$numero/10',
+                            style: TextStyle(
+                            color: myRed2,
+                            fontSize: 17,
+                            fontFamily: 'Gotham',
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(top: 17, right: 5),
+              child: IconButton(
+                            icon: Icon(Icons.clear),
+                            color: myRed2,
+                            iconSize: 30,
+                            onPressed: () {
+                              points = 0;
+                              Navigator.pushNamed(context, '/planetChoice');
+                            }),
+            ),
+          ],
           flexibleSpace: FlexibleSpaceBar(
             titlePadding: EdgeInsets.zero,
             centerTitle: true,
-            title: SizedBox(
-              height: 58,
-              child: Column(children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Spacer(flex: 2),
-                    Text(
-                      '$numero/10',
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-                        color: myRed2,
-                        fontSize: 13,
-                        fontFamily: 'Gotham',
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                    Spacer(flex: 5),
-                    Text(
-                      '$planete',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 17,
-                        fontFamily: 'Gotham',
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                    Spacer(flex: 5),
-                    IconButton(
-                        icon: Icon(Icons.clear),
-                        color: myRed2,
-                        iconSize: 20,
-                        onPressed: () {
-                          points = 0;
-                          Navigator.pushNamed(context, '/planetChoice');
-                        }),
-                  ],
-                ),
-              ]),
+            title: Padding(
+              padding: const EdgeInsets.only(top: 47),
+              child: Center(
+                child: Text(
+                            '$planete',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 17,
+                              fontFamily: 'Gotham',
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+              ),
             ),
           ),
-          bottom: PreferredSize(
-              preferredSize: Size.fromRadius(6),
-              child: ProgressBar(
-                width: (MediaQuery.of(context).size.width) * 0.98,
-              )),
+          // bottom: PreferredSize(
+          //     preferredSize: Size.fromRadius(6),
+          //     child: ProgressBar(
+          //       width: (MediaQuery.of(context).size.width) * 0.98,
+          //     )),
         ),
       ],
     );

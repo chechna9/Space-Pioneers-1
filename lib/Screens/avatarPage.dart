@@ -92,33 +92,53 @@ class AvatarPageState extends State<AvatarPage> {
                     children: [
                       AvatarCard(
                         credit: credit,
-                        image: 'default',
-                        price: -1,
+                        image: 'ridingRocket',
+                        price: 50,
                       ),
                       AvatarCard(
                         credit: credit,
-                        image: 'ridingRocket',
-                        price: -1,
+                        image: 'holdingRocket',
+                        price: 100,
                       ),
                       AvatarCard(
                         credit: credit,
                         image: 'ridingMoon',
-                        price: 75,
+                        price: 250,
                       ),
                       AvatarCard(
                         credit: credit,
-                        image: 'ridingRocket',
-                        price: 150,
+                        image: 'iron',
+                        price: 500,
                       ),
                       AvatarCard(
                         credit: credit,
-                        image: 'default',
+                        image: 'beatPlanet',
+                        price: 1000,
+                      ),
+                      AvatarCard(
+                        credit: credit,
+                        image: 'iceCream',
                         price: 2000,
                       ),
                       AvatarCard(
                         credit: credit,
-                        image: 'default',
-                        price: 2000,
+                        image: 'onCloud',
+                        price: 3000,
+                      ),
+                      AvatarCard(
+                        credit: credit,
+                        image: 'hacker',
+                        price: 4000,
+                      ),
+                      AvatarCard(
+                        credit: credit,
+                        image: 'superHero',
+                        price: 4500,
+                      ),
+                      AvatarCard(
+                        credit: credit,
+                        image: 'king',
+                        price: 5000,
                       ),
                     ],
                   ),

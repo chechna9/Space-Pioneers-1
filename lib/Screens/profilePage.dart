@@ -35,11 +35,12 @@ class _ProfilePageState extends State<ProfilePage> {
               width: 0,
             ),
             IconButton(
-              icon: Icon(Icons.shopping_cart_outlined),
+              icon: Icon(Icons.arrow_back_outlined),
               color: myRed,
-              iconSize: 30,
+              iconSize: 35,
               onPressed: () {
-                Navigator.pushNamed(context, '/shopPage');
+                print("Go back");
+                Navigator.pop(context);
               },
             ),
             Transform.rotate(
@@ -64,6 +65,14 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         leadingWidth: 150,
         actions: [
+          IconButton(
+            icon: Icon(Icons.shopping_cart_outlined),
+            color: myRed,
+            iconSize: 30,
+            onPressed: () {
+              Navigator.pushNamed(context, '/shopPage');
+            },
+          ),
           IconButton(
             icon: Icon(Icons.leaderboard_outlined),
             color: myRed,

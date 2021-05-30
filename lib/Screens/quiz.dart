@@ -226,8 +226,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                               .updateAvatar(ind);
                         });
                       else {
-                        Navigator.pushReplacementNamed(
-                            context, '/planetChoice');
+                        Navigator.pop(context);
                         questNum = 1;
                         points = 0;
                       }
@@ -373,7 +372,7 @@ class AppbarCustomed extends StatelessWidget {
                         iconSize: 20,
                         onPressed: () {
                           points = 0;
-                          Navigator.pushNamed(context, '/planetChoice');
+                          Navigator.pop(context);
                         }),
                   ],
                 ),

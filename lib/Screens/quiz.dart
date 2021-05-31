@@ -368,15 +368,15 @@ class AppbarCustomed extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(top: 27),
               child: Text(
-                          '$planete',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 28,
-                            fontFamily: 'Gotham',
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
+                '$planete',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 28,
+                  fontFamily: 'Gotham',
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
             ),
           ),
           leading: Padding(

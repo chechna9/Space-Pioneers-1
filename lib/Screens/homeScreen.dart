@@ -1,4 +1,3 @@
-import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:astro01/Screens/loading.dart';
 import 'package:astro01/classes/User.dart';
 import 'package:astro01/variable_globale/variable.dart';
@@ -11,6 +10,8 @@ import 'package:supabase/supabase.dart';
 import 'splashScreen.dart';
 
 class HomeScreen extends StatefulWidget {
+  final AudioPlayer mainAudioPlayer;
+  HomeScreen({@required this.mainAudioPlayer});
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -44,7 +45,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: sh * 0.03,
                   ),
                   Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                    SoundCntrl(),
+                    SoundCntrl(
+                      mainAudioPlayer: widget.mainAudioPlayer,
+                    ),
                   ]),
                   Stack(
                     clipBehavior: Clip.none,
@@ -102,6 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   text: 'Decouvrir',
                                   color: myRed,
                                   onPressed: () {
+                                    widget.mainAudioPlayer.pause();
                                     Navigator.pushNamed(
                                         context, '/documentation');
                                   },
@@ -161,57 +165,23 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class SoundCntrl extends StatefulWidget {
-  SoundCntrl({
-    Key key,
-  }) : super(key: key);
+  final AudioPlayer mainAudioPlayer;
+  SoundCntrl({Key key, @required this.mainAudioPlayer}) : super(key: key);
 
   @override
   _SoundCntrlState createState() => _SoundCntrlState();
 }
 
 class _SoundCntrlState extends State<SoundCntrl> {
-  bool mute = false;
-  AudioPlayer _audioPlayer = AudioPlayer();
-  bool isPlaying = false;
-  String currentTime = "00:00";
-  String completeTime = "00:00";
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-    _audioPlayer.onAudioPositionChanged.listen((Duration duration) {
-      setState(() {
-        currentTime = duration.toString().split(".")[0];
-      });
-    });
-
-    _audioPlayer.onDurationChanged.listen((Duration duration) {
-      setState(() {
-        completeTime = duration.toString().split(".")[0];
-      });
-    });
-  }
-
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () {
-        if (isPlaying) {
-          _audioPlayer.pause();
-
-          setState(() {
-            isPlaying = false;
-          });
-        } else {
-          _audioPlayer.resume();
-
-          setState(() {
-            isPlaying = true;
-          });
-        }
         setState(() {
+          mute
+              ? widget.mainAudioPlayer.setVolume(1)
+              : widget.mainAudioPlayer.setVolume(0);
           mute = mute ? false : true;
-          playaudio();
         });
       },
       icon: Icon(
@@ -291,9 +261,4 @@ Future<List<Users>> getUsers(String email_) async {
       .map((map) => Users.fromJson(map))
       .where((dataList) => dataList.email_ver(email_))
       .toList();
-}
-
-void playaudio() async {
-  AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
-  assetsAudioPlayer.open(Audio("assets/music/music.mp3"));
 }

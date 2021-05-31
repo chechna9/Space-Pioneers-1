@@ -14,8 +14,6 @@ class LevelChoice extends StatefulWidget {
 }
 
 class _LevelChoiceState extends State<LevelChoice> {
-  get audioCache => null;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -71,33 +71,53 @@ class SshopPageState extends State<ShopPage> {
             children: [
               ShopCard(
                 credit: credit,
-                image: 'default',
-                price: 20,
-              ),
-              ShopCard(
-                credit: credit,
                 image: 'ridingRocket',
                 price: 50,
               ),
               ShopCard(
                 credit: credit,
+                image: 'holdingRocket',
+                price: 100,
+              ),
+              ShopCard(
+                credit: credit,
                 image: 'ridingMoon',
-                price: 75,
+                price: 250,
               ),
               ShopCard(
                 credit: credit,
-                image: 'ridingRocket',
-                price: 150,
+                image: 'iron',
+                price: 500,
               ),
               ShopCard(
                 credit: credit,
-                image: 'default',
+                image: 'beatPlanet',
+                price: 1000,
+              ),
+              ShopCard(
+                credit: credit,
+                image: 'iceCream',
                 price: 2000,
               ),
               ShopCard(
                 credit: credit,
-                image: 'default',
-                price: 2000,
+                image: 'onCloud',
+                price: 3000,
+              ),
+              ShopCard(
+                credit: credit,
+                image: 'hacker',
+                price: 4000,
+              ),
+              ShopCard(
+                credit: credit,
+                image: 'superHero',
+                price: 4500,
+              ),
+              ShopCard(
+                credit: credit,
+                image: 'king',
+                price: 5000,
               ),
             ],
           ),

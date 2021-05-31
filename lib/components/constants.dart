@@ -32,3 +32,5 @@ const LinearGradient myGradiant = LinearGradient(
     Color(0xff50012d),
   ],
 );
+String mainMusicPath = "assets/music/shortMusic.mp3";
+String docMusicPath = "assets/music/music.mp3";

@@ -166,6 +166,7 @@ class PlanetCard extends StatelessWidget {
         planeteInd = choiceInd;
         questNum = 1;
         Navigator.pushNamed(context, '/levelChoice');
+        print('c fait');
       },
       child: Container(
         decoration: BoxDecoration(

@@ -5,6 +5,7 @@ import 'package:astro01/variable_globale/variable.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../components/constants.dart';
+import '../main.dart';
 
 // String avatar = user.avatar;
 class TempAvatar extends ChangeNotifier {
@@ -55,6 +56,7 @@ class AvatarPageState extends State<AvatarPage> {
               icon: Icon(Icons.save),
               onPressed: () {
                 user.avatar = avatar;
+                update_avatar(user.avatar);
               },
             ),
             SizedBox(
@@ -206,4 +208,15 @@ class AvatarCard extends StatelessWidget {
       ),
     );
   }
+}
+
+void update_avatar(String nouveaua_vatar) async {
+  supabaseclient
+      .from("user")
+      .update({
+        "email": user.email,
+        "avatar": nouveaua_vatar,
+      })
+      .eq("email", user.email)
+      .execute();
 }

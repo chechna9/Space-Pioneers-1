@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             height: 10,
                           ),
                           AutoSizeText(
-                            'Zinou nhar el lyoum mabrok idkom',
+                            'Bienvenue dans cette belle aventure',
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w100,
@@ -83,14 +83,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Star(angle: 8, scale: 2.8),
                       ),
                       Positioned(
-                        top: -50,
-                        right: -10,
+                        top: -28,
+                        right: 115 ,
                         child: Star(angle: 8, scale: 2.8),
                       ),
                     ],
                   ),
                   SizedBox(
-                    height: sh * 0.1,
+                    height: sh * 0.0315,
                   ),
                   Expanded(
                     child: ListView(
@@ -136,11 +136,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             Positioned(
                               bottom: -100,
-                              left: 50,
+                              left: 30,
                               child: Star(angle: 8, scale: 2.8),
                             ),
                             Positioned(
-                              bottom: -50,
+                              bottom: -40,
                               right: 10,
                               child: Star(angle: 8, scale: 2.8),
                             ),

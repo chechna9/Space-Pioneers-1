@@ -8,3 +8,6 @@ Users user = new Users();
 Trace trace = new Trace();
 bool mute = false;
 int indice = 0;
+int nbTentatives;
+int factRecomp;
+bool ableToBadge = false;

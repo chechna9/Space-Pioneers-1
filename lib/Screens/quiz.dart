@@ -232,7 +232,6 @@ class _AnswerBoxState extends State<AnswerBox> {
                   print('nbbb');
                   print(nbTentatives);
                   Timer(Duration(seconds: 1), () {
-<<<<<<< HEAD
                     if (ind.isEmpty || nbTentatives <= 0) {
                       if (verification(points) == 1) {
                         update();
@@ -254,25 +253,10 @@ class _AnswerBoxState extends State<AnswerBox> {
                       points = 0;
                     } else {
                       if (widget.answer == propo[0]) {
-=======
-                    if (widget.answer == propo[0]) {
-                      setState(() {
-                        choiceColor = Colors.white;
-                      });
-                      if (ind.isNotEmpty)
->>>>>>> d70627fffb4aa1cb183551e975b03b1cfc70f2cb
                         setState(() {
                           Provider.of<Ind>(context, listen: false)
                               .updateInd(ind);
                         });
-<<<<<<< HEAD
-=======
-                      else {
-                        Navigator.pushReplacementNamed(
-                            context, '/planetChoice');
-                        questNum = 1;
-                        points = 0;
->>>>>>> d70627fffb4aa1cb183551e975b03b1cfc70f2cb
                       }
                     }
                   });
@@ -380,35 +364,34 @@ class AppbarCustomed extends StatelessWidget {
           shadowColor: Colors.black,
           expandedHeight: 91,
           brightness: Brightness.dark,
-          leading:  Padding(
-                      padding: const EdgeInsets.only(top: 34, left: 11),
-                      child: Text(
-                          '$numero/10',
-                            style: TextStyle(
-                            color: myRed2,
-                            fontSize: 17,
-                            fontFamily: 'Gotham',
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
+          leading: Padding(
+            padding: const EdgeInsets.only(top: 34, left: 11),
+            child: Text(
+              '$numero/10',
+              style: TextStyle(
+                color: myRed2,
+                fontSize: 17,
+                fontFamily: 'Gotham',
+                fontWeight: FontWeight.normal,
+              ),
+            ),
           ),
           actions: [
             Padding(
               padding: const EdgeInsets.only(top: 17, right: 5),
               child: IconButton(
-                            icon: Icon(Icons.clear),
-                            color: myRed2,
-                            iconSize: 30,
-                            onPressed: () {
-                              points = 0;
-                              Navigator.pushNamed(context, '/planetChoice');
-                            }),
+                  icon: Icon(Icons.clear),
+                  color: myRed2,
+                  iconSize: 30,
+                  onPressed: () {
+                    points = 0;
+                    Navigator.pushNamed(context, '/planetChoice');
+                  }),
             ),
           ],
           flexibleSpace: FlexibleSpaceBar(
             titlePadding: EdgeInsets.zero,
             centerTitle: true,
-<<<<<<< HEAD
             title: SizedBox(
               height: 58,
               child: Column(children: <Widget>[
@@ -449,21 +432,6 @@ class AppbarCustomed extends StatelessWidget {
                   ],
                 ),
               ]),
-=======
-            title: Padding(
-              padding: const EdgeInsets.only(top: 47),
-              child: Center(
-                child: Text(
-                            '$planete',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 17,
-                              fontFamily: 'Gotham',
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-              ),
->>>>>>> d70627fffb4aa1cb183551e975b03b1cfc70f2cb
             ),
           ),
           // bottom: PreferredSize(

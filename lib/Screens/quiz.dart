@@ -364,6 +364,21 @@ class AppbarCustomed extends StatelessWidget {
           shadowColor: Colors.black,
           expandedHeight: 91,
           brightness: Brightness.dark,
+          title: Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 27),
+              child: Text(
+                          '$planete',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 28,
+                            fontFamily: 'Gotham',
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+            ),
+          ),
           leading: Padding(
             padding: const EdgeInsets.only(top: 34, left: 11),
             child: Text(
@@ -389,56 +404,6 @@ class AppbarCustomed extends StatelessWidget {
                   }),
             ),
           ],
-          flexibleSpace: FlexibleSpaceBar(
-            titlePadding: EdgeInsets.zero,
-            centerTitle: true,
-            title: SizedBox(
-              height: 58,
-              child: Column(children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Spacer(flex: 2),
-                    Text(
-                      '$numero/10',
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-                        color: myRed2,
-                        fontSize: 13,
-                        fontFamily: 'Gotham',
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                    Spacer(flex: 5),
-                    Text(
-                      '$planete',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 17,
-                        fontFamily: 'Gotham',
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                    Spacer(flex: 5),
-                    IconButton(
-                        icon: Icon(Icons.clear),
-                        color: myRed2,
-                        iconSize: 20,
-                        onPressed: () {
-                          points = 0;
-                          Navigator.pop(context, '/planetChoice');
-                        }),
-                  ],
-                ),
-              ]),
-            ),
-          ),
-          // bottom: PreferredSize(
-          //     preferredSize: Size.fromRadius(6),
-          //     child: ProgressBar(
-          //       width: (MediaQuery.of(context).size.width) * 0.98,
-          //     )),
         ),
       ],
     );

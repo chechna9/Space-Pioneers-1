@@ -31,7 +31,7 @@ List<int> ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 class Ind extends ChangeNotifier {
   List<int> ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-  void updateAvatar(List<int> newindice) {
+  void updateInd(List<int> newindice) {
     ind = newindice;
     notifyListeners();
   }
@@ -48,8 +48,6 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-// ignore: unused_field
-
   List<Question> _questions = <Question>[];
   Future<List<Question>> fetchQuestions() async {
     var url = Uri.parse('https://nadir-ogd.github.io/Quiz-API/questions.json');
@@ -175,16 +173,28 @@ class _AnswerBoxState extends State<AnswerBox> {
                   if (widget.answer == propo[0]) {
                     setState(() {
                       if (cliquer == false) {
-                        points++;
+                        points += factRecomp;
                       }
                       choiceColor = choiceColors[0];
                       questNum++;
                       ind.removeAt(0);
                       cliquer = false;
                       // if ((ind.isEmpty) && (questNum == 10)) {
-                      if (ind.isEmpty) {
+                      if (ind.isEmpty || nbTentatives == 0) {
                         if (verification(points) == 1) {
                           update();
+
+                          user.etoiles = trace.earth +
+                              trace.jupiter +
+                              trace.mars +
+                              trace.mercury +
+                              trace.neptune +
+                              trace.neptune +
+                              trace.saturn +
+                              trace.soleil +
+                              trace.uranus +
+                              trace.venus;
+                          print(user.etoiles);
                         }
                       } else {
                         //var route = new MaterialPageRoute(
@@ -198,39 +208,55 @@ class _AnswerBoxState extends State<AnswerBox> {
                     setState(() {
                       cliquer = true;
                       choiceColor = choiceColors[1];
+                      nbTentatives--;
                     });
                   else if (widget.answer == propo[2])
                     setState(() {
                       cliquer = true;
                       choiceColor = choiceColors[2];
+                      nbTentatives--;
                     });
-                  else if (widget.answer == propo[3])
+                  else if (widget.answer == propo[3]) {
                     setState(() {
                       cliquer = true;
                       choiceColor = choiceColors[3];
+                      nbTentatives--;
                     });
+                  }
 
                   Timer(Duration(milliseconds: 600), () {
                     setState(() {
                       choiceColor = Colors.white;
                     });
                   });
-
+                  print('nbbb');
+                  print(nbTentatives);
                   Timer(Duration(seconds: 1), () {
-                    if (widget.answer == propo[0]) {
-                      setState(() {
-                        choiceColor = Colors.white;
-                      });
-                      if (ind.isNotEmpty)
+                    if (ind.isEmpty || nbTentatives <= 0) {
+                      if (verification(points) == 1) {
+                        update();
+
+                        user.etoiles = trace.earth +
+                            trace.jupiter +
+                            trace.mars +
+                            trace.mercury +
+                            trace.neptune +
+                            trace.neptune +
+                            trace.saturn +
+                            trace.soleil +
+                            trace.uranus +
+                            trace.venus;
+                        print(user.etoiles);
+                      }
+                      Navigator.pop(context);
+                      questNum = 1;
+                      points = 0;
+                    } else {
+                      if (widget.answer == propo[0]) {
                         setState(() {
                           Provider.of<Ind>(context, listen: false)
-                              .updateAvatar(ind);
+                              .updateInd(ind);
                         });
-                      else {
-                        Navigator.pushReplacementNamed(
-                            context, '/planetChoice');
-                        questNum = 1;
-                        points = 0;
                       }
                     }
                   });
@@ -338,47 +364,74 @@ class AppbarCustomed extends StatelessWidget {
           shadowColor: Colors.black,
           expandedHeight: 91,
           brightness: Brightness.dark,
-          leading:  Padding(
-                      padding: const EdgeInsets.only(top: 34, left: 11),
-                      child: Text(
-                          '$numero/10',
-                            style: TextStyle(
-                            color: myRed2,
-                            fontSize: 17,
-                            fontFamily: 'Gotham',
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
+          leading: Padding(
+            padding: const EdgeInsets.only(top: 34, left: 11),
+            child: Text(
+              '$numero/10',
+              style: TextStyle(
+                color: myRed2,
+                fontSize: 17,
+                fontFamily: 'Gotham',
+                fontWeight: FontWeight.normal,
+              ),
+            ),
           ),
           actions: [
             Padding(
               padding: const EdgeInsets.only(top: 17, right: 5),
               child: IconButton(
-                            icon: Icon(Icons.clear),
-                            color: myRed2,
-                            iconSize: 30,
-                            onPressed: () {
-                              points = 0;
-                              Navigator.pushNamed(context, '/planetChoice');
-                            }),
+                  icon: Icon(Icons.clear),
+                  color: myRed2,
+                  iconSize: 30,
+                  onPressed: () {
+                    points = 0;
+                    Navigator.pushNamed(context, '/planetChoice');
+                  }),
             ),
           ],
           flexibleSpace: FlexibleSpaceBar(
             titlePadding: EdgeInsets.zero,
             centerTitle: true,
-            title: Padding(
-              padding: const EdgeInsets.only(top: 47),
-              child: Center(
-                child: Text(
-                            '$planete',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 17,
-                              fontFamily: 'Gotham',
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-              ),
+            title: SizedBox(
+              height: 58,
+              child: Column(children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Spacer(flex: 2),
+                    Text(
+                      '$numero/10',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        color: myRed2,
+                        fontSize: 13,
+                        fontFamily: 'Gotham',
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                    Spacer(flex: 5),
+                    Text(
+                      '$planete',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontFamily: 'Gotham',
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                    Spacer(flex: 5),
+                    IconButton(
+                        icon: Icon(Icons.clear),
+                        color: myRed2,
+                        iconSize: 20,
+                        onPressed: () {
+                          points = 0;
+                          Navigator.pop(context, '/planetChoice');
+                        }),
+                  ],
+                ),
+              ]),
             ),
           ),
           // bottom: PreferredSize(

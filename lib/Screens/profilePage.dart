@@ -22,7 +22,6 @@ class _ProfilePageState extends State<ProfilePage> {
     'ridingMoon',
     'ridingRocket',
   ];
-  int credit = user.etoiles;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             Center(
               child: Text(
-                '$credit',
+                '${user.etoiles}',
                 style: TextStyle(
                   color: myYellow,
                   fontWeight: FontWeight.w500,

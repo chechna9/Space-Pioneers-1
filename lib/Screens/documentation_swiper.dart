@@ -35,7 +35,6 @@ class _DocumentationState extends State<Documentation> {
           color: Colors.white,
           iconSize: 35,
           onPressed: () {
-            print("Go back");
             Navigator.pop(context);
           },
         ),

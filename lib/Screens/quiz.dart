@@ -24,18 +24,14 @@ import 'package:provider/provider.dart';
 //   return rootBundle.loadString('questions.json');
 // }
 List<String> propo = ['a', 'b', 'c', 'd'];
-<<<<<<< HEAD
 int points = 0;
 bool cliquer = false;
-=======
-
->>>>>>> d815ee1542266a4ac14070a8130c16b0b9d64648
 List<int> ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 class Ind extends ChangeNotifier {
   List<int> ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-  void updateAvatar(List<int> newindice) {
+  void updateInd(List<int> newindice) {
     ind = newindice;
     notifyListeners();
   }
@@ -52,8 +48,6 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-// ignore: unused_field
-
   List<Question> _questions = <Question>[];
   Future<List<Question>> fetchQuestions() async {
     var url = Uri.parse('https://nadir-ogd.github.io/Quiz-API/questions.json');
@@ -178,29 +172,30 @@ class _AnswerBoxState extends State<AnswerBox> {
                 onTap: () {
                   if (widget.answer == propo[0]) {
                     setState(() {
-<<<<<<< HEAD
                       if (cliquer == false) {
-                        points++;
+                        points += factRecomp;
                       }
                       choiceColor = choiceColors[0];
                       questNum++;
                       ind.removeAt(0);
                       cliquer = false;
                       // if ((ind.isEmpty) && (questNum == 10)) {
-                      if (ind.isEmpty) {
+                      if (ind.isEmpty || nbTentatives == 0) {
                         if (verification(points) == 1) {
                           update();
+
+                          user.etoiles = trace.earth +
+                              trace.jupiter +
+                              trace.mars +
+                              trace.mercury +
+                              trace.neptune +
+                              trace.neptune +
+                              trace.saturn +
+                              trace.soleil +
+                              trace.uranus +
+                              trace.venus;
+                          print(user.etoiles);
                         }
-=======
-                      choiceColor = choiceColors[0];
-                      questNum++;
-                      ind.removeAt(0);
-                      // if ((ind.isEmpty) && (questNum == 10)) {
-                      if (ind.isEmpty) {
-                        print('ok');
-                        Navigator.pushNamed(context, '/planetChoice');
-                        questNum = 1;
->>>>>>> d815ee1542266a4ac14070a8130c16b0b9d64648
                       } else {
                         //var route = new MaterialPageRoute(
                         //builder: (BuildContext context) => new Quiz(
@@ -211,54 +206,58 @@ class _AnswerBoxState extends State<AnswerBox> {
                     });
                   } else if (widget.answer == propo[1])
                     setState(() {
-<<<<<<< HEAD
                       cliquer = true;
-=======
->>>>>>> d815ee1542266a4ac14070a8130c16b0b9d64648
                       choiceColor = choiceColors[1];
+                      nbTentatives--;
                     });
                   else if (widget.answer == propo[2])
                     setState(() {
-                      choiceColor = choiceColors[2];
-                    });
-                  else if (widget.answer == propo[3])
-                    setState(() {
-<<<<<<< HEAD
                       cliquer = true;
-=======
->>>>>>> d815ee1542266a4ac14070a8130c16b0b9d64648
-                      choiceColor = choiceColors[3];
+                      choiceColor = choiceColors[2];
+                      nbTentatives--;
                     });
+                  else if (widget.answer == propo[3]) {
+                    setState(() {
+                      cliquer = true;
+                      choiceColor = choiceColors[3];
+                      nbTentatives--;
+                    });
+                  }
 
                   Timer(Duration(milliseconds: 600), () {
                     setState(() {
                       choiceColor = Colors.white;
                     });
                   });
-
+                  print('nbbb');
+                  print(nbTentatives);
                   Timer(Duration(seconds: 1), () {
-                    if (widget.answer == propo[0]) {
-                      setState(() {
-                        choiceColor = Colors.white;
-                      });
-<<<<<<< HEAD
+                    if (ind.isEmpty || nbTentatives <= 0) {
+                      if (verification(points) == 1) {
+                        update();
 
-=======
->>>>>>> d815ee1542266a4ac14070a8130c16b0b9d64648
-                      if (ind.isNotEmpty)
+                        user.etoiles = trace.earth +
+                            trace.jupiter +
+                            trace.mars +
+                            trace.mercury +
+                            trace.neptune +
+                            trace.neptune +
+                            trace.saturn +
+                            trace.soleil +
+                            trace.uranus +
+                            trace.venus;
+                        print(user.etoiles);
+                      }
+                      Navigator.pop(context);
+                      questNum = 1;
+                      points = 0;
+                    } else {
+                      if (widget.answer == propo[0]) {
                         setState(() {
                           Provider.of<Ind>(context, listen: false)
-                              .updateAvatar(ind);
+                              .updateInd(ind);
                         });
-<<<<<<< HEAD
-                      else {
-                        Navigator.pushReplacementNamed(
-                            context, '/planetChoice');
-                        questNum = 1;
-                        points = 0;
                       }
-=======
->>>>>>> d815ee1542266a4ac14070a8130c16b0b9d64648
                     }
                   });
                 },
@@ -396,22 +395,13 @@ class AppbarCustomed extends StatelessWidget {
                     ),
                     Spacer(flex: 5),
                     IconButton(
-<<<<<<< HEAD
                         icon: Icon(Icons.clear),
                         color: myRed2,
                         iconSize: 20,
                         onPressed: () {
                           points = 0;
-                          Navigator.pushNamed(context, '/planetChoice');
+                          Navigator.pop(context, '/planetChoice');
                         }),
-=======
-                      icon: Icon(Icons.clear),
-                      color: myRed2,
-                      iconSize: 20,
-                      onPressed: () =>
-                          Navigator.pushNamed(context, '/planetChoice'),
-                    ),
->>>>>>> d815ee1542266a4ac14070a8130c16b0b9d64648
                   ],
                 ),
               ]),
@@ -494,7 +484,6 @@ List shuffle(List<int> indices) {
 
   return indices;
 }
-<<<<<<< HEAD
 
 int verification(int point) {
   if (planeteInd == 0) {
@@ -596,5 +585,3 @@ void update() async {
       .eq("email", user.email)
       .execute();
 }
-=======
->>>>>>> d815ee1542266a4ac14070a8130c16b0b9d64648

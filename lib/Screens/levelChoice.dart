@@ -82,7 +82,10 @@ class _LevelChoiceState extends State<LevelChoice> {
                               text: 'Facile',
                               color: Color(0xff1BEFBC),
                               onPressed: () {
-                                Navigator.pushNamed(context, '/planetChoice');
+                                nbTentatives = 10;
+                                factRecomp = 1;
+                                ableToBadge = false;
+                                Navigator.pushNamed(context, '/quiz');
                               },
                             ),
                             SizedBox(
@@ -92,7 +95,10 @@ class _LevelChoiceState extends State<LevelChoice> {
                                 text: 'Moyen',
                                 color: Color(0xff1759BC),
                                 onPressed: () {
-                                  Navigator.pushNamed(context, '/planetChoice');
+                                  nbTentatives = 6;
+                                  factRecomp = 5;
+                                  ableToBadge = false;
+                                  Navigator.pushNamed(context, '/quiz');
                                 }),
                             SizedBox(
                               height: 30,
@@ -101,6 +107,9 @@ class _LevelChoiceState extends State<LevelChoice> {
                                 text: 'Difficile',
                                 color: Color(0xffE1023C),
                                 onPressed: () {
+                                  nbTentatives = 3;
+                                  factRecomp = 10;
+                                  ableToBadge = true;
                                   Navigator.pushNamed(context, '/quiz');
                                 }),
                           ],

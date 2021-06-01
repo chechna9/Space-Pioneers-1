@@ -8,6 +8,7 @@ import 'dart:io';
 import 'package:astro01/Screens/loading.dart';
 import 'package:astro01/Screens/planetChoice.dart';
 import 'package:astro01/classes/questions.dart';
+import 'package:astro01/components/InfoSup.dart';
 import 'package:astro01/main.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
@@ -17,6 +18,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:provider/provider.dart';
+import '../components/InfoSup.dart';
 // import 'package:http/http.dart' as http;
 // import 'package:flutter/services.dart' show rootBundle;
 
@@ -125,6 +127,9 @@ class _QuizState extends State<Quiz> {
                                   AnswerBox(
                                     answer: propo[indices[myindex]],
                                     answerLetter: '${myindex + 1}',
+                                    infoSup: snapshot
+                                        .data[ind[0] + 10 * planeteInd]
+                                        .infosupp,
                                   ),
                                 ]);
                               },
@@ -141,10 +146,12 @@ class _QuizState extends State<Quiz> {
 class AnswerBox extends StatefulWidget {
   final String answer;
   final String answerLetter;
+  final String infoSup;
   AnswerBox({
     Key key,
     this.answer: 'answer',
     this.answerLetter: 'A',
+    this.infoSup,
   }) : super(key: key);
 
   @override
@@ -179,6 +186,11 @@ class _AnswerBoxState extends State<AnswerBox> {
                       questNum++;
                       ind.removeAt(0);
                       cliquer = false;
+                      showDialog(
+                        context: context,
+                        builder: (context) => InfoSup(
+                            content: widget.infoSup, recomp: factRecomp),
+                      );
                       // if ((ind.isEmpty) && (questNum == 10)) {
                       if (ind.isEmpty || nbTentatives == 0) {
                         if (verification(points) == 1) {
@@ -400,7 +412,7 @@ class AppbarCustomed extends StatelessWidget {
                   iconSize: 30,
                   onPressed: () {
                     points = 0;
-                    Navigator.pushNamed(context, '/planetChoice');
+                    Navigator.pop(context);
                   }),
             ),
           ],

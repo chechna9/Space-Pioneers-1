@@ -185,12 +185,14 @@ class _AnswerBoxState extends State<AnswerBox> {
                       choiceColor = choiceColors[0];
                       questNum++;
                       ind.removeAt(0);
-                      cliquer = false;
+
                       showDialog(
                         context: context,
                         builder: (context) => InfoSup(
-                            content: widget.infoSup, recomp: factRecomp),
+                            content: widget.infoSup,
+                            recomp: cliquer ? 0 : factRecomp),
                       );
+                      cliquer = false;
                       // if ((ind.isEmpty) && (questNum == 10)) {
                       if (ind.isEmpty || nbTentatives == 0) {
                         if (verification(points) == 1) {

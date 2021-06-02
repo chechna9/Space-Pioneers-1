@@ -184,7 +184,6 @@ class _AnswerBoxState extends State<AnswerBox> {
                       }
                       choiceColor = choiceColors[0];
                       questNum++;
-                      ind.removeAt(0);
 
                       showDialog(
                         context: context,
@@ -192,6 +191,8 @@ class _AnswerBoxState extends State<AnswerBox> {
                             content: widget.infoSup,
                             recomp: cliquer ? 0 : factRecomp),
                       );
+                      ind.removeAt(0);
+
                       cliquer = false;
                       // if ((ind.isEmpty) && (questNum == 10)) {
                       if (ind.isEmpty || nbTentatives == 0) {
@@ -262,7 +263,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                             trace.venus;
                         print(user.etoiles);
                       }
-                      Navigator.pop(context);
+                      Navigator.pushReplacementNamed(context, '/planetChoice');
                       questNum = 1;
                       points = 0;
                     } else {
@@ -414,7 +415,7 @@ class AppbarCustomed extends StatelessWidget {
                   iconSize: 30,
                   onPressed: () {
                     points = 0;
-                    Navigator.pop(context);
+                    Navigator.pushReplacementNamed(context, '/planetChoice');
                   }),
             ),
           ],

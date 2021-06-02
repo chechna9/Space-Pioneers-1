@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:js';
 
+import 'package:astro01/Screens/bravoNiveau.dart';
 import 'package:astro01/Screens/levelChoice.dart';
 
 import 'package:astro01/Screens/quiz.dart';
@@ -42,7 +44,7 @@ void main() {
       // to change calendar color
       primarySwatch: calendarColor,
     ),
-    initialRoute: '/splashScreen',
+    initialRoute: '/bravoNiveau',
     routes: {
       '/splashScreen': (context) => SplashScreen(
             mainAudioPlayer: mainAudioPlayer,
@@ -65,6 +67,7 @@ void main() {
             docAudioPlayer: docAudioPlayer,
             mainAudioPlayer: mainAudioPlayer,
           ),
+      '/bravoNiveau': (context) => BravoNiveau(),
     },
   ));
 }

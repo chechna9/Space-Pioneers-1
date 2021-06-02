@@ -22,7 +22,7 @@ class _PlanetChoiceState extends State<PlanetChoice> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushReplacementNamed(context, '/homeScreen');
           },
           icon: Icon(
             Icons.arrow_back,
@@ -165,7 +165,7 @@ class PlanetCard extends StatelessWidget {
       onPressed: () {
         planeteInd = choiceInd;
         questNum = 1;
-        Navigator.pushNamed(context, '/levelChoice');
+        Navigator.pushReplacementNamed(context, '/levelChoice');
         print('c fait');
       },
       child: Container(

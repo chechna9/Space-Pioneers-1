@@ -184,7 +184,6 @@ class _AnswerBoxState extends State<AnswerBox> {
                       }
                       choiceColor = choiceColors[0];
                       questNum++;
-                      ind.removeAt(0);
 
                       showDialog(
                         context: context,
@@ -192,8 +191,9 @@ class _AnswerBoxState extends State<AnswerBox> {
                             content: widget.infoSup,
                             recomp: cliquer ? 0 : factRecomp),
                       );
+                      ind.removeAt(0);
+
                       cliquer = false;
-                      // if ((ind.isEmpty) && (questNum == 10)) {
                       if (ind.isEmpty || nbTentatives == 0) {
                         if (verification(points) == 1) {
                           update();
@@ -243,8 +243,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                       choiceColor = Colors.white;
                     });
                   });
-                  print('nbbb');
-                  print(nbTentatives);
+
                   Timer(Duration(seconds: 1), () {
                     if (ind.isEmpty || nbTentatives <= 0) {
                       if (verification(points) == 1) {
@@ -262,7 +261,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                             trace.venus;
                         print(user.etoiles);
                       }
-                      Navigator.pop(context);
+                      Navigator.pushReplacementNamed(context, '/planetChoice');
                       questNum = 1;
                       points = 0;
                     } else {
@@ -414,7 +413,7 @@ class AppbarCustomed extends StatelessWidget {
                   iconSize: 30,
                   onPressed: () {
                     points = 0;
-                    Navigator.pop(context);
+                    Navigator.pushReplacementNamed(context, '/planetChoice');
                   }),
             ),
           ],
@@ -493,15 +492,15 @@ List shuffle(List<int> indices) {
 
 int verification(int point) {
   if (planeteInd == 0) {
-    if (trace.mercury < point) {
-      trace.mercury = point;
+    if (trace.soleil < point) {
+      trace.soleil = point;
       return 1;
     } else
       return -1;
   }
   if (planeteInd == 1) {
-    if (trace.earth < point) {
-      trace.earth = point;
+    if (trace.mercury < point) {
+      trace.mercury = point;
       return 1;
     } else
       return -1;
@@ -542,8 +541,8 @@ int verification(int point) {
       return -1;
   }
   if (planeteInd == 7) {
-    if (trace.soleil < point) {
-      trace.soleil = point;
+    if (trace.uranus < point) {
+      trace.uranus = point;
       return 1;
     } else
       return -1;

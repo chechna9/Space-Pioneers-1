@@ -34,3 +34,6 @@ const LinearGradient myGradiant = LinearGradient(
 );
 String mainMusicPath = "assets/music/shortMusic.mp3";
 String docMusicPath = "assets/music/music.mp3";
+const int facileRecomp = 1;
+const int moyenRecomp = 5;
+const int difficileRecomp = 10;

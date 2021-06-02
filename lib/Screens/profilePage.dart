@@ -23,8 +23,40 @@ class _ProfilePageState extends State<ProfilePage> {
     'ridingRocket',
   ];
 
+  List<BadgeCard> remplireBadge() {
+    List<BadgeCard> allBadges = <BadgeCard>[
+      BadgeCard(name: "Terre hero"),
+      BadgeCard(name: "Jupiter hero"),
+      BadgeCard(name: "Mars hero"),
+      BadgeCard(name: "Mercure hero"),
+      BadgeCard(name: "Neptune hero"),
+      BadgeCard(name: "Saturn hero"),
+      BadgeCard(name: "Uranus hero"),
+      BadgeCard(name: "Venus hero"),
+    ];
+    List<BadgeCard> tempBadges = [];
+    List<int> tempTrace = [
+      trace.earth,
+      trace.jupiter,
+      trace.mars,
+      trace.mercury,
+      trace.neptune,
+      trace.saturn,
+      trace.uranus,
+      trace.venus
+    ];
+    int i = 0;
+    for (BadgeCard badge in allBadges) {
+      //10 is the number of questions
+      tempTrace[i] == difficileRecomp * 10 ? tempBadges.add(badge) : null;
+      i++;
+    }
+    return tempBadges;
+  }
+
   @override
   Widget build(BuildContext context) {
+    List<BadgeCard> userBagdes = remplireBadge();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -133,15 +165,11 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               Expanded(
                 child: ListView.builder(
-                  itemCount: 15,
+                  itemCount: userBagdes.length,
                   itemBuilder: (BuildContext context, int ind) {
                     return Column(
                       children: [
-                        BadgeCard(
-                          name: "Badge $ind",
-                          photo: photoList[ind % 3],
-                          date: "${ind % 31}-${ind % 13}-${ind % 2 + 2020}",
-                        ),
+                        userBagdes[ind],
                         SizedBox(
                           height: 20,
                         ),

@@ -160,9 +160,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: ListView.builder(
                   itemCount: min(9, nb_badges(user.badges)),
                   itemBuilder: (BuildContext context, int ind) {
-                    print(min(9, nb_badges(user.badges)));
-                    //int indice =  get_indice(ind, user.badges);
-
                     return Column(
                       children: [
                         userBagdes[ind],
@@ -270,18 +267,4 @@ int nb_badges(String bages) {
   print(cpt);
   print('cpt');
   return cpt;
-}
-
-int get_indice(int i, String bages) {
-  int cpt = 0;
-  int k = 0;
-  for (k; k <= bages.length - 1; k++) {
-    if (bages[i] != '0') {
-      cpt++;
-      if (cpt == i) {
-        break;
-      }
-    }
-  }
-  return k;
 }

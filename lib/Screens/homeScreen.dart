@@ -32,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
             return LoadingScreen();
           }
           user = snapshot.data[0];
+          print(user.badges);
           return Material(
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -84,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       Positioned(
                         top: -28,
-                        right: 115 ,
+                        right: 115,
                         child: Star(angle: 8, scale: 2.8),
                       ),
                     ],

@@ -30,7 +30,7 @@ class _LevelChoiceState extends State<LevelChoice> {
                 appBar: AppBar(
                   leading: IconButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigator.pushReplacementNamed(context, '/quiz');
                     },
                     icon: Icon(
                       Icons.arrow_back,

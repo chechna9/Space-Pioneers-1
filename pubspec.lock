@@ -28,7 +28,6 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.5.0"
   audioplayer:
     dependency: "direct main"
@@ -37,9 +36,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.8.1"
-=======
-    version: "2.6.1"
->>>>>>> 8bc43bb37258b2a9cf821274018dbd414a54d050
   audioplayers:
     dependency: "direct main"
     description:
@@ -388,7 +384,7 @@ packages:
       name: source_span
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.8.1"
+    version: "1.8.0"
   stack_trace:
     dependency: transitive
     description:
@@ -437,7 +433,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.0"
+    version: "0.2.19"
   transformer_page_view:
     dependency: transitive
     description:

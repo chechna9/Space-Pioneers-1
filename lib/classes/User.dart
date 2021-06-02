@@ -16,7 +16,7 @@ class Users {
     this.etoiles,
     this.naissance,
     this.avatar,
-    this.badges,
+    this.badges: null,
   });
   factory Users.fromJson(Map<String, dynamic> map) {
     return Users(

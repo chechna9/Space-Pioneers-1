@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -23,8 +24,32 @@ class _ProfilePageState extends State<ProfilePage> {
     'ridingRocket',
   ];
 
+  List<BadgeCard> remplireBadge() {
+    List<BadgeCard> allBadges = <BadgeCard>[
+      BadgeCard(name: "Terre hero"),
+      BadgeCard(name: "Jupiter hero"),
+      BadgeCard(name: "Mars hero"),
+      BadgeCard(name: "Mercure hero"),
+      BadgeCard(name: "Neptune hero"),
+      BadgeCard(name: "Saturn hero"),
+      BadgeCard(name: "Uranus hero"),
+      BadgeCard(name: "Venus hero"),
+      BadgeCard(name: "Soleil hero"),
+    ];
+    List<BadgeCard> tempBadges = [];
+
+    int i = 0;
+    for (BadgeCard badge in allBadges) {
+      //10 is the number of questions
+      user.badges[i] != '0' ? tempBadges.add(badge) : null;
+      i++;
+    }
+    return tempBadges;
+  }
+
   @override
   Widget build(BuildContext context) {
+    List<BadgeCard> userBagdes = remplireBadge();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -133,15 +158,14 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               Expanded(
                 child: ListView.builder(
-                  itemCount: 15,
+                  itemCount: min(9, nb_badges(user.badges)),
                   itemBuilder: (BuildContext context, int ind) {
+                    print(min(9, nb_badges(user.badges)));
+                    //int indice =  get_indice(ind, user.badges);
+
                     return Column(
                       children: [
-                        BadgeCard(
-                          name: "Badge $ind",
-                          photo: photoList[ind % 3],
-                          date: "${ind % 31}-${ind % 13}-${ind % 2 + 2020}",
-                        ),
+                        userBagdes[ind],
                         SizedBox(
                           height: 20,
                         ),
@@ -231,4 +255,33 @@ class BadgeCard extends StatelessWidget {
       ),
     );
   }
+}
+
+int nb_badges(String bages) {
+  int cpt = 0;
+  print('badges :');
+  print(bages);
+  print(bages.length);
+  for (int i = 0; i <= bages.length - 1; i++) {
+    if (bages[i] != '0') {
+      cpt++;
+    }
+  }
+  print(cpt);
+  print('cpt');
+  return cpt;
+}
+
+int get_indice(int i, String bages) {
+  int cpt = 0;
+  int k = 0;
+  for (k; k <= bages.length - 1; k++) {
+    if (bages[i] != '0') {
+      cpt++;
+      if (cpt == i) {
+        break;
+      }
+    }
+  }
+  return k;
 }

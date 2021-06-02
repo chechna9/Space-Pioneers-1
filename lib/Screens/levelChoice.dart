@@ -81,9 +81,10 @@ class _LevelChoiceState extends State<LevelChoice> {
                               color: Color(0xff1BEFBC),
                               onPressed: () {
                                 nbTentatives = 10;
-                                factRecomp = 1;
+                                factRecomp = facileRecomp;
                                 ableToBadge = false;
-                                Navigator.pushNamed(context, '/quiz');
+                                Navigator.pushReplacementNamed(
+                                    context, '/quiz');
                               },
                             ),
                             SizedBox(
@@ -94,9 +95,10 @@ class _LevelChoiceState extends State<LevelChoice> {
                                 color: Color(0xff1759BC),
                                 onPressed: () {
                                   nbTentatives = 6;
-                                  factRecomp = 5;
+                                  factRecomp = moyenRecomp;
                                   ableToBadge = false;
-                                  Navigator.pushNamed(context, '/quiz');
+                                  Navigator.pushReplacementNamed(
+                                      context, '/quiz');
                                 }),
                             SizedBox(
                               height: 30,
@@ -106,9 +108,10 @@ class _LevelChoiceState extends State<LevelChoice> {
                                 color: Color(0xffE1023C),
                                 onPressed: () {
                                   nbTentatives = 3;
-                                  factRecomp = 10;
+                                  factRecomp = difficileRecomp;
                                   ableToBadge = true;
-                                  Navigator.pushNamed(context, '/quiz');
+                                  Navigator.pushReplacementNamed(
+                                      context, '/quiz');
                                 }),
                           ],
                         ),

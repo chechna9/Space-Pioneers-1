@@ -25,7 +25,7 @@ class Users {
       etoiles: map['etoiles'],
       naissance: map['naissance'],
       avatar: map['avatar'],
-      //badges: map['badges'],
+      badges: map['badges'],
     );
   }
   Map<String, dynamic> toJson() => {
@@ -34,7 +34,7 @@ class Users {
         'etoiles': etoiles,
         'naissance': naissance,
         'avatar': avatar,
-        //'badges': badges,
+        'badges': badges,
       };
   bool email_ver(String _email) {
     if (this.email == _email) {

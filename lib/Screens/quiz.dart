@@ -514,15 +514,15 @@ List shuffle(List<int> indices) {
 
 int verification(int point) {
   if (planeteInd == 0) {
-    if (trace.mercury < point) {
-      trace.mercury = point;
+    if (trace.soleil < point) {
+      trace.soleil = point;
       return 1;
     } else
       return -1;
   }
   if (planeteInd == 1) {
-    if (trace.earth < point) {
-      trace.earth = point;
+    if (trace.mercury < point) {
+      trace.mercury = point;
       return 1;
     } else
       return -1;
@@ -563,8 +563,8 @@ int verification(int point) {
       return -1;
   }
   if (planeteInd == 7) {
-    if (trace.soleil < point) {
-      trace.soleil = point;
+    if (trace.uranus < point) {
+      trace.uranus = point;
       return 1;
     } else
       return -1;

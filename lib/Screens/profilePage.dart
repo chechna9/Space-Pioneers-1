@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -33,22 +34,14 @@ class _ProfilePageState extends State<ProfilePage> {
       BadgeCard(name: "Saturn hero"),
       BadgeCard(name: "Uranus hero"),
       BadgeCard(name: "Venus hero"),
+      BadgeCard(name: "Soleil hero"),
     ];
     List<BadgeCard> tempBadges = [];
-    List<int> tempTrace = [
-      trace.earth,
-      trace.jupiter,
-      trace.mars,
-      trace.mercury,
-      trace.neptune,
-      trace.saturn,
-      trace.uranus,
-      trace.venus
-    ];
+
     int i = 0;
     for (BadgeCard badge in allBadges) {
       //10 is the number of questions
-      tempTrace[i] == difficileRecomp * 10 ? tempBadges.add(badge) : null;
+      user.badges[i] != '0' ? tempBadges.add(badge) : null;
       i++;
     }
     return tempBadges;
@@ -165,7 +158,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               Expanded(
                 child: ListView.builder(
-                  itemCount: userBagdes.length,
+                  itemCount: min(9, nb_badges(user.badges)),
                   itemBuilder: (BuildContext context, int ind) {
                     return Column(
                       children: [
@@ -259,4 +252,19 @@ class BadgeCard extends StatelessWidget {
       ),
     );
   }
+}
+
+int nb_badges(String bages) {
+  int cpt = 0;
+  print('badges :');
+  print(bages);
+  print(bages.length);
+  for (int i = 0; i <= bages.length - 1; i++) {
+    if (bages[i] != '0') {
+      cpt++;
+    }
+  }
+  print(cpt);
+  print('cpt');
+  return cpt;
 }

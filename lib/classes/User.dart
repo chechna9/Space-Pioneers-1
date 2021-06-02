@@ -8,7 +8,7 @@ class Users {
   int etoiles;
   String naissance;
   String avatar;
-  List<int> badges;
+  String badges;
   Users({
     ///
     this.name,
@@ -16,7 +16,7 @@ class Users {
     this.etoiles,
     this.naissance,
     this.avatar,
-    //this.badges: null,
+    this.badges: null,
   });
   factory Users.fromJson(Map<String, dynamic> map) {
     return Users(
@@ -25,7 +25,7 @@ class Users {
       etoiles: map['etoiles'],
       naissance: map['naissance'],
       avatar: map['avatar'],
-      // badges: map['badges'],
+      badges: map['badges'],
     );
   }
   Map<String, dynamic> toJson() => {

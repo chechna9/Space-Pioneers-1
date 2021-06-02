@@ -292,7 +292,8 @@ class _RegCardState extends State<RegCard> {
           "email": _email.text,
           'etoiles': 0,
           'naissance': _dateTime.toString().split(" ")[0],
-          'avatar': 'default'
+          'avatar': 'default',
+          'badges': [0, 0, 0, 0, 0, 0, 0, 0, 0],
         }).execute();
         Navigator.pushNamed(context, '/homeScreen');
       } else if (signInResult.error.message != null ||

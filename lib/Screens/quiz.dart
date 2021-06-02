@@ -194,7 +194,6 @@ class _AnswerBoxState extends State<AnswerBox> {
                       ind.removeAt(0);
 
                       cliquer = false;
-                      // if ((ind.isEmpty) && (questNum == 10)) {
                       if (ind.isEmpty || nbTentatives == 0) {
                         if (verification(points) == 1) {
                           update();
@@ -244,8 +243,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                       choiceColor = Colors.white;
                     });
                   });
-                  print('nbbb');
-                  print(nbTentatives);
+
                   Timer(Duration(seconds: 1), () {
                     if (ind.isEmpty || nbTentatives <= 0) {
                       if (verification(points) == 1) {
@@ -494,15 +492,15 @@ List shuffle(List<int> indices) {
 
 int verification(int point) {
   if (planeteInd == 0) {
-    if (trace.mercury < point) {
-      trace.mercury = point;
+    if (trace.soleil < point) {
+      trace.soleil = point;
       return 1;
     } else
       return -1;
   }
   if (planeteInd == 1) {
-    if (trace.earth < point) {
-      trace.earth = point;
+    if (trace.mercury < point) {
+      trace.mercury = point;
       return 1;
     } else
       return -1;
@@ -543,8 +541,8 @@ int verification(int point) {
       return -1;
   }
   if (planeteInd == 7) {
-    if (trace.soleil < point) {
-      trace.soleil = point;
+    if (trace.uranus < point) {
+      trace.uranus = point;
       return 1;
     } else
       return -1;

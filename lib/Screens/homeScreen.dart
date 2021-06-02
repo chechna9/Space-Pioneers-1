@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
             return LoadingScreen();
           }
           user = snapshot.data[0];
-          print(user.badges);
+
           return Material(
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),

@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:js';
 
+import 'package:astro01/Screens/bravoNiveau.dart';
 import 'package:astro01/Screens/levelChoice.dart';
 
 import 'package:astro01/Screens/quiz.dart';
@@ -65,6 +67,7 @@ void main() {
             docAudioPlayer: docAudioPlayer,
             mainAudioPlayer: mainAudioPlayer,
           ),
+      '/bravoNiveau': (context) => BravoNiveau(),
     },
   ));
 }

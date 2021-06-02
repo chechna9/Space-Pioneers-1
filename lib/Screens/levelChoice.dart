@@ -30,7 +30,7 @@ class _LevelChoiceState extends State<LevelChoice> {
                 appBar: AppBar(
                   leading: IconButton(
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, '/quiz');
+                      Navigator.pushReplacementNamed(context, '/planetChoice');
                     },
                     icon: Icon(
                       Icons.arrow_back,
@@ -83,7 +83,8 @@ class _LevelChoiceState extends State<LevelChoice> {
                                 nbTentatives = 10;
                                 factRecomp = 1;
                                 ableToBadge = false;
-                                Navigator.pushNamed(context, '/quiz');
+                                Navigator.pushReplacementNamed(
+                                    context, '/quiz');
                               },
                             ),
                             SizedBox(
@@ -96,7 +97,8 @@ class _LevelChoiceState extends State<LevelChoice> {
                                   nbTentatives = 6;
                                   factRecomp = 5;
                                   ableToBadge = false;
-                                  Navigator.pushNamed(context, '/quiz');
+                                  Navigator.pushReplacementNamed(
+                                      context, '/quiz');
                                 }),
                             SizedBox(
                               height: 30,
@@ -108,7 +110,8 @@ class _LevelChoiceState extends State<LevelChoice> {
                                   nbTentatives = 3;
                                   factRecomp = 10;
                                   ableToBadge = true;
-                                  Navigator.pushNamed(context, '/quiz');
+                                  Navigator.pushReplacementNamed(
+                                      context, '/quiz');
                                 }),
                           ],
                         ),

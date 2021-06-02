@@ -192,6 +192,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                             recomp: cliquer ? 0 : factRecomp),
                       );
                       ind.removeAt(0);
+
                       cliquer = false;
                       if (ind.isEmpty || nbTentatives == 0) {
                         if (verification(points) == 1) {
@@ -260,7 +261,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                             trace.venus;
                         print(user.etoiles);
                       }
-                      Navigator.pushReplacementNamed(context, '/levelChoice');
+                      Navigator.pushReplacementNamed(context, '/planetChoice');
                       questNum = 1;
                       points = 0;
                     } else {
@@ -412,7 +413,7 @@ class AppbarCustomed extends StatelessWidget {
                   iconSize: 30,
                   onPressed: () {
                     points = 0;
-                    Navigator.pop(context);
+                    Navigator.pushReplacementNamed(context, '/planetChoice');
                   }),
             ),
           ],

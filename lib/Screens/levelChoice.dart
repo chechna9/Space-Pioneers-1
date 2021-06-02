@@ -81,7 +81,7 @@ class _LevelChoiceState extends State<LevelChoice> {
                               color: Color(0xff1BEFBC),
                               onPressed: () {
                                 nbTentatives = 10;
-                                factRecomp = 1;
+                                factRecomp = facileRecomp;
                                 ableToBadge = false;
                                 Navigator.pushReplacementNamed(
                                     context, '/quiz');
@@ -95,7 +95,7 @@ class _LevelChoiceState extends State<LevelChoice> {
                                 color: Color(0xff1759BC),
                                 onPressed: () {
                                   nbTentatives = 6;
-                                  factRecomp = 5;
+                                  factRecomp = moyenRecomp;
                                   ableToBadge = false;
                                   Navigator.pushReplacementNamed(
                                       context, '/quiz');
@@ -108,7 +108,7 @@ class _LevelChoiceState extends State<LevelChoice> {
                                 color: Color(0xffE1023C),
                                 onPressed: () {
                                   nbTentatives = 3;
-                                  factRecomp = 10;
+                                  factRecomp = difficileRecomp;
                                   ableToBadge = true;
                                   Navigator.pushReplacementNamed(
                                       context, '/quiz');

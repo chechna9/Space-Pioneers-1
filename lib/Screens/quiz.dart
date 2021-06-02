@@ -8,6 +8,7 @@ import 'dart:io';
 import 'package:astro01/Screens/loading.dart';
 import 'package:astro01/Screens/planetChoice.dart';
 import 'package:astro01/classes/questions.dart';
+import 'package:astro01/components/InfoSup.dart';
 import 'package:astro01/main.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
@@ -17,6 +18,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:provider/provider.dart';
+import '../components/InfoSup.dart';
 // import 'package:http/http.dart' as http;
 // import 'package:flutter/services.dart' show rootBundle;
 
@@ -125,6 +127,9 @@ class _QuizState extends State<Quiz> {
                                   AnswerBox(
                                     answer: propo[indices[myindex]],
                                     answerLetter: '${myindex + 1}',
+                                    infoSup: snapshot
+                                        .data[ind[0] + 10 * planeteInd]
+                                        .infosupp,
                                   ),
                                 ]);
                               },
@@ -141,10 +146,12 @@ class _QuizState extends State<Quiz> {
 class AnswerBox extends StatefulWidget {
   final String answer;
   final String answerLetter;
+  final String infoSup;
   AnswerBox({
     Key key,
     this.answer: 'answer',
     this.answerLetter: 'A',
+    this.infoSup,
   }) : super(key: key);
 
   @override
@@ -178,6 +185,13 @@ class _AnswerBoxState extends State<AnswerBox> {
                       choiceColor = choiceColors[0];
                       questNum++;
                       ind.removeAt(0);
+
+                      showDialog(
+                        context: context,
+                        builder: (context) => InfoSup(
+                            content: widget.infoSup,
+                            recomp: cliquer ? 0 : factRecomp),
+                      );
                       cliquer = false;
                       // if ((ind.isEmpty) && (questNum == 10)) {
                       if (ind.isEmpty || nbTentatives == 0) {
@@ -364,6 +378,21 @@ class AppbarCustomed extends StatelessWidget {
           shadowColor: Colors.black,
           expandedHeight: 91,
           brightness: Brightness.dark,
+          title: Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 27),
+              child: Text(
+                '$planete',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 28,
+                  fontFamily: 'Gotham',
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+            ),
+          ),
           leading: Padding(
             padding: const EdgeInsets.only(top: 34, left: 11),
             child: Text(
@@ -385,60 +414,10 @@ class AppbarCustomed extends StatelessWidget {
                   iconSize: 30,
                   onPressed: () {
                     points = 0;
-                    Navigator.pushNamed(context, '/planetChoice');
+                    Navigator.pop(context);
                   }),
             ),
           ],
-          flexibleSpace: FlexibleSpaceBar(
-            titlePadding: EdgeInsets.zero,
-            centerTitle: true,
-            title: SizedBox(
-              height: 58,
-              child: Column(children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Spacer(flex: 2),
-                    Text(
-                      '$numero/10',
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-                        color: myRed2,
-                        fontSize: 13,
-                        fontFamily: 'Gotham',
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                    Spacer(flex: 5),
-                    Text(
-                      '$planete',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 17,
-                        fontFamily: 'Gotham',
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                    Spacer(flex: 5),
-                    IconButton(
-                        icon: Icon(Icons.clear),
-                        color: myRed2,
-                        iconSize: 20,
-                        onPressed: () {
-                          points = 0;
-                          Navigator.pop(context, '/planetChoice');
-                        }),
-                  ],
-                ),
-              ]),
-            ),
-          ),
-          // bottom: PreferredSize(
-          //     preferredSize: Size.fromRadius(6),
-          //     child: ProgressBar(
-          //       width: (MediaQuery.of(context).size.width) * 0.98,
-          //     )),
         ),
       ],
     );

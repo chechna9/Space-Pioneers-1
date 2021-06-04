@@ -357,7 +357,7 @@ class AppbarCustomedRandom extends StatelessWidget {
               '$numero/100',
               style: TextStyle(
                 color: myRed2,
-                fontSize: 17,
+                fontSize: 16,
                 fontFamily: 'Gotham',
                 fontWeight: FontWeight.normal,
               ),

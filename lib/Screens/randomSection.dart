@@ -18,14 +18,14 @@ import 'package:provider/provider.dart';
 import '../components/InfoSup.dart';
 
 List<String> propo = ['a', 'b', 'c', 'd'];
-var ind = Iterable<int>.generate(100).toList();
+var ind = Iterable<int>.generate(10).toList();
 
 int points = 0;
 bool cliquerRandom = true;
   int questNum = 1;
 
 class Index extends ChangeNotifier {
-var ind = Iterable<int>.generate(100).toList();
+var ind = Iterable<int>.generate(10).toList();
 
   void updateInd(List<int> newindice) {
     ind = newindice;
@@ -164,7 +164,6 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                         points += factRecomp;
                       }
                       choiceColor = choiceColors[0];
-                      nbTentatives--;
                       questNum++;
                       print("points :");
                       print(points);

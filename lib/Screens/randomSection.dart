@@ -20,8 +20,13 @@ import '../components/InfoSup.dart';
 List<String> propo = ['a', 'b', 'c', 'd'];
 var ind = Iterable<int>.generate(100).toList();
 
+int points = 0;
+bool cliquer = false;
+  int questNum = 1;
+
 class Index extends ChangeNotifier {
 var ind = Iterable<int>.generate(100).toList();
+
   void updateInd(List<int> newindice) {
     ind = newindice;
     notifyListeners();
@@ -52,19 +57,34 @@ class _RandomQuizState extends State<RandomQuiz> {
     return randoms;
   }
 
-  int questNum = 1;
 
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ChangeNotifierProvider<Index>(
+        create: (context) => Index(),
+        child: Scaffold(
             backgroundColor: Colors.blue,
             body: FutureBuilder<List<Aleatoire>>(
                 future: fetchRandoms(),
                 builder: (context, AsyncSnapshot<List<Aleatoire>> snapshot) {
-                //  if (snapshot.hasData == false) {
-                //     return LoadingScreen();
-                //   }
+                 if (snapshot.hasData == false) {
+                    return LoadingScreen();
+                  }
+                  List<int> indices = [0, 1, 2, 3];
+
+                  indices = shuffle(indices);
+                  print(indices);
+                  ind = Provider.of<Index>(context).ind;
+                  ind = shuffle(ind);
+                  RemplirChoices(
+                      propo, snapshot.data[ind[0]]);
+                  print(propo);
+                  int i = 4;
+                  if (propo[2] == null && propo[1] == null) {
+                    i = 2;
+                    indices = shuffle([0, 3]);
+                  }
                   return Stack(
                     fit: StackFit.expand,
                     children: [
@@ -85,15 +105,15 @@ class _RandomQuizState extends State<RandomQuiz> {
                         padding: const EdgeInsets.only(top: 160),
                         child: Column(children: [
                           QuestBoxRandom(
-                            quest: snapshot.data[0].question,
+                            quest: snapshot.data[ind[0]].question,
                           ),
                           Expanded(
                             child: ListView.builder(
-                              itemCount: 4,
+                              itemCount: min(i,4),
                               itemBuilder: (BuildContext context, int myindex) {
                                 return Column(children: [
                                   AnswerBoxRandom(
-                                    answer: "eeeee",
+                                    answer: propo[indices[myindex]],
                                     answerLetter: '${myindex + 1}',
                                   ),
                                 ]);
@@ -104,7 +124,7 @@ class _RandomQuizState extends State<RandomQuiz> {
                       ),
                     ],
                   );
-                }));
+                })));
   }
 }
 
@@ -139,11 +159,57 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
             ),
             child: Center(
               child: ListTile(
-                // onTap: () {
-                 
-                // },
+                onTap: () {
+                   if (widget.answer == propo[0]) {
+                     setState(() {
+                      choiceColor = choiceColors[0];
+                      nbTentatives--;
+                      questNum++;
+                    });
+                   }
+                   else 
+                     if (widget.answer == propo[1]) {
+                     setState(() {
+                      choiceColor = choiceColors[1];
+                      nbTentatives--;
+                    });
+                   }
+                   else 
+                     if (widget.answer == propo[2]) {
+                     setState(() {
+                      choiceColor = choiceColors[2];
+                      nbTentatives--;
+                    }); 
+                   }
+                   else 
+                     if (widget.answer == propo[3]) {
+                     setState(() {
+                      choiceColor = choiceColors[3];
+                      nbTentatives--;
+                    });
+                   }
+                   Timer(Duration(milliseconds: 600), () {
+                    setState(() {
+                      choiceColor = Colors.white;
+                    });
+                  });
+                  Timer(Duration(seconds: 1), () {
+                    if (ind.isEmpty) {
+                      Navigator.pushReplacementNamed(context, '/planetChoice');
+                      questNum = 1;
+                      points = 0;}
+                      else {
+                      if (widget.answer == propo[0]) {
+                        setState(() {
+                          Provider.of<Index>(context, listen: false)
+                              .updateInd(ind);
+                        });
+                      }
+                    }
+                  });},          
                 selectedTileColor: choiceColor,
-                leading: Padding(
+                leading:    
+                Padding(
                   padding: const EdgeInsets.only(
                       top: 8, left: 8, bottom: 8, right: 15),
                   child: Container(
@@ -164,6 +230,7 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                       ),
                     ),
                   ),
+                  
                 ),
                 title: Text(
                   '${widget.answer}',
@@ -258,10 +325,12 @@ class AppbarCustomedRandom extends StatelessWidget {
               ),
             ),
           ),
-          leading: Padding(
+          leadingWidth: 65,
+          leading: 
+          Padding(
             padding: const EdgeInsets.only(top: 34, left: 11),
             child: Text(
-              '$numero/10',
+              '$numero/100',
               style: TextStyle(
                 color: myRed2,
                 fontSize: 17,
@@ -269,6 +338,7 @@ class AppbarCustomedRandom extends StatelessWidget {
                 fontWeight: FontWeight.normal,
               ),
             ),
+
           ),
           actions: [
             Padding(

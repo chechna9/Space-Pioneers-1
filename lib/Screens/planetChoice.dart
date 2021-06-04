@@ -1,3 +1,4 @@
+import 'package:astro01/Screens/levelChoice.dart';
 import 'package:astro01/classes/trace.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -165,8 +166,11 @@ class PlanetCard extends StatelessWidget {
       onPressed: () {
         planeteInd = choiceInd;
         questNum = 1;
+        if (planeteInd == 9) {
+        Navigator.pushReplacementNamed(context, '/levelChoiceRandom');
+        }else{
         Navigator.pushReplacementNamed(context, '/levelChoice');
-        print('c fait');
+        }
       },
       child: Container(
         decoration: BoxDecoration(

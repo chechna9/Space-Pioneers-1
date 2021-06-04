@@ -10,12 +10,12 @@ import 'splashScreen.dart';
 import 'planetChoice.dart';
 
 int planeteInd;
-class LevelChoice extends StatefulWidget {
+class LevelChoiceRandom extends StatefulWidget {
   @override
-  _LevelChoiceState createState() => _LevelChoiceState();
+  _LevelChoiceRandomState createState() => _LevelChoiceRandomState();
 }
 
-class _LevelChoiceState extends State<LevelChoice> {
+class _LevelChoiceRandomState extends State<LevelChoiceRandom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +62,7 @@ class _LevelChoiceState extends State<LevelChoice> {
                               ),
                             ),
                             AutoSizeText(
-                              'Selon votre niveau.',
+                              'Selon votre.',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w100,
@@ -86,7 +86,7 @@ class _LevelChoiceState extends State<LevelChoice> {
                                 factRecomp = facileRecomp;
                                 ableToBadge = false;
                                 Navigator.pushReplacementNamed(
-                                    context, '/quiz');
+                                    context, '/random');
                               },
                             ),
                             SizedBox(
@@ -100,7 +100,7 @@ class _LevelChoiceState extends State<LevelChoice> {
                                   factRecomp = moyenRecomp;
                                   ableToBadge = false;
                                   Navigator.pushReplacementNamed(
-                                      context, '/quiz');}
+                                      context, '/random');}
                                 ),
                             SizedBox(
                               height: 30,
@@ -113,7 +113,7 @@ class _LevelChoiceState extends State<LevelChoice> {
                                   factRecomp = difficileRecomp;
                                   ableToBadge = true;
                                   Navigator.pushReplacementNamed(
-                                      context, '/quiz');
+                                      context, '/random');
                                 }),
                           ],
                         ),

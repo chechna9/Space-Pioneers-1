@@ -26,6 +26,7 @@ import 'Screens/planetChoice.dart';
 import 'Screens/documentation_details.dart';
 import 'Screens/documentation_data.dart';
 import 'Screens/documentation_swiper.dart';
+import 'Screens/levelChoiceRandom.dart';
 
 const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
 const supabaseKey =
@@ -70,6 +71,7 @@ void main() {
           ),
       '/bravoNiveau': (context) => BravoNiveau(),
       '/random': (context) => RandomQuiz(),
+      '/levelChoiceRandom': (context) => LevelChoiceRandom(),
     },
   ));
 }

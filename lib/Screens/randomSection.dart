@@ -21,7 +21,7 @@ List<String> propo = ['a', 'b', 'c', 'd'];
 var ind = Iterable<int>.generate(100).toList();
 
 int points = 0;
-bool cliquer = false;
+bool cliquerRandom = true;
   int questNum = 1;
 
 class Index extends ChangeNotifier {
@@ -74,12 +74,10 @@ class _RandomQuizState extends State<RandomQuiz> {
                   List<int> indices = [0, 1, 2, 3];
 
                   indices = shuffle(indices);
-                  print(indices);
                   ind = Provider.of<Index>(context).ind;
                   ind = shuffle(ind);
                   RemplirChoices(
                       propo, snapshot.data[ind[0]]);
-                  print(propo);
                   int i = 4;
                   if (propo[2] == null && propo[1] == null) {
                     i = 2;
@@ -162,30 +160,54 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                 onTap: () {
                    if (widget.answer == propo[0]) {
                      setState(() {
+                      if (cliquerRandom == true) {
+                        points += factRecomp;
+                      }
                       choiceColor = choiceColors[0];
                       nbTentatives--;
                       questNum++;
+                      print("points :");
+                      print(points);
+                      print("tentatives :");
+                      print(nbTentatives);
                     });
+                      ind.removeAt(0);
+                      cliquerRandom = true;
                    }
                    else 
                      if (widget.answer == propo[1]) {
                      setState(() {
+                       cliquerRandom = false;
                       choiceColor = choiceColors[1];
                       nbTentatives--;
+                      print("points :");
+                      print(points);
+                      print("tentatives :");
+                      print(nbTentatives);
                     });
                    }
                    else 
                      if (widget.answer == propo[2]) {
                      setState(() {
+                       cliquerRandom = false;
                       choiceColor = choiceColors[2];
                       nbTentatives--;
+                      print("points :");
+                      print(points);
+                      print("tentatives :");
+                      print(nbTentatives);
                     }); 
                    }
                    else 
                      if (widget.answer == propo[3]) {
                      setState(() {
+                       cliquerRandom = false;
                       choiceColor = choiceColors[3];
                       nbTentatives--;
+                      print("points :");
+                      print(points);
+                      print("tentatives :");
+                      print(nbTentatives);
                     });
                    }
                    Timer(Duration(milliseconds: 600), () {
@@ -193,11 +215,13 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                       choiceColor = Colors.white;
                     });
                   });
-                  Timer(Duration(seconds: 1), () {
-                    if (ind.isEmpty) {
+                  Timer(Duration(milliseconds: 700 ), () {
+                    if (ind.isEmpty || nbTentatives <= 0) {
                       Navigator.pushReplacementNamed(context, '/planetChoice');
                       questNum = 1;
-                      points = 0;}
+                      points = 0;
+                      print(questNum);
+                      }
                       else {
                       if (widget.answer == propo[0]) {
                         setState(() {
@@ -251,7 +275,7 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
 
 class QuestBoxRandom extends StatelessWidget {
   const QuestBoxRandom({
-    this.quest: 'Quelle est la couleur du Soleil',
+    this.quest: '',
     Key key,
   }) : super(key: key);
 
@@ -348,7 +372,7 @@ class AppbarCustomedRandom extends StatelessWidget {
                   color: myRed2,
                   iconSize: 30,
                   onPressed: () {
-                    // points = 0;
+                    points = 0;
                     Navigator.pushReplacementNamed(context, '/planetChoice');
                   }),
             ),
@@ -359,50 +383,7 @@ class AppbarCustomedRandom extends StatelessWidget {
   }
 }
 
-// class ProgressBar extends StatelessWidget {
-//   final double width;
-// // final int value;
-// // final int totalValue;
 
-//   ProgressBar({this.width});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//       mainAxisAlignment: MainAxisAlignment.center,
-//       children: <Widget>[
-//         SizedBox(
-//           width: 5,
-//         ),
-//         Stack(
-//           children: <Widget>[
-//             Container(
-//               width: width,
-//               height: 8,
-//               decoration: BoxDecoration(color: myBlue),
-//             ),
-//             Row(
-//               children: [
-//                 AnimatedContainer(
-//                   height: 8,
-//                   width: width,
-//                   duration: Duration(milliseconds: 500),
-//                   decoration: BoxDecoration(
-//                     color: myRed2,
-//                     borderRadius: BorderRadius.only(
-//                       topRight: Radius.circular(5),
-//                       bottomRight: Radius.circular(5),
-//                     ),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ],
-//         ),
-//       ],
-//     );
-//   }
-// }
 
 void RemplirChoices(List<String> choices, Aleatoire myrandom) {
   choices[0] = myrandom.correct;

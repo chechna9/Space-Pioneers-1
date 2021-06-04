@@ -37,3 +37,7 @@ String docMusicPath = "assets/music/music.mp3";
 const int facileRecomp = 1;
 const int moyenRecomp = 5;
 const int difficileRecomp = 10;
+const int facileRcmpRndm = 1;
+const int moyenRcmpRndm = 2;
+const int difficileRcmpRndm = 3;
+

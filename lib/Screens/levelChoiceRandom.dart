@@ -82,8 +82,8 @@ class _LevelChoiceRandomState extends State<LevelChoiceRandom> {
                               text: 'Facile',
                               color: Color(0xff1BEFBC),
                               onPressed: () {
-                                nbTentatives = 10;
-                                factRecomp = facileRecomp;
+                                nbTentatives = 5;
+                                factRecomp = facileRcmpRndm;
                                 ableToBadge = false;
                                 Navigator.pushReplacementNamed(
                                     context, '/random');
@@ -96,8 +96,8 @@ class _LevelChoiceRandomState extends State<LevelChoiceRandom> {
                                 text: 'Moyen',
                                 color: Color(0xff1759BC),
                                 onPressed: () {
-                                  nbTentatives = 6;
-                                  factRecomp = moyenRecomp;
+                                  nbTentatives = 20;
+                                  factRecomp = moyenRcmpRndm;
                                   ableToBadge = false;
                                   Navigator.pushReplacementNamed(
                                       context, '/random');}
@@ -109,8 +109,8 @@ class _LevelChoiceRandomState extends State<LevelChoiceRandom> {
                                 text: 'Difficile',
                                 color: Color(0xffE1023C),
                                 onPressed: () {
-                                  nbTentatives = 3;
-                                  factRecomp = difficileRecomp;
+                                  nbTentatives = 10;
+                                  factRecomp = difficileRcmpRndm;
                                   ableToBadge = true;
                                   Navigator.pushReplacementNamed(
                                       context, '/random');

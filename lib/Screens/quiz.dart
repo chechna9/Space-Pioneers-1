@@ -184,7 +184,8 @@ class _AnswerBoxState extends State<AnswerBox> {
                       }
                       choiceColor = choiceColors[0];
                       questNum++;
-
+                        print("points :");                       
+                        print(points);
                       showDialog(
                         context: context,
                         builder: (context) => InfoSup(
@@ -223,18 +224,26 @@ class _AnswerBoxState extends State<AnswerBox> {
                       cliquer = true;
                       choiceColor = choiceColors[1];
                       nbTentatives--;
+                      print("points :");
+                      print(points);
+
                     });
                   else if (widget.answer == propo[2])
                     setState(() {
                       cliquer = true;
                       choiceColor = choiceColors[2];
                       nbTentatives--;
+                      print("points :");
+                      print(points);
+
                     });
                   else if (widget.answer == propo[3]) {
                     setState(() {
                       cliquer = true;
                       choiceColor = choiceColors[3];
                       nbTentatives--;
+                      print("points :");
+                      print(points);
                     });
                   }
 

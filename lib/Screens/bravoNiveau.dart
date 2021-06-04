@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import '../components/constants.dart';
+import 'quiz.dart';
+import 'randomSection.dart';
 
 
+int etoiles;
 
 class BravoNiveau extends StatefulWidget {
   @override
@@ -31,7 +34,7 @@ class _BravoNiveauState extends State<BravoNiveau> {
             Text('BRAVO !',style: TextStyle(color: myYellow, fontSize: 40, fontWeight: FontWeight.w900, fontFamily: 'Gotham'),),
             Padding(
               padding: const EdgeInsets.only(top: 5),
-              child: Text('Vous avez terminé \n\ ce niveau !',style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.normal, fontFamily: 'Gotham'), textAlign: TextAlign.center,),
+              child: Text('Vous avez collecté \n\ $etoiles !',style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.normal, fontFamily: 'Gotham'), textAlign: TextAlign.center,),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 25, bottom: 10),
@@ -42,8 +45,10 @@ class _BravoNiveauState extends State<BravoNiveau> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                 Text('Passez au prochain niveau',style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.normal, fontFamily: 'Gotham'), textAlign: TextAlign.center,),
-                 IconButton(icon: Icon(Icons.arrow_forward_outlined), color: Colors.white, iconSize: 30, onPressed: () => {}),],),
+                 Text('Allez voir votre profil !',style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.normal, fontFamily: 'Gotham'), textAlign: TextAlign.center,),
+                 IconButton(icon: Icon(Icons.arrow_forward_outlined), color: Colors.white, iconSize: 30, onPressed: () => {
+                    Navigator.pushReplacementNamed(context, '/profilePage'),
+                 }),],),
             ],),
       ),
  );

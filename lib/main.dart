@@ -1,10 +1,11 @@
 import 'dart:async';
-import 'dart:js';
+// import 'dart:js';
 
 import 'package:astro01/Screens/bravoNiveau.dart';
 import 'package:astro01/Screens/levelChoice.dart';
 
 import 'package:astro01/Screens/quiz.dart';
+import 'package:astro01/Screens/randomSection.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
@@ -34,7 +35,7 @@ void main() {
   Injector.appInstance.registerSingleton<SupabaseClient>(() => supabaseclient);
   AudioPlayer mainAudioPlayer = AudioPlayer();
   AudioPlayer docAudioPlayer = AudioPlayer();
-  // AudioCache musicCache;
+  AudioCache musicCache;
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
@@ -68,6 +69,7 @@ void main() {
             mainAudioPlayer: mainAudioPlayer,
           ),
       '/bravoNiveau': (context) => BravoNiveau(),
+      '/random': (context) => RandomQuiz(),
     },
   ));
 }

@@ -7,7 +7,9 @@ import 'package:astro01/components/constants.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
 import 'splashScreen.dart';
+import 'planetChoice.dart';
 
+int planeteInd;
 class LevelChoice extends StatefulWidget {
   @override
   _LevelChoiceState createState() => _LevelChoiceState();
@@ -98,8 +100,8 @@ class _LevelChoiceState extends State<LevelChoice> {
                                   factRecomp = moyenRecomp;
                                   ableToBadge = false;
                                   Navigator.pushReplacementNamed(
-                                      context, '/quiz');
-                                }),
+                                      context, '/random');}
+                                ),
                             SizedBox(
                               height: 30,
                             ),

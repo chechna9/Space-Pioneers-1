@@ -1,13 +1,13 @@
-class Random {
+class Aleatoire {
   String question;
   String correct;
   String choice1;
   String choice2;
   String choice3;
 
-  Random(this.question, this.correct, this.choice1, this.choice2, this.choice3);
+  Aleatoire(this.question, this.correct, this.choice1, this.choice2, this.choice3);
 
-  Random.fromJson(Map<String, dynamic> json)
+  Aleatoire.fromJson(Map<String, dynamic> json)
   {
     question = json['question'];
     correct = json['correct'];

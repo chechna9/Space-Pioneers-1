@@ -158,7 +158,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               Expanded(
                 child: ListView.builder(
-                  itemCount: min(9, nb_badges(user.badges)),
+                  itemCount: userBagdes.length,
                   itemBuilder: (BuildContext context, int ind) {
                     return Column(
                       children: [

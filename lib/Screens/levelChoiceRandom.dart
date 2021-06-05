@@ -10,6 +10,7 @@ import 'splashScreen.dart';
 import 'planetChoice.dart';
 
 int planeteInd;
+
 class LevelChoiceRandom extends StatefulWidget {
   @override
   _LevelChoiceRandomState createState() => _LevelChoiceRandomState();
@@ -82,7 +83,7 @@ class _LevelChoiceRandomState extends State<LevelChoiceRandom> {
                               text: 'Facile',
                               color: Color(0xff1BEFBC),
                               onPressed: () {
-                                nbTentatives = 5;
+                                nbTentatives = 25;
                                 factRecomp = facileRcmpRndm;
                                 ableToBadge = false;
                                 Navigator.pushReplacementNamed(
@@ -100,8 +101,8 @@ class _LevelChoiceRandomState extends State<LevelChoiceRandom> {
                                   factRecomp = moyenRcmpRndm;
                                   ableToBadge = false;
                                   Navigator.pushReplacementNamed(
-                                      context, '/random');}
-                                ),
+                                      context, '/random');
+                                }),
                             SizedBox(
                               height: 30,
                             ),

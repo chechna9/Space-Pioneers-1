@@ -22,16 +22,17 @@ var ind = Iterable<int>.generate(10).toList();
 
 int points = 0;
 bool cliquerRandom = true;
-  int questNum = 1;
+int questNum = 1;
 
 class Index extends ChangeNotifier {
-var ind = Iterable<int>.generate(10).toList();
+  var ind = Iterable<int>.generate(10).toList();
 
   void updateInd(List<int> newindice) {
     ind = newindice;
     notifyListeners();
   }
 }
+
 class RandomQuiz extends StatefulWidget {
   @override
   final int indice;
@@ -57,8 +58,6 @@ class _RandomQuizState extends State<RandomQuiz> {
     return randoms;
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<Index>(
@@ -68,7 +67,7 @@ class _RandomQuizState extends State<RandomQuiz> {
             body: FutureBuilder<List<Aleatoire>>(
                 future: fetchRandoms(),
                 builder: (context, AsyncSnapshot<List<Aleatoire>> snapshot) {
-                 if (snapshot.hasData == false) {
+                  if (snapshot.hasData == false) {
                     return LoadingScreen();
                   }
                   List<int> indices = [0, 1, 2, 3];
@@ -76,8 +75,7 @@ class _RandomQuizState extends State<RandomQuiz> {
                   indices = shuffle(indices);
                   ind = Provider.of<Index>(context).ind;
                   ind = shuffle(ind);
-                  RemplirChoices(
-                      propo, snapshot.data[ind[0]]);
+                  RemplirChoices(propo, snapshot.data[ind[0]]);
                   int i = 4;
                   if (propo[2] == null && propo[1] == null) {
                     i = 2;
@@ -107,7 +105,7 @@ class _RandomQuizState extends State<RandomQuiz> {
                           ),
                           Expanded(
                             child: ListView.builder(
-                              itemCount: min(i,4),
+                              itemCount: min(i, 4),
                               itemBuilder: (BuildContext context, int myindex) {
                                 return Column(children: [
                                   AnswerBoxRandom(
@@ -158,8 +156,8 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
             child: Center(
               child: ListTile(
                 onTap: () {
-                   if (widget.answer == propo[0]) {
-                     setState(() {
+                  if (widget.answer == propo[0]) {
+                    setState(() {
                       if (cliquerRandom == true) {
                         points += factRecomp;
                       }
@@ -170,13 +168,11 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                       print("tentatives :");
                       print(nbTentatives);
                     });
-                      ind.removeAt(0);
-                      cliquerRandom = true;
-                   }
-                   else 
-                     if (widget.answer == propo[1]) {
-                     setState(() {
-                       cliquerRandom = false;
+                    ind.removeAt(0);
+                    cliquerRandom = true;
+                  } else if (widget.answer == propo[1]) {
+                    setState(() {
+                      cliquerRandom = false;
                       choiceColor = choiceColors[1];
                       nbTentatives--;
                       print("points :");
@@ -184,23 +180,19 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                       print("tentatives :");
                       print(nbTentatives);
                     });
-                   }
-                   else 
-                     if (widget.answer == propo[2]) {
-                     setState(() {
-                       cliquerRandom = false;
+                  } else if (widget.answer == propo[2]) {
+                    setState(() {
+                      cliquerRandom = false;
                       choiceColor = choiceColors[2];
                       nbTentatives--;
                       print("points :");
                       print(points);
                       print("tentatives :");
                       print(nbTentatives);
-                    }); 
-                   }
-                   else 
-                     if (widget.answer == propo[3]) {
-                     setState(() {
-                       cliquerRandom = false;
+                    });
+                  } else if (widget.answer == propo[3]) {
+                    setState(() {
+                      cliquerRandom = false;
                       choiceColor = choiceColors[3];
                       nbTentatives--;
                       print("points :");
@@ -208,20 +200,21 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                       print("tentatives :");
                       print(nbTentatives);
                     });
-                   }
-                   Timer(Duration(milliseconds: 600), () {
+                  }
+                  Timer(Duration(milliseconds: 600), () {
                     setState(() {
                       choiceColor = Colors.white;
                     });
                   });
-                  Timer(Duration(milliseconds: 700 ), () {
+                  Timer(Duration(milliseconds: 700), () {
                     if (ind.isEmpty || nbTentatives <= 0) {
                       Navigator.pushReplacementNamed(context, '/planetChoice');
                       questNum = 1;
+                      user.etoiles = user.etoiles + points;
+                      update_etoiles();
+
                       points = 0;
-                      print(questNum);
-                      }
-                      else {
+                    } else {
                       if (widget.answer == propo[0]) {
                         setState(() {
                           Provider.of<Index>(context, listen: false)
@@ -229,10 +222,10 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                         });
                       }
                     }
-                  });},          
+                  });
+                },
                 selectedTileColor: choiceColor,
-                leading:    
-                Padding(
+                leading: Padding(
                   padding: const EdgeInsets.only(
                       top: 8, left: 8, bottom: 8, right: 15),
                   child: Container(
@@ -253,7 +246,6 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                       ),
                     ),
                   ),
-                  
                 ),
                 title: Text(
                   '${widget.answer}',
@@ -349,8 +341,7 @@ class AppbarCustomedRandom extends StatelessWidget {
             ),
           ),
           leadingWidth: 65,
-          leading: 
-          Padding(
+          leading: Padding(
             padding: const EdgeInsets.only(top: 34, left: 11),
             child: Text(
               '$numero/100',
@@ -361,7 +352,6 @@ class AppbarCustomedRandom extends StatelessWidget {
                 fontWeight: FontWeight.normal,
               ),
             ),
-
           ),
           actions: [
             Padding(
@@ -381,8 +371,6 @@ class AppbarCustomedRandom extends StatelessWidget {
     );
   }
 }
-
-
 
 void RemplirChoices(List<String> choices, Aleatoire myrandom) {
   choices[0] = myrandom.correct;
@@ -406,3 +394,10 @@ List shuffle(List<int> indices) {
   return indices;
 }
 
+void update_etoiles() async {
+  await supabaseclient
+      .from("user")
+      .update({"etoiles": user.etoiles})
+      .eq("email", user.email)
+      .execute();
+}

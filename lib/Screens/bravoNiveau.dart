@@ -7,6 +7,7 @@ import '../components/constants.dart';
 import '../main.dart';
 
 int etoiles;
+int indices;
 
 class BravoNiveau extends StatefulWidget {
   @override
@@ -17,10 +18,18 @@ class _BravoNiveauState extends State<BravoNiveau> {
   @override
   Widget build(BuildContext context) {
     if (ableToBadge == true && etoiles == 100) {
-      print(user.badges);
-      user.badges.replaceRange(planeteInd, planeteInd + 1, '1');
+      List<String> badges = user.badges.split("");
+      print(planeteInd);
+      print(badges);
+      badges[indices] = '1';
+
+      user.badges = badges.join("");
       print(user.badges);
       update_badges();
+      /* print(user.badges);
+      user.badges.replaceRange(planeteInd, planeteInd + 1, '1');
+      print(user.badges);
+      */
     }
     return Scaffold(
       appBar: AppBar(

@@ -34,7 +34,7 @@ class _BravoNiveauState extends State<BravoNiveau> {
             Text('BRAVO !',style: TextStyle(color: myYellow, fontSize: 40, fontWeight: FontWeight.w900, fontFamily: 'Gotham'),),
             Padding(
               padding: const EdgeInsets.only(top: 5),
-              child: Text('Vous avez collecté \n\ $etoiles !',style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.normal, fontFamily: 'Gotham'), textAlign: TextAlign.center,),
+              child: Text('Vous avez collecté \n\ $etoiles étoiles!',style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.normal, fontFamily: 'Gotham'), textAlign: TextAlign.center,),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 25, bottom: 10),

@@ -265,7 +265,6 @@ class _AnswerBoxState extends State<AnswerBox> {
                             trace.mars +
                             trace.mercury +
                             trace.neptune +
-                            trace.neptune +
                             trace.saturn +
                             trace.soleil +
                             trace.uranus +
@@ -276,6 +275,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                         etoiles = points;
                         print(etoiles);
                         Navigator.pushReplacementNamed(context, '/bravoNiveau');
+                        indices = planeteInd;
                       } else
                         Navigator.pushReplacementNamed(
                             context, '/planetChoice');
@@ -597,7 +597,6 @@ void update() async {
             trace.jupiter +
             trace.mars +
             trace.mercury +
-            trace.neptune +
             trace.neptune +
             trace.saturn +
             trace.soleil +

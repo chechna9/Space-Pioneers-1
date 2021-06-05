@@ -5,6 +5,7 @@
 import 'dart:math';
 import 'dart:io';
 
+import 'package:astro01/Screens/bravoNiveau.dart';
 import 'package:astro01/Screens/loading.dart';
 import 'package:astro01/Screens/planetChoice.dart';
 import 'package:astro01/classes/questions.dart';
@@ -184,14 +185,17 @@ class _AnswerBoxState extends State<AnswerBox> {
                       }
                       choiceColor = choiceColors[0];
                       questNum++;
-                        print("points :");                       
-                        print(points);
-                      showDialog(
-                        context: context,
-                        builder: (context) => InfoSup(
-                            content: widget.infoSup,
-                            recomp: cliquer ? 0 : factRecomp),
-                      );
+                      print("points :");
+                      print(points);
+                      if (ind.length != 1) {
+                        showDialog(
+                          context: context,
+                          builder: (context) => InfoSup(
+                              content: widget.infoSup,
+                              recomp: cliquer ? 0 : factRecomp),
+                        );
+                      }
+
                       ind.removeAt(0);
 
                       cliquer = false;
@@ -226,7 +230,6 @@ class _AnswerBoxState extends State<AnswerBox> {
                       nbTentatives--;
                       print("points :");
                       print(points);
-
                     });
                   else if (widget.answer == propo[2])
                     setState(() {
@@ -235,7 +238,6 @@ class _AnswerBoxState extends State<AnswerBox> {
                       nbTentatives--;
                       print("points :");
                       print(points);
-
                     });
                   else if (widget.answer == propo[3]) {
                     setState(() {
@@ -270,7 +272,13 @@ class _AnswerBoxState extends State<AnswerBox> {
                             trace.venus;
                         print(user.etoiles);
                       }
-                      Navigator.pushReplacementNamed(context, '/planetChoice');
+                      if (ind.isEmpty) {
+                        etoiles = points;
+                        print(etoiles);
+                        Navigator.pushReplacementNamed(context, '/bravoNiveau');
+                      } else
+                        Navigator.pushReplacementNamed(
+                            context, '/planetChoice');
                       questNum = 1;
                       points = 0;
                     } else {

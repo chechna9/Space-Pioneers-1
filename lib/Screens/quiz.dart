@@ -187,14 +187,6 @@ class _AnswerBoxState extends State<AnswerBox> {
                       questNum++;
                       print("points :");
                       print(points);
-<<<<<<< HEAD
-                      /*showDialog(
-                        context: context,
-                        builder: (context) => InfoSup(
-                            content: widget.infoSup,
-                            recomp: cliquer ? 0 : factRecomp),
-                      );*/
-=======
                       if (ind.length != 1) {
                         showDialog(
                           context: context,
@@ -204,7 +196,6 @@ class _AnswerBoxState extends State<AnswerBox> {
                         );
                       }
 
->>>>>>> c346d2a194f7ffb585d814286e04dc53e34c2707
                       ind.removeAt(0);
 
                       cliquer = false;
@@ -282,13 +273,9 @@ class _AnswerBoxState extends State<AnswerBox> {
                       }
                       if (ind.isEmpty) {
                         etoiles = points;
-<<<<<<< HEAD
-                        Navigator.pushReplacementNamed(context, '/bravoNiveau');
-=======
                         print(etoiles);
                         Navigator.pushReplacementNamed(context, '/bravoNiveau');
                         indices = planeteInd;
->>>>>>> c346d2a194f7ffb585d814286e04dc53e34c2707
                       } else
                         Navigator.pushReplacementNamed(
                             context, '/planetChoice');

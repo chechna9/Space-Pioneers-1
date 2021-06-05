@@ -1,14 +1,10 @@
 // import 'dart:js';
-
-// import 'dart:js';
-
 import 'dart:math';
 import 'dart:io';
-
-import 'package:astro01/Screens/bravoNiveau.dart';
 import 'package:astro01/Screens/loading.dart';
 import 'package:astro01/Screens/planetChoice.dart';
 import 'package:astro01/classes/questions.dart';
+import 'package:astro01/classes/random.dart';
 import 'package:astro01/components/InfoSup.dart';
 import 'package:astro01/main.dart';
 import 'package:flutter/material.dart';
@@ -20,19 +16,16 @@ import 'package:http/http.dart' as http;
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:provider/provider.dart';
 import '../components/InfoSup.dart';
-// import 'package:http/http.dart' as http;
-// import 'package:flutter/services.dart' show rootBundle;
 
-// Future<String> getJson() {
-//   return rootBundle.loadString('questions.json');
-// }
 List<String> propo = ['a', 'b', 'c', 'd'];
-int points = 0;
-bool cliquer = false;
-List<int> ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+var ind = Iterable<int>.generate(10).toList();
 
-class Ind extends ChangeNotifier {
-  List<int> ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+int points = 0;
+bool cliquerRandom = true;
+int questNum = 1;
+
+class Index extends ChangeNotifier {
+  var ind = Iterable<int>.generate(10).toList();
 
   void updateInd(List<int> newindice) {
     ind = newindice;
@@ -40,61 +33,54 @@ class Ind extends ChangeNotifier {
   }
 }
 
-int questNum = 1;
-
-class Quiz extends StatefulWidget {
+class RandomQuiz extends StatefulWidget {
   @override
   final int indice;
 
-  Quiz({Key key, this.indice}) : super(key: key);
-  _QuizState createState() => _QuizState();
+  RandomQuiz({Key key, this.indice}) : super(key: key);
+  _RandomQuizState createState() => _RandomQuizState();
 }
 
-class _QuizState extends State<Quiz> {
-  List<Question> _questions = <Question>[];
-  Future<List<Question>> fetchQuestions() async {
-    var url = Uri.parse('https://nadir-ogd.github.io/Quiz-API/questions.json');
+class _RandomQuizState extends State<RandomQuiz> {
+  List<Aleatoire> _randoms = <Aleatoire>[];
+  Future<List<Aleatoire>> fetchRandoms() async {
+    var url = Uri.parse('https://nadir-ogd.github.io/Random-API/random.json');
     var response = await http.get(url);
 
 // ignore: deprecated_member_use
-    var questions = List<Question>();
+    var randoms = List<Aleatoire>();
     if (response.statusCode == 200) {
-      var questionsJson = json.decode(response.body);
-      for (var questionsJson in questionsJson) {
-        questions.add(Question.fromJson(questionsJson));
+      var randomsJson = json.decode(response.body);
+      for (var randomsJson in randomsJson) {
+        randoms.add(Aleatoire.fromJson(randomsJson));
       }
     }
-    return questions;
+    return randoms;
   }
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<Ind>(
-        create: (context) => Ind(),
+    return ChangeNotifierProvider<Index>(
+        create: (context) => Index(),
         child: Scaffold(
             backgroundColor: Colors.blue,
-            body: FutureBuilder<List<Question>>(
-                future: fetchQuestions(),
-                builder: (context, AsyncSnapshot<List<Question>> snapshot) {
+            body: FutureBuilder<List<Aleatoire>>(
+                future: fetchRandoms(),
+                builder: (context, AsyncSnapshot<List<Aleatoire>> snapshot) {
                   if (snapshot.hasData == false) {
                     return LoadingScreen();
                   }
                   List<int> indices = [0, 1, 2, 3];
 
                   indices = shuffle(indices);
-                  print(indices);
-                  ind = Provider.of<Ind>(context).ind;
+                  ind = Provider.of<Index>(context).ind;
                   ind = shuffle(ind);
-                  RemplirChoices(
-                      propo, snapshot.data[ind[0] + 10 * planeteInd]);
-                  print(propo);
+                  RemplirChoices(propo, snapshot.data[ind[0]]);
                   int i = 4;
                   if (propo[2] == null && propo[1] == null) {
                     i = 2;
-
                     indices = shuffle([0, 3]);
                   }
-
                   return Stack(
                     fit: StackFit.expand,
                     children: [
@@ -104,11 +90,9 @@ class _QuizState extends State<Quiz> {
                         ),
                         child: Scaffold(
                           backgroundColor: Colors.transparent,
-                          body: AppbarCustomed(
+                          body: AppbarCustomedRandom(
                             myBlue: myBlue,
                             myRed2: myRed2,
-                            planete:
-                                snapshot.data[ind[0] + 10 * planeteInd].planete,
                             numero: questNum,
                           ),
                         ),
@@ -116,21 +100,17 @@ class _QuizState extends State<Quiz> {
                       Padding(
                         padding: const EdgeInsets.only(top: 160),
                         child: Column(children: [
-                          QuestBox(
-                            quest: snapshot
-                                .data[ind[0] + 10 * planeteInd].question,
+                          QuestBoxRandom(
+                            quest: snapshot.data[ind[0]].question,
                           ),
                           Expanded(
                             child: ListView.builder(
-                              itemCount: min(4, i),
+                              itemCount: min(i, 4),
                               itemBuilder: (BuildContext context, int myindex) {
                                 return Column(children: [
-                                  AnswerBox(
+                                  AnswerBoxRandom(
                                     answer: propo[indices[myindex]],
                                     answerLetter: '${myindex + 1}',
-                                    infoSup: snapshot
-                                        .data[ind[0] + 10 * planeteInd]
-                                        .infosupp,
                                   ),
                                 ]);
                               },
@@ -144,22 +124,20 @@ class _QuizState extends State<Quiz> {
   }
 }
 
-class AnswerBox extends StatefulWidget {
+class AnswerBoxRandom extends StatefulWidget {
   final String answer;
   final String answerLetter;
-  final String infoSup;
-  AnswerBox({
+  AnswerBoxRandom({
     Key key,
     this.answer: 'answer',
     this.answerLetter: 'A',
-    this.infoSup,
   }) : super(key: key);
 
   @override
-  _AnswerBoxState createState() => _AnswerBoxState();
+  _AnswerBoxRandomState createState() => _AnswerBoxRandomState();
 }
 
-class _AnswerBoxState extends State<AnswerBox> {
+class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
   Color choiceColor = Colors.white;
   List<Color> choiceColors = [choiceGreen, choiceRed, choiceYellow, choiceBlue];
   @override
@@ -180,111 +158,66 @@ class _AnswerBoxState extends State<AnswerBox> {
                 onTap: () {
                   if (widget.answer == propo[0]) {
                     setState(() {
-                      if (cliquer == false) {
+                      if (cliquerRandom == true) {
                         points += factRecomp;
                       }
                       choiceColor = choiceColors[0];
                       questNum++;
                       print("points :");
                       print(points);
-                      if (ind.length != 1) {
-                        showDialog(
-                          context: context,
-                          builder: (context) => InfoSup(
-                              content: widget.infoSup,
-                              recomp: cliquer ? 0 : factRecomp),
-                        );
-                      }
-
-                      ind.removeAt(0);
-
-                      cliquer = false;
-                      if (ind.isEmpty || nbTentatives == 0) {
-                        if (verification(points) == 1) {
-                          update();
-
-                          user.etoiles = trace.earth +
-                              trace.jupiter +
-                              trace.mars +
-                              trace.mercury +
-                              trace.neptune +
-                              trace.neptune +
-                              trace.saturn +
-                              trace.soleil +
-                              trace.uranus +
-                              trace.venus;
-                          print(user.etoiles);
-                        }
-                      } else {
-                        //var route = new MaterialPageRoute(
-                        //builder: (BuildContext context) => new Quiz(
-                        //      indice: indice,
-                        //      ));
-                        //Navigator.of(context).pushReplacement(route);
-                      }
+                      print("tentatives :");
+                      print(nbTentatives);
                     });
-                  } else if (widget.answer == propo[1])
+                    ind.removeAt(0);
+                    cliquerRandom = true;
+                  } else if (widget.answer == propo[1]) {
                     setState(() {
-                      cliquer = true;
+                      cliquerRandom = false;
                       choiceColor = choiceColors[1];
                       nbTentatives--;
                       print("points :");
                       print(points);
+                      print("tentatives :");
+                      print(nbTentatives);
                     });
-                  else if (widget.answer == propo[2])
+                  } else if (widget.answer == propo[2]) {
                     setState(() {
-                      cliquer = true;
+                      cliquerRandom = false;
                       choiceColor = choiceColors[2];
                       nbTentatives--;
                       print("points :");
                       print(points);
+                      print("tentatives :");
+                      print(nbTentatives);
                     });
-                  else if (widget.answer == propo[3]) {
+                  } else if (widget.answer == propo[3]) {
                     setState(() {
-                      cliquer = true;
+                      cliquerRandom = false;
                       choiceColor = choiceColors[3];
                       nbTentatives--;
                       print("points :");
                       print(points);
+                      print("tentatives :");
+                      print(nbTentatives);
                     });
                   }
-
                   Timer(Duration(milliseconds: 600), () {
                     setState(() {
                       choiceColor = Colors.white;
                     });
                   });
-
-                  Timer(Duration(seconds: 1), () {
+                  Timer(Duration(milliseconds: 700), () {
                     if (ind.isEmpty || nbTentatives <= 0) {
-                      if (verification(points) == 1) {
-                        update();
-
-                        user.etoiles = trace.earth +
-                            trace.jupiter +
-                            trace.mars +
-                            trace.mercury +
-                            trace.neptune +
-                            trace.saturn +
-                            trace.soleil +
-                            trace.uranus +
-                            trace.venus;
-                        print(user.etoiles);
-                      }
-                      if (ind.isEmpty) {
-                        etoiles = points;
-                        print(etoiles);
-                        Navigator.pushReplacementNamed(context, '/bravoNiveau');
-                        indices = planeteInd;
-                      } else
-                        Navigator.pushReplacementNamed(
-                            context, '/planetChoice');
+                      Navigator.pushReplacementNamed(context, '/planetChoice');
                       questNum = 1;
+                      user.etoiles = user.etoiles + points;
+                      update_etoiles();
+
                       points = 0;
                     } else {
                       if (widget.answer == propo[0]) {
                         setState(() {
-                          Provider.of<Ind>(context, listen: false)
+                          Provider.of<Index>(context, listen: false)
                               .updateInd(ind);
                         });
                       }
@@ -331,9 +264,9 @@ class _AnswerBoxState extends State<AnswerBox> {
   }
 }
 
-class QuestBox extends StatelessWidget {
-  const QuestBox({
-    this.quest: 'Quelle est la couleur du Soleil',
+class QuestBoxRandom extends StatelessWidget {
+  const QuestBoxRandom({
+    this.quest: '',
     Key key,
   }) : super(key: key);
 
@@ -368,18 +301,16 @@ class QuestBox extends StatelessWidget {
   }
 }
 
-class AppbarCustomed extends StatelessWidget {
-  const AppbarCustomed({
+class AppbarCustomedRandom extends StatelessWidget {
+  const AppbarCustomedRandom({
     Key key,
     @required this.myBlue,
     @required this.myRed2,
-    this.planete: 'Soleil',
     this.numero: 5,
   }) : super(key: key);
 
   final Color myBlue;
   final Color myRed2;
-  final String planete;
   final int numero;
 
   @override
@@ -398,7 +329,7 @@ class AppbarCustomed extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(top: 27),
               child: Text(
-                '$planete',
+                'random',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,
@@ -409,13 +340,14 @@ class AppbarCustomed extends StatelessWidget {
               ),
             ),
           ),
+          leadingWidth: 65,
           leading: Padding(
             padding: const EdgeInsets.only(top: 34, left: 11),
             child: Text(
-              '$numero/10',
+              '$numero/100',
               style: TextStyle(
                 color: myRed2,
-                fontSize: 17,
+                fontSize: 16,
                 fontFamily: 'Gotham',
                 fontWeight: FontWeight.normal,
               ),
@@ -440,56 +372,11 @@ class AppbarCustomed extends StatelessWidget {
   }
 }
 
-class ProgressBar extends StatelessWidget {
-  final double width;
-// final int value;
-// final int totalValue;
-
-  ProgressBar({this.width});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        SizedBox(
-          width: 5,
-        ),
-        Stack(
-          children: <Widget>[
-            Container(
-              width: width,
-              height: 8,
-              decoration: BoxDecoration(color: myBlue),
-            ),
-            Row(
-              children: [
-                AnimatedContainer(
-                  height: 8,
-                  width: width,
-                  duration: Duration(milliseconds: 500),
-                  decoration: BoxDecoration(
-                    color: myRed2,
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(5),
-                      bottomRight: Radius.circular(5),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
-void RemplirChoices(List<String> choices, Question myquestion) {
-  choices[0] = myquestion.correct;
-  choices[1] = myquestion.choice1;
-  choices[2] = myquestion.choice2;
-  choices[3] = myquestion.choice3;
+void RemplirChoices(List<String> choices, Aleatoire myrandom) {
+  choices[0] = myrandom.correct;
+  choices[1] = myrandom.choice1;
+  choices[2] = myrandom.choice2;
+  choices[3] = myrandom.choice3;
 }
 
 List shuffle(List<int> indices) {
@@ -507,102 +394,10 @@ List shuffle(List<int> indices) {
   return indices;
 }
 
-int verification(int point) {
-  if (planeteInd == 0) {
-    if (trace.soleil < point) {
-      trace.soleil = point;
-      return 1;
-    } else
-      return -1;
-  }
-  if (planeteInd == 1) {
-    if (trace.mercury < point) {
-      trace.mercury = point;
-      return 1;
-    } else
-      return -1;
-  }
-  if (planeteInd == 2) {
-    if (trace.venus < point) {
-      trace.venus = point;
-      return 1;
-    } else
-      return -1;
-  }
-  if (planeteInd == 3) {
-    if (trace.earth < point) {
-      trace.earth = point;
-      return 1;
-    } else
-      return -1;
-  }
-  if (planeteInd == 4) {
-    if (trace.mars < point) {
-      trace.mars = point;
-      return 1;
-    } else
-      return -1;
-  }
-  if (planeteInd == 5) {
-    if (trace.jupiter < point) {
-      trace.jupiter = point;
-      return 1;
-    } else
-      return -1;
-  }
-  if (planeteInd == 6) {
-    if (trace.saturn < point) {
-      trace.saturn = point;
-      return 1;
-    } else
-      return -1;
-  }
-  if (planeteInd == 7) {
-    if (trace.uranus < point) {
-      trace.uranus = point;
-      return 1;
-    } else
-      return -1;
-  }
-  if (planeteInd == 8) {
-    if (trace.neptune < point) {
-      trace.neptune = point;
-      return 1;
-    } else
-      return -1;
-  }
-}
-
-void update() async {
-  await supabaseclient
-      .from("Trace")
-      .update({
-        "email": trace.email,
-        "jupiter": trace.jupiter,
-        "earth": trace.earth,
-        "venus": trace.venus,
-        "soleil": trace.soleil,
-        "uranus": trace.uranus,
-        "saturn": trace.saturn,
-        "neptune": trace.neptune,
-        "mercury": trace.mercury,
-        "mars": trace.mars
-      })
-      .eq("email", trace.email)
-      .execute();
+void update_etoiles() async {
   await supabaseclient
       .from("user")
-      .update({
-        "etoiles": trace.earth +
-            trace.jupiter +
-            trace.mars +
-            trace.mercury +
-            trace.neptune +
-            trace.saturn +
-            trace.soleil +
-            trace.uranus +
-            trace.venus,
-      })
+      .update({"etoiles": user.etoiles})
       .eq("email", user.email)
       .execute();
 }

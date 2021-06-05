@@ -10,12 +10,13 @@ import 'splashScreen.dart';
 import 'planetChoice.dart';
 
 int planeteInd;
-class LevelChoice extends StatefulWidget {
+
+class LevelChoiceRandom extends StatefulWidget {
   @override
-  _LevelChoiceState createState() => _LevelChoiceState();
+  _LevelChoiceRandomState createState() => _LevelChoiceRandomState();
 }
 
-class _LevelChoiceState extends State<LevelChoice> {
+class _LevelChoiceRandomState extends State<LevelChoiceRandom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +63,7 @@ class _LevelChoiceState extends State<LevelChoice> {
                               ),
                             ),
                             AutoSizeText(
-                              'Selon votre niveau.',
+                              'Selon votre.',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w100,
@@ -82,11 +83,11 @@ class _LevelChoiceState extends State<LevelChoice> {
                               text: 'Facile',
                               color: Color(0xff1BEFBC),
                               onPressed: () {
-                                nbTentatives = 10;
-                                factRecomp = facileRecomp;
+                                nbTentatives = 25;
+                                factRecomp = facileRcmpRndm;
                                 ableToBadge = false;
                                 Navigator.pushReplacementNamed(
-                                    context, '/quiz');
+                                    context, '/random');
                               },
                             ),
                             SizedBox(
@@ -96,12 +97,12 @@ class _LevelChoiceState extends State<LevelChoice> {
                                 text: 'Moyen',
                                 color: Color(0xff1759BC),
                                 onPressed: () {
-                                  nbTentatives = 6;
-                                  factRecomp = moyenRecomp;
+                                  nbTentatives = 20;
+                                  factRecomp = moyenRcmpRndm;
                                   ableToBadge = false;
                                   Navigator.pushReplacementNamed(
-                                      context, '/quiz');}
-                                ),
+                                      context, '/random');
+                                }),
                             SizedBox(
                               height: 30,
                             ),
@@ -109,11 +110,11 @@ class _LevelChoiceState extends State<LevelChoice> {
                                 text: 'Difficile',
                                 color: Color(0xffE1023C),
                                 onPressed: () {
-                                  nbTentatives = 3;
-                                  factRecomp = difficileRecomp;
+                                  nbTentatives = 10;
+                                  factRecomp = difficileRcmpRndm;
                                   ableToBadge = true;
                                   Navigator.pushReplacementNamed(
-                                      context, '/quiz');
+                                      context, '/random');
                                 }),
                           ],
                         ),

@@ -19,12 +19,11 @@ class _BravoNiveauState extends State<BravoNiveau> {
   Widget build(BuildContext context) {
     if (ableToBadge == true && etoiles == 100) {
       List<String> badges = user.badges.split("");
-      print(planeteInd);
-      print(badges);
+
       badges[indices] = '1';
 
       user.badges = badges.join("");
-      print(user.badges);
+
       update_badges();
       /* print(user.badges);
       user.badges.replaceRange(planeteInd, planeteInd + 1, '1');
@@ -50,9 +49,9 @@ class _BravoNiveauState extends State<BravoNiveau> {
                   user.badges = badges.join("");
                   print(user.badges);*/
 
-                  user.badges.replaceRange(planeteInd, planeteInd, '1');
-                  print(user.badges);
-                  update_badges();
+                  //user.badges.replaceRange(planeteInd, planeteInd, '1');
+                  //print(user.badges);
+                  // update_badges();
                   Navigator.pushReplacementNamed(context, '/bravoBadge');
                 } else {
                   Navigator.pushReplacementNamed(context, '/planetChoice');

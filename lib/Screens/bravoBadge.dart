@@ -106,7 +106,10 @@ class _BravoBadgeState extends State<BravoBadge> {
                       icon: Icon(Icons.arrow_forward_outlined),
                       color: Colors.white,
                       iconSize: 30,
-                      onPressed: () => {}),
+                      onPressed: () => {
+                            Navigator.pushReplacementNamed(
+                                context, '/profilePage'),
+                          }),
                 ],
               ),
             ],

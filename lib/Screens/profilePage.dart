@@ -27,15 +27,15 @@ class _ProfilePageState extends State<ProfilePage> {
 
   List<BadgeCard> remplireBadge() {
     List<BadgeCard> allBadges = <BadgeCard>[
-      BadgeCard(name: "Terre hero"),
-      BadgeCard(name: "Jupiter hero"),
-      BadgeCard(name: "Mars hero"),
+      BadgeCard(name: "Soleil hero"),
       BadgeCard(name: "Mercure hero"),
-      BadgeCard(name: "Neptune hero"),
+      BadgeCard(name: "Venus hero"),
+      BadgeCard(name: "Terre hero"),
+      BadgeCard(name: "Mars hero"),
+      BadgeCard(name: "Jupiter hero"),
       BadgeCard(name: "Saturn hero"),
       BadgeCard(name: "Uranus hero"),
-      BadgeCard(name: "Venus hero"),
-      BadgeCard(name: "Soleil hero"),
+      BadgeCard(name: "Neptune hero"),
     ];
     List<BadgeCard> tempBadges = [];
 

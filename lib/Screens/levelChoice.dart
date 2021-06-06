@@ -10,6 +10,7 @@ import 'splashScreen.dart';
 import 'planetChoice.dart';
 
 int planeteInd;
+
 class LevelChoice extends StatefulWidget {
   @override
   _LevelChoiceState createState() => _LevelChoiceState();
@@ -27,6 +28,8 @@ class _LevelChoiceState extends State<LevelChoice> {
                 return LoadingScreen();
               }
               trace = snapshot.data[0];
+              print(' hello');
+              print(trace.earth);
               print(trace.jupiter);
               return Scaffold(
                 appBar: AppBar(
@@ -100,8 +103,8 @@ class _LevelChoiceState extends State<LevelChoice> {
                                   factRecomp = moyenRecomp;
                                   ableToBadge = false;
                                   Navigator.pushReplacementNamed(
-                                      context, '/quiz');}
-                                ),
+                                      context, '/quiz');
+                                }),
                             SizedBox(
                               height: 30,
                             ),

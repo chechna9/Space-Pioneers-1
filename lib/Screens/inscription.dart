@@ -266,15 +266,13 @@ class _RegCardState extends State<RegCard> {
   }
 
   Future _signup() async {
-    if (_formKey.currentState.validate()) {
+    if (_formKey.currentState.validate() && _username.text.length <= 14) {
       final signInResult = await Injector.appInstance
           .get<SupabaseClient>()
           .auth
           .signUp(_email.text, _password.text);
 
-      if (signInResult != null &&
-          signInResult.user != null &&
-          _username.text.length <= 14) {
+      if (signInResult != null && signInResult.user != null) {
         user.email = _email.text;
         await supabaseclient.from("Trace").insert({
           "email": _email.text,
@@ -285,7 +283,8 @@ class _RegCardState extends State<RegCard> {
           'neptune': 0,
           'saturn': 0,
           'uranus': 0,
-          'venus': 0
+          'venus': 0,
+          'soleil': 0
         }).execute();
         await supabaseclient.from("user").insert({
           "name": _username.text,
@@ -293,17 +292,15 @@ class _RegCardState extends State<RegCard> {
           'etoiles': 0,
           'naissance': _dateTime.toString().split(" ")[0],
           'avatar': 'default',
-          'badges': '000000000',
+          'badges': '000000001',
         }).execute();
         Navigator.pushNamed(context, '/homeScreen');
       } else if (signInResult.error.message != null ||
           _username.text.length > 14) {
         String message;
-        if (_username.text.length > 14) {
-          message = ' taille maximale de username est 14';
-        } else {
-          message = signInResult.error.message;
-        }
+
+        message = signInResult.error.message;
+
         TextButton(
             onPressed: () {}, child: Text(' erreur dans le mot ed passe'));
 
@@ -329,6 +326,29 @@ class _RegCardState extends State<RegCard> {
                   ));
             });
       }
+    } else {
+      String message = ' taille maximale du nom est 14';
+      showFlash(
+          context: context,
+          duration: const Duration(seconds: 2),
+          builder: (context, controller) {
+            return Flash.dialog(
+                controller: controller,
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
+                backgroundGradient: LinearGradient(colors: [myRed, myRed]),
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    message,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      backgroundColor: myRed,
+                    ),
+                  ),
+                ));
+          });
     }
   }
 }

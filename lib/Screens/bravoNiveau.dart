@@ -9,13 +9,10 @@ import 'randomSection.dart';
 import '../main.dart';
 import '../classes/trace.dart';
 
-
-
 int etoiles;
 int etoilesMax;
 int indices;
-int ecart;
-
+int difference;
 
 class BravoNiveau extends StatefulWidget {
   @override
@@ -25,8 +22,8 @@ class BravoNiveau extends StatefulWidget {
 class _BravoNiveauState extends State<BravoNiveau> {
   @override
   Widget build(BuildContext context) {
-          print("Ecart bravo");
-      print(ecart);
+    print("difference bravo");
+    print(difference);
     if (ableToBadge == true && etoiles == 100) {
       List<String> badges = user.badges.split("");
 
@@ -121,7 +118,7 @@ class _BravoNiveauState extends State<BravoNiveau> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Column(
-                crossAxisAlignment: CrossAxisAlignment.center, 
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       "Nombre maximale d'étoiles \n collectées dans $planeteName :",
@@ -132,32 +129,37 @@ class _BravoNiveauState extends State<BravoNiveau> {
                           fontFamily: 'Gotham'),
                       textAlign: TextAlign.center,
                     ),
-               Text("$etoilesMax",style: TextStyle(
+                    Text(
+                      "$etoilesMax",
+                      style: TextStyle(
                           color: myYellow,
                           fontSize: 18,
                           fontWeight: FontWeight.w900,
                           fontFamily: 'Gotham'),
-                      textAlign: TextAlign.center,),
+                      textAlign: TextAlign.center,
+                    ),
                   ],
                 ),
-                
-                Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                Text("\nPoints ajoutés :  ",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.normal,
-                      fontFamily: 'Gotham'),
-                  textAlign: TextAlign.center,
-                ),
-                Text("$ecart",style: TextStyle(
-                      color: myYellow,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w900,
-                      fontFamily: 'Gotham'),
-                  textAlign: TextAlign.center,),])
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Text(
+                    "\nEtoiles ajoutés :  ",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.normal,
+                        fontFamily: 'Gotham'),
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    "$difference",
+                    style: TextStyle(
+                        color: myYellow,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w900,
+                        fontFamily: 'Gotham'),
+                    textAlign: TextAlign.center,
+                  ),
+                ])
               ],
             ),
           ],

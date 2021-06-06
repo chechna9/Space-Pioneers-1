@@ -27,15 +27,66 @@ class _ProfilePageState extends State<ProfilePage> {
 
   List<BadgeCard> remplireBadge() {
     List<BadgeCard> allBadges = <BadgeCard>[
-      BadgeCard(name: "Soleil hero"),
-      BadgeCard(name: "Mercure hero"),
-      BadgeCard(name: "Venus hero"),
-      BadgeCard(name: "Terre hero"),
-      BadgeCard(name: "Mars hero"),
-      BadgeCard(name: "Jupiter hero"),
-      BadgeCard(name: "Saturn hero"),
-      BadgeCard(name: "Uranus hero"),
-      BadgeCard(name: "Neptune hero"),
+      BadgeCard(
+        name: "Soleil hero",
+        photo: "soleil",
+        color: Color(0xffFFE600),
+      ),
+      BadgeCard(
+        name: "Mercure hero",
+        photo: "mercure",
+        color: Color(0xff595959),
+      ),
+      BadgeCard(
+        name: "Venus hero",
+        photo: "venus",
+        color: Color(0xffDF8F13),
+      ),
+      BadgeCard(
+        name: "Terre hero",
+        photo: "terre",
+        color: Color(0xff78E237),
+      ),
+      BadgeCard(
+        name: "Mars hero",
+        photo: "mars",
+        color: Color(0xffD70003),
+      ),
+      BadgeCard(
+        name: "Jupiter hero",
+        photo: "jupiter",
+        color: Color(0xffEE6632),
+      ),
+      BadgeCard(
+        name: "Saturn hero",
+        photo: "saturn",
+        color: Color(0xff87579E),
+      ),
+      BadgeCard(
+        name: "Uranus hero",
+        photo: "uranus",
+        color: Color(0xff1A8CA9),
+      ),
+      BadgeCard(
+        name: "Neptune hero",
+        photo: "neptune",
+        color: Color(0xff37DBD0),
+      ),
+      BadgeCard(
+        name: "After 5 badges",
+        photo: "after5Badges",
+        color: Color(0xffE1023C),
+      ),
+      BadgeCard(
+        name: "Random",
+        photo: "random",
+        color: Color(0xffFFF16E),
+      ),
+      BadgeCard(
+        name: "New",
+        photo: "new",
+        color: Color(0xffAB02E6),
+      ),
     ];
     List<BadgeCard> tempBadges = [];
 
@@ -46,6 +97,7 @@ class _ProfilePageState extends State<ProfilePage> {
       user.badges[i] != '0' ? tempBadges.add(badge) : null;
       i++;
     }
+    // return tempBadges;
     return tempBadges;
   }
 
@@ -200,18 +252,19 @@ class BadgeCard extends StatelessWidget {
   final String name;
   final String date;
   final String photo;
-
+  final Color color;
   BadgeCard({
     Key key,
     this.name: "loading",
     this.photo: "default",
     this.date: "01-01-2020",
+    this.color,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: myRed,
+      color: color,
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 20,
@@ -234,7 +287,7 @@ class BadgeCard extends StatelessWidget {
                     decoration: ShapeDecoration(
                       shape: PolygonBorder(sides: 6),
                       image: DecorationImage(
-                        image: AssetImage('assets/images/avatars/default.png'),
+                        image: AssetImage('images/Badges/$photo.png'),
                       ),
                     ),
                   ),
@@ -252,14 +305,6 @@ class BadgeCard extends StatelessWidget {
                   maxLines: 1,
                 ),
               ],
-            ),
-            AutoSizeText(
-              '$date',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w100,
-                fontSize: 10,
-              ),
             ),
           ],
         ),

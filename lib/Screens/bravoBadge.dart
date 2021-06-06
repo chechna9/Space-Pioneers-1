@@ -14,6 +14,7 @@ class BravoBadge extends StatefulWidget {
 class _BravoBadgeState extends State<BravoBadge> {
   @override
   Widget build(BuildContext context) {
+    print('bravo');
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,

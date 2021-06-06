@@ -32,6 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
             return LoadingScreen();
           }
           user = snapshot.data[0];
+          print('user');
+          print(user.email);
 
           return Material(
             child: Container(

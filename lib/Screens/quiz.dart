@@ -527,6 +527,8 @@ int verification(int point) {
   if (planeteInd == 1) {
     if (trace.mercury < point) {
       ecart = point - trace.mercury;
+            print("ecart");
+      print(ecart);
       trace.mercury = point;
       etoilesMax = point;
       return 1;
@@ -539,6 +541,8 @@ int verification(int point) {
   if (planeteInd == 2) {
     if (trace.venus < point) {
       ecart = point - trace.venus;
+            print("ecart");
+      print(ecart);
       trace.venus = point;
       etoilesMax = point;
       return 1;
@@ -551,6 +555,8 @@ int verification(int point) {
   if (planeteInd == 3) {
     if (trace.earth < point) {
       ecart = point - trace.earth;
+            print("ecart");
+      print(ecart);
       trace.earth = point;
       etoilesMax = point;
       return 1;
@@ -563,6 +569,8 @@ int verification(int point) {
   if (planeteInd == 4) {
     if (trace.mars < point) {
       ecart = point - trace.mars;
+            print("ecart");
+      print(ecart);
       trace.mars = point;
       etoilesMax = point;
       return 1;
@@ -575,6 +583,8 @@ int verification(int point) {
   if (planeteInd == 5) {
     if (trace.jupiter < point) {
       ecart = point - trace.jupiter;
+      print("ecart");
+      print(ecart);
       trace.jupiter = point;
       etoilesMax = point;
       return 1;
@@ -587,6 +597,8 @@ int verification(int point) {
   if (planeteInd == 6) {
     if (trace.saturn < point) {
       ecart = point - trace.saturn;
+            print("ecart");
+      print(ecart);
       trace.saturn = point;
       etoilesMax = point;
       return 1;
@@ -598,6 +610,8 @@ int verification(int point) {
   if (planeteInd == 7) {
     if (trace.uranus < point) {
       ecart = point - trace.uranus;
+      print("ecart");
+      print(ecart);
       trace.uranus = point;
       etoilesMax = point;
       return 1;
@@ -609,7 +623,9 @@ int verification(int point) {
   }
   if (planeteInd == 8) {
     if (trace.neptune < point) {
-            ecart = point - trace.neptune;
+      ecart = point - trace.neptune;
+            print("ecart");
+      print(ecart);
       trace.neptune = point;
       etoilesMax = point;
       return 1;

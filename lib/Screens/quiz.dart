@@ -26,6 +26,7 @@ import '../components/InfoSup.dart';
 // Future<String> getJson() {
 //   return rootBundle.loadString('questions.json');
 // }
+String planeteName;
 List<String> propo = ['a', 'b', 'c', 'd'];
 int points = 0;
 bool cliquer = false;
@@ -88,7 +89,9 @@ class _QuizState extends State<Quiz> {
                   RemplirChoices(
                       propo, snapshot.data[ind[0] + 10 * planeteInd]);
                   print(propo);
+                  planeteName = snapshot.data[ind[0] + 10 * planeteInd].planete;
                   int i = 4;
+
                   if (propo[2] == null && propo[1] == null) {
                     i = 2;
 
@@ -199,29 +202,6 @@ class _AnswerBoxState extends State<AnswerBox> {
                       ind.removeAt(0);
 
                       cliquer = false;
-                      if (ind.isEmpty || nbTentatives == 0) {
-                        if (verification(points) == 1) {
-                          update();
-
-                          user.etoiles = trace.earth +
-                              trace.jupiter +
-                              trace.mars +
-                              trace.mercury +
-                              trace.neptune +
-                              trace.neptune +
-                              trace.saturn +
-                              trace.soleil +
-                              trace.uranus +
-                              trace.venus;
-                          print(user.etoiles);
-                        }
-                      } else {
-                        //var route = new MaterialPageRoute(
-                        //builder: (BuildContext context) => new Quiz(
-                        //      indice: indice,
-                        //      ));
-                        //Navigator.of(context).pushReplacement(route);
-                      }
                     });
                   } else if (widget.answer == propo[1])
                     setState(() {
@@ -269,16 +249,15 @@ class _AnswerBoxState extends State<AnswerBox> {
                             trace.soleil +
                             trace.uranus +
                             trace.venus;
-                        print(user.etoiles);
+                        //print(user.etoiles);
                       }
-                      if (ind.isEmpty) {
-                        etoiles = points;
-                        print(etoiles);
-                        Navigator.pushReplacementNamed(context, '/bravoNiveau');
-                        indices = planeteInd;
-                      } else
-                        Navigator.pushReplacementNamed(
-                            context, '/planetChoice');
+
+                      etoiles = points;
+                      print(points);
+                      Navigator.pushReplacementNamed(context, '/bravoNiveau');
+                      indices = planeteInd;
+
+                      //Navigator.pushReplacementNamed(context, '/planetChoice');
                       questNum = 1;
                       points = 0;
                     } else {
@@ -510,66 +489,129 @@ List shuffle(List<int> indices) {
 int verification(int point) {
   if (planeteInd == 0) {
     if (trace.soleil < point) {
+      difference = point - trace.soleil;
+      print("difference");
+      print(difference);
       trace.soleil = point;
+      etoilesMax = point;
       return 1;
-    } else
+    } else {
+      difference = 0;
+      etoilesMax = trace.soleil;
       return -1;
+    }
   }
   if (planeteInd == 1) {
     if (trace.mercury < point) {
+      difference = point - trace.mercury;
+      print("difference");
+      print(difference);
       trace.mercury = point;
+      etoilesMax = point;
       return 1;
-    } else
+    } else {
+      difference = 0;
+      etoilesMax = trace.mercury;
       return -1;
+    }
   }
   if (planeteInd == 2) {
     if (trace.venus < point) {
+      difference = point - trace.venus;
+      print("difference");
+      print(difference);
       trace.venus = point;
+      etoilesMax = point;
       return 1;
-    } else
+    } else {
+      difference = 0;
+      etoilesMax = trace.venus;
       return -1;
+    }
   }
   if (planeteInd == 3) {
     if (trace.earth < point) {
+      difference = point - trace.earth;
+      print("difference");
+      print(difference);
       trace.earth = point;
+      etoilesMax = point;
       return 1;
-    } else
+    } else {
+      difference = 0;
+      etoilesMax = trace.earth;
       return -1;
+    }
   }
   if (planeteInd == 4) {
     if (trace.mars < point) {
+      difference = point - trace.mars;
+      print("difference");
+      print(difference);
       trace.mars = point;
+      etoilesMax = point;
       return 1;
-    } else
+    } else {
+      difference = 0;
+      etoilesMax = trace.mars;
       return -1;
+    }
   }
   if (planeteInd == 5) {
     if (trace.jupiter < point) {
+      difference = point - trace.jupiter;
+      print("difference");
+      print(difference);
       trace.jupiter = point;
+      etoilesMax = point;
       return 1;
-    } else
+    } else {
+      difference = 0;
+      etoilesMax = trace.jupiter;
       return -1;
+    }
   }
   if (planeteInd == 6) {
     if (trace.saturn < point) {
+      difference = point - trace.saturn;
+      print("difference");
+      print(difference);
       trace.saturn = point;
+      etoilesMax = point;
       return 1;
-    } else
+    } else {
+      difference = 0;
+      etoilesMax = trace.saturn;
       return -1;
+    }
   }
   if (planeteInd == 7) {
     if (trace.uranus < point) {
+      difference = point - trace.uranus;
+      print("difference");
+      print(difference);
       trace.uranus = point;
+      etoilesMax = point;
       return 1;
-    } else
+    } else {
+      difference = 0;
+      etoilesMax = trace.uranus;
       return -1;
+    }
   }
   if (planeteInd == 8) {
     if (trace.neptune < point) {
+      difference = point - trace.neptune;
+      print("difference");
+      print(difference);
       trace.neptune = point;
+      etoilesMax = point;
       return 1;
-    } else
+    } else {
+      difference = 0;
+      etoilesMax = trace.neptune;
       return -1;
+    }
   }
 }
 
@@ -577,7 +619,7 @@ void update() async {
   await supabaseclient
       .from("Trace")
       .update({
-        "email": trace.email,
+        "email": user.email,
         "jupiter": trace.jupiter,
         "earth": trace.earth,
         "venus": trace.venus,
@@ -588,7 +630,7 @@ void update() async {
         "mercury": trace.mercury,
         "mars": trace.mars
       })
-      .eq("email", trace.email)
+      .eq("email", user.email)
       .execute();
   await supabaseclient
       .from("user")

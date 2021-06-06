@@ -4,10 +4,15 @@ import 'package:astro01/variable_globale/variable.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import '../components/constants.dart';
+import 'quiz.dart';
+import 'randomSection.dart';
 import '../main.dart';
+import '../classes/trace.dart';
 
 int etoiles;
+int etoilesMax;
 int indices;
+int difference;
 
 class BravoNiveau extends StatefulWidget {
   @override
@@ -17,6 +22,8 @@ class BravoNiveau extends StatefulWidget {
 class _BravoNiveauState extends State<BravoNiveau> {
   @override
   Widget build(BuildContext context) {
+    print("difference bravo");
+    print(difference);
     if (ableToBadge == true && etoiles == 100) {
       List<String> badges = user.badges.split("");
 
@@ -29,6 +36,7 @@ class _BravoNiveauState extends State<BravoNiveau> {
       user.badges.replaceRange(planeteInd, planeteInd + 1, '1');
       print(user.badges);
       */
+
     }
     return Scaffold(
       appBar: AppBar(
@@ -77,14 +85,27 @@ class _BravoNiveauState extends State<BravoNiveau> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 5),
-              child: Text(
-                'Vous avez collecté \n\ $etoiles etoiles!',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.normal,
-                    fontFamily: 'Gotham'),
-                textAlign: TextAlign.center,
+              child: Column(
+                children: [
+                  Text(
+                    'Vous avez collecté',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.normal,
+                        fontFamily: 'Gotham'),
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    '$etoiles étoiles !',
+                    style: TextStyle(
+                        color: myYellow,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'Gotham'),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
             ),
             Padding(
@@ -93,26 +114,52 @@ class _BravoNiveauState extends State<BravoNiveau> {
                 image: AssetImage('assets/images/avatars/rocket_badge.png'),
               ),
             ),
-            Row(
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  'Allez voir votre profil',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.normal,
-                      fontFamily: 'Gotham'),
-                  textAlign: TextAlign.center,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Nombre maximale d'étoiles \n collectées dans $planeteName :",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.normal,
+                          fontFamily: 'Gotham'),
+                      textAlign: TextAlign.center,
+                    ),
+                    Text(
+                      "$etoilesMax",
+                      style: TextStyle(
+                          color: myYellow,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w900,
+                          fontFamily: 'Gotham'),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
                 ),
-                IconButton(
-                    icon: Icon(Icons.arrow_forward_outlined),
-                    color: Colors.white,
-                    iconSize: 30,
-                    onPressed: () => {
-                          Navigator.pushReplacementNamed(
-                              context, '/profilePage')
-                        }),
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Text(
+                    "\nEtoiles ajoutés :  ",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.normal,
+                        fontFamily: 'Gotham'),
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    "$difference",
+                    style: TextStyle(
+                        color: myYellow,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w900,
+                        fontFamily: 'Gotham'),
+                    textAlign: TextAlign.center,
+                  ),
+                ])
               ],
             ),
           ],

@@ -390,35 +390,39 @@ class AppbarCustomed extends StatelessWidget {
           backgroundColor: myBlue,
           pinned: true,
           shadowColor: Colors.black,
-          expandedHeight: 91,
+          // expandedHeight: 91,
           brightness: Brightness.dark,
-          title: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '$planete',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 28,
-                  fontFamily: 'Gotham',
-                  fontWeight: FontWeight.normal,
+          title: Padding(
+            padding: const EdgeInsets.only(top: 25),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  '$planete',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 28,
+                    fontFamily: 'Gotham',
+                    fontWeight: FontWeight.normal,
+                  ),
                 ),
+                Text(
+                '$numero/10',
+                 style: TextStyle(
+                 color: myRed2,
+                 fontSize: 17,
+                 fontFamily: 'Gotham',
+                 fontWeight: FontWeight.normal,
+            ),
               ),
-              Text(
-              '$numero/10',
-               style: TextStyle(
-               color: myRed2,
-               fontSize: 17,
-               fontFamily: 'Gotham',
-               fontWeight: FontWeight.normal,
+              ],
+              ),
           ),
-            ),
-            ],
-            ),
           centerTitle: true,
+          leadingWidth: 70,
           leading: Padding(
-            padding: const EdgeInsets.only(top: 34, left: 11),
+            padding: const EdgeInsets.only(top: 34, left: 20),
             child: Row(
               children: [
                 Text(
@@ -431,9 +435,14 @@ class AppbarCustomed extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  child: Image.asset(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 5),
+                    child: Image.asset(
                 'assets/images/icons/fusil.png',
-                ),),
+                //  width: 10,
+                fit: BoxFit.cover,
+                ),
+                  ),),
               ],
             ),
           ),

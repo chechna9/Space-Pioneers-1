@@ -23,6 +23,7 @@ class _BravoBadgeState extends State<BravoBadge> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20),
+            // ignore: missing_required_param
             child: IconButton(
               icon: IconButton(
                 icon: Icon(Icons.cancel_outlined),

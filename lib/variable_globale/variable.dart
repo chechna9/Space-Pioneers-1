@@ -11,3 +11,4 @@ int indice = 0;
 int nbTentatives;
 int factRecomp;
 bool ableToBadge = false;
+

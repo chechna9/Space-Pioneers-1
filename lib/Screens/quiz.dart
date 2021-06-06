@@ -206,7 +206,6 @@ class _AnswerBoxState extends State<AnswerBox> {
                       if (ind.isEmpty || nbTentatives == 0) {
                         if (verification(points) == 1) {
                           update();
-
                           user.etoiles = trace.earth +
                               trace.jupiter +
                               trace.mars +
@@ -262,7 +261,6 @@ class _AnswerBoxState extends State<AnswerBox> {
                     if (ind.isEmpty || nbTentatives <= 0) {
                       if (verification(points) == 1) {
                         update();
-
                         user.etoiles = trace.earth +
                             trace.jupiter +
                             trace.mars +
@@ -392,14 +390,13 @@ class AppbarCustomed extends StatelessWidget {
           automaticallyImplyLeading: false,
           backgroundColor: myBlue,
           pinned: true,
-          elevation: 15,
           shadowColor: Colors.black,
           expandedHeight: 91,
           brightness: Brightness.dark,
-          title: Center(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 27),
-              child: Text(
+          title: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
                 '$planete',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -409,18 +406,36 @@ class AppbarCustomed extends StatelessWidget {
                   fontWeight: FontWeight.normal,
                 ),
               ),
-            ),
+              Text(
+              '$numero/10',
+               style: TextStyle(
+               color: myRed2,
+               fontSize: 17,
+               fontFamily: 'Gotham',
+               fontWeight: FontWeight.normal,
           ),
+            ),
+            ],
+            ),
+          centerTitle: true,
           leading: Padding(
             padding: const EdgeInsets.only(top: 34, left: 11),
-            child: Text(
-              '$numero/10',
-              style: TextStyle(
-                color: myRed2,
-                fontSize: 17,
-                fontFamily: 'Gotham',
-                fontWeight: FontWeight.normal,
-              ),
+            child: Row(
+              children: [
+                Text(
+                  '$nbTentatives',
+                  style: TextStyle(
+                    color: myRed2,
+                    fontSize: 17,
+                    fontFamily: 'Gotham',
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                Container(
+                  child: Image.asset(
+                'assets/images/icons/fusil.png',
+                ),),
+              ],
             ),
           ),
           actions: [
@@ -527,8 +542,6 @@ int verification(int point) {
   if (planeteInd == 1) {
     if (trace.mercury < point) {
       ecart = point - trace.mercury;
-            print("ecart");
-      print(ecart);
       trace.mercury = point;
       etoilesMax = point;
       return 1;
@@ -537,6 +550,7 @@ int verification(int point) {
       etoilesMax = trace.mercury;
       return -1;
     }
+
   }
   if (planeteInd == 2) {
     if (trace.venus < point) {

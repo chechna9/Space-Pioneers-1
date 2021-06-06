@@ -25,8 +25,7 @@ class BravoNiveau extends StatefulWidget {
 class _BravoNiveauState extends State<BravoNiveau> {
   @override
   Widget build(BuildContext context) {
-          print("Ecart bravo");
-      print(ecart);
+
     if (ableToBadge == true && etoiles == 100) {
       List<String> badges = user.badges.split("");
 

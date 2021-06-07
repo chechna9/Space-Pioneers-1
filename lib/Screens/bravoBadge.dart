@@ -25,13 +25,11 @@ class _BravoBadgeState extends State<BravoBadge> {
             padding: const EdgeInsets.only(right: 20),
             // ignore: missing_required_param
             child: IconButton(
-              icon: IconButton(
-                icon: Icon(Icons.cancel_outlined),
-                color: myGrey,
-                iconSize: 30,
-                onPressed: () =>
-                    Navigator.pushReplacementNamed(context, '/planetChoice'),
-              ),
+              icon: Icon(Icons.cancel_outlined),
+              color: myGrey,
+              iconSize: 30,
+              onPressed: () =>
+                  Navigator.pushReplacementNamed(context, '/planetChoice'),
             ),
           ),
         ],

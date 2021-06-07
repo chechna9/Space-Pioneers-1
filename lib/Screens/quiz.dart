@@ -11,6 +11,7 @@ import 'package:astro01/Screens/planetChoice.dart';
 import 'package:astro01/classes/questions.dart';
 import 'package:astro01/components/InfoSup.dart';
 import 'package:astro01/main.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'dart:async';
@@ -34,12 +35,20 @@ List<int> ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 class Ind extends ChangeNotifier {
   List<int> ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    int nb = nbTentatives;
 
   void updateInd(List<int> newindice) {
     ind = newindice;
     notifyListeners();
   }
+
+    void updatenb() {
+    nb--;
+    notifyListeners();
+  }
 }
+
+
 
 int questNum = 1;
 
@@ -202,7 +211,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                       ind.removeAt(0);
 
                       cliquer = false;
-                      if (ind.isEmpty || nbTentatives == 0) {
+                      if (ind.isEmpty || Provider.of<Ind>(context).nb == 0) {
                         if (verification(points) == 1) {
                           update();
                           user.etoiles = trace.earth +
@@ -228,7 +237,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                     setState(() {
                       cliquer = true;
                       choiceColor = choiceColors[1];
-                      nbTentatives--;
+                      Provider.of<Ind>(context , listen: false).updatenb();
                       print("points :");
                       print(points);
                     });
@@ -236,7 +245,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                     setState(() {
                       cliquer = true;
                       choiceColor = choiceColors[2];
-                      nbTentatives--;
+                      Provider.of<Ind>(context , listen: false).updatenb();
                       print("points :");
                       print(points);
                     });
@@ -244,7 +253,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                     setState(() {
                       cliquer = true;
                       choiceColor = choiceColors[3];
-                      nbTentatives--;
+                      Provider.of<Ind>(context , listen: false).updatenb();
                       print("points :");
                       print(points);
                     });
@@ -257,7 +266,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                   });
 
                   Timer(Duration(seconds: 1), () {
-                    if (ind.isEmpty || nbTentatives <= 0) {
+                    if (ind.isEmpty || Provider.of<Ind>(context).nb <= 0) {
                       if (verification(points) == 1) {
                         update();
                         user.etoiles = trace.earth +
@@ -383,83 +392,82 @@ class AppbarCustomed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: <Widget>[
-        SliverAppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: myBlue,
-          pinned: true,
-          shadowColor: Colors.black,
-          expandedHeight: 91,
-          brightness: Brightness.dark,
-          title: 
-          Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '$planete',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 28,
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          toolbarHeight: 91,
+          elevation: 20,
+          title: Container(
+            clipBehavior: Clip.none,
+            child: Column(
+                 mainAxisAlignment: MainAxisAlignment.center,
+               children: [
+                 Text(
+                   '$planete',
+                   textAlign: TextAlign.center,
+                   style: TextStyle(
+                     color: Colors.white,
+                     fontSize: 28,
+                     fontFamily: 'Gotham',
+                     fontWeight: FontWeight.normal,
+                   ),
+                 ),
+                 Text(
+                 '$numero/10',
+                  style: TextStyle(
+                  color: myRed2,
+                  fontSize: 17,
                   fontFamily: 'Gotham',
                   fontWeight: FontWeight.normal,
-                ),
-              ),
-              Text(
-              '$numero/10',
-               style: TextStyle(
-               color: myRed2,
-               fontSize: 17,
-               fontFamily: 'Gotham',
-               fontWeight: FontWeight.normal,
+             ),
+               ),
+               ],
+               ),
           ),
-            ),
-            ],
-            ),
-          centerTitle: true,
-          leadingWidth: 70,
-          leading: Padding(
-            padding: const EdgeInsets.only(top: 34, left: 20),
-            child: Row(
-              children: [
-                Text(
-                  '$nbTentatives',
-                  style: TextStyle(
-                    color: myRed2,
-                    fontSize: 17,
-                    fontFamily: 'Gotham',
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                Container(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 5),
-                    child: Image.asset(
-                'assets/images/icons/fusil.png',
-                //  width: 10,
-                fit: BoxFit.cover,
-                ),
-                  ),),
-              ],
-            ),
-          ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(top: 17, right: 5),
-              child: IconButton(
-                  icon: Icon(Icons.clear),
-                  color: myRed2,
-                  iconSize: 30,
-                  onPressed: () {
-                    points = 0;
-                    Navigator.pushReplacementNamed(context, '/planetChoice');
-                  }),
-            ),
+         centerTitle: true,
+         leadingWidth: 70,
+         leading: Center(
+           child: Padding(
+             padding: const EdgeInsets.only(left: 10),
+             child: Row(
+               children: [
+                 Text(
+                   '${Provider.of<Ind>(context).nb}',
+                   style: TextStyle(
+                     color: myRed2,
+                     fontSize: 23,
+                     fontFamily: 'Gotham',
+                     fontWeight: FontWeight.w700,
+                   ),
+                 ),
+                 Padding(
+                   padding: const EdgeInsets.only(left: 6, top: 3),
+                   child: Transform.rotate(
+                     angle: 6.5,
+                      child: Image.asset(
+                     'assets/images/icons/fusil.png',
+                     fit: BoxFit.scaleDown,
+                     width: 15,
+                     ),
+                   ),
+                 ),
+                   ]),
+           ),
+           ),
+         actions: [
+           Center(
+             child: IconButton(
+                 icon: Icon(Icons.clear),
+                 color: myRed2,
+                 iconSize: 30,
+                 onPressed: () {
+                   points = 0;
+                   Navigator.pushReplacementNamed(context, '/planetChoice');
+                 }),
+           ),
           ],
-        ),
-      ],
-    );
+        )
+     );          
   }
 }
 

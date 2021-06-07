@@ -160,7 +160,7 @@ List<PlanetInfo> planets = [
         "assets/images/doc/jupiter/galerie/jupiter9.png",
       ]),
   PlanetInfo(6,
-      name: 'Saturn',
+      name: 'Saturne',
       iconImage: 'assets/images/doc/saturn/saturn.png',
       gifplanet: 'assets/images/doc/saturn/saturn.gif',
       description:

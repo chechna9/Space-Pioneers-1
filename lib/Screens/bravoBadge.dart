@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'package:polygon_clipper/polygon_border.dart';
 import '../components/constants.dart';
+import 'profilePage.dart';
 
 String avatar = "default";
 String Badge = "Terre Hero";

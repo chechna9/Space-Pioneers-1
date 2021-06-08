@@ -39,6 +39,8 @@ class Ind extends ChangeNotifier {
     ind = newindice;
     notifyListeners();
   }
+
+  
 }
 
 int questNum = 1;

@@ -9,7 +9,7 @@ import '../main.dart';
 import '../classes/trace.dart';
 
 int etoilesRandom;
-// int etoilesMax;
+// int etoilessMax;
 int indicesbravo;
 // int difference;
 
@@ -21,21 +21,6 @@ class BravoNiveauR extends StatefulWidget {
 class _BravoNiveauRState extends State<BravoNiveauR> {
   @override
   Widget build(BuildContext context) {
-    // // if (ableToBadge == true && etoilesRandom == 15) {
-    // //   List<String> badges = user.badges.split("");
-
-    // //   print("etoiles de random");
-    // //   print(etoilesRandom);
-    // //   badges[indicesbravo] = '1';
-
-    // //   user.badges = badges.join("");
-    // //   update_badges();
-    // //   /* print(user.badges);
-    // //   user.badges.replaceRange(planeteInd, planeteInd + 1, '1');
-    // //   print(user.badges);
-    // //   */
-
-    // }
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -49,13 +34,13 @@ class _BravoNiveauRState extends State<BravoNiveauR> {
               color: myGrey,
               iconSize: 30,
               onPressed: () {
-                if (ableToBadge == true && etoilesRandom ==15) {
-                  // List<String> badges = user.badges.split("");
-                  // badges[indicesbravo] = '1';
-                  // user.badges = badges.join("");
-                  // update_badges();
-                    print("etoiles Random:");
-                    print(etoilesRandom);
+                if (ableToBadge == true &&
+                     etoilesRandom == 300 &&
+                    user.badges[9] == '0') {
+                  List<String> badges = user.badges.split("");
+                  badges[9] = '1';
+                  user.badges = badges.join("");
+                  update_badges();
                   Navigator.pushReplacementNamed(context, '/bravoBadge');
                 } else {
                   Navigator.pushReplacementNamed(context, '/planetChoice');
@@ -109,6 +94,20 @@ class _BravoNiveauRState extends State<BravoNiveauR> {
               child: Image(
                 image: AssetImage('assets/images/avatars/rocket_badge.png'),
               ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "Nombre maximale d'étoiles \n collectées dans $planeteName :",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.normal,
+                      fontFamily: 'Gotham'),
+                  textAlign: TextAlign.center,
+                ),
+              ],
             ),
           ],
         ),

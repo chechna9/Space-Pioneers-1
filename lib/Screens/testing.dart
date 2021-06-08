@@ -263,7 +263,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                       etoiles = points;
                       print(points);
                       // Navigator.pushReplacementNamed(context, '/bravoNiveau');
-                      // indices = planeteInd;
+                      indices = planeteInd;
 
                       //Navigator.pushReplacementNamed(context, '/planetChoice');
                       questNum = 1;

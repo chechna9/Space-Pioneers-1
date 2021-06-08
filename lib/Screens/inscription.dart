@@ -292,7 +292,7 @@ class _RegCardState extends State<RegCard> {
           'etoiles': 0,
           'naissance': _dateTime.toString().split(" ")[0],
           'avatar': 'default',
-          'badges': '000000000001',
+          'badges': '000000001',
         }).execute();
         Navigator.pushNamed(context, '/homeScreen');
       } else if (signInResult.error.message != null ||

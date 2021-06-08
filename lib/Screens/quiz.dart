@@ -32,7 +32,6 @@ String planeteName;
 List<String> propo = ['a', 'b', 'c', 'd'];
 int points = 0;
 bool cliquer = false;
-bool recompCliquer = false;
 List<int> ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 List<int> indices = [0, 1, 2, 3];
 
@@ -190,7 +189,6 @@ class _AnswerBoxState extends State<AnswerBox> {
             child: Center(
               child: ListTile(
                 onTap: () {
-                  recompCliquer = cliquer;
                   if (widget.answer == propo[0]) {
                     setState(() {
                       if (cliquer == false) {
@@ -200,20 +198,14 @@ class _AnswerBoxState extends State<AnswerBox> {
                       questNum++;
                       print("points :");
                       print(points);
-                      print("chlicker=$cliquer");
-                      showDialog(
-                        barrierDismissible: ind.length != 1,
-                        context: context,
-                        builder: (context) => InfoSup(
-                          content: widget.infoSup,
-                          recomp: recompCliquer ? 0 : factRecomp,
-                          onPressedExiste: ind.length == 0,
-                          onPressed: () {
-                            Navigator.pushReplacementNamed(
-                                context, '/bravoNiveau');
-                          },
-                        ),
-                      );
+                      if (ind.length != 1) {
+                        showDialog(
+                          context: context,
+                          builder: (context) => InfoSup(
+                              content: widget.infoSup,
+                              recomp: cliquer ? 0 : factRecomp),
+                        );
+                      }
 
                       ind.removeAt(0);
                       vfquestion = false;
@@ -275,10 +267,15 @@ class _AnswerBoxState extends State<AnswerBox> {
 
                       etoiles = points;
                       print(points);
+<<<<<<< HEAD
                       if (nbTentatives <= 0) {
                         Navigator.pushReplacementNamed(context, '/bravoNiveau');
                       }
                       // indices = planeteInd;
+=======
+                      Navigator.pushReplacementNamed(context, '/bravoNiveau');
+                      indices = planeteInd;
+>>>>>>> parent of 48602b5 (fixing last info sup)
 
                       //Navigator.pushReplacementNamed(context, '/planetChoice');
                       questNum = 1;

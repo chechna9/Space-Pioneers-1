@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:astro01/Screens/bravoNiveauR.dart';
 import 'package:astro01/components/RoundedCard.dart';
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -67,14 +68,14 @@ class _ProfilePageState extends State<ProfilePage> {
         color: Color(0xff37DBD0),
       ),
       BadgeCard(
-        name: "After 5 badges",
-        photo: "after5Badges",
-        color: Color(0xffE1023C),
-      ),
-      BadgeCard(
         name: "Random",
         photo: "random",
         color: Color(0xffFFF16E),
+      ),
+      BadgeCard(
+        name: "After 5 badges",
+        photo: "after5Badges",
+        color: Color(0xffE1023C),
       ),
       BadgeCard(
         name: "New",
@@ -91,6 +92,17 @@ class _ProfilePageState extends State<ProfilePage> {
       user.badges[i] != '0' ? tempBadges.add(badge) : null;
       i++;
     }
+    if (tempBadges.length > 5) {
+      tempBadges.add(allBadges[10]);
+      List<String> badges = user.badges.split("");
+
+      badges[10] = '1';
+
+      user.badges = badges.join("");
+
+      update_badges();
+    }
+
     // return tempBadges;
     return allBadges;
   }

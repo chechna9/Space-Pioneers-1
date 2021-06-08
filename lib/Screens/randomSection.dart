@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:astro01/Screens/bravoNiveauR.dart';
 import 'package:astro01/Screens/loading.dart';
 import 'package:astro01/Screens/planetChoice.dart';
+import 'package:astro01/Screens/quiz.dart';
 import 'package:astro01/classes/questions.dart';
 import 'package:astro01/classes/random.dart';
 import 'package:astro01/components/InfoSup.dart';
@@ -22,7 +23,7 @@ import 'bravoBadge.dart';
 
 bool vfquestion;
 List<String> propo = ['a', 'b', 'c', 'd'];
-var ind = Iterable<int>.generate(100).toList();
+var ind = Iterable<int>.generate(5).toList();
 
 int points = 0;
 bool cliquerRandom = false;
@@ -30,7 +31,7 @@ int questNumRandom = 1;
 List<int> indices = [0, 1, 2, 3];
 
 class Index extends ChangeNotifier {
-  var ind = Iterable<int>.generate(100).toList();
+  var ind = Iterable<int>.generate(5).toList();
 
   int nb = nbTentatives;
 
@@ -228,12 +229,21 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                   });
                   Timer(Duration(milliseconds: 700), () {
                     if (ind.isEmpty || nbTentatives <= 0) {
+<<<<<<< HEAD
                       Navigator.pushReplacementNamed(context, '/bravoNiveauR');
                       questNumRandom = 1;
                       user.etoiles = user.etoiles + points;
                       update_etoiles();
                       etoilesRandom = points;
+=======
+                      questNum = 1;
+                      user.etoiles = user.etoiles + points;
+                      update_etoiles();
+                      etoiless = points;
+>>>>>>> 371bb645f147b7687ac7cfde82cb3fb1f2480675
                       points = 0;
+                      planeteName = "Random";
+                      Navigator.pushReplacementNamed(context, '/bravoNiveauR');
                     } else {
                       if (widget.answer == propo[0]) {
                         setState(() {

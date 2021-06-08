@@ -79,7 +79,7 @@ class _BravoBadgeState extends State<BravoBadge> {
                     decoration: ShapeDecoration(
                       shape: PolygonBorder(sides: 6),
                       image: DecorationImage(
-                        image: AssetImage('assets/images/Badges/Soleil.png'),
+                        image: AssetImage('assets/images/Badges/$planeteName.png'),
                       ),
                     ),
                   ),

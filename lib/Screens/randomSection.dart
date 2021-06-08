@@ -22,15 +22,15 @@ import 'bravoBadge.dart';
 
 bool vfquestion;
 List<String> propo = ['a', 'b', 'c', 'd'];
-var ind = Iterable<int>.generate(10).toList();
+var ind = Iterable<int>.generate(100).toList();
 
 int points = 0;
 bool cliquerRandom = false;
-int questNum = 1;
+int questNumRandom = 1;
 List<int> indices = [0, 1, 2, 3];
 
 class Index extends ChangeNotifier {
-  var ind = Iterable<int>.generate(10).toList();
+  var ind = Iterable<int>.generate(100).toList();
 
   int nb = nbTentatives;
 
@@ -106,7 +106,7 @@ class _RandomQuizState extends State<RandomQuiz> {
                           body: AppbarCustomedRandom(
                             myBlue: myBlue,
                             myRed2: myRed2,
-                            numero: questNum,
+                            numero: questNumRandom,
                           ),
                         ),
                       ),
@@ -175,7 +175,7 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                         points += factRecomp;
                       }
                       choiceColor = choiceColors[0];
-                      questNum++;
+                      questNumRandom++;
                       vfquestion = false;
                       print("points :");
                       print(points);
@@ -229,7 +229,7 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                   Timer(Duration(milliseconds: 700), () {
                     if (ind.isEmpty || nbTentatives <= 0) {
                       Navigator.pushReplacementNamed(context, '/bravoNiveauR');
-                      questNum = 1;
+                      questNumRandom = 1;
                       user.etoiles = user.etoiles + points;
                       update_etoiles();
                       etoilesRandom = points;

@@ -23,47 +23,47 @@ class _ProfilePageState extends State<ProfilePage> {
     List<BadgeCard> allBadges = <BadgeCard>[
       BadgeCard(
         name: "Soleil hero",
-        photo: "Soleil",
+        photo: "soleil",
         color: Color(0xffFFE600),
       ),
       BadgeCard(
         name: "Mercure hero",
-        photo: "Mercure",
+        photo: "mercure",
         color: Color(0xff595959),
       ),
       BadgeCard(
         name: "Venus hero",
-        photo: "Venus",
+        photo: "venus",
         color: Color(0xffDF8F13),
       ),
       BadgeCard(
         name: "Terre hero",
-        photo: "Terre",
+        photo: "terre",
         color: Color(0xff78E237),
       ),
       BadgeCard(
         name: "Mars hero",
-        photo: "Mars",
+        photo: "mars",
         color: Color(0xffD70003),
       ),
       BadgeCard(
         name: "Jupiter hero",
-        photo: "Jupiter",
+        photo: "jupiter",
         color: Color(0xffEE6632),
       ),
       BadgeCard(
-        name: "Saturne hero",
-        photo: "Saturne",
+        name: "Saturn hero",
+        photo: "saturn",
         color: Color(0xff87579E),
       ),
       BadgeCard(
         name: "Uranus hero",
-        photo: "Uranus",
+        photo: "uranus",
         color: Color(0xff1A8CA9),
       ),
       BadgeCard(
         name: "Neptune hero",
-        photo: "Neptune",
+        photo: "neptune",
         color: Color(0xff37DBD0),
       ),
       BadgeCard(
@@ -73,7 +73,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       BadgeCard(
         name: "Random",
-        photo: "Random",
+        photo: "random",
         color: Color(0xffFFF16E),
       ),
       BadgeCard(
@@ -92,7 +92,7 @@ class _ProfilePageState extends State<ProfilePage> {
       i++;
     }
     // return tempBadges;
-    return tempBadges;
+    return allBadges;
   }
 
   @override
@@ -276,7 +276,7 @@ class BadgeCard extends StatelessWidget {
                 decoration: ShapeDecoration(
                   shape: PolygonBorder(sides: 6),
                   image: DecorationImage(
-                    image: AssetImage('images/Badges/$photo.png'),
+                    image: AssetImage('assets/images/Badges/$photo.png'),
                   ),
                 ),
               ),

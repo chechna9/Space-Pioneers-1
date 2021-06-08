@@ -1,5 +1,6 @@
 import 'package:astro01/Screens/loading.dart';
 import 'package:astro01/classes/User.dart';
+import 'package:astro01/main.dart';
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -264,4 +265,8 @@ Future<List<Users>> getUsers(String email_) async {
       .map((map) => Users.fromJson(map))
       .where((dataList) => dataList.email_ver(email_))
       .toList();
+}
+
+void signOut() async {
+  await Injector.appInstance.get<SupabaseClient>().auth.signOut();
 }

@@ -19,18 +19,23 @@ import '../components/InfoSup.dart';
 import 'bravoNiveau.dart';
 import 'bravoBadge.dart';
 
+bool vfquestion;
 List<String> propo = ['a', 'b', 'c', 'd'];
-var ind = Iterable<int>.generate(5).toList();
+var ind = Iterable<int>.generate(100).toList();
 
 int points = 0;
 bool cliquerRandom = true;
 int questNum = 1;
+List<int> indices = [0, 1, 2, 3];
 
 class Index extends ChangeNotifier {
-  var ind = Iterable<int>.generate(5).toList();
+  var ind = Iterable<int>.generate(100).toList();
 
-  void updateInd(List<int> newindice) {
+  int nb = nbTentatives;
+
+  void updateInd(List<int> newindice, int num) {
     ind = newindice;
+    nb = num;
     notifyListeners();
   }
 }
@@ -72,16 +77,21 @@ class _RandomQuizState extends State<RandomQuiz> {
                   if (snapshot.hasData == false) {
                     return LoadingScreen();
                   }
-                  List<int> indices = [0, 1, 2, 3];
 
-                  indices = shuffle(indices);
                   ind = Provider.of<Index>(context).ind;
-                  ind = shuffle(ind);
+                  if (cliquerRandom == false) {
+                    if (vfquestion == false) indices = [0, 1, 2, 3];
+                    indices = shuffle(indices);
+                    ind = shuffle(ind);
+                  }
+
                   RemplirChoices(propo, snapshot.data[ind[0]]);
+                  print(propo);
                   int i = 4;
                   if (propo[2] == null && propo[1] == null) {
                     i = 2;
-                    indices = shuffle([0, 3]);
+                    if (cliquerRandom == false) indices = shuffle([0, 3]);
+                    vfquestion = true;
                   }
                   return Stack(
                     fit: StackFit.expand,
@@ -165,18 +175,21 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                       }
                       choiceColor = choiceColors[0];
                       questNum++;
+                      vfquestion = false;
                       print("points :");
                       print(points);
                       print("tentatives :");
                       print(nbTentatives);
                     });
                     ind.removeAt(0);
-                    cliquerRandom = true;
+                    cliquerRandom = false;
                   } else if (widget.answer == propo[1]) {
                     setState(() {
-                      cliquerRandom = false;
+                      cliquerRandom = true;
                       choiceColor = choiceColors[1];
                       nbTentatives--;
+                      Provider.of<Index>(context, listen: false)
+                          .updateInd(ind, nbTentatives);
                       print("points :");
                       print(points);
                       print("tentatives :");
@@ -184,9 +197,11 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                     });
                   } else if (widget.answer == propo[2]) {
                     setState(() {
-                      cliquerRandom = false;
+                      cliquerRandom = true;
                       choiceColor = choiceColors[2];
                       nbTentatives--;
+                      Provider.of<Index>(context, listen: false)
+                          .updateInd(ind, nbTentatives);
                       print("points :");
                       print(points);
                       print("tentatives :");
@@ -194,9 +209,11 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                     });
                   } else if (widget.answer == propo[3]) {
                     setState(() {
-                      cliquerRandom = false;
+                      cliquerRandom = true;
                       choiceColor = choiceColors[3];
                       nbTentatives--;
+                      Provider.of<Index>(context, listen: false)
+                          .updateInd(ind, nbTentatives);
                       print("points :");
                       print(points);
                       print("tentatives :");
@@ -220,7 +237,7 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                       if (widget.answer == propo[0]) {
                         setState(() {
                           Provider.of<Index>(context, listen: false)
-                              .updateInd(ind);
+                              .updateInd(ind, nbTentatives);
                         });
                       }
                     }
@@ -336,81 +353,79 @@ class AppbarCustomedRandom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+        backgroundColor: Colors.transparent,
         appBar: AppBar(
           toolbarHeight: 91,
           elevation: 20,
           title: Container(
             clipBehavior: Clip.none,
             child: Column(
-                 mainAxisAlignment: MainAxisAlignment.center,
-               children: [
-                 Text(
-                   'random',
-                   textAlign: TextAlign.center,
-                   style: TextStyle(
-                     color: Colors.white,
-                     fontSize: 28,
-                     fontFamily: 'Gotham',
-                     fontWeight: FontWeight.normal,
-                   ),
-                 ),
-                 Text(
-                 '$numero/5',
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'random',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
-                  color: myRed2,
-                  fontSize: 17,
-                  fontFamily: 'Gotham',
-                  fontWeight: FontWeight.normal,
-             ),
-               ),
-               ],
-               ),
+                    color: Colors.white,
+                    fontSize: 28,
+                    fontFamily: 'Gotham',
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+                Text(
+                  '$numero/100',
+                  style: TextStyle(
+                    color: myRed2,
+                    fontSize: 17,
+                    fontFamily: 'Gotham',
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ],
+            ),
           ),
-         centerTitle: true,
-         leadingWidth: 70,
-         leading: Center(
-           child: Padding(
-             padding: const EdgeInsets.only(left: 10),
-             child: Row(
-               children: [
-                 Text(
-                   '$nbTentatives',
-                   style: TextStyle(
-                     color: myRed2,
-                     fontSize: 23,
-                     fontFamily: 'Gotham',
-                     fontWeight: FontWeight.w700,
-                   ),
-                 ),
-                 Padding(
-                   padding: const EdgeInsets.only(left: 6, top: 3),
-                   child: Transform.rotate(
-                     angle: 6.5,
-                      child: Image.asset(
-                     'assets/images/icons/fusil.png',
-                     fit: BoxFit.scaleDown,
-                     width: 15,
-                     ),
-                   ),
-                 ),
-                   ]),
-           ),
-           ),
-         actions: [
-           Center(
-             child: IconButton(
-                 icon: Icon(Icons.clear),
-                 color: myRed2,
-                 iconSize: 30,
-                 onPressed: () {
-                   points = 0;
-                   Navigator.pushReplacementNamed(context, '/planetChoice');
-                 }),
-           ),
+          centerTitle: true,
+          leadingWidth: 70,
+          leading: Center(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Row(children: [
+                Text(
+                  '${Provider.of<Index>(context).nb}',
+                  style: TextStyle(
+                    color: myRed2,
+                    fontSize: 23,
+                    fontFamily: 'Gotham',
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 6, top: 3),
+                  child: Transform.rotate(
+                    angle: 6.5,
+                    child: Image.asset(
+                      'assets/images/icons/fusil.png',
+                      fit: BoxFit.scaleDown,
+                      width: 15,
+                    ),
+                  ),
+                ),
+              ]),
+            ),
+          ),
+          actions: [
+            Center(
+              child: IconButton(
+                  icon: Icon(Icons.clear),
+                  color: myRed2,
+                  iconSize: 30,
+                  onPressed: () {
+                    points = 0;
+                    Navigator.pushReplacementNamed(context, '/planetChoice');
+                  }),
+            ),
           ],
-        )
-     );         
+        ));
   }
 }
 

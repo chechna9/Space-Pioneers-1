@@ -11,6 +11,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
+import 'Screens/bravoNiveauR.dart';
 import 'Screens/inscription.dart';
 import 'Screens/loading.dart';
 import 'Screens/quiz.dart';
@@ -71,6 +72,7 @@ void main() {
             mainAudioPlayer: mainAudioPlayer,
           ),
       '/bravoNiveau': (context) => BravoNiveau(),
+      '/bravoNiveauR': (context) => BravoNiveauR(),
       '/bravoBadge': (context) => BravoBadge(),
       '/random': (context) => RandomQuiz(),
       '/levelChoiceRandom': (context) => LevelChoiceRandom(),

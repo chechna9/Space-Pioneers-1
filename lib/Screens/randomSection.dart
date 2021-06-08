@@ -1,8 +1,10 @@
 // import 'dart:js';
 import 'dart:math';
 import 'dart:io';
+import 'package:astro01/Screens/bravoNiveauR.dart';
 import 'package:astro01/Screens/loading.dart';
 import 'package:astro01/Screens/planetChoice.dart';
+import 'package:astro01/Screens/quiz.dart';
 import 'package:astro01/classes/questions.dart';
 import 'package:astro01/classes/random.dart';
 import 'package:astro01/components/InfoSup.dart';
@@ -18,14 +20,14 @@ import 'package:provider/provider.dart';
 import '../components/InfoSup.dart';
 
 List<String> propo = ['a', 'b', 'c', 'd'];
-var ind = Iterable<int>.generate(10).toList();
+var ind = Iterable<int>.generate(100).toList();
 
 int points = 0;
-bool cliquerRandom = true;
+bool cliquerRandom = false;
 int questNum = 1;
 
 class Index extends ChangeNotifier {
-  var ind = Iterable<int>.generate(10).toList();
+  var ind = Iterable<int>.generate(100).toList();
 
   void updateInd(List<int> newindice) {
     ind = newindice;
@@ -158,7 +160,7 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                 onTap: () {
                   if (widget.answer == propo[0]) {
                     setState(() {
-                      if (cliquerRandom == true) {
+                      if (cliquerRandom == false) {
                         points += factRecomp;
                       }
                       choiceColor = choiceColors[0];
@@ -208,12 +210,13 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                   });
                   Timer(Duration(milliseconds: 700), () {
                     if (ind.isEmpty || nbTentatives <= 0) {
-                      Navigator.pushReplacementNamed(context, '/planetChoice');
                       questNum = 1;
                       user.etoiles = user.etoiles + points;
                       update_etoiles();
-
+                      etoiless = points;
                       points = 0;
+                      planeteName = "Random";
+                      Navigator.pushReplacementNamed(context, '/bravoNiveauR');
                     } else {
                       if (widget.answer == propo[0]) {
                         setState(() {

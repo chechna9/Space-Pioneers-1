@@ -1,4 +1,6 @@
+import 'package:astro01/Screens/bravoNiveauR.dart';
 import 'package:astro01/Screens/levelChoice.dart';
+import 'package:astro01/Screens/levelChoiceRandom.dart';
 import 'package:astro01/Screens/quiz.dart';
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:flutter/material.dart';
@@ -24,20 +26,7 @@ class _BravoNiveauState extends State<BravoNiveau> {
   Widget build(BuildContext context) {
     print("difference bravo");
     print(difference);
-    if (ableToBadge == true && etoiles == 100) {
-      List<String> badges = user.badges.split("");
 
-      badges[indices] = '1';
-
-      user.badges = badges.join("");
-
-      update_badges();
-      /* print(user.badges);
-      user.badges.replaceRange(planeteInd, planeteInd + 1, '1');
-      print(user.badges);
-      */
-
-    }
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -51,15 +40,17 @@ class _BravoNiveauState extends State<BravoNiveau> {
               color: myGrey,
               iconSize: 30,
               onPressed: () {
-                if (ableToBadge == true && etoiles == 100) {
-                  /*  List<String> badges = user.badges.split("");
-                  badges[planeteInd] = '1';
-                  user.badges = badges.join("");
-                  print(user.badges);*/
+                if (ableToBadge == true &&
+                    etoiles == 100 &&
+                    user.badges[indicesbravo] == '0') {
+                  List<String> badges = user.badges.split("");
 
-                  //user.badges.replaceRange(planeteInd, planeteInd, '1');
-                  //print(user.badges);
-                  // update_badges();
+                  badges[indicesbravo] = '1';
+
+                  user.badges = badges.join("");
+
+                  update_badges();
+
                   Navigator.pushReplacementNamed(context, '/bravoBadge');
                 } else {
                   Navigator.pushReplacementNamed(context, '/planetChoice');

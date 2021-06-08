@@ -6,6 +6,7 @@ import 'dart:math';
 import 'dart:io';
 
 import 'package:astro01/Screens/bravoNiveau.dart';
+import 'package:astro01/Screens/bravoNiveauR.dart';
 import 'package:astro01/Screens/loading.dart';
 import 'package:astro01/Screens/planetChoice.dart';
 import 'package:astro01/classes/questions.dart';
@@ -267,16 +268,10 @@ class _AnswerBoxState extends State<AnswerBox> {
 
                       etoiles = points;
                       print(points);
-<<<<<<< HEAD
                       if (nbTentatives <= 0) {
                         Navigator.pushReplacementNamed(context, '/bravoNiveau');
                       }
-                      // indices = planeteInd;
-=======
-                      Navigator.pushReplacementNamed(context, '/bravoNiveau');
-                      indices = planeteInd;
->>>>>>> parent of 48602b5 (fixing last info sup)
-
+                      indicesbravo = planeteInd;
                       //Navigator.pushReplacementNamed(context, '/planetChoice');
                       questNum = 1;
                       points = 0;

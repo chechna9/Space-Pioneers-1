@@ -1,3 +1,4 @@
+import 'package:astro01/Screens/bravoNiveauR.dart';
 import 'package:astro01/Screens/levelChoice.dart';
 import 'package:astro01/Screens/levelChoiceRandom.dart';
 import 'package:astro01/Screens/quiz.dart';
@@ -12,7 +13,7 @@ import '../classes/trace.dart';
 
 int etoiles;
 int etoilesMax;
-int indicesbravo;
+int indices;
 int difference;
 String planeteNAME = planeteName.inCaps;
 

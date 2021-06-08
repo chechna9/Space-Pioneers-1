@@ -6,7 +6,13 @@ import 'constants.dart';
 class InfoSup extends StatelessWidget {
   final String content;
   final int recomp;
-  InfoSup({@required this.content, @required this.recomp});
+  final Function onPressed;
+  final bool onPressedExiste;
+  InfoSup(
+      {@required this.content,
+      @required this.recomp,
+      this.onPressed,
+      @required this.onPressedExiste});
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -46,15 +52,37 @@ class InfoSup extends StatelessWidget {
               ),
               Column(
                 children: [
-                  Star(
-                    scale: 2.2,
-                    angle: 4,
+                  Row(
+                    children: [
+                      Star(
+                        scale: 2.2,
+                        angle: 4,
+                      ),
+                    ],
                   ),
                   SizedBox(
                     height: 4,
                   )
                 ],
               ),
+              onPressedExiste
+                  ? Column(
+                      children: [
+                        IconButton(
+                            icon: Icon(
+                              Icons.play_circle_fill,
+                              size: 30,
+                              color: myYellow,
+                            ),
+                            onPressed: onPressed),
+                        SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    )
+                  : SizedBox(
+                      width: 0,
+                    ),
             ],
           ),
         ],

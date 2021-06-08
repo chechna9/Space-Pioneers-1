@@ -9,9 +9,7 @@ import '../main.dart';
 import '../classes/trace.dart';
 
 int etoilesRandom;
-// int etoilessMax;
 int indicesbravo;
-// int difference;
 String planeteNAME = planeteName.inCaps;
 
 class BravoNiveauR extends StatefulWidget {

@@ -6,6 +6,7 @@ import 'dart:math';
 import 'dart:io';
 
 import 'package:astro01/Screens/bravoNiveau.dart';
+import 'package:astro01/Screens/bravoNiveauR.dart';
 import 'package:astro01/Screens/loading.dart';
 import 'package:astro01/Screens/planetChoice.dart';
 import 'package:astro01/classes/questions.dart';
@@ -171,6 +172,8 @@ class AnswerBox extends StatefulWidget {
 }
 
 class _AnswerBoxState extends State<AnswerBox> {
+  bool recompCliquer = false;
+
   Color choiceColor = Colors.white;
   List<Color> choiceColors = [choiceGreen, choiceRed, choiceYellow, choiceBlue];
   @override
@@ -189,6 +192,8 @@ class _AnswerBoxState extends State<AnswerBox> {
             child: Center(
               child: ListTile(
                 onTap: () {
+                  recompCliquer = cliquer;
+
                   if (widget.answer == propo[0]) {
                     setState(() {
                       if (cliquer == false) {
@@ -198,14 +203,20 @@ class _AnswerBoxState extends State<AnswerBox> {
                       questNum++;
                       print("points :");
                       print(points);
-                      if (ind.length != 1) {
-                        showDialog(
-                          context: context,
-                          builder: (context) => InfoSup(
-                              content: widget.infoSup,
-                              recomp: cliquer ? 0 : factRecomp),
-                        );
-                      }
+
+                      showDialog(
+                        barrierDismissible: ind.length != 1,
+                        context: context,
+                        builder: (context) => InfoSup(
+                          content: widget.infoSup,
+                          recomp: recompCliquer ? 0 : factRecomp,
+                          onPressedExiste: ind.length == 0,
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(
+                                context, '/bravoNiveau');
+                          },
+                        ),
+                      );
 
                       ind.removeAt(0);
                       vfquestion = false;
@@ -267,9 +278,10 @@ class _AnswerBoxState extends State<AnswerBox> {
 
                       etoiles = points;
                       print(points);
-                      Navigator.pushReplacementNamed(context, '/bravoNiveau');
+                      if (nbTentatives <= 0) {
+                        Navigator.pushReplacementNamed(context, '/bravoNiveau');
+                      }
                       indicesbravo = planeteInd;
-
                       //Navigator.pushReplacementNamed(context, '/planetChoice');
                       questNum = 1;
                       points = 0;

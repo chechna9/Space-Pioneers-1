@@ -24,7 +24,6 @@ import 'bravoBadge.dart';
 bool vfquestion;
 List<String> propo = ['a', 'b', 'c', 'd'];
 var ind = Iterable<int>.generate(5).toList();
-
 int points = 0;
 bool cliquerRandom = false;
 int questNumRandom = 1;
@@ -235,7 +234,7 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                       update_etoiles();
                       etoilesRandom = points;
                       points = 0;
-                      planeteName = "Random";
+                      planeteName = "random";
                     } else {
                       if (widget.answer == propo[0]) {
                         setState(() {

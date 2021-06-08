@@ -1,3 +1,4 @@
+import 'package:astro01/Screens/bravoNiveau.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'package:flutter/services.dart';
@@ -6,10 +7,10 @@ import 'package:polygon_clipper/polygon_border.dart';
 import '../components/constants.dart';
 import 'profilePage.dart';
 import 'quiz.dart';
+import 'randomSection.dart';
 
 String avatar = "default";
-// String Badge = "Terre Hero";
-String planeteNAME = planeteName.inCaps;
+String planeteNAME;
 
 
 class BravoBadge extends StatefulWidget {
@@ -21,6 +22,7 @@ class _BravoBadgeState extends State<BravoBadge> {
   @override
   Widget build(BuildContext context) {
     print('bravo');
+    planeteNAME = planeteName.inCaps;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,

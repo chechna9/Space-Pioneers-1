@@ -12,7 +12,6 @@ import 'package:astro01/Screens/planetChoice.dart';
 import 'package:astro01/classes/questions.dart';
 import 'package:astro01/components/InfoSup.dart';
 import 'package:astro01/main.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'dart:async';
@@ -97,7 +96,9 @@ class _QuizState extends State<Quiz> {
                   RemplirChoices(
                       propo, snapshot.data[ind[0] + 10 * planeteInd]);
                   print(propo);
+
                   planeteName = snapshot.data[ind[0] + 10 * planeteInd].planete;
+
                   int i = 4;
 
                   if (propo[2] == null && propo[1] == null) {
@@ -119,7 +120,7 @@ class _QuizState extends State<Quiz> {
                             myBlue: myBlue,
                             myRed2: myRed2,
                             planete:
-                                snapshot.data[ind[0] + 10 * planeteInd].planete,
+                                planeteName.inCaps,
                             numero: questNum,
                           ),
                         ),
@@ -264,6 +265,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                     if (ind.isEmpty || nbTentatives <= 0) {
                       if (verification(points) == 1) {
                         update();
+
                         user.etoiles = trace.earth +
                             trace.jupiter +
                             trace.mars +
@@ -273,7 +275,6 @@ class _AnswerBoxState extends State<AnswerBox> {
                             trace.soleil +
                             trace.uranus +
                             trace.venus;
-                        //print(user.etoiles);
                       }
 
                       etoiles = points;

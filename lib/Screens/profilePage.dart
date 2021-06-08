@@ -13,6 +13,7 @@ import '../variable_globale/variable.dart';
 
 String avatar = user.avatar;
 String userName = user.name;
+String badgePhoto;
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -53,8 +54,8 @@ class _ProfilePageState extends State<ProfilePage> {
         color: Color(0xffEE6632),
       ),
       BadgeCard(
-        name: "Saturn hero",
-        photo: "saturn",
+        name: "Saturne hero",
+        photo: "saturne",
         color: Color(0xff87579E),
       ),
       BadgeCard(
@@ -104,7 +105,8 @@ class _ProfilePageState extends State<ProfilePage> {
     }
 
     // return tempBadges;
-    return tempBadges;
+    badgePhoto = BadgeCard().photo;
+    return allBadges;
   }
 
   @override
@@ -288,7 +290,7 @@ class BadgeCard extends StatelessWidget {
                 decoration: ShapeDecoration(
                   shape: PolygonBorder(sides: 6),
                   image: DecorationImage(
-                    image: AssetImage('images/Badges/$photo.png'),
+                    image: AssetImage('assets/images/Badges/$photo.png'),
                   ),
                 ),
               ),

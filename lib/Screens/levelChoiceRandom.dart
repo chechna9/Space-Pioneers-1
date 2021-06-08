@@ -63,7 +63,7 @@ class _LevelChoiceRandomState extends State<LevelChoiceRandom> {
                               ),
                             ),
                             AutoSizeText(
-                              'Selon votre.',
+                              'Selon votre niveau .',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w100,

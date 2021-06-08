@@ -23,47 +23,47 @@ class _ProfilePageState extends State<ProfilePage> {
     List<BadgeCard> allBadges = <BadgeCard>[
       BadgeCard(
         name: "Soleil hero",
-        photo: "soleil",
+        photo: "Soleil",
         color: Color(0xffFFE600),
       ),
       BadgeCard(
         name: "Mercure hero",
-        photo: "mercure",
+        photo: "Mercure",
         color: Color(0xff595959),
       ),
       BadgeCard(
         name: "Venus hero",
-        photo: "venus",
+        photo: "Venus",
         color: Color(0xffDF8F13),
       ),
       BadgeCard(
         name: "Terre hero",
-        photo: "terre",
+        photo: "Terre",
         color: Color(0xff78E237),
       ),
       BadgeCard(
         name: "Mars hero",
-        photo: "mars",
+        photo: "Mars",
         color: Color(0xffD70003),
       ),
       BadgeCard(
         name: "Jupiter hero",
-        photo: "jupiter",
+        photo: "Jupiter",
         color: Color(0xffEE6632),
       ),
       BadgeCard(
-        name: "Saturn hero",
-        photo: "saturn",
+        name: "Saturne hero",
+        photo: "Saturne",
         color: Color(0xff87579E),
       ),
       BadgeCard(
         name: "Uranus hero",
-        photo: "uranus",
+        photo: "Uranus",
         color: Color(0xff1A8CA9),
       ),
       BadgeCard(
         name: "Neptune hero",
-        photo: "neptune",
+        photo: "Neptune",
         color: Color(0xff37DBD0),
       ),
       BadgeCard(
@@ -73,7 +73,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       BadgeCard(
         name: "Random",
-        photo: "random",
+        photo: "Random",
         color: Color(0xffFFF16E),
       ),
       BadgeCard(

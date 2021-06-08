@@ -79,7 +79,7 @@ class _BravoBadgeState extends State<BravoBadge> {
                     decoration: ShapeDecoration(
                       shape: PolygonBorder(sides: 6),
                       image: DecorationImage(
-                        image: AssetImage('assets/images/avatars/$planeteName.png'),
+                        image: AssetImage('assets/images/Badges/Soleil.png'),
                       ),
                     ),
                   ),
@@ -94,27 +94,29 @@ class _BravoBadgeState extends State<BravoBadge> {
                     fontFamily: 'Gotham'),
               ),
               Spacer(flex: 1),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Allez voir vos badges',
-                    style: TextStyle(
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Allez voir vos badges',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.normal,
+                          fontFamily: 'Gotham'),
+                      textAlign: TextAlign.center,
+                    ),
+                    IconButton(
+                        icon: Icon(Icons.arrow_forward_outlined),
                         color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.normal,
-                        fontFamily: 'Gotham'),
-                    textAlign: TextAlign.center,
-                  ),
-                  IconButton(
-                      icon: Icon(Icons.arrow_forward_outlined),
-                      color: Colors.white,
-                      iconSize: 30,
-                      onPressed: () => {
-                            Navigator.pushReplacementNamed(
-                                context, '/profilePage'),
-                          }),
-                ],
+                        iconSize: 30,
+                        onPressed: () => {
+                              Navigator.pushReplacementNamed(
+                                  context, '/profilePage'),
+                            }),
+                  ],
+                ),
               ),
             ],
           ),

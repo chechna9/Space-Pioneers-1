@@ -172,6 +172,8 @@ class AnswerBox extends StatefulWidget {
 }
 
 class _AnswerBoxState extends State<AnswerBox> {
+  bool recompCliquer = false;
+
   Color choiceColor = Colors.white;
   List<Color> choiceColors = [choiceGreen, choiceRed, choiceYellow, choiceBlue];
   @override
@@ -190,6 +192,8 @@ class _AnswerBoxState extends State<AnswerBox> {
             child: Center(
               child: ListTile(
                 onTap: () {
+                  recompCliquer = cliquer;
+
                   if (widget.answer == propo[0]) {
                     setState(() {
                       if (cliquer == false) {
@@ -199,14 +203,20 @@ class _AnswerBoxState extends State<AnswerBox> {
                       questNum++;
                       print("points :");
                       print(points);
-                      if (ind.length != 1) {
-                        showDialog(
-                          context: context,
-                          builder: (context) => InfoSup(
-                              content: widget.infoSup,
-                              recomp: cliquer ? 0 : factRecomp),
-                        );
-                      }
+
+                      showDialog(
+                        barrierDismissible: ind.length != 1,
+                        context: context,
+                        builder: (context) => InfoSup(
+                          content: widget.infoSup,
+                          recomp: recompCliquer ? 0 : factRecomp,
+                          onPressedExiste: ind.length == 0,
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(
+                                context, '/bravoNiveau');
+                          },
+                        ),
+                      );
 
                       ind.removeAt(0);
                       vfquestion = false;

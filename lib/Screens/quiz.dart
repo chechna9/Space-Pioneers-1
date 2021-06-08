@@ -283,10 +283,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                         Navigator.pushReplacementNamed(context, '/bravoNiveau');
                       }
                       indicesbravo = planeteInd;
-<<<<<<< HEAD
-=======
                       //Navigator.pushReplacementNamed(context, '/planetChoice');
->>>>>>> 514878ccac2e4987eff0cf188db5c370969b5e38
                       questNum = 1;
                       points = 0;
                     } else {

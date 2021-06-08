@@ -54,8 +54,8 @@ class _ProfilePageState extends State<ProfilePage> {
         color: Color(0xffEE6632),
       ),
       BadgeCard(
-        name: "Saturn hero",
-        photo: "saturn",
+        name: "Saturne hero",
+        photo: "saturne",
         color: Color(0xff87579E),
       ),
       BadgeCard(

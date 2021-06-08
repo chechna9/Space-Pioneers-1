@@ -1,6 +1,7 @@
 // import 'dart:js';
 import 'dart:math';
 import 'dart:io';
+import 'package:astro01/Screens/bravoNiveauR.dart';
 import 'package:astro01/Screens/loading.dart';
 import 'package:astro01/Screens/planetChoice.dart';
 import 'package:astro01/classes/questions.dart';
@@ -16,18 +17,20 @@ import 'package:http/http.dart' as http;
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:provider/provider.dart';
 import '../components/InfoSup.dart';
+import 'bravoNiveau.dart';
+import 'bravoBadge.dart';
 
 bool vfquestion;
 List<String> propo = ['a', 'b', 'c', 'd'];
-var ind = Iterable<int>.generate(100).toList();
+var ind = Iterable<int>.generate(10).toList();
 
 int points = 0;
-bool cliquerRandom = true;
+bool cliquerRandom = false;
 int questNum = 1;
 List<int> indices = [0, 1, 2, 3];
 
 class Index extends ChangeNotifier {
-  var ind = Iterable<int>.generate(100).toList();
+  var ind = Iterable<int>.generate(10).toList();
 
   int nb = nbTentatives;
 
@@ -168,7 +171,7 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                 onTap: () {
                   if (widget.answer == propo[0]) {
                     setState(() {
-                      if (cliquerRandom == true) {
+                      if (cliquerRandom == false) {
                         points += factRecomp;
                       }
                       choiceColor = choiceColors[0];
@@ -225,11 +228,11 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                   });
                   Timer(Duration(milliseconds: 700), () {
                     if (ind.isEmpty || nbTentatives <= 0) {
-                      Navigator.pushReplacementNamed(context, '/planetChoice');
+                      Navigator.pushReplacementNamed(context, '/bravoNiveauR');
                       questNum = 1;
                       user.etoiles = user.etoiles + points;
                       update_etoiles();
-
+                      etoilesRandom = points;
                       points = 0;
                     } else {
                       if (widget.answer == propo[0]) {
@@ -280,6 +283,24 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
     );
   }
 }
+
+// int verifRandom(int point) {
+//   if (planeteInd == 9) {
+//     int pointsRandom = user.etoiles - (trace.earth + trace.jupiter + trace.mars + trace.mercury + trace.neptune + trace.saturn + trace.soleil + trace.uranus + trace.venus);
+//     if (pointsRandom < points) {
+//       difference = points - pointsRandom;
+//       print("difference");
+//       print(difference);
+//       pointsRandom = points;
+//       etoilesMax = points;
+//       return 1;
+//     } else {
+//       difference = 0;
+//       etoilesMax = pointsRandom;
+//       return -1;
+//     }
+//   }
+// }
 
 class QuestBoxRandom extends StatelessWidget {
   const QuestBoxRandom({
@@ -340,20 +361,11 @@ class AppbarCustomedRandom extends StatelessWidget {
           title: Container(
             clipBehavior: Clip.none,
             child: Column(
-                 mainAxisAlignment: MainAxisAlignment.center,
-               children: [
-                 Text(
-                   'random',
-                   textAlign: TextAlign.center,
-                   style: TextStyle(
-                     color: Colors.white,
-                     fontSize: 28,
-                     fontFamily: 'Gotham',
-                     fontWeight: FontWeight.normal,
-                   ),
-                 ),
-                 Text(
-                 '$numero/100',
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'random',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 28,
@@ -362,7 +374,7 @@ class AppbarCustomedRandom extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '$numero/100',
+                  '$numero/10',
                   style: TextStyle(
                     color: myRed2,
                     fontSize: 17,

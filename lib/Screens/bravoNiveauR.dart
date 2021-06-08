@@ -8,7 +8,7 @@ import 'randomSection.dart';
 import '../main.dart';
 import '../classes/trace.dart';
 
-int etoiles;
+int etoilesRandom;
 // int etoilesMax;
 int indicesbravo;
 // int difference;
@@ -21,7 +21,7 @@ class BravoNiveauR extends StatefulWidget {
 class _BravoNiveauRState extends State<BravoNiveauR> {
   @override
   Widget build(BuildContext context) {
-    if (ableToBadge == true && etoiles == 300) {
+    if (ableToBadge == true && etoilesRandom == 30) {
       List<String> badges = user.badges.split("");
 
       badges[indicesbravo] = '1';
@@ -48,7 +48,9 @@ class _BravoNiveauRState extends State<BravoNiveauR> {
               color: myGrey,
               iconSize: 30,
               onPressed: () {
-                if (ableToBadge == true && etoiles == 300) {
+                if (ableToBadge == true && etoilesRandom == 30) {
+                    print("etoiles Random:");
+                    print(etoilesRandom);
                   Navigator.pushReplacementNamed(context, '/bravoBadge');
                 } else {
                   Navigator.pushReplacementNamed(context, '/planetChoice');
@@ -86,7 +88,7 @@ class _BravoNiveauRState extends State<BravoNiveauR> {
                     textAlign: TextAlign.center,
                   ),
                   Text(
-                    '$etoiles étoiles !',
+                    '$etoilesRandom étoiles !',
                     style: TextStyle(
                         color: myYellow,
                         fontSize: 24,
@@ -102,20 +104,6 @@ class _BravoNiveauRState extends State<BravoNiveauR> {
               child: Image(
                 image: AssetImage('assets/images/avatars/rocket_badge.png'),
               ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  "Nombre maximale d'étoiles \n collectées dans $planeteName :",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.normal,
-                      fontFamily: 'Gotham'),
-                  textAlign: TextAlign.center,
-                ),
-              ],
             ),
           ],
         ),

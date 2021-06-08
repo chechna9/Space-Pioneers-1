@@ -262,15 +262,12 @@ class _AnswerBoxState extends State<AnswerBox> {
                             trace.soleil +
                             trace.uranus +
                             trace.venus;
-                        //print(user.etoiles);
                       }
 
                       etoiles = points;
                       print(points);
                       Navigator.pushReplacementNamed(context, '/bravoNiveau');
                       indicesbravo = planeteInd;
-
-                      //Navigator.pushReplacementNamed(context, '/planetChoice');
                       questNum = 1;
                       points = 0;
                     } else {

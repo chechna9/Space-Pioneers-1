@@ -3,9 +3,10 @@ import 'package:astro01/components/constants.dart';
 import 'package:polygon_clipper/polygon_border.dart';
 import '../components/constants.dart';
 import 'profilePage.dart';
+import 'quiz.dart';
 
 String avatar = "default";
-String Badge = "Terre Hero";
+// String Badge = "Terre Hero";
 
 class BravoBadge extends StatefulWidget {
   @override
@@ -78,14 +79,14 @@ class _BravoBadgeState extends State<BravoBadge> {
                     decoration: ShapeDecoration(
                       shape: PolygonBorder(sides: 6),
                       image: DecorationImage(
-                        image: AssetImage('assets/images/avatars/default.png'),
+                        image: AssetImage('assets/images/avatars/$planeteName.png'),
                       ),
                     ),
                   ),
                 ),
               ),
               Text(
-                '$Badge',
+                '$planeteName Pionnier',
                 style: TextStyle(
                     color: myYellow,
                     fontSize: 36,

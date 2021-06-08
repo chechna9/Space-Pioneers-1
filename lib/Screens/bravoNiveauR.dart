@@ -8,8 +8,8 @@ import 'randomSection.dart';
 import '../main.dart';
 import '../classes/trace.dart';
 
-int etoiles;
-// int etoilesMax;
+int etoiless;
+// int etoilessMax;
 int indicesbravo;
 // int difference;
 
@@ -21,20 +21,6 @@ class BravoNiveauR extends StatefulWidget {
 class _BravoNiveauRState extends State<BravoNiveauR> {
   @override
   Widget build(BuildContext context) {
-    if (ableToBadge == true && etoiles == 300) {
-      List<String> badges = user.badges.split("");
-
-      badges[indicesbravo] = '1';
-
-      user.badges = badges.join("");
-
-      update_badges();
-      /* print(user.badges);
-      user.badges.replaceRange(planeteInd, planeteInd + 1, '1');
-      print(user.badges);
-      */
-
-    }
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -48,7 +34,13 @@ class _BravoNiveauRState extends State<BravoNiveauR> {
               color: myGrey,
               iconSize: 30,
               onPressed: () {
-                if (ableToBadge == true && etoiles == 300) {
+                if (ableToBadge == true &&
+                    etoiless == 300 &&
+                    user.badges[9] == '0') {
+                  List<String> badges = user.badges.split("");
+                  badges[9] = '1';
+                  user.badges = badges.join("");
+                  update_badges();
                   Navigator.pushReplacementNamed(context, '/bravoBadge');
                 } else {
                   Navigator.pushReplacementNamed(context, '/planetChoice');
@@ -86,7 +78,7 @@ class _BravoNiveauRState extends State<BravoNiveauR> {
                     textAlign: TextAlign.center,
                   ),
                   Text(
-                    '$etoiles étoiles !',
+                    '$etoiless étoiles !',
                     style: TextStyle(
                         color: myYellow,
                         fontSize: 24,

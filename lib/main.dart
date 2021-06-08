@@ -70,7 +70,7 @@ void main() {
             mainAudioPlayer: mainAudioPlayer,
           ),
       '/bravoNiveau': (context) => BravoNiveau(),
-      'bravoNiveauR': (context) => BravoNiveauR(),
+      '/bravoNiveauR': (context) => BravoNiveauR(),
       '/bravoBadge': (context) => BravoBadge(),
       '/random': (context) => RandomQuiz(),
       '/levelChoiceRandom': (context) => LevelChoiceRandom(),

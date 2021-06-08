@@ -1,10 +1,9 @@
 import 'dart:async';
-// import 'dart:js';
 
 import 'package:astro01/Screens/bravoBadge.dart';
 import 'package:astro01/Screens/bravoNiveau.dart';
 import 'package:astro01/Screens/levelChoice.dart';
-
+import 'package:astro01/Screens/bravoNiveauR.dart';
 import 'package:astro01/Screens/quiz.dart';
 import 'package:astro01/Screens/randomSection.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -71,6 +70,7 @@ void main() {
             mainAudioPlayer: mainAudioPlayer,
           ),
       '/bravoNiveau': (context) => BravoNiveau(),
+      'bravoNiveauR': (context) => BravoNiveauR(),
       '/bravoBadge': (context) => BravoBadge(),
       '/random': (context) => RandomQuiz(),
       '/levelChoiceRandom': (context) => LevelChoiceRandom(),

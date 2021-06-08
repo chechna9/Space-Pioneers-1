@@ -6,11 +6,12 @@ import 'dart:math';
 import 'dart:io';
 
 import 'package:astro01/Screens/bravoNiveau.dart';
-import 'package:astro01/Screens/planetChoice.dart';
 import 'package:astro01/Screens/loading.dart';
+import 'package:astro01/Screens/planetChoice.dart';
 import 'package:astro01/classes/questions.dart';
 import 'package:astro01/components/InfoSup.dart';
 import 'package:astro01/main.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'dart:async';
@@ -26,18 +27,22 @@ import '../components/InfoSup.dart';
 // Future<String> getJson() {
 //   return rootBundle.loadString('questions.json');
 // }
+bool vfquestion;
 String planeteName;
 List<String> propo = ['a', 'b', 'c', 'd'];
 int points = 0;
 bool cliquer = false;
 bool recompCliquer = false;
 List<int> ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+List<int> indices = [0, 1, 2, 3];
 
 class Ind extends ChangeNotifier {
   List<int> ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  int nb = nbTentatives;
 
-  void updateInd(List<int> newindice) {
+  void updateInd(List<int> newindice, int num) {
     ind = newindice;
+    nb = num;
     notifyListeners();
   }
 }
@@ -81,12 +86,14 @@ class _QuizState extends State<Quiz> {
                   if (snapshot.hasData == false) {
                     return LoadingScreen();
                   }
-                  List<int> indices = [0, 1, 2, 3];
 
-                  indices = shuffle(indices);
-                  print(indices);
                   ind = Provider.of<Ind>(context).ind;
-                  ind = shuffle(ind);
+
+                  if (cliquer == false) {
+                    if (vfquestion == false) indices = [0, 1, 2, 3];
+                    indices = shuffle(indices);
+                    ind = shuffle(ind);
+                  }
                   RemplirChoices(
                       propo, snapshot.data[ind[0] + 10 * planeteInd]);
                   print(propo);
@@ -95,8 +102,8 @@ class _QuizState extends State<Quiz> {
 
                   if (propo[2] == null && propo[1] == null) {
                     i = 2;
-
-                    indices = shuffle([0, 3]);
+                    if (cliquer == false) indices = shuffle([0, 3]);
+                    vfquestion = true;
                   }
 
                   return Stack(
@@ -128,6 +135,7 @@ class _QuizState extends State<Quiz> {
                             child: ListView.builder(
                               itemCount: min(4, i),
                               itemBuilder: (BuildContext context, int myindex) {
+                                print(indices);
                                 return Column(children: [
                                   AnswerBox(
                                     answer: propo[indices[myindex]],
@@ -208,7 +216,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                       );
 
                       ind.removeAt(0);
-
+                      vfquestion = false;
                       cliquer = false;
                     });
                   } else if (widget.answer == propo[1])
@@ -216,6 +224,8 @@ class _AnswerBoxState extends State<AnswerBox> {
                       cliquer = true;
                       choiceColor = choiceColors[1];
                       nbTentatives--;
+                      Provider.of<Ind>(context, listen: false)
+                          .updateInd(ind, nbTentatives);
                       print("points :");
                       print(points);
                     });
@@ -224,6 +234,8 @@ class _AnswerBoxState extends State<AnswerBox> {
                       cliquer = true;
                       choiceColor = choiceColors[2];
                       nbTentatives--;
+                      Provider.of<Ind>(context, listen: false)
+                          .updateInd(ind, nbTentatives);
                       print("points :");
                       print(points);
                     });
@@ -232,6 +244,8 @@ class _AnswerBoxState extends State<AnswerBox> {
                       cliquer = true;
                       choiceColor = choiceColors[3];
                       nbTentatives--;
+                      Provider.of<Ind>(context, listen: false)
+                          .updateInd(ind, nbTentatives);
                       print("points :");
                       print(points);
                     });
@@ -247,7 +261,6 @@ class _AnswerBoxState extends State<AnswerBox> {
                     if (ind.isEmpty || nbTentatives <= 0) {
                       if (verification(points) == 1) {
                         update();
-
                         user.etoiles = trace.earth +
                             trace.jupiter +
                             trace.mars +
@@ -274,7 +287,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                       if (widget.answer == propo[0]) {
                         setState(() {
                           Provider.of<Ind>(context, listen: false)
-                              .updateInd(ind);
+                              .updateInd(ind, nbTentatives);
                         });
                       }
                     }
@@ -373,46 +386,69 @@ class AppbarCustomed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: <Widget>[
-        SliverAppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: myBlue,
-          pinned: true,
-          elevation: 15,
-          shadowColor: Colors.black,
-          expandedHeight: 91,
-          brightness: Brightness.dark,
-          title: Center(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 27),
-              child: Text(
-                '$planete',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 28,
-                  fontFamily: 'Gotham',
-                  fontWeight: FontWeight.normal,
+    return Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          toolbarHeight: 91,
+          elevation: 20,
+          title: Container(
+            clipBehavior: Clip.none,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  '$planete',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 28,
+                    fontFamily: 'Gotham',
+                    fontWeight: FontWeight.normal,
+                  ),
                 ),
-              ),
+                Text(
+                  '$numero/10',
+                  style: TextStyle(
+                    color: myRed2,
+                    fontSize: 17,
+                    fontFamily: 'Gotham',
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ],
             ),
           ),
-          leading: Padding(
-            padding: const EdgeInsets.only(top: 34, left: 11),
-            child: Text(
-              '$numero/10',
-              style: TextStyle(
-                color: myRed2,
-                fontSize: 17,
-                fontFamily: 'Gotham',
-                fontWeight: FontWeight.normal,
-              ),
+          centerTitle: true,
+          leadingWidth: 70,
+          leading: Center(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Row(children: [
+                Text(
+                  '${Provider.of<Ind>(context).nb}',
+                  style: TextStyle(
+                    color: myRed2,
+                    fontSize: 23,
+                    fontFamily: 'Gotham',
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 6, top: 3),
+                  child: Transform.rotate(
+                    angle: 6.5,
+                    child: Image.asset(
+                      'assets/images/icons/fusil.png',
+                      fit: BoxFit.scaleDown,
+                      width: 15,
+                    ),
+                  ),
+                ),
+              ]),
             ),
           ),
           actions: [
-            Padding(
-              padding: const EdgeInsets.only(top: 17, right: 5),
+            Center(
               child: IconButton(
                   icon: Icon(Icons.clear),
                   color: myRed2,
@@ -423,9 +459,7 @@ class AppbarCustomed extends StatelessWidget {
                   }),
             ),
           ],
-        ),
-      ],
-    );
+        ));
   }
 }
 

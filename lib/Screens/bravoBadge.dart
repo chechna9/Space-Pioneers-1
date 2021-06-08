@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'package:polygon_clipper/polygon_border.dart';
 import '../components/constants.dart';
+import 'profilePage.dart';
 
 String avatar = "default";
 String Badge = "Terre Hero";
@@ -23,6 +24,7 @@ class _BravoBadgeState extends State<BravoBadge> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20),
+            // ignore: missing_required_param
             child: IconButton(
               icon: Icon(Icons.cancel_outlined),
               color: myGrey,

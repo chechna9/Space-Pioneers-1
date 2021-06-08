@@ -9,8 +9,6 @@ import 'package:supabase/supabase.dart';
 import 'splashScreen.dart';
 import 'planetChoice.dart';
 
-int planeteInd;
-
 class LevelChoice extends StatefulWidget {
   @override
   _LevelChoiceState createState() => _LevelChoiceState();

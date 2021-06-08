@@ -16,18 +16,16 @@ import 'package:http/http.dart' as http;
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:provider/provider.dart';
 import '../components/InfoSup.dart';
-import 'bravoNiveau.dart';
-import 'bravoBadge.dart';
 
 List<String> propo = ['a', 'b', 'c', 'd'];
-var ind = Iterable<int>.generate(5).toList();
+var ind = Iterable<int>.generate(10).toList();
 
 int points = 0;
 bool cliquerRandom = true;
 int questNum = 1;
 
 class Index extends ChangeNotifier {
-  var ind = Iterable<int>.generate(5).toList();
+  var ind = Iterable<int>.generate(10).toList();
 
   void updateInd(List<int> newindice) {
     ind = newindice;
@@ -210,11 +208,11 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                   });
                   Timer(Duration(milliseconds: 700), () {
                     if (ind.isEmpty || nbTentatives <= 0) {
-                      Navigator.pushReplacementNamed(context, '/bravoNiveauR');
+                      Navigator.pushReplacementNamed(context, '/planetChoice');
                       questNum = 1;
                       user.etoiles = user.etoiles + points;
                       update_etoiles();
-                      etoiles = points;
+
                       points = 0;
                     } else {
                       if (widget.answer == propo[0]) {
@@ -265,24 +263,6 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
     );
   }
 }
-
-// int verifRandom(int point) {
-//   if (planeteInd == 9) {
-//     int pointsRandom = user.etoiles - (trace.earth + trace.jupiter + trace.mars + trace.mercury + trace.neptune + trace.saturn + trace.soleil + trace.uranus + trace.venus);
-//     if (pointsRandom < points) {
-//       difference = points - pointsRandom;
-//       print("difference");
-//       print(difference);
-//       pointsRandom = points;
-//       etoilesMax = points;
-//       return 1;
-//     } else {
-//       difference = 0;
-//       etoilesMax = pointsRandom;
-//       return -1;
-//     }
-//   }
-// }
 
 class QuestBoxRandom extends StatelessWidget {
   const QuestBoxRandom({
@@ -356,7 +336,7 @@ class AppbarCustomedRandom extends StatelessWidget {
                    ),
                  ),
                  Text(
-                 '$numero/5',
+                 '$numero/100',
                   style: TextStyle(
                   color: myRed2,
                   fontSize: 17,

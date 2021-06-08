@@ -11,7 +11,6 @@ import 'package:astro01/Screens/planetChoice.dart';
 import 'package:astro01/classes/questions.dart';
 import 'package:astro01/components/InfoSup.dart';
 import 'package:astro01/main.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'dart:async';
@@ -35,20 +34,12 @@ List<int> ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 class Ind extends ChangeNotifier {
   List<int> ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    int nb = nbTentatives;
 
   void updateInd(List<int> newindice) {
     ind = newindice;
     notifyListeners();
   }
-
-    void updatenb() {
-    nb--;
-    notifyListeners();
-  }
 }
-
-
 
 int questNum = 1;
 
@@ -211,33 +202,12 @@ class _AnswerBoxState extends State<AnswerBox> {
                       ind.removeAt(0);
 
                       cliquer = false;
-                      if (ind.isEmpty || Provider.of<Ind>(context).nb == 0) {
-                        if (verification(points) == 1) {
-                          update();
-                          user.etoiles = trace.earth +
-                              trace.jupiter +
-                              trace.mars +
-                              trace.mercury +
-                              trace.neptune +
-                              trace.neptune +
-                              trace.saturn +
-                              trace.soleil +
-                              trace.uranus +
-                              trace.venus;
-                        }
-                      } else {
-                        //var route = new MaterialPageRoute(
-                        //builder: (BuildContext context) => new Quiz(
-                        //      indice: indice,
-                        //      ));
-                        //Navigator.of(context).pushReplacement(route);
-                      }
                     });
                   } else if (widget.answer == propo[1])
                     setState(() {
                       cliquer = true;
                       choiceColor = choiceColors[1];
-                      Provider.of<Ind>(context , listen: false).updatenb();
+                      nbTentatives--;
                       print("points :");
                       print(points);
                     });
@@ -245,7 +215,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                     setState(() {
                       cliquer = true;
                       choiceColor = choiceColors[2];
-                      Provider.of<Ind>(context , listen: false).updatenb();
+                      nbTentatives--;
                       print("points :");
                       print(points);
                     });
@@ -253,7 +223,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                     setState(() {
                       cliquer = true;
                       choiceColor = choiceColors[3];
-                      Provider.of<Ind>(context , listen: false).updatenb();
+                      nbTentatives--;
                       print("points :");
                       print(points);
                     });
@@ -266,9 +236,10 @@ class _AnswerBoxState extends State<AnswerBox> {
                   });
 
                   Timer(Duration(seconds: 1), () {
-                    if (ind.isEmpty || Provider.of<Ind>(context).nb <= 0) {
+                    if (ind.isEmpty || nbTentatives <= 0) {
                       if (verification(points) == 1) {
                         update();
+
                         user.etoiles = trace.earth +
                             trace.jupiter +
                             trace.mars +
@@ -432,7 +403,7 @@ class AppbarCustomed extends StatelessWidget {
              child: Row(
                children: [
                  Text(
-                   '${Provider.of<Ind>(context).nb}',
+                   '$nbTentatives',
                    style: TextStyle(
                      color: myRed2,
                      fontSize: 23,
@@ -566,7 +537,6 @@ int verification(int point) {
       etoilesMax = trace.mercury;
       return -1;
     }
-
   }
   if (planeteInd == 2) {
     if (trace.venus < point) {

@@ -32,12 +32,13 @@ const LinearGradient myGradiant = LinearGradient(
     Color(0xff50012d),
   ],
 );
-String mainMusicPath = "assets/music/shortMusic.mp3";
-String docMusicPath = "assets/music/music.mp3";
+String mainMusicPath = "assets/music/mainMusic.mp3";
+String docMusicPath = "assets/music/docMusic.mp3";
+String rightMusicPath = "assets/music/rightAnswer.mp3";
+String wrongMusicPath = "assets/music/wrongAnswer.mp3";
 const int facileRecomp = 1;
 const int moyenRecomp = 5;
 const int difficileRecomp = 10;
 const int facileRcmpRndm = 1;
 const int moyenRcmpRndm = 2;
 const int difficileRcmpRndm = 3;
-

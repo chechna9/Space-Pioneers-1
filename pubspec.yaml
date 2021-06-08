@@ -96,7 +96,7 @@ flutter:
     - assets/images/doc/uranus/galerie/
     - assets/images/doc/venus/
     - assets/images/doc/venus/galerie/
-    - assets/music/music.mp3
+    - assets/music/
     # - assets/music.mp3
 
   # An image asset can refer to one or more resolution-specific "variants", see

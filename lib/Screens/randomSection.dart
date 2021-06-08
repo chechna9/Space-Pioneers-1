@@ -9,6 +9,7 @@ import 'package:astro01/classes/questions.dart';
 import 'package:astro01/classes/random.dart';
 import 'package:astro01/components/InfoSup.dart';
 import 'package:astro01/main.dart';
+import 'package:audioplayer/audioplayer.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'dart:async';
@@ -25,6 +26,8 @@ var ind = Iterable<int>.generate(100).toList();
 int points = 0;
 bool cliquerRandom = false;
 int questNum = 1;
+AudioPlayer wrongRandAnswerPlayer;
+AudioPlayer rightRandAnswerPlayer;
 
 class Index extends ChangeNotifier {
   var ind = Iterable<int>.generate(100).toList();
@@ -160,6 +163,8 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                 onTap: () {
                   if (widget.answer == propo[0]) {
                     setState(() {
+                      rightRandAnswerPlayer.play(rightMusicPath, isLocal: true);
+
                       if (cliquerRandom == false) {
                         points += factRecomp;
                       }
@@ -174,6 +179,7 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                     cliquerRandom = true;
                   } else if (widget.answer == propo[1]) {
                     setState(() {
+                      wrongRandAnswerPlayer.play(wrongMusicPath, isLocal: true);
                       cliquerRandom = false;
                       choiceColor = choiceColors[1];
                       nbTentatives--;
@@ -184,6 +190,8 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                     });
                   } else if (widget.answer == propo[2]) {
                     setState(() {
+                      wrongRandAnswerPlayer.play(wrongMusicPath, isLocal: true);
+
                       cliquerRandom = false;
                       choiceColor = choiceColors[2];
                       nbTentatives--;
@@ -194,6 +202,8 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                     });
                   } else if (widget.answer == propo[3]) {
                     setState(() {
+                      wrongRandAnswerPlayer.play(wrongMusicPath, isLocal: true);
+
                       cliquerRandom = false;
                       choiceColor = choiceColors[3];
                       nbTentatives--;

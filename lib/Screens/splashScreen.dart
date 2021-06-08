@@ -17,6 +17,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   void playMusic() {
     widget.mainAudioPlayer.play(mainMusicPath, isLocal: true);
+    widget.mainAudioPlayer.setVolume(0.8);
     widget.mainAudioPlayer.setReleaseMode(ReleaseMode.LOOP);
   }
 

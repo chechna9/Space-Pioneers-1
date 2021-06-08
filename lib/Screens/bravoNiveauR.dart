@@ -21,20 +21,21 @@ class BravoNiveauR extends StatefulWidget {
 class _BravoNiveauRState extends State<BravoNiveauR> {
   @override
   Widget build(BuildContext context) {
-    if (ableToBadge == true && etoilesRandom == 30) {
-      List<String> badges = user.badges.split("");
+    // // if (ableToBadge == true && etoilesRandom == 15) {
+    // //   List<String> badges = user.badges.split("");
 
-      badges[indicesbravo] = '1';
+    // //   print("etoiles de random");
+    // //   print(etoilesRandom);
+    // //   badges[indicesbravo] = '1';
 
-      user.badges = badges.join("");
+    // //   user.badges = badges.join("");
+    // //   update_badges();
+    // //   /* print(user.badges);
+    // //   user.badges.replaceRange(planeteInd, planeteInd + 1, '1');
+    // //   print(user.badges);
+    // //   */
 
-      update_badges();
-      /* print(user.badges);
-      user.badges.replaceRange(planeteInd, planeteInd + 1, '1');
-      print(user.badges);
-      */
-
-    }
+    // }
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -48,7 +49,11 @@ class _BravoNiveauRState extends State<BravoNiveauR> {
               color: myGrey,
               iconSize: 30,
               onPressed: () {
-                if (ableToBadge == true && etoilesRandom == 30) {
+                if (ableToBadge == true && etoilesRandom ==15) {
+                  // List<String> badges = user.badges.split("");
+                  // badges[indicesbravo] = '1';
+                  // user.badges = badges.join("");
+                  // update_badges();
                     print("etoiles Random:");
                     print(etoilesRandom);
                   Navigator.pushReplacementNamed(context, '/bravoBadge');

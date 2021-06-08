@@ -229,21 +229,13 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                   });
                   Timer(Duration(milliseconds: 700), () {
                     if (ind.isEmpty || nbTentatives <= 0) {
-<<<<<<< HEAD
                       Navigator.pushReplacementNamed(context, '/bravoNiveauR');
                       questNumRandom = 1;
                       user.etoiles = user.etoiles + points;
                       update_etoiles();
                       etoilesRandom = points;
-=======
-                      questNum = 1;
-                      user.etoiles = user.etoiles + points;
-                      update_etoiles();
-                      etoiless = points;
->>>>>>> 371bb645f147b7687ac7cfde82cb3fb1f2480675
                       points = 0;
                       planeteName = "Random";
-                      Navigator.pushReplacementNamed(context, '/bravoNiveauR');
                     } else {
                       if (widget.answer == propo[0]) {
                         setState(() {
@@ -384,7 +376,7 @@ class AppbarCustomedRandom extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '$numero/10',
+                  '$numero/5',
                   style: TextStyle(
                     color: myRed2,
                     fontSize: 17,

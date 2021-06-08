@@ -95,7 +95,9 @@ class _QuizState extends State<Quiz> {
                   RemplirChoices(
                       propo, snapshot.data[ind[0] + 10 * planeteInd]);
                   print(propo);
+
                   planeteName = snapshot.data[ind[0] + 10 * planeteInd].planete;
+
                   int i = 4;
 
                   if (propo[2] == null && propo[1] == null) {
@@ -117,7 +119,7 @@ class _QuizState extends State<Quiz> {
                             myBlue: myBlue,
                             myRed2: myRed2,
                             planete:
-                                snapshot.data[ind[0] + 10 * planeteInd].planete,
+                                planeteName.inCaps,
                             numero: questNum,
                           ),
                         ),

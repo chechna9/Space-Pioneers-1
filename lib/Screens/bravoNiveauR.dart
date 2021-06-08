@@ -12,6 +12,7 @@ int etoilesRandom;
 // int etoilessMax;
 int indicesbravo;
 // int difference;
+String planeteNAME = planeteName.inCaps;
 
 class BravoNiveauR extends StatefulWidget {
   @override
@@ -99,7 +100,7 @@ class _BravoNiveauRState extends State<BravoNiveauR> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  "Nombre maximale d'étoiles \n collectées dans $planeteName :",
+                  "Nombre maximale d'étoiles \n collectées dans $planeteNAME. :",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,

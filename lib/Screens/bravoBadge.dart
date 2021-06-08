@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
+import 'package:flutter/services.dart';
+import 'package:astro01/variable_globale/variable.dart';
 import 'package:polygon_clipper/polygon_border.dart';
 import '../components/constants.dart';
 import 'profilePage.dart';
@@ -7,6 +9,8 @@ import 'quiz.dart';
 
 String avatar = "default";
 // String Badge = "Terre Hero";
+String planeteNAME = planeteName.inCaps;
+
 
 class BravoBadge extends StatefulWidget {
   @override
@@ -86,7 +90,7 @@ class _BravoBadgeState extends State<BravoBadge> {
                 ),
               ),
               Text(
-                '$planeteName Pionnier',
+                '$planeteNAME Pionnier',
                 style: TextStyle(
                     color: myYellow,
                     fontSize: 36,

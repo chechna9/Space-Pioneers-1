@@ -1,5 +1,4 @@
 import 'dart:async';
-// import 'dart:js';
 
 import 'package:astro01/Screens/bravoBadge.dart';
 import 'package:astro01/Screens/bravoNiveau.dart';
@@ -71,7 +70,7 @@ void main() {
             mainAudioPlayer: mainAudioPlayer,
           ),
       '/bravoNiveau': (context) => BravoNiveau(),
-      'bravoNiveauR' : (context) => BravoNiveauR(),
+      'bravoNiveauR': (context) => BravoNiveauR(),
       '/bravoBadge': (context) => BravoBadge(),
       '/random': (context) => RandomQuiz(),
       '/levelChoiceRandom': (context) => LevelChoiceRandom(),

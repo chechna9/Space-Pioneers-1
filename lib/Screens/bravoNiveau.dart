@@ -11,7 +11,7 @@ import '../classes/trace.dart';
 
 int etoiles;
 int etoilesMax;
-int indices;
+int indicesbravo;
 int difference;
 
 class BravoNiveau extends StatefulWidget {
@@ -27,7 +27,7 @@ class _BravoNiveauState extends State<BravoNiveau> {
     if (ableToBadge == true && etoiles == 100) {
       List<String> badges = user.badges.split("");
 
-      badges[indices] = '1';
+      badges[indicesbravo] = '1';
 
       user.badges = badges.join("");
 
@@ -162,7 +162,7 @@ class _BravoNiveauState extends State<BravoNiveau> {
                 ])
               ],
             ),
-          ],    
+          ],
         ),
       ),
     );

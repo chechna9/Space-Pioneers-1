@@ -201,36 +201,21 @@ class _ProfilePageState extends State<ProfilePage> {
               SizedBox(
                 height: 20,
               ),
-              userBagdes.length == 0
-                  ? RoundedCard(
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: AutoSizeText(
-                          "Vous avez aucun badge!",
-                          maxFontSize: 30,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
-                          ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: userBagdes.length,
+                  itemBuilder: (BuildContext context, int ind) {
+                    return Column(
+                      children: [
+                        userBagdes[ind],
+                        SizedBox(
+                          height: 20,
                         ),
-                      ),
-                      color: myRed,
-                    )
-                  : Expanded(
-                      child: ListView.builder(
-                        itemCount: userBagdes.length,
-                        itemBuilder: (BuildContext context, int ind) {
-                          return Column(
-                            children: [
-                              userBagdes[ind],
-                              SizedBox(
-                                height: 20,
-                              ),
-                            ],
-                          );
-                        },
-                      ),
-                    ),
+                      ],
+                    );
+                  },
+                ),
+              ),
             ],
           ),
         ),
@@ -286,7 +271,7 @@ class BadgeCard extends StatelessWidget {
             ),
             Expanded(
               child: AutoSizeText(
-                '${user.name}',
+                name,
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w500,

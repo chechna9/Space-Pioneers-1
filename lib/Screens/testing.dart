@@ -1,232 +1,353 @@
-import 'package:astro01/Screens/splashScreen.dart';
-import 'package:astro01/components/constants.dart';
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/material.dart';
-import 'package:astro01/components/RoundedCard.dart';
-import 'package:polygon_clipper/polygon_border.dart';
+// import 'dart:js';
 
-String userName = "Testing";
-int etoiles = 7000;
+// import 'dart:js';
+
+import 'dart:math';
+import 'dart:io';
+
+import 'package:astro01/Screens/bravoNiveau.dart';
+import 'package:astro01/Screens/loading.dart';
+import 'package:astro01/Screens/planetChoice.dart';
+import 'package:astro01/classes/questions.dart';
+import 'package:astro01/components/InfoSup.dart';
+import 'package:astro01/main.dart';
+import 'package:flutter/material.dart';
+import 'package:astro01/components/constants.dart';
+import 'dart:async';
+import 'dart:convert';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:http/http.dart' as http;
+import 'package:astro01/variable_globale/variable.dart';
+import 'package:provider/provider.dart';
+import '../components/InfoSup.dart';
+// import 'package:http/http.dart' as http;
+// import 'package:flutter/services.dart' show rootBundle;
+
+// Future<String> getJson() {
+//   return rootBundle.loadString('questions.json');
+// }
+String planeteName;
+List<String> propo = ['a', 'b', 'c', 'd'];
+int points = 0;
+bool cliquer = false;
+List<int> ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+class Ind extends ChangeNotifier {
+  List<int> ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+  void updateInd(List<int> newindice) {
+    ind = newindice;
+    notifyListeners();
+  }
+}
+
+int questNum = 1;
 
 class Testing extends StatefulWidget {
   @override
+  final int indice;
+
+  Testing({Key key, this.indice}) : super(key: key);
   _TestingState createState() => _TestingState();
 }
 
 class _TestingState extends State<Testing> {
-  List<BadgeCard> remplireBadge() {
-    List<BadgeCard> allBadges = <BadgeCard>[
-      BadgeCard(
-        name: "Soleil hero",
-        photo: "soleil",
-        color: Color(0xffFFE600),
-      ),
-      BadgeCard(
-        name: "Mercure hero",
-        photo: "mercure",
-        color: Color(0xff595959),
-      ),
-      BadgeCard(
-        name: "Venus hero",
-        photo: "venus",
-        color: Color(0xffDF8F13),
-      ),
-      BadgeCard(
-        name: "Terre hero",
-        photo: "terre",
-        color: Color(0xff78E237),
-      ),
-      BadgeCard(
-        name: "Mars hero",
-        photo: "mars",
-        color: Color(0xffD70003),
-      ),
-      BadgeCard(
-        name: "Jupiter hero",
-        photo: "jupiter",
-        color: Color(0xffEE6632),
-      ),
-      BadgeCard(
-        name: "Saturn hero",
-        photo: "saturn",
-        color: Color(0xff87579E),
-      ),
-      BadgeCard(
-        name: "Uranus hero",
-        photo: "uranus",
-        color: Color(0xff1A8CA9),
-      ),
-      BadgeCard(
-        name: "Neptune hero",
-        photo: "neptune",
-        color: Color(0xff37DBD0),
-      ),
-      BadgeCard(
-        name: "After 5 badges",
-        photo: "after5Badges",
-        color: Color(0xffE1023C),
-      ),
-      BadgeCard(
-        name: "Random",
-        photo: "random",
-        color: Color(0xffFFF16E),
-      ),
-      BadgeCard(
-        name: "New",
-        photo: "new",
-        color: Color(0xffAB02E6),
-      ),
-    ];
-    List<BadgeCard> tempBadges = [allBadges[0], allBadges[2]];
+  List<Question> _questions = <Question>[];
+  Future<List<Question>> fetchQuestions() async {
+    var url = Uri.parse('https://nadir-ogd.github.io/Quiz-API/questions.json');
+    var response = await http.get(url);
 
-    int i = 0;
-    // for (BadgeCard badge in allBadges) {
-    //   //10 is the number of questions
-    //   //user.badges = "110100001"; //for testing
-    //   user.badges[i] != '0' ? tempBadges.add(badge) : null;
-    //   i++;
-    // }
-    // return tempBadges;
-    return tempBadges;
+// ignore: deprecated_member_use
+    var questions = List<Question>();
+    if (response.statusCode == 200) {
+      var questionsJson = json.decode(response.body);
+      for (var questionsJson in questionsJson) {
+        questions.add(Question.fromJson(questionsJson));
+      }
+    }
+    return questions;
   }
 
   @override
   Widget build(BuildContext context) {
-    List<BadgeCard> userBagdes = remplireBadge();
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        title: Row(
-          children: [
-            Transform.rotate(
-              angle: 8,
-              child: Image.asset(
-                'assets/images/other/star.png',
-                width: 30,
-                fit: BoxFit.scaleDown,
-              ),
-            ),
-            Center(
-              child: Text(
-                '$etoiles',
-                style: TextStyle(
-                  color: myYellow,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 20,
-                ),
-              ),
-            ),
-          ],
-        ),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_outlined),
-          color: myRed,
-          iconSize: 35,
-          onPressed: () {
-            print("Go back");
-            Navigator.pop(context);
-          },
-        ),
-        leadingWidth: 45,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.shopping_cart_outlined),
-            color: myRed,
-            iconSize: 30,
-            onPressed: () {
-              Navigator.pushNamed(context, '/shopPage');
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.leaderboard_outlined),
-            color: myRed,
-            iconSize: 30,
-            onPressed: () {
-              Navigator.pushNamed(context, '/leaderBoard');
-            },
-          ),
-        ],
-      ),
-      backgroundColor: myBlue,
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            children: [
-              Stack(
-                alignment: Alignment.topRight,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      border: Border.all(
-                        color: myRed,
-                        width: 5,
-                      ),
-                    ),
-                    child: CircleAvatar(
-                      backgroundImage:
-                          AssetImage('assets/images/avatars/default.png'),
-                      radius: 70,
-                    ),
-                  ),
-                  Positioned(
-                    child: IconButton(
-                      icon: Icon(Icons.settings),
-                      color: Colors.white,
-                      iconSize: 25,
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/avatarPage');
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              AutoSizeText(
-                userName,
-                style: TextStyle(
-                  fontSize: 30,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              userBagdes.length == 0
-                  ? RoundedCard(
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: AutoSizeText(
-                          "Vous avez aucun badge!",
-                          maxFontSize: 30,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
+    return ChangeNotifierProvider<Ind>(
+        create: (context) => Ind(),
+        child: Scaffold(
+            backgroundColor: Colors.blue,
+            body: FutureBuilder<List<Question>>(
+                future: fetchQuestions(),
+                builder: (context, AsyncSnapshot<List<Question>> snapshot) {
+                  if (snapshot.hasData == false) {
+                    return LoadingScreen();
+                  }
+                  List<int> indices = [0, 1, 2, 3];
+
+                  indices = shuffle(indices);
+                  print(indices);
+                  ind = Provider.of<Ind>(context).ind;
+                  ind = shuffle(ind);
+                  RemplirChoices(
+                      propo, snapshot.data[ind[0] + 10 * planeteInd]);
+                  print(propo);
+                  planeteName = snapshot.data[ind[0] + 10 * planeteInd].planete;
+                  int i = 4;
+
+                  if (propo[2] == null && propo[1] == null) {
+                    i = 2;
+
+                    indices = shuffle([0, 3]);
+                  }
+
+                  return Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          gradient: myGradiant,
+                        ),
+                        child: Scaffold(
+                          backgroundColor: Colors.transparent,
+                          body: AppbarCustomed(
+                            myBlue: myBlue,
+                            myRed2: myRed2,
+                            planete:
+                                snapshot.data[ind[0] + 10 * planeteInd].planete,
+                            numero: questNum,
                           ),
                         ),
                       ),
-                      color: myRed,
-                    )
-                  : Expanded(
-                      child: ListView.builder(
-                        itemCount: userBagdes.length,
-                        itemBuilder: (BuildContext context, int ind) {
-                          return Column(
-                            children: [
-                              userBagdes[ind],
-                              SizedBox(
-                                height: 20,
-                              ),
-                            ],
-                          );
-                        },
+                      Padding(
+                        padding: const EdgeInsets.only(top: 160),
+                        child: Column(children: [
+                          QuestBox(
+                            quest: snapshot
+                                .data[ind[0] + 10 * planeteInd].question,
+                          ),
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: min(4, i),
+                              itemBuilder: (BuildContext context, int myindex) {
+                                return Column(children: [
+                                  AnswerBox(
+                                    answer: propo[indices[myindex]],
+                                    answerLetter: '${myindex + 1}',
+                                    infoSup: snapshot
+                                        .data[ind[0] + 10 * planeteInd]
+                                        .infosupp,
+                                  ),
+                                ]);
+                              },
+                            ),
+                          ),
+                        ]),
+                      ),
+                    ],
+                  );
+                })));
+  }
+}
+
+class AnswerBox extends StatefulWidget {
+  final String answer;
+  final String answerLetter;
+  final String infoSup;
+  AnswerBox({
+    Key key,
+    this.answer: 'answer',
+    this.answerLetter: 'A',
+    this.infoSup,
+  }) : super(key: key);
+
+  @override
+  _AnswerBoxState createState() => _AnswerBoxState();
+}
+
+class _AnswerBoxState extends State<AnswerBox> {
+  Color choiceColor = Colors.white;
+  List<Color> choiceColors = [choiceGreen, choiceRed, choiceYellow, choiceBlue];
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 22, left: 20, right: 20),
+          child: Container(
+            width: double.infinity,
+            height: 69,
+            decoration: BoxDecoration(
+              color: choiceColor,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Center(
+              child: ListTile(
+                onTap: () async {
+                  if (widget.answer == propo[0]) {
+                    setState(() async {
+                      if (cliquer == false) {
+                        points += factRecomp;
+                      }
+                      choiceColor = choiceColors[0];
+                      questNum++;
+                      print("points :");
+                      print(points);
+                      // if (ind.length != 1) {
+
+                      showDialog(
+                        barrierDismissible: false,
+                        context: context,
+                        builder: (context) => InfoSup(
+                          content: widget.infoSup,
+                          recomp: cliquer ? 0 : factRecomp,
+                          onPressedExiste: true,
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(
+                                context, '/bravoNiveau');
+                          },
+                        ),
+                      );
+                      // }
+
+                      ind.removeAt(0);
+
+                      cliquer = false;
+                    });
+                  } else if (widget.answer == propo[1])
+                    setState(() {
+                      cliquer = true;
+                      choiceColor = choiceColors[1];
+                      nbTentatives--;
+                      print("points :");
+                      print(points);
+                    });
+                  else if (widget.answer == propo[2])
+                    setState(() {
+                      cliquer = true;
+                      choiceColor = choiceColors[2];
+                      nbTentatives--;
+                      print("points :");
+                      print(points);
+                    });
+                  else if (widget.answer == propo[3]) {
+                    setState(() {
+                      cliquer = true;
+                      choiceColor = choiceColors[3];
+                      nbTentatives--;
+                      print("points :");
+                      print(points);
+                    });
+                  }
+
+                  Timer(Duration(milliseconds: 600), () {
+                    setState(() {
+                      choiceColor = Colors.white;
+                    });
+                  });
+
+                  Timer(Duration(seconds: 1), () {
+                    if (ind.isEmpty || nbTentatives <= 0) {
+                      if (verification(points) == 1) {
+                        //   update();
+
+                        //   user.etoiles = trace.earth +
+                        //       trace.jupiter +
+                        //       trace.mars +
+                        //       trace.mercury +
+                        //       trace.neptune +
+                        //       trace.saturn +
+                        //       trace.soleil +
+                        //       trace.uranus +
+                        //       trace.venus;
+                        //   //print(user.etoiles);
+                      }
+
+                      etoiles = points;
+                      print(points);
+                      // Navigator.pushReplacementNamed(context, '/bravoNiveau');
+                      indices = planeteInd;
+
+                      //Navigator.pushReplacementNamed(context, '/planetChoice');
+                      questNum = 1;
+                      points = 0;
+                    } else {
+                      if (widget.answer == propo[0]) {
+                        setState(() {
+                          Provider.of<Ind>(context, listen: false)
+                              .updateInd(ind);
+                        });
+                      }
+                    }
+                  });
+                },
+                selectedTileColor: choiceColor,
+                leading: Padding(
+                  padding: const EdgeInsets.only(
+                      top: 8, left: 8, bottom: 8, right: 15),
+                  child: Container(
+                    width: 41,
+                    height: 41,
+                    decoration: BoxDecoration(
+                      color: myRed2,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: Text(
+                        '${widget.answerLetter}',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 20,
+                        ),
                       ),
                     ),
-            ],
+                  ),
+                ),
+                title: Text(
+                  '${widget.answer}',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class QuestBox extends StatelessWidget {
+  const QuestBox({
+    this.quest: 'Quelle est la couleur du Soleil',
+    Key key,
+  }) : super(key: key);
+
+  final String quest;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20, right: 20),
+      child: SizedBox(
+        width: double.infinity,
+        height: 100,
+        child: Card(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+          color: myRed2,
+          child: Center(
+            child: Text(
+              '$quest',
+              style: TextStyle(
+                fontFamily: 'Gotham',
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+                fontSize: 19,
+              ),
+              maxLines: 3,
+              textAlign: TextAlign.center,
+            ),
           ),
         ),
       ),
@@ -234,68 +355,271 @@ class _TestingState extends State<Testing> {
   }
 }
 
-class BadgeCard extends StatelessWidget {
-  final String name;
-  final String date;
-  final String photo;
-  final Color color;
-  BadgeCard({
+class AppbarCustomed extends StatelessWidget {
+  const AppbarCustomed({
     Key key,
-    this.name: "loading",
-    this.photo: "default",
-    this.date: "01-01-2020",
-    this.color,
+    @required this.myBlue,
+    @required this.myRed2,
+    this.planete: 'Soleil',
+    this.numero: 5,
   }) : super(key: key);
+
+  final Color myBlue;
+  final Color myRed2;
+  final String planete;
+  final int numero;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: color,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 5,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              height: 60,
-              width: 60,
-              padding: EdgeInsets.all(4),
-              decoration: ShapeDecoration(
-                color: myYellow,
-                shape: PolygonBorder(sides: 6),
-              ),
-              child: Container(
-                decoration: ShapeDecoration(
-                  shape: PolygonBorder(sides: 6),
-                  image: DecorationImage(
-                    image: AssetImage('images/Badges/$photo.png'),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Expanded(
-              child: AutoSizeText(
-                '$name',
+    return CustomScrollView(
+      slivers: <Widget>[
+        SliverAppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: myBlue,
+          pinned: true,
+          elevation: 15,
+          shadowColor: Colors.black,
+          expandedHeight: 91,
+          brightness: Brightness.dark,
+          title: Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 27),
+              child: Text(
+                '$planete',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 30,
+                  fontSize: 28,
+                  fontFamily: 'Gotham',
+                  fontWeight: FontWeight.normal,
                 ),
-                maxLines: 1,
               ),
+            ),
+          ),
+          leading: Padding(
+            padding: const EdgeInsets.only(top: 34, left: 11),
+            child: Text(
+              '$numero/10',
+              style: TextStyle(
+                color: myRed2,
+                fontSize: 17,
+                fontFamily: 'Gotham',
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(top: 17, right: 5),
+              child: IconButton(
+                  icon: Icon(Icons.clear),
+                  color: myRed2,
+                  iconSize: 30,
+                  onPressed: () {
+                    points = 0;
+                    Navigator.pushReplacementNamed(context, '/planetChoice');
+                  }),
             ),
           ],
         ),
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(40),
-      ),
+      ],
     );
+  }
+}
+
+class ProgressBar extends StatelessWidget {
+  final double width;
+// final int value;
+// final int totalValue;
+
+  ProgressBar({this.width});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        SizedBox(
+          width: 5,
+        ),
+        Stack(
+          children: <Widget>[
+            Container(
+              width: width,
+              height: 8,
+              decoration: BoxDecoration(color: myBlue),
+            ),
+            Row(
+              children: [
+                AnimatedContainer(
+                  height: 8,
+                  width: width,
+                  duration: Duration(milliseconds: 500),
+                  decoration: BoxDecoration(
+                    color: myRed2,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(5),
+                      bottomRight: Radius.circular(5),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+void RemplirChoices(List<String> choices, Question myquestion) {
+  choices[0] = myquestion.correct;
+  choices[1] = myquestion.choice1;
+  choices[2] = myquestion.choice2;
+  choices[3] = myquestion.choice3;
+}
+
+List shuffle(List<int> indices) {
+  var random = new Random();
+
+  // Go through all elements.
+  for (var i = indices.length - 1; i >= 0; i--) {
+    // Pick a pseudorandom number according to the list length
+    var n = random.nextInt(i + 1);
+    var temp = indices[i];
+    indices[i] = indices[n];
+    indices[n] = temp;
+  }
+
+  return indices;
+}
+
+int verification(int point) {
+  return 1;
+  if (planeteInd == 0) {
+    if (trace.soleil < point) {
+      difference = point - trace.soleil;
+      print("difference");
+      print(difference);
+      trace.soleil = point;
+      etoilesMax = point;
+      return 1;
+    } else {
+      difference = 0;
+      etoilesMax = trace.soleil;
+      return -1;
+    }
+  }
+  if (planeteInd == 1) {
+    if (trace.mercury < point) {
+      difference = point - trace.mercury;
+      print("difference");
+      print(difference);
+      trace.mercury = point;
+      etoilesMax = point;
+      return 1;
+    } else {
+      difference = 0;
+      etoilesMax = trace.mercury;
+      return -1;
+    }
+  }
+  if (planeteInd == 2) {
+    if (trace.venus < point) {
+      difference = point - trace.venus;
+      print("difference");
+      print(difference);
+      trace.venus = point;
+      etoilesMax = point;
+      return 1;
+    } else {
+      difference = 0;
+      etoilesMax = trace.venus;
+      return -1;
+    }
+  }
+  if (planeteInd == 3) {
+    if (trace.earth < point) {
+      difference = point - trace.earth;
+      print("difference");
+      print(difference);
+      trace.earth = point;
+      etoilesMax = point;
+      return 1;
+    } else {
+      difference = 0;
+      etoilesMax = trace.earth;
+      return -1;
+    }
+  }
+  if (planeteInd == 4) {
+    if (trace.mars < point) {
+      difference = point - trace.mars;
+      print("difference");
+      print(difference);
+      trace.mars = point;
+      etoilesMax = point;
+      return 1;
+    } else {
+      difference = 0;
+      etoilesMax = trace.mars;
+      return -1;
+    }
+  }
+  if (planeteInd == 5) {
+    if (trace.jupiter < point) {
+      difference = point - trace.jupiter;
+      print("difference");
+      print(difference);
+      trace.jupiter = point;
+      etoilesMax = point;
+      return 1;
+    } else {
+      difference = 0;
+      etoilesMax = trace.jupiter;
+      return -1;
+    }
+  }
+  if (planeteInd == 6) {
+    if (trace.saturn < point) {
+      difference = point - trace.saturn;
+      print("difference");
+      print(difference);
+      trace.saturn = point;
+      etoilesMax = point;
+      return 1;
+    } else {
+      difference = 0;
+      etoilesMax = trace.saturn;
+      return -1;
+    }
+  }
+  if (planeteInd == 7) {
+    if (trace.uranus < point) {
+      difference = point - trace.uranus;
+      print("difference");
+      print(difference);
+      trace.uranus = point;
+      etoilesMax = point;
+      return 1;
+    } else {
+      difference = 0;
+      etoilesMax = trace.uranus;
+      return -1;
+    }
+  }
+  if (planeteInd == 8) {
+    if (trace.neptune < point) {
+      difference = point - trace.neptune;
+      print("difference");
+      print(difference);
+      trace.neptune = point;
+      etoilesMax = point;
+      return 1;
+    } else {
+      difference = 0;
+      etoilesMax = trace.neptune;
+      return -1;
+    }
   }
 }

@@ -16,16 +16,18 @@ import 'package:http/http.dart' as http;
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:provider/provider.dart';
 import '../components/InfoSup.dart';
+import 'bravoNiveau.dart';
+import 'bravoBadge.dart';
 
 List<String> propo = ['a', 'b', 'c', 'd'];
-var ind = Iterable<int>.generate(10).toList();
+var ind = Iterable<int>.generate(5).toList();
 
 int points = 0;
 bool cliquerRandom = true;
 int questNum = 1;
 
 class Index extends ChangeNotifier {
-  var ind = Iterable<int>.generate(10).toList();
+  var ind = Iterable<int>.generate(5).toList();
 
   void updateInd(List<int> newindice) {
     ind = newindice;
@@ -208,11 +210,11 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                   });
                   Timer(Duration(milliseconds: 700), () {
                     if (ind.isEmpty || nbTentatives <= 0) {
-                      Navigator.pushReplacementNamed(context, '/planetChoice');
+                      Navigator.pushReplacementNamed(context, '/bravoNiveauR');
                       questNum = 1;
                       user.etoiles = user.etoiles + points;
                       update_etoiles();
-
+                      etoiles = points;
                       points = 0;
                     } else {
                       if (widget.answer == propo[0]) {
@@ -263,6 +265,24 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
     );
   }
 }
+
+// int verifRandom(int point) {
+//   if (planeteInd == 9) {
+//     int pointsRandom = user.etoiles - (trace.earth + trace.jupiter + trace.mars + trace.mercury + trace.neptune + trace.saturn + trace.soleil + trace.uranus + trace.venus);
+//     if (pointsRandom < points) {
+//       difference = points - pointsRandom;
+//       print("difference");
+//       print(difference);
+//       pointsRandom = points;
+//       etoilesMax = points;
+//       return 1;
+//     } else {
+//       difference = 0;
+//       etoilesMax = pointsRandom;
+//       return -1;
+//     }
+//   }
+// }
 
 class QuestBoxRandom extends StatelessWidget {
   const QuestBoxRandom({
@@ -315,60 +335,82 @@ class AppbarCustomedRandom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: <Widget>[
-        SliverAppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: myBlue,
-          pinned: true,
-          elevation: 15,
-          shadowColor: Colors.black,
-          expandedHeight: 91,
-          brightness: Brightness.dark,
-          title: Center(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 27),
-              child: Text(
-                'random',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 28,
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          toolbarHeight: 91,
+          elevation: 20,
+          title: Container(
+            clipBehavior: Clip.none,
+            child: Column(
+                 mainAxisAlignment: MainAxisAlignment.center,
+               children: [
+                 Text(
+                   'random',
+                   textAlign: TextAlign.center,
+                   style: TextStyle(
+                     color: Colors.white,
+                     fontSize: 28,
+                     fontFamily: 'Gotham',
+                     fontWeight: FontWeight.normal,
+                   ),
+                 ),
+                 Text(
+                 '$numero/5',
+                  style: TextStyle(
+                  color: myRed2,
+                  fontSize: 17,
                   fontFamily: 'Gotham',
                   fontWeight: FontWeight.normal,
-                ),
-              ),
-            ),
+             ),
+               ),
+               ],
+               ),
           ),
-          leadingWidth: 65,
-          leading: Padding(
-            padding: const EdgeInsets.only(top: 34, left: 11),
-            child: Text(
-              '$numero/100',
-              style: TextStyle(
-                color: myRed2,
-                fontSize: 16,
-                fontFamily: 'Gotham',
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-          ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(top: 17, right: 5),
-              child: IconButton(
-                  icon: Icon(Icons.clear),
-                  color: myRed2,
-                  iconSize: 30,
-                  onPressed: () {
-                    points = 0;
-                    Navigator.pushReplacementNamed(context, '/planetChoice');
-                  }),
-            ),
+         centerTitle: true,
+         leadingWidth: 70,
+         leading: Center(
+           child: Padding(
+             padding: const EdgeInsets.only(left: 10),
+             child: Row(
+               children: [
+                 Text(
+                   '$nbTentatives',
+                   style: TextStyle(
+                     color: myRed2,
+                     fontSize: 23,
+                     fontFamily: 'Gotham',
+                     fontWeight: FontWeight.w700,
+                   ),
+                 ),
+                 Padding(
+                   padding: const EdgeInsets.only(left: 6, top: 3),
+                   child: Transform.rotate(
+                     angle: 6.5,
+                      child: Image.asset(
+                     'assets/images/icons/fusil.png',
+                     fit: BoxFit.scaleDown,
+                     width: 15,
+                     ),
+                   ),
+                 ),
+                   ]),
+           ),
+           ),
+         actions: [
+           Center(
+             child: IconButton(
+                 icon: Icon(Icons.clear),
+                 color: myRed2,
+                 iconSize: 30,
+                 onPressed: () {
+                   points = 0;
+                   Navigator.pushReplacementNamed(context, '/planetChoice');
+                 }),
+           ),
           ],
-        ),
-      ],
-    );
+        )
+     );         
   }
 }
 

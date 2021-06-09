@@ -183,7 +183,7 @@ class _SoundCntrlState extends State<SoundCntrl> {
       onPressed: () {
         setState(() {
           mute
-              ? widget.mainAudioPlayer.setVolume(1)
+              ? widget.mainAudioPlayer.setVolume(0.8)
               : widget.mainAudioPlayer.setVolume(0);
           mute = mute ? false : true;
         });

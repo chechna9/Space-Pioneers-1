@@ -38,7 +38,6 @@ void main() {
   Injector.appInstance.registerSingleton<SupabaseClient>(() => supabaseclient);
   AudioPlayer mainAudioPlayer = AudioPlayer();
   AudioPlayer docAudioPlayer = AudioPlayer();
-  AudioCache musicCache;
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(

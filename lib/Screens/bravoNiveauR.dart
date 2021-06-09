@@ -8,10 +8,8 @@ import 'randomSection.dart';
 import '../main.dart';
 import '../classes/trace.dart';
 
-int etoiless;
-// int etoilessMax;
+int etoilesRandom;
 int indicesbravo;
-// int difference;
 
 class BravoNiveauR extends StatefulWidget {
   @override
@@ -35,7 +33,7 @@ class _BravoNiveauRState extends State<BravoNiveauR> {
               iconSize: 30,
               onPressed: () {
                 if (ableToBadge == true &&
-                    etoiless == 300 &&
+                     etoilesRandom == 15 &&
                     user.badges[9] == '0') {
                   List<String> badges = user.badges.split("");
                   badges[9] = '1';
@@ -78,7 +76,7 @@ class _BravoNiveauRState extends State<BravoNiveauR> {
                     textAlign: TextAlign.center,
                   ),
                   Text(
-                    '$etoiless étoiles !',
+                    '$etoilesRandom étoiles !',
                     style: TextStyle(
                         color: myYellow,
                         fontSize: 24,
@@ -94,20 +92,6 @@ class _BravoNiveauRState extends State<BravoNiveauR> {
               child: Image(
                 image: AssetImage('assets/images/avatars/rocket_badge.png'),
               ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  "Nombre maximale d'étoiles \n collectées dans $planeteName :",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.normal,
-                      fontFamily: 'Gotham'),
-                  textAlign: TextAlign.center,
-                ),
-              ],
             ),
           ],
         ),

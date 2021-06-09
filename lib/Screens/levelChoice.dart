@@ -65,7 +65,7 @@ class _LevelChoiceState extends State<LevelChoice> {
                               ),
                             ),
                             AutoSizeText(
-                              'Selon votre niveau.',
+                              'Selon votre niveau .',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w100,

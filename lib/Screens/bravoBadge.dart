@@ -1,10 +1,17 @@
+import 'package:astro01/Screens/bravoNiveau.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
+import 'package:flutter/services.dart';
+import 'package:astro01/variable_globale/variable.dart';
 import 'package:polygon_clipper/polygon_border.dart';
 import '../components/constants.dart';
+import 'profilePage.dart';
+import 'quiz.dart';
+import 'randomSection.dart';
 
 String avatar = "default";
-String Badge = "Terre Hero";
+String planeteNAME;
+
 
 class BravoBadge extends StatefulWidget {
   @override
@@ -15,6 +22,7 @@ class _BravoBadgeState extends State<BravoBadge> {
   @override
   Widget build(BuildContext context) {
     print('bravo');
+    planeteNAME = planeteName.inCaps;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -76,14 +84,14 @@ class _BravoBadgeState extends State<BravoBadge> {
                     decoration: ShapeDecoration(
                       shape: PolygonBorder(sides: 6),
                       image: DecorationImage(
-                        image: AssetImage('assets/images/avatars/default.png'),
+                        image: AssetImage('assets/images/Badges/$planeteName.png'),
                       ),
                     ),
                   ),
                 ),
               ),
               Text(
-                '$Badge',
+                '$planeteNAME Pionnier',
                 style: TextStyle(
                     color: myYellow,
                     fontSize: 36,
@@ -91,27 +99,29 @@ class _BravoBadgeState extends State<BravoBadge> {
                     fontFamily: 'Gotham'),
               ),
               Spacer(flex: 1),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Allez voir vos badges',
-                    style: TextStyle(
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Allez voir vos badges',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.normal,
+                          fontFamily: 'Gotham'),
+                      textAlign: TextAlign.center,
+                    ),
+                    IconButton(
+                        icon: Icon(Icons.arrow_forward_outlined),
                         color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.normal,
-                        fontFamily: 'Gotham'),
-                    textAlign: TextAlign.center,
-                  ),
-                  IconButton(
-                      icon: Icon(Icons.arrow_forward_outlined),
-                      color: Colors.white,
-                      iconSize: 30,
-                      onPressed: () => {
-                            Navigator.pushReplacementNamed(
-                                context, '/profilePage'),
-                          }),
-                ],
+                        iconSize: 30,
+                        onPressed: () => {
+                              Navigator.pushReplacementNamed(
+                                  context, '/profilePage'),
+                            }),
+                  ],
+                ),
               ),
             ],
           ),

@@ -7,6 +7,7 @@ import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
 // import '../components/RoundedCard.dart';
 import 'quiz.dart';
+import 'randomSection.dart';
 
 class PlanetChoice extends StatefulWidget {
   @override
@@ -166,6 +167,7 @@ class PlanetCard extends StatelessWidget {
       onPressed: () {
         planeteInd = choiceInd;
         questNum = 1;
+        questNumRandom = 1;
         if (planeteInd == 9) {
         Navigator.pushReplacementNamed(context, '/levelChoiceRandom');
         }else{

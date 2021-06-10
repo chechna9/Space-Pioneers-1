@@ -46,13 +46,37 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: sh * 0.03,
+                    height: sh * 0.04,
                   ),
-                  Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                    SoundCntrl(
-                      mainAudioPlayer: widget.mainAudioPlayer,
-                    ),
-                  ]),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        icon: Transform.rotate(
+                          angle: 3.15,
+                          child: Icon(
+                            Icons.logout,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        ),
+                        onPressed: () async {
+                          await Injector.appInstance
+                              .get<SupabaseClient>()
+                              .auth
+                              .signOut();
+                          Navigator.pushReplacementNamed(
+                              context, '/splashScreen');
+                        },
+                      ),
+                      SoundCntrl(
+                        mainAudioPlayer: widget.mainAudioPlayer,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: sh * 0.01,
+                  ),
                   Stack(
                     clipBehavior: Clip.none,
                     alignment: Alignment.topRight,
@@ -265,8 +289,4 @@ Future<List<Users>> getUsers(String email_) async {
       .map((map) => Users.fromJson(map))
       .where((dataList) => dataList.email_ver(email_))
       .toList();
-}
-
-void signOut() async {
-  await Injector.appInstance.get<SupabaseClient>().auth.signOut();
 }

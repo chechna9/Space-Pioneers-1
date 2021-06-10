@@ -45,6 +45,7 @@ dependencies:
   flutter_bloc: ^7.0.0
   provider: ^5.0.0
   audioplayer: ^0.8.1
+  animated_text_kit: ^4.2.1
 
 dev_dependencies:
   flutter_test:

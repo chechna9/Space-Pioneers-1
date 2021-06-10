@@ -36,8 +36,8 @@ int points = 0;
 bool cliquer = false;
 List<int> ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 List<int> indices = [0, 1, 2, 3];
-AudioPlayer wrongAnswerPlayer = AudioPlayer();
-AudioPlayer rightAnswerPlayer = AudioPlayer();
+AudioPlayer wrongAnswerPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
+AudioPlayer rightAnswerPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
 
 class Ind extends ChangeNotifier {
   List<int> ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];

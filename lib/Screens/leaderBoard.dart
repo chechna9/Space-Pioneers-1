@@ -9,6 +9,8 @@ import 'package:astro01/components/constants.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
 
+import 'OriginalSplashScreen.dart';
+
 class LeaderBoard extends StatefulWidget {
   @override
   _LeaderBoardState createState() => _LeaderBoardState();
@@ -19,6 +21,8 @@ class _LeaderBoardState extends State<LeaderBoard> {
   Widget build(BuildContext context) {
     bool existe = false;
     int ind = 0;
+    getEmail();
+
     // List<Users> list;
     return Scaffold(
         backgroundColor: Colors.blue,

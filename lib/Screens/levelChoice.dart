@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
+import 'OriginalSplashScreen.dart';
 import 'splashScreen.dart';
 import 'planetChoice.dart';
 
@@ -19,6 +20,8 @@ class LevelChoice extends StatefulWidget {
 class _LevelChoiceState extends State<LevelChoice> {
   @override
   Widget build(BuildContext context) {
+    getEmail();
+
     return Scaffold(
         backgroundColor: Colors.blue,
         body: FutureBuilder<List<Trace>>(

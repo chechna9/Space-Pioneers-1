@@ -9,7 +9,6 @@ import 'package:astro01/classes/questions.dart';
 import 'package:astro01/classes/random.dart';
 import 'package:astro01/components/InfoSup.dart';
 import 'package:astro01/main.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'dart:async';
@@ -24,11 +23,10 @@ import 'bravoBadge.dart';
 
 bool vfquestion;
 List<String> propo = ['a', 'b', 'c', 'd'];
-var ind = Iterable<int>.generate(5).toList();
+var ind = Iterable<int>.generate(100).toList();
+
 int points = 0;
 bool cliquerRandom = false;
-AudioPlayer wrongRandAnswerPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
-AudioPlayer rightRandAnswerPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
 int questNumRandom = 1;
 List<int> indices = [0, 1, 2, 3];
 
@@ -174,8 +172,6 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                 onTap: () {
                   if (widget.answer == propo[0]) {
                     setState(() {
-                      rightRandAnswerPlayer.play(rightMusicPath, isLocal: true);
-
                       if (cliquerRandom == false) {
                         points += factRecomp;
                       }
@@ -191,8 +187,6 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                     cliquerRandom = false;
                   } else if (widget.answer == propo[1]) {
                     setState(() {
-                      wrongRandAnswerPlayer.play(wrongMusicPath, isLocal: true);
-
                       cliquerRandom = true;
                       choiceColor = choiceColors[1];
                       nbTentatives--;
@@ -205,8 +199,6 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                     });
                   } else if (widget.answer == propo[2]) {
                     setState(() {
-                      wrongRandAnswerPlayer.play(wrongMusicPath, isLocal: true);
-
                       cliquerRandom = true;
                       choiceColor = choiceColors[2];
                       nbTentatives--;
@@ -219,8 +211,6 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                     });
                   } else if (widget.answer == propo[3]) {
                     setState(() {
-                      wrongRandAnswerPlayer.play(wrongMusicPath, isLocal: true);
-
                       cliquerRandom = true;
                       choiceColor = choiceColors[3];
                       nbTentatives--;
@@ -239,13 +229,13 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                   });
                   Timer(Duration(milliseconds: 700), () {
                     if (ind.isEmpty || nbTentatives <= 0) {
-                      Navigator.pushReplacementNamed(context, '/bravoNiveauR');
                       questNumRandom = 1;
                       user.etoiles = user.etoiles + points;
                       update_etoiles();
                       etoilesRandom = points;
                       points = 0;
-                      planeteName = "random";
+                      planeteName = "Random";
+                      Navigator.pushReplacementNamed(context, '/bravoNiveauR');
                     } else {
                       if (widget.answer == propo[0]) {
                         setState(() {

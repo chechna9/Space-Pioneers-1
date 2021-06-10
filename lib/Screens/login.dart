@@ -4,16 +4,19 @@ import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'package:flutter/rendering.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../components/TextInput.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
 import '../variable_globale/variable.dart';
+import 'OriginalSplashScreen.dart';
 import 'homeScreen.dart';
 
 const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
 const supabaseKey =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDQ3OTY4MiwiZXhwIjoxOTM2MDU1NjgyfQ.IoKgpB9APMw5Te9DYgbJZIbYcvPOwl41dl4-IKFjpVk';
 final supabaseclient = SupabaseClient(supabaseUrl, supabaseKey);
+Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
 String name;
 
@@ -97,6 +100,15 @@ class LogCard extends StatefulWidget {
 class _LogCardState extends State<LogCard> {
   TextEditingController _email;
   TextEditingController _password;
+  Future<void> _setuseremail(String _useremail) async {
+    final SharedPreferences prefs = await _prefs;
+
+    setState(() {
+      prefs.setString('email', _useremail).then((bool success) {
+        return 0;
+      });
+    });
+  }
 
   @override
   void initState() {
@@ -181,7 +193,7 @@ class _LogCardState extends State<LogCard> {
         .signIn(email: _email.text.split(" ")[0], password: _password.text);
     if (signInResult != null && signInResult.user != null) {
       user.email = _email.text.split(" ")[0];
-
+      _setuseremail(user.email);
       Navigator.pushNamed(context, '/homeScreen');
     } else if (signInResult.error.message != null) {
       TextButton(

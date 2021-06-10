@@ -7,6 +7,7 @@ import '../components/TextInput.dart';
 import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
+import 'OriginalSplashScreen.dart';
 import 'levelChoice.dart';
 import 'homeScreen.dart';
 
@@ -273,7 +274,7 @@ class _RegCardState extends State<RegCard> {
           .signUp(_email.text, _password.text);
 
       if (signInResult != null && signInResult.user != null) {
-        user.email = _email.text;
+        user.email = _email.text.split(" ")[0];
         await supabaseclient.from("Trace").insert({
           "email": _email.text,
           'earth': 0,
@@ -292,7 +293,7 @@ class _RegCardState extends State<RegCard> {
           'etoiles': 0,
           'naissance': _dateTime.toString().split(" ")[0],
           'avatar': 'default',
-          'badges': '000000001',
+          'badges': '000000000001',
         }).execute();
         Navigator.pushNamed(context, '/homeScreen');
       } else if (signInResult.error.message != null ||

@@ -11,6 +11,7 @@ import 'package:astro01/Screens/randomSection.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase/supabase.dart';
 import 'Screens/bravoNiveauR.dart';
 import 'Screens/inscription.dart';
@@ -30,12 +31,15 @@ import 'Screens/documentation_details.dart';
 import 'Screens/documentation_data.dart';
 import 'Screens/documentation_swiper.dart';
 import 'Screens/levelChoiceRandom.dart';
+import 'dart:async';
 
 const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
 const supabaseKey =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDQ3OTY4MiwiZXhwIjoxOTM2MDU1NjgyfQ.IoKgpB9APMw5Te9DYgbJZIbYcvPOwl41dl4-IKFjpVk';
 final supabaseclient = SupabaseClient(supabaseUrl, supabaseKey);
-void main() {
+void main() async {
+  //WidgetsFlutterBinding.ensureInitialized();
+
   Injector.appInstance.registerSingleton<SupabaseClient>(() => supabaseclient);
   AudioPlayer mainAudioPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
   AudioCache mainAudioCache = AudioCache(fixedPlayer: mainAudioPlayer);
@@ -49,7 +53,7 @@ void main() {
       // to change calendar color
       primarySwatch: calendarColor,
     ),
-    initialRoute: '/splashScreen',
+    initialRoute: '/splash',
     routes: {
       '/splashScreen': (context) => SplashScreen(
             mainAudioPlayer: mainAudioPlayer,
@@ -82,3 +86,5 @@ void main() {
     },
   ));
 }
+
+void setState(Null Function() param0) {}

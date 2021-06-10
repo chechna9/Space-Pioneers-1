@@ -6,6 +6,7 @@ import 'package:astro01/components/constants.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
 // import '../components/RoundedCard.dart';
+import 'OriginalSplashScreen.dart';
 import 'quiz.dart';
 import 'randomSection.dart';
 
@@ -163,15 +164,17 @@ class PlanetCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    getEmail();
+
     return TextButton(
       onPressed: () {
         planeteInd = choiceInd;
         questNum = 1;
         questNumRandom = 1;
         if (planeteInd == 9) {
-        Navigator.pushReplacementNamed(context, '/levelChoiceRandom');
-        }else{
-        Navigator.pushReplacementNamed(context, '/levelChoice');
+          Navigator.pushReplacementNamed(context, '/levelChoiceRandom');
+        } else {
+          Navigator.pushReplacementNamed(context, '/levelChoice');
         }
       },
       child: Container(

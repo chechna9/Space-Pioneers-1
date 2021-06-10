@@ -1,3 +1,4 @@
+import 'package:astro01/Screens/OriginalSplashScreen.dart';
 import 'package:astro01/Screens/loading.dart';
 import 'package:astro01/classes/User.dart';
 import 'package:astro01/main.dart';
@@ -7,8 +8,11 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'package:injector/injector.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase/supabase.dart';
 import 'splashScreen.dart';
+
+Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
 class HomeScreen extends StatefulWidget {
   final AudioPlayer mainAudioPlayer;
@@ -22,7 +26,12 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     double sh = MediaQuery.of(context).size.height; //screen height
     double sw = MediaQuery.of(context).size.width; //screen width
-    Users user1 = new Users();
+    @override
+    void initState() async {
+      super.initState();
+
+      print(user.email);
+    }
 
     return Scaffold(
       backgroundColor: Colors.blue,
@@ -32,6 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
           if (snapshot.hasData == false) {
             return LoadingScreen();
           }
+          print(snapshot.data.length);
           user = snapshot.data[0];
           print('user');
           print(user.email);
@@ -60,13 +70,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             size: 30,
                           ),
                         ),
-                        onPressed: () async {
-                          await Injector.appInstance
-                              .get<SupabaseClient>()
-                              .auth
-                              .signOut();
+                        onPressed: () {
+                          signOut();
+                          _clearremail();
+
                           Navigator.pushReplacementNamed(
                               context, '/splashScreen');
+                          (route) => false;
                         },
                       ),
                       SoundCntrl(
@@ -289,4 +299,16 @@ Future<List<Users>> getUsers(String email_) async {
       .map((map) => Users.fromJson(map))
       .where((dataList) => dataList.email_ver(email_))
       .toList();
+}
+
+void signOut() async {
+  await Injector.appInstance.get<SupabaseClient>().auth.signOut();
+}
+
+Future<void> _clearremail() async {
+  final SharedPreferences prefs = await _prefs;
+
+  setState(() {
+    prefs.clear();
+  });
 }

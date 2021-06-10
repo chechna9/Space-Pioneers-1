@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.astro01">
    <application
-        android:label="astro01"
+        android:label="Space Pioneers"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

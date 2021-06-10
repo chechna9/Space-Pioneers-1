@@ -186,7 +186,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: CircleAvatar(
                       backgroundImage: AssetImage(
                           'assets/images/avatars/${user.avatar}.png'),
-                      radius: 100,
+                      radius: 70,
                     ),
                   ),
                   Positioned(
@@ -300,7 +300,7 @@ class BadgeCard extends StatelessWidget {
             ),
             Expanded(
               child: AutoSizeText(
-                '${user.name}',
+                '$name',
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w500,

@@ -27,13 +27,13 @@ List<String> propo = ['a', 'b', 'c', 'd'];
 var ind = Iterable<int>.generate(5).toList();
 int points = 0;
 bool cliquerRandom = false;
-AudioPlayer wrongRandAnswerPlayer = AudioPlayer();
-AudioPlayer rightRandAnswerPlayer = AudioPlayer();
+AudioPlayer wrongRandAnswerPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
+AudioPlayer rightRandAnswerPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
 int questNumRandom = 1;
 List<int> indices = [0, 1, 2, 3];
 
 class Index extends ChangeNotifier {
-  var ind = Iterable<int>.generate(5).toList();
+  var ind = Iterable<int>.generate(100).toList();
 
   int nb = nbTentatives;
 
@@ -386,7 +386,7 @@ class AppbarCustomedRandom extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '$numero/5',
+                  '$numero/100',
                   style: TextStyle(
                     color: myRed2,
                     fontSize: 17,

@@ -9,14 +9,16 @@ import 'package:astro01/components/constants.dart';
 
 class SplashScreen extends StatefulWidget {
   final AudioPlayer mainAudioPlayer;
-  SplashScreen({@required this.mainAudioPlayer});
+  final AudioCache mainAudioChache;
+  SplashScreen(
+      {@required this.mainAudioPlayer, @required this.mainAudioChache});
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  void playMusic() {
-    widget.mainAudioPlayer.play(mainMusicPath, isLocal: true);
+  void playMusic() async {
+    await widget.mainAudioChache.play(mainMusicPath);
     widget.mainAudioPlayer.setVolume(0.8);
     widget.mainAudioPlayer.setReleaseMode(ReleaseMode.LOOP);
   }

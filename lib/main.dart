@@ -1,6 +1,7 @@
 import 'dart:async';
 // import 'dart:js';
 
+import 'package:astro01/Screens/OriginalSplashScreen.dart';
 import 'package:astro01/Screens/bravoBadge.dart';
 import 'package:astro01/Screens/bravoNiveau.dart';
 import 'package:astro01/Screens/levelChoice.dart';
@@ -36,8 +37,9 @@ const supabaseKey =
 final supabaseclient = SupabaseClient(supabaseUrl, supabaseKey);
 void main() {
   Injector.appInstance.registerSingleton<SupabaseClient>(() => supabaseclient);
-  AudioPlayer mainAudioPlayer = AudioPlayer();
-  AudioPlayer docAudioPlayer = AudioPlayer();
+  AudioPlayer mainAudioPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
+  AudioCache mainAudioCache = AudioCache(fixedPlayer: mainAudioPlayer);
+  AudioPlayer docAudioPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
@@ -51,7 +53,9 @@ void main() {
     routes: {
       '/splashScreen': (context) => SplashScreen(
             mainAudioPlayer: mainAudioPlayer,
+            mainAudioChache: mainAudioCache,
           ),
+      '/splash': (context) => Splash(),
       '/inscription': (context) => Inscription(),
       '/login': (context) => Login(),
       '/leaderBoard': (context) => LeaderBoard(),

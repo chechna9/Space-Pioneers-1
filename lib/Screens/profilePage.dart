@@ -104,9 +104,8 @@ class _ProfilePageState extends State<ProfilePage> {
       update_badges();
     }
 
-    // return tempBadges;
     badgePhoto = BadgeCard().photo;
-    return allBadges;
+    return tempBadges;
   }
 
   @override

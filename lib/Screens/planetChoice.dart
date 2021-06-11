@@ -164,7 +164,7 @@ class PlanetCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    getEmail();
+    //getEmail();
 
     return TextButton(
       onPressed: () {

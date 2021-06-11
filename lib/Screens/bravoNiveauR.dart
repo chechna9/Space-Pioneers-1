@@ -33,7 +33,7 @@ class _BravoNiveauRState extends State<BravoNiveauR> {
               iconSize: 30,
               onPressed: () {
                 if (ableToBadge == true &&
-                     etoilesRandom == 15 &&
+                     etoilesRandom == 300 &&
                     user.badges[9] == '0') {
                   List<String> badges = user.badges.split("");
                   badges[9] = '1';

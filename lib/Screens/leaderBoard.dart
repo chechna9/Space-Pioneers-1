@@ -21,7 +21,6 @@ class _LeaderBoardState extends State<LeaderBoard> {
   Widget build(BuildContext context) {
     bool existe = false;
     int ind = 0;
-    getEmail();
 
     // List<Users> list;
     return Scaffold(

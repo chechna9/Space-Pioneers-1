@@ -3,6 +3,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../components/TextInput.dart';
 import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
@@ -10,11 +11,13 @@ import 'package:supabase/supabase.dart';
 import 'OriginalSplashScreen.dart';
 import 'levelChoice.dart';
 import 'homeScreen.dart';
+import 'OriginalSplashScreen.dart';
 
 const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
 const supabaseKey =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDQ3OTY4MiwiZXhwIjoxOTM2MDU1NjgyfQ.IoKgpB9APMw5Te9DYgbJZIbYcvPOwl41dl4-IKFjpVk';
 final supabaseclient = SupabaseClient(supabaseUrl, supabaseKey);
+//Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
 class Inscription extends StatefulWidget {
   @override
@@ -104,6 +107,16 @@ class _RegCardState extends State<RegCard> {
     _email = TextEditingController();
     _password = TextEditingController();
     _username = TextEditingController();
+  }
+
+  Future<void> _setuseremail(String _useremail) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('email', _useremail);
+    /* setState(() {
+    prefs.setString('email', _useremail).then((bool success) {
+      return 0;
+    });
+  });*/
   }
 
   @override
@@ -275,6 +288,10 @@ class _RegCardState extends State<RegCard> {
 
       if (signInResult != null && signInResult.user != null) {
         user.email = _email.text.split(" ")[0];
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('email', user.email);
+
+        ;
         await supabaseclient.from("Trace").insert({
           "email": _email.text,
           'earth': 0,

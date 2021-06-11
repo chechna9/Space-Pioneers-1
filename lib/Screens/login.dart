@@ -16,8 +16,7 @@ const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
 const supabaseKey =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDQ3OTY4MiwiZXhwIjoxOTM2MDU1NjgyfQ.IoKgpB9APMw5Te9DYgbJZIbYcvPOwl41dl4-IKFjpVk';
 final supabaseclient = SupabaseClient(supabaseUrl, supabaseKey);
-Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-
+Future<int> _counter;
 String name;
 
 class Login extends StatefulWidget {
@@ -100,21 +99,22 @@ class LogCard extends StatefulWidget {
 class _LogCardState extends State<LogCard> {
   TextEditingController _email;
   TextEditingController _password;
-  Future<void> _setuseremail(String _useremail) async {
-    final SharedPreferences prefs = await _prefs;
-
-    setState(() {
-      prefs.setString('email', _useremail).then((bool success) {
-        return 0;
-      });
-    });
-  }
 
   @override
   void initState() {
     super.initState();
     _email = TextEditingController();
     _password = TextEditingController();
+  }
+
+  Future<void> _setuseremail(String _useremail) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('email', _useremail);
+    /* setState(() {
+    prefs.setString('email', _useremail).then((bool success) {
+      return 0;
+    });
+  });*/
   }
 
   @override
@@ -159,6 +159,15 @@ class _LogCardState extends State<LogCard> {
                         ),
                         onPressed: () {
                           _login();
+
+                          void initState() {
+                            super.initState();
+                            //_clearremail();
+                            _setuseremail(user.email);
+                            print(user.email);
+                          }
+
+                          //_setuseremail(user.email);
                           widget.formKey.currentState.validate();
                         },
                         style: TextButton.styleFrom(
@@ -193,7 +202,9 @@ class _LogCardState extends State<LogCard> {
         .signIn(email: _email.text.split(" ")[0], password: _password.text);
     if (signInResult != null && signInResult.user != null) {
       user.email = _email.text.split(" ")[0];
-      _setuseremail(user.email);
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('email', user.email);
+      print(' saved ');
       Navigator.pushNamed(context, '/homeScreen');
     } else if (signInResult.error.message != null) {
       TextButton(
@@ -221,4 +232,10 @@ class _LogCardState extends State<LogCard> {
           });
     }
   }
+}
+
+Future<void> _clearremail() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  prefs.clear();
 }

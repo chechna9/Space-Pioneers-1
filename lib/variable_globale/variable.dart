@@ -3,6 +3,7 @@ import 'package:astro01/classes/User.dart';
 import 'package:astro01/classes/trace.dart';
 import 'package:audioplayer/audioplayer.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Users user = new Users();
 Trace trace = new Trace();
@@ -11,6 +12,8 @@ int indice = 0;
 int nbTentatives;
 int factRecomp;
 bool ableToBadge = false;
+
 extension CapExtension on String {
-  String get inCaps => this.length > 0 ?'${this[0].toUpperCase()}${this.substring(1)}':'';
+  String get inCaps =>
+      this.length > 0 ? '${this[0].toUpperCase()}${this.substring(1)}' : '';
 }

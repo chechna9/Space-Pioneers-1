@@ -40,6 +40,7 @@ final supabaseclient = SupabaseClient(supabaseUrl, supabaseKey);
 void main() async {
   //WidgetsFlutterBinding.ensureInitialized();
 
+  SharedPreferences prefs = await SharedPreferences.getInstance();
   Injector.appInstance.registerSingleton<SupabaseClient>(() => supabaseclient);
   AudioPlayer mainAudioPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
   AudioCache mainAudioCache = AudioCache(fixedPlayer: mainAudioPlayer);

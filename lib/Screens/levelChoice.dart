@@ -20,8 +20,6 @@ class LevelChoice extends StatefulWidget {
 class _LevelChoiceState extends State<LevelChoice> {
   @override
   Widget build(BuildContext context) {
-    getEmail();
-
     return Scaffold(
         backgroundColor: Colors.blue,
         body: FutureBuilder<List<Trace>>(

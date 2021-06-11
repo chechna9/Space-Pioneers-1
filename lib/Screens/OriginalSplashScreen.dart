@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:astro01/components/constants.dart';
 import 'package:astro01/variable_globale/variable.dart';
@@ -7,32 +9,34 @@ import 'package:supabase/supabase.dart';
 import '../main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+int splash = 1;
 Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 Future<String> _useremail;
 Future<void> _setuseremail(String _useremail) async {
-  final SharedPreferences prefs = await _prefs;
-
-  setState(() {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString('email', _useremail);
+  /* setState(() {
     prefs.setString('email', _useremail).then((bool success) {
       return 0;
     });
-  });
+  });*/
 }
 
 Future<void> _getseremail() async {
-  final SharedPreferences prefs = await _prefs;
-
-  setState(() {
-    user.email = (prefs.getString('counter') ?? null);
-  });
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  user.email = (prefs.getString('email') ?? null);
+  /*setState(() {
+    final email = prefs.getString('email') ?? null;
+    print('amail');
+    print(email);
+    user.email = email;
+  });*/
 }
 
 Future<void> _clearremail() async {
-  final SharedPreferences prefs = await _prefs;
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  setState(() {
-    prefs.clear();
-  });
+  prefs.clear();
 }
 
 class Splash extends StatefulWidget {
@@ -44,15 +48,29 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
+    //_clearremail();
+    //_setuseremail('ja_khenfouf@esi.dz');
+    void initState() {
+      super.initState();
+      _useremail = _prefs.then((SharedPreferences prefs) {
+        return (prefs.getString('email') ?? 0);
+      });
+    }
 
-    Future.microtask(() async {
-      _getseremail();
-      if (user.email == null) {
-        Navigator.pushNamed(context, '/splashScreen');
-      } else {
-        Navigator.pushNamed(context, '/homeScreen');
-      }
+    _getseremail();
+    print('user email');
+    print(user.email);
+    Timer(Duration(seconds: 5), () {
+      Future.microtask(() async {
+        await Duration(seconds: 5);
+        if (user.email == null) {
+          Navigator.pushNamed(context, '/splashScreen');
+        } else {
+          Navigator.pushNamed(context, '/homeScreen');
+        }
+      });
     });
+    ;
   }
 
   @override

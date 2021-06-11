@@ -1,4 +1,3 @@
-import 'package:astro01/Screens/OriginalSplashScreen.dart';
 import 'package:astro01/Screens/loading.dart';
 import 'package:astro01/classes/User.dart';
 import 'package:astro01/main.dart';
@@ -12,8 +11,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase/supabase.dart';
 import 'splashScreen.dart';
 
-Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-
 class HomeScreen extends StatefulWidget {
   final AudioPlayer mainAudioPlayer;
   HomeScreen({@required this.mainAudioPlayer});
@@ -26,26 +23,58 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     double sh = MediaQuery.of(context).size.height; //screen height
     double sw = MediaQuery.of(context).size.width; //screen width
-    @override
     void initState() async {
       super.initState();
-
-      print(user.email);
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String emailuser = prefs.getString('email');
+      setState(() {
+        user.email = emailuser;
+      });
     }
 
+    print('user email home screnn');
+    print(user.email);
     return Scaffold(
       backgroundColor: Colors.blue,
+      appBar: AppBar(
+        elevation: 0,
+        leading: IconButton(
+          icon: Transform.rotate(
+            angle: 3.15,
+            child: Icon(
+              Icons.logout,
+              color: Colors.white,
+              size: 30,
+            ),
+          ),
+          onPressed: () async {
+            signOut();
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+
+            prefs.clear();
+
+            Navigator.pushReplacementNamed(context, '/splashScreen');
+            (route) => false;
+          },
+        ),
+        actions: [
+          SoundCntrl(
+            mainAudioPlayer: widget.mainAudioPlayer,
+          ),
+        ],
+      ),
       body: FutureBuilder<List<Users>>(
         future: getUsers(user.email),
         builder: (context, AsyncSnapshot<List<Users>> snapshot) {
           if (snapshot.hasData == false) {
             return LoadingScreen();
           }
+          print('user');
+          print(user.email);
           print(snapshot.data.length);
           user = snapshot.data[0];
           print('user');
           print(user.email);
-
           return Material(
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -56,34 +85,34 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: sh * 0.04,
+                    height: sh * 0.025,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                        icon: Transform.rotate(
-                          angle: 3.15,
-                          child: Icon(
-                            Icons.logout,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                        ),
-                        onPressed: () {
-                          signOut();
-                          _clearremail();
-
-                          Navigator.pushReplacementNamed(
-                              context, '/splashScreen');
-                          (route) => false;
-                        },
-                      ),
-                      SoundCntrl(
-                        mainAudioPlayer: widget.mainAudioPlayer,
-                      ),
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     IconButton(
+                  //       icon: Transform.rotate(
+                  //         angle: 3.15,
+                  //         child: Icon(
+                  //           Icons.logout,
+                  //           color: Colors.white,
+                  //           size: 30,
+                  //         ),
+                  //       ),
+                  //       onPressed: () async {
+                  //         await Injector.appInstance
+                  //             .get<SupabaseClient>()
+                  //             .auth
+                  //             .signOut();
+                  //         Navigator.pushReplacementNamed(
+                  //             context, '/splashScreen');
+                  //       },
+                  //     ),
+                  //     SoundCntrl(
+                  //       mainAudioPlayer: widget.mainAudioPlayer,
+                  //     ),
+                  //   ],
+                  // ),
                   SizedBox(
                     height: sh * 0.01,
                   ),
@@ -303,12 +332,4 @@ Future<List<Users>> getUsers(String email_) async {
 
 void signOut() async {
   await Injector.appInstance.get<SupabaseClient>().auth.signOut();
-}
-
-Future<void> _clearremail() async {
-  final SharedPreferences prefs = await _prefs;
-
-  setState(() {
-    prefs.clear();
-  });
 }

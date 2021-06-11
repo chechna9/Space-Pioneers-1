@@ -27,32 +27,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       backgroundColor: Colors.blue,
-      body: FutureBuilder<List<Users>>(
-        future: getUsers(user.email),
-        builder: (context, AsyncSnapshot<List<Users>> snapshot) {
-          if (snapshot.hasData == false) {
-            return LoadingScreen();
-          }
-          user = snapshot.data[0];
-          print('user');
-          print(user.email);
-
-          return Material(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              decoration: BoxDecoration(
-                gradient: myGradiant,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: sh * 0.04,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
+      appBar: AppBar(
+        elevation: 0,
+        leading: IconButton(
                         icon: Transform.rotate(
                           angle: 3.15,
                           child: Icon(
@@ -70,11 +47,57 @@ class _HomeScreenState extends State<HomeScreen> {
                               context, '/splashScreen');
                         },
                       ),
-                      SoundCntrl(
+        actions: [ SoundCntrl(
                         mainAudioPlayer: widget.mainAudioPlayer,
-                      ),
-                    ],
+                      ),],
+      ),
+      body: FutureBuilder<List<Users>>(
+        future: getUsers(user.email),
+        builder: (context, AsyncSnapshot<List<Users>> snapshot) {
+          if (snapshot.hasData == false) {
+            return LoadingScreen();
+          }
+          user = snapshot.data[0];
+          print('user');
+          print(user.email);
+          return Material(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              decoration: BoxDecoration(
+                gradient: myGradiant,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: sh * 0.025,
                   ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     IconButton(
+                  //       icon: Transform.rotate(
+                  //         angle: 3.15,
+                  //         child: Icon(
+                  //           Icons.logout,
+                  //           color: Colors.white,
+                  //           size: 30,
+                  //         ),
+                  //       ),
+                  //       onPressed: () async {
+                  //         await Injector.appInstance
+                  //             .get<SupabaseClient>()
+                  //             .auth
+                  //             .signOut();
+                  //         Navigator.pushReplacementNamed(
+                  //             context, '/splashScreen');
+                  //       },
+                  //     ),
+                  //     SoundCntrl(
+                  //       mainAudioPlayer: widget.mainAudioPlayer,
+                  //     ),
+                  //   ],
+                  // ),
                   SizedBox(
                     height: sh * 0.01,
                   ),

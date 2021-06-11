@@ -124,6 +124,7 @@ class _RandomQuizState extends State<RandomQuiz> {
                             child: ListView.builder(
                               itemCount: min(i, 4),
                               itemBuilder: (BuildContext context, int myindex) {
+                                print(indices);
                                 return Column(children: [
                                   AnswerBoxRandom(
                                     answer: propo[indices[myindex]],

@@ -1,6 +1,7 @@
 // import 'dart:js';
 import 'dart:math';
 import 'dart:io';
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:astro01/Screens/bravoNiveauR.dart';
 import 'package:astro01/Screens/loading.dart';
 import 'package:astro01/Screens/planetChoice.dart';
@@ -27,8 +28,8 @@ List<String> propo = ['a', 'b', 'c', 'd'];
 var ind = Iterable<int>.generate(5).toList();
 int points = 0;
 bool cliquerRandom = false;
-AudioPlayer wrongRandAnswerPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
-AudioPlayer rightRandAnswerPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
+AssetsAudioPlayer wrongRandAnswerPlayer = AssetsAudioPlayer();
+AssetsAudioPlayer rightRandAnswerPlayer = AssetsAudioPlayer();
 int questNumRandom = 1;
 List<int> indices = [0, 1, 2, 3];
 
@@ -154,6 +155,26 @@ class AnswerBoxRandom extends StatefulWidget {
 }
 
 class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
+  void playRandRightMusic() async {
+    rightRandAnswerPlayer.open(
+      Audio(
+        rightMusicPath,
+      ),
+      autoStart: true,
+      playInBackground: PlayInBackground.disabledRestoreOnForeground,
+    );
+  }
+
+  void playRandWrongMusic() async {
+    rightRandAnswerPlayer.open(
+      Audio(
+        wrongMusicPath,
+      ),
+      autoStart: true,
+      playInBackground: PlayInBackground.disabledRestoreOnForeground,
+    );
+  }
+
   Color choiceColor = Colors.white;
   List<Color> choiceColors = [choiceGreen, choiceRed, choiceYellow, choiceBlue];
   @override
@@ -174,8 +195,7 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                 onTap: () {
                   if (widget.answer == propo[0]) {
                     setState(() {
-                      rightRandAnswerPlayer.play(rightMusicPath, isLocal: true);
-
+                      playRandRightMusic();
                       if (cliquerRandom == false) {
                         points += factRecomp;
                       }
@@ -191,8 +211,7 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                     cliquerRandom = false;
                   } else if (widget.answer == propo[1]) {
                     setState(() {
-                      wrongRandAnswerPlayer.play(wrongMusicPath, isLocal: true);
-
+                      playRandWrongMusic();
                       cliquerRandom = true;
                       choiceColor = choiceColors[1];
                       nbTentatives--;
@@ -205,8 +224,7 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                     });
                   } else if (widget.answer == propo[2]) {
                     setState(() {
-                      wrongRandAnswerPlayer.play(wrongMusicPath, isLocal: true);
-
+                      playRandWrongMusic();
                       cliquerRandom = true;
                       choiceColor = choiceColors[2];
                       nbTentatives--;
@@ -219,8 +237,7 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                     });
                   } else if (widget.answer == propo[3]) {
                     setState(() {
-                      wrongRandAnswerPlayer.play(wrongMusicPath, isLocal: true);
-
+                      playRandWrongMusic();
                       cliquerRandom = true;
                       choiceColor = choiceColors[3];
                       nbTentatives--;

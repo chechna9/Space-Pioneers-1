@@ -1,3 +1,4 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -11,8 +12,8 @@ import 'documentation_details.dart';
 import 'splashScreen.dart';
 
 class Documentation extends StatefulWidget {
-  final AudioPlayer docAudioPlayer;
-  final AudioPlayer mainAudioPlayer;
+  final AssetsAudioPlayer docAudioPlayer;
+  final AssetsAudioPlayer mainAudioPlayer;
   Documentation(
       {@required this.docAudioPlayer, @required this.mainAudioPlayer});
   @override
@@ -25,8 +26,14 @@ class _DocumentationState extends State<Documentation> {
     // TODO: implement initState
     super.initState();
     if (!mute) {
-      widget.docAudioPlayer.play(docMusicPath, isLocal: true);
-      widget.docAudioPlayer.setReleaseMode(ReleaseMode.LOOP);
+      widget.docAudioPlayer.open(
+        Audio(
+          docMusicPath,
+        ),
+        autoStart: true,
+        loopMode: LoopMode.playlist,
+        playInBackground: PlayInBackground.disabledRestoreOnForeground,
+      );
     }
   }
 
@@ -53,8 +60,7 @@ class _DocumentationState extends State<Documentation> {
           onPressed: () {
             setState(() {
               widget.docAudioPlayer.pause();
-              widget.mainAudioPlayer.resume();
-              // widget.docAudioPlayer.setReleaseMode(ReleaseMode.LOOP);
+              widget.mainAudioPlayer.playOrPause();
             });
 
             Navigator.pop(context);

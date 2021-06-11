@@ -5,6 +5,7 @@
 import 'dart:math';
 import 'dart:io';
 
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:astro01/Screens/bravoNiveau.dart';
 import 'package:astro01/Screens/bravoNiveauR.dart';
 import 'package:astro01/Screens/loading.dart';
@@ -36,8 +37,8 @@ int points = 0;
 bool cliquer = false;
 List<int> ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 List<int> indices = [0, 1, 2, 3];
-AudioPlayer wrongAnswerPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
-AudioPlayer rightAnswerPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
+AssetsAudioPlayer wrongAnswerPlayer = AssetsAudioPlayer();
+AssetsAudioPlayer rightAnswerPlayer = AssetsAudioPlayer();
 
 class Ind extends ChangeNotifier {
   List<int> ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -176,6 +177,28 @@ class AnswerBox extends StatefulWidget {
 }
 
 class _AnswerBoxState extends State<AnswerBox> {
+  void playRightMusic() async {
+    rightAnswerPlayer.open(
+      Audio(
+        rightMusicPath,
+      ),
+      autoStart: true,
+      
+      playInBackground: PlayInBackground.disabledRestoreOnForeground,
+    );
+  }
+
+  void playWrongMusic() async {
+    rightAnswerPlayer.open(
+      Audio(
+        wrongMusicPath,
+      ),
+      autoStart: true,
+      
+      playInBackground: PlayInBackground.disabledRestoreOnForeground,
+    );
+  }
+
   bool recompCliquer = false;
 
   Color choiceColor = Colors.white;
@@ -200,7 +223,7 @@ class _AnswerBoxState extends State<AnswerBox> {
 
                   if (widget.answer == propo[0]) {
                     setState(() {
-                      rightAnswerPlayer.play(rightMusicPath, isLocal: true);
+                      playRightMusic();
 
                       if (cliquer == false) {
                         points += factRecomp;
@@ -230,7 +253,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                     });
                   } else if (widget.answer == propo[1])
                     setState(() {
-                      wrongAnswerPlayer.play(wrongMusicPath, isLocal: true);
+                      playWrongMusic();
                       cliquer = true;
                       choiceColor = choiceColors[1];
                       nbTentatives--;
@@ -241,8 +264,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                     });
                   else if (widget.answer == propo[2])
                     setState(() {
-                      wrongAnswerPlayer.play(wrongMusicPath, isLocal: true);
-
+                      playWrongMusic();
                       cliquer = true;
                       choiceColor = choiceColors[2];
                       nbTentatives--;
@@ -253,8 +275,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                     });
                   else if (widget.answer == propo[3]) {
                     setState(() {
-                      wrongAnswerPlayer.play(wrongMusicPath, isLocal: true);
-
+                      playWrongMusic();
                       cliquer = true;
                       choiceColor = choiceColors[3];
                       nbTentatives--;

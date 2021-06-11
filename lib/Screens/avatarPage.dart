@@ -94,6 +94,11 @@ class AvatarPageState extends State<AvatarPage> {
                     children: [
                       AvatarCard(
                         credit: credit,
+                        image: 'default',
+                        price: 0,
+                      ),
+                      AvatarCard(
+                        credit: credit,
                         image: 'ridingRocket',
                         price: 50,
                       ),

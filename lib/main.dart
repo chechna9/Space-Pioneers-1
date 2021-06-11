@@ -1,6 +1,7 @@
 import 'dart:async';
 // import 'dart:js';
 
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:astro01/Screens/OriginalSplashScreen.dart';
 import 'package:astro01/Screens/bravoBadge.dart';
 import 'package:astro01/Screens/bravoNiveau.dart';
@@ -11,7 +12,6 @@ import 'package:astro01/Screens/randomSection.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase/supabase.dart';
 import 'Screens/bravoNiveauR.dart';
 import 'Screens/inscription.dart';
@@ -31,20 +31,17 @@ import 'Screens/documentation_details.dart';
 import 'Screens/documentation_data.dart';
 import 'Screens/documentation_swiper.dart';
 import 'Screens/levelChoiceRandom.dart';
-import 'dart:async';
 
 const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
 const supabaseKey =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDQ3OTY4MiwiZXhwIjoxOTM2MDU1NjgyfQ.IoKgpB9APMw5Te9DYgbJZIbYcvPOwl41dl4-IKFjpVk';
 final supabaseclient = SupabaseClient(supabaseUrl, supabaseKey);
-void main() async {
-  //WidgetsFlutterBinding.ensureInitialized();
-
-  SharedPreferences prefs = await SharedPreferences.getInstance();
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   Injector.appInstance.registerSingleton<SupabaseClient>(() => supabaseclient);
-  AudioPlayer mainAudioPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
-  AudioCache mainAudioCache = AudioCache(fixedPlayer: mainAudioPlayer);
-  AudioPlayer docAudioPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
+  AssetsAudioPlayer mainAudioPlayer = AssetsAudioPlayer();
+  AssetsAudioPlayer docAudioPlayer = AssetsAudioPlayer();
+
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
@@ -54,11 +51,10 @@ void main() async {
       // to change calendar color
       primarySwatch: calendarColor,
     ),
-    initialRoute: '/splash',
+    initialRoute: '/splashScreen',
     routes: {
       '/splashScreen': (context) => SplashScreen(
             mainAudioPlayer: mainAudioPlayer,
-            mainAudioChache: mainAudioCache,
           ),
       '/splash': (context) => Splash(),
       '/inscription': (context) => Inscription(),
@@ -87,5 +83,3 @@ void main() async {
     },
   ));
 }
-
-void setState(Null Function() param0) {}

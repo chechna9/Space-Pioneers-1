@@ -1,6 +1,7 @@
 // import 'dart:js';
 import 'dart:math';
 import 'dart:io';
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:astro01/Screens/bravoNiveauR.dart';
 import 'package:astro01/Screens/loading.dart';
 import 'package:astro01/Screens/planetChoice.dart';
@@ -27,6 +28,11 @@ var ind = Iterable<int>.generate(100).toList();
 
 int points = 0;
 bool cliquerRandom = false;
+<<<<<<< HEAD
+=======
+AssetsAudioPlayer wrongRandAnswerPlayer = AssetsAudioPlayer();
+AssetsAudioPlayer rightRandAnswerPlayer = AssetsAudioPlayer();
+>>>>>>> 43e0a3e37cac0abf615c4b4748da5fe181f6fea3
 int questNumRandom = 1;
 List<int> indices = [0, 1, 2, 3];
 
@@ -153,6 +159,26 @@ class AnswerBoxRandom extends StatefulWidget {
 }
 
 class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
+  void playRandRightMusic() async {
+    rightRandAnswerPlayer.open(
+      Audio(
+        rightMusicPath,
+      ),
+      autoStart: true,
+      playInBackground: PlayInBackground.disabledRestoreOnForeground,
+    );
+  }
+
+  void playRandWrongMusic() async {
+    rightRandAnswerPlayer.open(
+      Audio(
+        wrongMusicPath,
+      ),
+      autoStart: true,
+      playInBackground: PlayInBackground.disabledRestoreOnForeground,
+    );
+  }
+
   Color choiceColor = Colors.white;
   List<Color> choiceColors = [choiceGreen, choiceRed, choiceYellow, choiceBlue];
   @override
@@ -173,6 +199,10 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                 onTap: () {
                   if (widget.answer == propo[0]) {
                     setState(() {
+<<<<<<< HEAD
+=======
+                      playRandRightMusic();
+>>>>>>> 43e0a3e37cac0abf615c4b4748da5fe181f6fea3
                       if (cliquerRandom == false) {
                         points += factRecomp;
                       }
@@ -188,6 +218,10 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                     cliquerRandom = false;
                   } else if (widget.answer == propo[1]) {
                     setState(() {
+<<<<<<< HEAD
+=======
+                      playRandWrongMusic();
+>>>>>>> 43e0a3e37cac0abf615c4b4748da5fe181f6fea3
                       cliquerRandom = true;
                       choiceColor = choiceColors[1];
                       nbTentatives--;
@@ -200,6 +234,10 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                     });
                   } else if (widget.answer == propo[2]) {
                     setState(() {
+<<<<<<< HEAD
+=======
+                      playRandWrongMusic();
+>>>>>>> 43e0a3e37cac0abf615c4b4748da5fe181f6fea3
                       cliquerRandom = true;
                       choiceColor = choiceColors[2];
                       nbTentatives--;
@@ -212,6 +250,10 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                     });
                   } else if (widget.answer == propo[3]) {
                     setState(() {
+<<<<<<< HEAD
+=======
+                      playRandWrongMusic();
+>>>>>>> 43e0a3e37cac0abf615c4b4748da5fe181f6fea3
                       cliquerRandom = true;
                       choiceColor = choiceColors[3];
                       nbTentatives--;

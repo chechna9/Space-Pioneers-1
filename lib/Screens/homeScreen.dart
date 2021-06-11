@@ -1,3 +1,4 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:astro01/Screens/loading.dart';
 import 'package:astro01/classes/User.dart';
 import 'package:astro01/main.dart';
@@ -12,7 +13,7 @@ import 'package:supabase/supabase.dart';
 import 'splashScreen.dart';
 
 class HomeScreen extends StatefulWidget {
-  final AudioPlayer mainAudioPlayer;
+  final AssetsAudioPlayer mainAudioPlayer;
   HomeScreen({@required this.mainAudioPlayer});
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -232,8 +233,8 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class SoundCntrl extends StatefulWidget {
-  final AudioPlayer mainAudioPlayer;
-  SoundCntrl({Key key, @required this.mainAudioPlayer}) : super(key: key);
+  final AssetsAudioPlayer mainAudioPlayer;
+  SoundCntrl({Key key, this.mainAudioPlayer}) : super(key: key);
 
   @override
   _SoundCntrlState createState() => _SoundCntrlState();

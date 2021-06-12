@@ -7,6 +7,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'package:injector/injector.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase/supabase.dart';
 
 import 'OriginalSplashScreen.dart';
@@ -17,6 +18,27 @@ class LeaderBoard extends StatefulWidget {
 }
 
 class _LeaderBoardState extends State<LeaderBoard> {
+  Future<void> _getseremail() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    print('affichage');
+    print(prefs.getString('email'));
+    setState(() {
+      user.email = (prefs.getString('email') ?? null);
+    });
+    /*setState(() {
+    final email = prefs.getString('email') ?? null;
+    print('amail');
+    print(email);
+    user.email = email;
+  });*/
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getseremail();
+  }
+
   @override
   Widget build(BuildContext context) {
     bool existe = false;

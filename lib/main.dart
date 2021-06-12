@@ -51,7 +51,7 @@ void main() {
       // to change calendar color
       primarySwatch: calendarColor,
     ),
-    initialRoute: '/splashScreen',
+    initialRoute: '/splash',
     routes: {
       '/splashScreen': (context) => SplashScreen(
             mainAudioPlayer: mainAudioPlayer,

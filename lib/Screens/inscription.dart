@@ -109,16 +109,6 @@ class _RegCardState extends State<RegCard> {
     _username = TextEditingController();
   }
 
-  Future<void> _setuseremail(String _useremail) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('email', _useremail);
-    /* setState(() {
-    prefs.setString('email', _useremail).then((bool success) {
-      return 0;
-    });
-  });*/
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(

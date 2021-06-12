@@ -38,7 +38,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   auto_size_text: ^2.1.0
-  bordered_text: ^1.0.1
+  bordered_text: ^1.0.1 
   animated_widgets: ^1.0.6
   polygon_clipper: ^1.0.2
   flutter_svg: ^0.22.0

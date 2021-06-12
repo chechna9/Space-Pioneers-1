@@ -5,6 +5,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'package:injector/injector.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase/supabase.dart';
 import 'OriginalSplashScreen.dart';
 import 'splashScreen.dart';
@@ -20,6 +21,8 @@ class LevelChoice extends StatefulWidget {
 class _LevelChoiceState extends State<LevelChoice> {
   @override
   Widget build(BuildContext context) {
+    print(' hello');
+    print(user.email);
     return Scaffold(
         backgroundColor: Colors.blue,
         body: FutureBuilder<List<Trace>>(
@@ -29,9 +32,7 @@ class _LevelChoiceState extends State<LevelChoice> {
                 return LoadingScreen();
               }
               trace = snapshot.data[0];
-              print(' hello');
-              print(trace.earth);
-              print(trace.jupiter);
+
               return Scaffold(
                 appBar: AppBar(
                   leading: IconButton(

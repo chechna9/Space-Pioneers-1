@@ -22,17 +22,6 @@ Future<void> _setuseremail(String _useremail) async {
   });*/
 }
 
-Future<void> _getseremail() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  user.email = (prefs.getString('email') ?? null);
-  /*setState(() {
-    final email = prefs.getString('email') ?? null;
-    print('amail');
-    print(email);
-    user.email = email;
-  });*/
-}
-
 Future<void> _clearremail() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -46,6 +35,22 @@ class Splash extends StatefulWidget {
 
 class _SplashState extends State<Splash> {
   @override
+  Future<void> _getseremail() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    print('affichage');
+    print(prefs.getString('email'));
+    setState(() {
+      user.email = (prefs.getString('email') ?? null);
+    });
+    /*setState(() {
+    final email = prefs.getString('email') ?? null;
+    print('amail');
+    print(email);
+    user.email = email;
+  });*/
+  }
+
+  @override
   void initState() {
     super.initState();
     //_clearremail();
@@ -58,15 +63,16 @@ class _SplashState extends State<Splash> {
     }
 
     _getseremail();
-    print('user email');
-    print(user.email);
+
     Timer(Duration(seconds: 5), () {
       Future.microtask(() async {
         await Duration(seconds: 5);
         if (user.email == null) {
           Navigator.pushNamed(context, '/splashScreen');
+          (route) => false;
         } else {
           Navigator.pushNamed(context, '/homeScreen');
+          (route) => false;
         }
       });
     });
@@ -137,18 +143,3 @@ class _SplashState extends State<Splash> {
     );
   }
 }*/
-void getEmail() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  user.email = prefs.getString("email") ?? null;
-  print(user.email);
-}
-
-void clearEmail() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.clear();
-}
-
-void createEmail(String emaill) async {
-  final prefs = await SharedPreferences.getInstance();
-  prefs.setString("email", emaill);
-}

@@ -21,18 +21,30 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+  Future<void> _getseremail() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    print('affichage');
+    print(prefs.getString('email'));
+    setState(() {
+      user.email = (prefs.getString('email') ?? null);
+    });
+    /*setState(() {
+    final email = prefs.getString('email') ?? null;
+    print('amail');
+    print(email);
+    user.email = email;
+  });*/
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getseremail();
+  }
+
   Widget build(BuildContext context) {
     double sh = MediaQuery.of(context).size.height; //screen height
     double sw = MediaQuery.of(context).size.width; //screen width
-    void initState() async {
-      super.initState();
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      String emailuser = prefs.getString('email');
-      setState(() {
-        user.email = emailuser;
-      });
-    }
-
     print('user email home screnn');
     print(user.email);
     return Scaffold(

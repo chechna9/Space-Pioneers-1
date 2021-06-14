@@ -1,4 +1,5 @@
 import 'package:astro01/Screens/loading.dart';
+import 'package:astro01/Screens/randomSection.dart';
 import 'package:astro01/classes/trace.dart';
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -86,6 +87,7 @@ class _LevelChoiceRandomState extends State<LevelChoiceRandom> {
                                 nbTentatives = 25;
                                 factRecomp = facileRcmpRndm;
                                 ableToBadge = false;
+                                cliquerRandom = true;
                                 Navigator.pushReplacementNamed(
                                     context, '/random');
                               },
@@ -100,6 +102,7 @@ class _LevelChoiceRandomState extends State<LevelChoiceRandom> {
                                   nbTentatives = 20;
                                   factRecomp = moyenRcmpRndm;
                                   ableToBadge = false;
+                                  cliquerRandom = true;
                                   Navigator.pushReplacementNamed(
                                       context, '/random');
                                 }),
@@ -113,6 +116,7 @@ class _LevelChoiceRandomState extends State<LevelChoiceRandom> {
                                   nbTentatives = 10;
                                   factRecomp = difficileRcmpRndm;
                                   ableToBadge = true;
+                                  cliquerRandom = true;
                                   Navigator.pushReplacementNamed(
                                       context, '/random');
                                 }),

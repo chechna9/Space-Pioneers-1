@@ -10,8 +10,6 @@ import 'package:injector/injector.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase/supabase.dart';
 
-import 'OriginalSplashScreen.dart';
-
 class LeaderBoard extends StatefulWidget {
   @override
   _LeaderBoardState createState() => _LeaderBoardState();

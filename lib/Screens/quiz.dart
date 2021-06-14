@@ -1,10 +1,4 @@
-// import 'dart:js';
-
-// import 'dart:js';
-
 import 'dart:math';
-import 'dart:io';
-
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:astro01/Screens/bravoNiveau.dart';
 import 'package:astro01/Screens/bravoNiveauR.dart';
@@ -13,23 +7,16 @@ import 'package:astro01/Screens/planetChoice.dart';
 import 'package:astro01/classes/questions.dart';
 import 'package:astro01/components/InfoSup.dart';
 import 'package:astro01/main.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:provider/provider.dart';
 import '../components/InfoSup.dart';
-// import 'package:http/http.dart' as http;
-// import 'package:flutter/services.dart' show rootBundle;
 
-// Future<String> getJson() {
-//   return rootBundle.loadString('questions.json');
-// }
 bool vfquestion;
 String planeteName;
 List<String> propo = ['a', 'b', 'c', 'd'];
@@ -80,6 +67,7 @@ class _QuizState extends State<Quiz> {
 
   @override
   Widget build(BuildContext context) {
+    print(cliquer);
     return ChangeNotifierProvider<Ind>(
         create: (context) => Ind(),
         child: Scaffold(
@@ -183,7 +171,6 @@ class _AnswerBoxState extends State<AnswerBox> {
         rightMusicPath,
       ),
       autoStart: true,
-      
       playInBackground: PlayInBackground.disabledRestoreOnForeground,
     );
   }
@@ -194,7 +181,6 @@ class _AnswerBoxState extends State<AnswerBox> {
         wrongMusicPath,
       ),
       autoStart: true,
-      
       playInBackground: PlayInBackground.disabledRestoreOnForeground,
     );
   }
@@ -220,6 +206,7 @@ class _AnswerBoxState extends State<AnswerBox> {
               child: ListTile(
                 onTap: () {
                   recompCliquer = cliquer;
+                  print(recompCliquer);
 
                   if (widget.answer == propo[0]) {
                     setState(() {

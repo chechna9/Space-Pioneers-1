@@ -3,10 +3,6 @@ import 'package:astro01/classes/trace.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
-import 'package:injector/injector.dart';
-import 'package:supabase/supabase.dart';
-// import '../components/RoundedCard.dart';
-import 'OriginalSplashScreen.dart';
 import 'quiz.dart';
 import 'randomSection.dart';
 

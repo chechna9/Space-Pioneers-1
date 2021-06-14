@@ -1,13 +1,9 @@
-import 'dart:async';
-import 'dart:math';
-
 import 'package:astro01/Screens/bravoNiveauR.dart';
 import 'package:astro01/components/RoundedCard.dart';
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:polygon_clipper/polygon_border.dart';
-import 'package:provider/provider.dart';
 import '../components/constants.dart';
 import '../variable_globale/variable.dart';
 

@@ -1,12 +1,8 @@
-import 'package:astro01/Screens/levelChoice.dart';
-import 'package:astro01/Screens/quiz.dart';
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import '../components/constants.dart';
-import 'randomSection.dart';
 import '../main.dart';
-import '../classes/trace.dart';
 
 int etoilesRandom;
 int indicesbravo;
@@ -33,7 +29,7 @@ class _BravoNiveauRState extends State<BravoNiveauR> {
               iconSize: 30,
               onPressed: () {
                 if (ableToBadge == true &&
-                     etoilesRandom == 300 &&
+                    etoilesRandom == 300 &&
                     user.badges[9] == '0') {
                   List<String> badges = user.badges.split("");
                   badges[9] = '1';

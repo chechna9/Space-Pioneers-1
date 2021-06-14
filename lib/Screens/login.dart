@@ -1,4 +1,3 @@
-import 'package:astro01/classes/User.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +8,6 @@ import '../components/TextInput.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
 import '../variable_globale/variable.dart';
-import 'OriginalSplashScreen.dart';
-import 'homeScreen.dart';
 
 const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
 const supabaseKey =

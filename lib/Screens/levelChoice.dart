@@ -1,15 +1,12 @@
 import 'package:astro01/Screens/loading.dart';
+import 'package:astro01/Screens/quiz.dart';
 import 'package:astro01/classes/trace.dart';
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'package:injector/injector.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase/supabase.dart';
-import 'OriginalSplashScreen.dart';
-import 'splashScreen.dart';
-import 'planetChoice.dart';
 
 //int planeteInd;
 
@@ -90,6 +87,8 @@ class _LevelChoiceState extends State<LevelChoice> {
                                 nbTentatives = 10;
                                 factRecomp = facileRecomp;
                                 ableToBadge = false;
+                                cliquer = false;
+
                                 Navigator.pushReplacementNamed(
                                     context, '/quiz');
                               },
@@ -104,6 +103,8 @@ class _LevelChoiceState extends State<LevelChoice> {
                                   nbTentatives = 6;
                                   factRecomp = moyenRecomp;
                                   ableToBadge = false;
+                                  cliquer = false;
+
                                   Navigator.pushReplacementNamed(
                                       context, '/quiz');
                                 }),
@@ -117,6 +118,7 @@ class _LevelChoiceState extends State<LevelChoice> {
                                   nbTentatives = 3;
                                   factRecomp = difficileRecomp;
                                   ableToBadge = true;
+                                  cliquer = false;
                                   Navigator.pushReplacementNamed(
                                       context, '/quiz');
                                 }),

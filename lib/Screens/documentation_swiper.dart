@@ -1,11 +1,8 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:astro01/variable_globale/variable.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:animated_widgets/animated_widgets.dart';
-import 'package:animated_widgets/widgets/shake_animated_widget.dart';
 import 'package:astro01/components/constants.dart';
 import 'documentation_data.dart';
 import 'documentation_details.dart';

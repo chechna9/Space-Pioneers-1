@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:astro01/Screens/bravoBadge.dart';
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:flutter/material.dart';

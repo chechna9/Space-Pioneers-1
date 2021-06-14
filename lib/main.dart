@@ -1,4 +1,3 @@
-import 'dart:async';
 // import 'dart:js';
 
 import 'package:assets_audio_player/assets_audio_player.dart';
@@ -9,7 +8,6 @@ import 'package:astro01/Screens/levelChoice.dart';
 
 import 'package:astro01/Screens/quiz.dart';
 import 'package:astro01/Screens/randomSection.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
@@ -27,8 +25,6 @@ import 'Screens/shopPage.dart';
 import 'Screens/avatarPage.dart';
 import 'Screens/profilePage.dart';
 import 'Screens/planetChoice.dart';
-import 'Screens/documentation_details.dart';
-import 'Screens/documentation_data.dart';
 import 'Screens/documentation_swiper.dart';
 import 'Screens/levelChoiceRandom.dart';
 

@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
-import 'splashScreen.dart';
-import 'planetChoice.dart';
 
 int planeteInd;
 

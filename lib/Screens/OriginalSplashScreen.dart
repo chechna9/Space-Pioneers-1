@@ -1,12 +1,8 @@
 import 'dart:async';
-
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:astro01/components/constants.dart';
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:flutter/material.dart';
-import 'package:injector/injector.dart';
-import 'package:supabase/supabase.dart';
-import '../main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 int splash = 1;

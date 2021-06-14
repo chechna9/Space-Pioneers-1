@@ -1,22 +1,17 @@
 import 'package:astro01/Screens/bravoNiveauR.dart';
-import 'package:astro01/Screens/levelChoice.dart';
-import 'package:astro01/Screens/levelChoiceRandom.dart';
 import 'package:astro01/Screens/quiz.dart';
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import '../components/constants.dart';
 import 'quiz.dart';
-import 'randomSection.dart';
 import '../main.dart';
-import '../classes/trace.dart';
 
 int etoiles;
 int etoilesMax;
 int indices;
 int difference;
 String planeteNAME = planeteName.inCaps;
-
 
 class BravoNiveau extends StatefulWidget {
   @override

@@ -1,10 +1,3 @@
-// import 'dart:html';
-
-import 'package:astro01/main.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:injector/injector.dart';
-import 'package:supabase/supabase.dart';
-
 class Trace {
   String email;
   int earth;

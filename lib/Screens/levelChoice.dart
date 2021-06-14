@@ -6,11 +6,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'package:injector/injector.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase/supabase.dart';
-import 'OriginalSplashScreen.dart';
-import 'splashScreen.dart';
-import 'planetChoice.dart';
 
 //int planeteInd;
 

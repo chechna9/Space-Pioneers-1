@@ -1,17 +1,12 @@
-import 'package:astro01/Screens/bravoNiveau.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
-import 'package:flutter/services.dart';
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:polygon_clipper/polygon_border.dart';
 import '../components/constants.dart';
-import 'profilePage.dart';
 import 'quiz.dart';
-import 'randomSection.dart';
 
 String avatar = "default";
 String planeteNAME;
-
 
 class BravoBadge extends StatefulWidget {
   @override
@@ -84,7 +79,8 @@ class _BravoBadgeState extends State<BravoBadge> {
                     decoration: ShapeDecoration(
                       shape: PolygonBorder(sides: 6),
                       image: DecorationImage(
-                        image: AssetImage('assets/images/Badges/$planeteName.png'),
+                        image:
+                            AssetImage('assets/images/Badges/$planeteName.png'),
                       ),
                     ),
                   ),

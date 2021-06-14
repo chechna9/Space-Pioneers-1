@@ -1,4 +1,5 @@
 import 'package:astro01/Screens/loading.dart';
+import 'package:astro01/Screens/quiz.dart';
 import 'package:astro01/classes/trace.dart';
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -90,6 +91,8 @@ class _LevelChoiceState extends State<LevelChoice> {
                                 nbTentatives = 10;
                                 factRecomp = facileRecomp;
                                 ableToBadge = false;
+                                cliquer = false;
+
                                 Navigator.pushReplacementNamed(
                                     context, '/quiz');
                               },
@@ -104,6 +107,8 @@ class _LevelChoiceState extends State<LevelChoice> {
                                   nbTentatives = 6;
                                   factRecomp = moyenRecomp;
                                   ableToBadge = false;
+                                  cliquer = false;
+
                                   Navigator.pushReplacementNamed(
                                       context, '/quiz');
                                 }),
@@ -117,6 +122,7 @@ class _LevelChoiceState extends State<LevelChoice> {
                                   nbTentatives = 3;
                                   factRecomp = difficileRecomp;
                                   ableToBadge = true;
+                                  cliquer = false;
                                   Navigator.pushReplacementNamed(
                                       context, '/quiz');
                                 }),

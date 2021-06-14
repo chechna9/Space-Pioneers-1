@@ -80,6 +80,7 @@ class _QuizState extends State<Quiz> {
 
   @override
   Widget build(BuildContext context) {
+    print(cliquer);
     return ChangeNotifierProvider<Ind>(
         create: (context) => Ind(),
         child: Scaffold(
@@ -183,7 +184,6 @@ class _AnswerBoxState extends State<AnswerBox> {
         rightMusicPath,
       ),
       autoStart: true,
-      
       playInBackground: PlayInBackground.disabledRestoreOnForeground,
     );
   }
@@ -194,7 +194,6 @@ class _AnswerBoxState extends State<AnswerBox> {
         wrongMusicPath,
       ),
       autoStart: true,
-      
       playInBackground: PlayInBackground.disabledRestoreOnForeground,
     );
   }
@@ -220,6 +219,7 @@ class _AnswerBoxState extends State<AnswerBox> {
               child: ListTile(
                 onTap: () {
                   recompCliquer = cliquer;
+                  print(recompCliquer);
 
                   if (widget.answer == propo[0]) {
                     setState(() {

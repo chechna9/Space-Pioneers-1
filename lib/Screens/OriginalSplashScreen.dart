@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:astro01/components/constants.dart';
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:flutter/material.dart';
@@ -25,11 +26,28 @@ Future<void> _clearremail() async {
 }
 
 class Splash extends StatefulWidget {
+  final AssetsAudioPlayer mainAudioPlayer;
+
+  Splash({
+    @required this.mainAudioPlayer,
+  });
   @override
   _SplashState createState() => _SplashState();
 }
 
 class _SplashState extends State<Splash> {
+  void playMusic() async {
+    widget.mainAudioPlayer.open(
+      Audio(
+        mainMusicPath,
+      ),
+      autoStart: true,
+      volume: 0.8,
+      loopMode: LoopMode.playlist,
+      playInBackground: PlayInBackground.disabledRestoreOnForeground,
+    );
+  }
+
   @override
   Future<void> _getseremail() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -49,6 +67,7 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
+    playMusic();
     //_clearremail();
     //_setuseremail('ja_khenfouf@esi.dz');
     void initState() {

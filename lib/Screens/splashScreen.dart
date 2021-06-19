@@ -7,35 +7,12 @@ import 'package:astro01/components/constants.dart';
 
 class SplashScreen extends StatefulWidget {
   // final AssetsAudioPlayer mainAudioPlayer;
-  final AssetsAudioPlayer mainAudioPlayer;
 
-  SplashScreen({
-    @required this.mainAudioPlayer,
-  });
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  void playMusic() async {
-    widget.mainAudioPlayer.open(
-      Audio(
-        mainMusicPath,
-      ),
-      autoStart: true,
-      volume: 0.8,
-      loopMode: LoopMode.playlist,
-      playInBackground: PlayInBackground.disabledRestoreOnForeground,
-    );
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    playMusic();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Material(

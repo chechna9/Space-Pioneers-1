@@ -49,10 +49,10 @@ void main() {
     ),
     initialRoute: '/splash',
     routes: {
-      '/splashScreen': (context) => SplashScreen(
+      '/splashScreen': (context) => SplashScreen(),
+      '/splash': (context) => Splash(
             mainAudioPlayer: mainAudioPlayer,
           ),
-      '/splash': (context) => Splash(),
       '/inscription': (context) => Inscription(),
       '/login': (context) => Login(),
       '/leaderBoard': (context) => LeaderBoard(),

@@ -5,7 +5,6 @@ import 'package:polygon_clipper/polygon_border.dart';
 import '../components/constants.dart';
 import 'quiz.dart';
 
-String avatar = "default";
 String planeteNAME;
 
 class BravoBadge extends StatefulWidget {

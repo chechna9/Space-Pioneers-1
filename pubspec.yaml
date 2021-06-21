@@ -31,6 +31,7 @@ dependencies:
   audioplayers: ^0.19.0
   shared_preferences: ^2.0.5
   #audioplayers: ^0.13.2
+  email_auth: ^0.0.1+4
 
   flash: ^2.0.0
 

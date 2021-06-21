@@ -7,12 +7,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../components/TextInput.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
+import 'package:email_auth/email_auth.dart';
 
 const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
 const supabaseKey =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDQ3OTY4MiwiZXhwIjoxOTM2MDU1NjgyfQ.IoKgpB9APMw5Te9DYgbJZIbYcvPOwl41dl4-IKFjpVk';
 final supabaseclient = SupabaseClient(supabaseUrl, supabaseKey);
 //Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+bool _emailvalidate = false;
 
 class Inscription extends StatefulWidget {
   @override
@@ -102,6 +104,21 @@ class _RegCardState extends State<RegCard> {
     _email = TextEditingController();
     _password = TextEditingController();
     _username = TextEditingController();
+  }
+
+  void sendOtp() async {
+    EmailAuth.sessionName = "Company Name";
+    bool result = await EmailAuth.sendOtp(receiverMail: _email.value.text);
+    if (result) {
+      setState(() {
+        _emailvalidate = true;
+      });
+    } else {
+      setState(() {
+        _emailvalidate = false;
+        ;
+      });
+    }
   }
 
   @override
@@ -265,7 +282,10 @@ class _RegCardState extends State<RegCard> {
   }
 
   Future _signup() async {
-    if (_formKey.currentState.validate() && _username.text.length <= 14) {
+    sendOtp();
+    if (_formKey.currentState.validate() &&
+        _username.text.length <= 14 &&
+        _emailvalidate == true) {
       final signInResult = await Injector.appInstance
           .get<SupabaseClient>()
           .auth
@@ -330,7 +350,11 @@ class _RegCardState extends State<RegCard> {
             });
       }
     } else {
-      String message = ' taille maximale du nom est 14';
+      String message;
+      if (_emailvalidate == false)
+        String message = 'invalid email';
+      else
+        String message = ' taille maximale du nom est 14';
       showFlash(
           context: context,
           duration: const Duration(seconds: 2),

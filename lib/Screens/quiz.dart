@@ -298,6 +298,8 @@ class _AnswerBoxState extends State<AnswerBox> {
                       etoiles = points;
                       print(points);
                       if (nbTentatives <= 0) {
+                        indicesbravo = planeteInd;
+                        points = 0;
                         Navigator.pushReplacementNamed(context, '/bravoNiveau');
                       }
                       indicesbravo = planeteInd;

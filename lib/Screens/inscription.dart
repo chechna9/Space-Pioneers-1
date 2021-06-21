@@ -282,7 +282,7 @@ class _RegCardState extends State<RegCard> {
   }
 
   Future _signup() async {
-    sendOtp();
+  //  sendOtp();
     if (_formKey.currentState.validate() &&
         _username.text.length <= 14 &&
         _emailvalidate == true) {

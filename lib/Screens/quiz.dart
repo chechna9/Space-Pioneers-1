@@ -67,7 +67,6 @@ class _QuizState extends State<Quiz> {
 
   @override
   Widget build(BuildContext context) {
-    print(cliquer);
     return ChangeNotifierProvider<Ind>(
         create: (context) => Ind(),
         child: Scaffold(
@@ -88,7 +87,6 @@ class _QuizState extends State<Quiz> {
                   }
                   RemplirChoices(
                       propo, snapshot.data[ind[0] + 10 * planeteInd]);
-                  print(propo);
 
                   planeteName = snapshot.data[ind[0] + 10 * planeteInd].planete;
 
@@ -128,7 +126,6 @@ class _QuizState extends State<Quiz> {
                             child: ListView.builder(
                               itemCount: min(4, i),
                               itemBuilder: (BuildContext context, int myindex) {
-                                print(indices);
                                 return Column(children: [
                                   AnswerBox(
                                     answer: propo[indices[myindex]],
@@ -206,7 +203,6 @@ class _AnswerBoxState extends State<AnswerBox> {
               child: ListTile(
                 onTap: () {
                   recompCliquer = cliquer;
-                  print(recompCliquer);
 
                   if (widget.answer == propo[0]) {
                     setState(() {
@@ -296,7 +292,6 @@ class _AnswerBoxState extends State<AnswerBox> {
                       }
 
                       etoiles = points;
-                      print(points);
                       if (nbTentatives <= 0) {
                         indicesbravo = planeteInd;
                         points = 0;

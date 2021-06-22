@@ -67,6 +67,7 @@ class _QuizState extends State<Quiz> {
 
   @override
   Widget build(BuildContext context) {
+    print(cliquer);
     return ChangeNotifierProvider<Ind>(
         create: (context) => Ind(),
         child: Scaffold(
@@ -87,6 +88,7 @@ class _QuizState extends State<Quiz> {
                   }
                   RemplirChoices(
                       propo, snapshot.data[ind[0] + 10 * planeteInd]);
+                  print(propo);
 
                   planeteName = snapshot.data[ind[0] + 10 * planeteInd].planete;
 
@@ -126,6 +128,7 @@ class _QuizState extends State<Quiz> {
                             child: ListView.builder(
                               itemCount: min(4, i),
                               itemBuilder: (BuildContext context, int myindex) {
+                                print(indices);
                                 return Column(children: [
                                   AnswerBox(
                                     answer: propo[indices[myindex]],
@@ -203,6 +206,7 @@ class _AnswerBoxState extends State<AnswerBox> {
               child: ListTile(
                 onTap: () {
                   recompCliquer = cliquer;
+                  print(recompCliquer);
 
                   if (widget.answer == propo[0]) {
                     setState(() {
@@ -292,6 +296,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                       }
 
                       etoiles = points;
+                      print(points);
                       if (nbTentatives <= 0) {
                         indicesbravo = planeteInd;
                         points = 0;
@@ -552,8 +557,7 @@ int verification(int point) {
   if (planeteInd == 0) {
     if (trace.soleil < point) {
       difference = point - trace.soleil;
-      print("difference");
-      print(difference);
+
       trace.soleil = point;
       etoilesMax = point;
       return 1;
@@ -566,8 +570,7 @@ int verification(int point) {
   if (planeteInd == 1) {
     if (trace.mercury < point) {
       difference = point - trace.mercury;
-      print("difference");
-      print(difference);
+
       trace.mercury = point;
       etoilesMax = point;
       return 1;
@@ -580,8 +583,7 @@ int verification(int point) {
   if (planeteInd == 2) {
     if (trace.venus < point) {
       difference = point - trace.venus;
-      print("difference");
-      print(difference);
+
       trace.venus = point;
       etoilesMax = point;
       return 1;
@@ -594,8 +596,7 @@ int verification(int point) {
   if (planeteInd == 3) {
     if (trace.earth < point) {
       difference = point - trace.earth;
-      print("difference");
-      print(difference);
+
       trace.earth = point;
       etoilesMax = point;
       return 1;
@@ -608,8 +609,7 @@ int verification(int point) {
   if (planeteInd == 4) {
     if (trace.mars < point) {
       difference = point - trace.mars;
-      print("difference");
-      print(difference);
+
       trace.mars = point;
       etoilesMax = point;
       return 1;
@@ -622,8 +622,7 @@ int verification(int point) {
   if (planeteInd == 5) {
     if (trace.jupiter < point) {
       difference = point - trace.jupiter;
-      print("difference");
-      print(difference);
+
       trace.jupiter = point;
       etoilesMax = point;
       return 1;
@@ -636,8 +635,7 @@ int verification(int point) {
   if (planeteInd == 6) {
     if (trace.saturn < point) {
       difference = point - trace.saturn;
-      print("difference");
-      print(difference);
+
       trace.saturn = point;
       etoilesMax = point;
       return 1;
@@ -650,8 +648,7 @@ int verification(int point) {
   if (planeteInd == 7) {
     if (trace.uranus < point) {
       difference = point - trace.uranus;
-      print("difference");
-      print(difference);
+
       trace.uranus = point;
       etoilesMax = point;
       return 1;
@@ -664,8 +661,7 @@ int verification(int point) {
   if (planeteInd == 8) {
     if (trace.neptune < point) {
       difference = point - trace.neptune;
-      print("difference");
-      print(difference);
+
       trace.neptune = point;
       etoilesMax = point;
       return 1;

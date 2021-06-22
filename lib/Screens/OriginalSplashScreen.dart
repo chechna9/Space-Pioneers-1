@@ -51,8 +51,7 @@ class _SplashState extends State<Splash> {
   @override
   Future<void> _getseremail() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    print('affichage');
-    print(prefs.getString('email'));
+
     setState(() {
       user.email = (prefs.getString('email') ?? null);
     });

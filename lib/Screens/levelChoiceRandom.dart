@@ -27,7 +27,6 @@ class _LevelChoiceRandomState extends State<LevelChoiceRandom> {
                 return LoadingScreen();
               }
               trace = snapshot.data[0];
-              print(trace.jupiter);
               return Scaffold(
                 appBar: AppBar(
                   leading: IconButton(

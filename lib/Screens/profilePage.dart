@@ -138,7 +138,6 @@ class _ProfilePageState extends State<ProfilePage> {
           color: myRed,
           iconSize: 35,
           onPressed: () {
-            print("Go back");
             Navigator.pop(context);
           },
         ),

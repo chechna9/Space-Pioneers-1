@@ -21,9 +21,6 @@ class BravoNiveau extends StatefulWidget {
 class _BravoNiveauState extends State<BravoNiveau> {
   @override
   Widget build(BuildContext context) {
-    print("difference bravo");
-    print(difference);
-
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,

@@ -85,6 +85,7 @@ class _LevelChoiceState extends State<LevelChoice> {
                               color: Color(0xff1BEFBC),
                               onPressed: () {
                                 points = 0;
+                                indices = [0, 1, 2, 3];
                                 nbTentatives = 10;
                                 factRecomp = facileRecomp;
                                 ableToBadge = false;
@@ -102,6 +103,7 @@ class _LevelChoiceState extends State<LevelChoice> {
                                 color: Color(0xff1759BC),
                                 onPressed: () {
                                   points = 0;
+                                  indices = [0, 1, 2, 3];
                                   nbTentatives = 6;
                                   factRecomp = moyenRecomp;
                                   ableToBadge = false;
@@ -118,6 +120,7 @@ class _LevelChoiceState extends State<LevelChoice> {
                                 color: Color(0xffE1023C),
                                 onPressed: () {
                                   points = 0;
+                                  indices = [0, 1, 2, 3];
                                   nbTentatives = 3;
                                   factRecomp = difficileRecomp;
                                   ableToBadge = true;

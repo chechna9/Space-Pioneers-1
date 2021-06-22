@@ -282,10 +282,8 @@ class _RegCardState extends State<RegCard> {
   }
 
   Future _signup() async {
-    sendOtp();
-    if (_formKey.currentState.validate() &&
-        _username.text.length <= 14 &&
-        _emailvalidate == true) {
+    //sendOtp();
+    if (_formKey.currentState.validate() && _username.text.length <= 14) {
       final signInResult = await Injector.appInstance
           .get<SupabaseClient>()
           .auth
@@ -350,11 +348,7 @@ class _RegCardState extends State<RegCard> {
             });
       }
     } else {
-      String message;
-      if (_emailvalidate == false)
-        String message = 'invalid email';
-      else
-        String message = ' taille maximale du nom est 14';
+      String message = ' taille maximale du nom est 14';
       showFlash(
           context: context,
           duration: const Duration(seconds: 2),

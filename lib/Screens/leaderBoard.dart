@@ -18,8 +18,7 @@ class LeaderBoard extends StatefulWidget {
 class _LeaderBoardState extends State<LeaderBoard> {
   Future<void> _getseremail() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    print('affichage');
-    print(prefs.getString('email'));
+
     setState(() {
       user.email = (prefs.getString('email') ?? null);
     });
@@ -48,7 +47,6 @@ class _LeaderBoardState extends State<LeaderBoard> {
         body: FutureBuilder<List<Users>>(
             future: getleaders(),
             builder: (context, AsyncSnapshot<List<Users>> snapshot) {
-              print(user.etoiles);
               // list = snapshot.data;
               if (snapshot.hasData == false) {
                 return LoadingScreen();
@@ -61,7 +59,6 @@ class _LeaderBoardState extends State<LeaderBoard> {
                     color: myRed,
                     iconSize: 35,
                     onPressed: () {
-                      print("Go back");
                       Navigator.pop(context);
                     },
                   ),
@@ -226,7 +223,6 @@ int leaders(String email, List<Users> list, int indice) {
   bool trouv = false;
   int i = 0;
 
-  print(indice);
   for (i; i != list.length; i++) {
     if (user.email == list[i].email) {
       trouv = true;

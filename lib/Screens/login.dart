@@ -184,8 +184,9 @@ class _LogCardState extends State<LogCard> {
       user.email = _email.text.split(" ")[0];
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('email', user.email);
-      print(' saved ');
+
       Navigator.pushNamed(context, '/homeScreen');
+      (route) => false;
     } else if (signInResult.error.message != null) {
       TextButton(
           onPressed: () {},

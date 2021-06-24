@@ -282,7 +282,7 @@ class _RegCardState extends State<RegCard> {
   }
 
   Future _signup() async {
-  //  sendOtp();
+    //  sendOtp();
     if (_formKey.currentState.validate() &&
         _username.text.length <= 14 &&
         _emailvalidate == true) {
@@ -318,6 +318,7 @@ class _RegCardState extends State<RegCard> {
           'badges': '000000000001',
         }).execute();
         Navigator.pushNamed(context, '/homeScreen');
+        (route) => false;
       } else if (signInResult.error.message != null ||
           _username.text.length > 14) {
         String message;
@@ -350,11 +351,7 @@ class _RegCardState extends State<RegCard> {
             });
       }
     } else {
-      String message;
-      if (_emailvalidate == false)
-        String message = 'invalid email';
-      else
-        String message = ' taille maximale du nom est 14';
+      String message = ' taille maximale du nom est 14';
       showFlash(
           context: context,
           duration: const Duration(seconds: 2),

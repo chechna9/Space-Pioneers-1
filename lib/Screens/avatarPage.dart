@@ -5,9 +5,7 @@ import 'package:provider/provider.dart';
 import '../components/constants.dart';
 import '../main.dart';
 
-
 String avatar = user.avatar;
-
 
 class TempAvatar extends ChangeNotifier {
   //to update avatar in avatarPage

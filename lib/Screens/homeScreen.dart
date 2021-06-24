@@ -21,8 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Future<void> _getseremail() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    print('affichage');
-    print(prefs.getString('email'));
+
     setState(() {
       user.email = (prefs.getString('email') ?? null);
     });
@@ -43,8 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     double sh = MediaQuery.of(context).size.height; //screen height
     double sw = MediaQuery.of(context).size.width; //screen width
-    print('user email home screnn');
-    print(user.email);
+
     return Scaffold(
       backgroundColor: Colors.blue,
       appBar: AppBar(
@@ -80,12 +78,9 @@ class _HomeScreenState extends State<HomeScreen> {
           if (snapshot.hasData == false) {
             return LoadingScreen();
           }
-          print('user');
-          print(user.email);
-          print(snapshot.data.length);
+
           user = snapshot.data[0];
-          print('user');
-          print(user.email);
+
           return Material(
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),

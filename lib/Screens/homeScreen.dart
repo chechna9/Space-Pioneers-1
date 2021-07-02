@@ -21,8 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Future<void> _getseremail() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    print('affichage');
-    print(prefs.getString('email'));
+
     setState(() {
       user.email = (prefs.getString('email') ?? null);
     });
@@ -43,200 +42,179 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     double sh = MediaQuery.of(context).size.height; //screen height
     double sw = MediaQuery.of(context).size.width; //screen width
-    print('user email home screnn');
-    print(user.email);
-    return Scaffold(
-      backgroundColor: Colors.blue,
-      appBar: AppBar(
-        elevation: 0,
-        leading: IconButton(
-          icon: Transform.rotate(
-            angle: 3.15,
-            child: Icon(
-              Icons.logout,
-              color: Colors.white,
-              size: 30,
-            ),
-          ),
-          onPressed: () async {
-            signOut();
-            SharedPreferences prefs = await SharedPreferences.getInstance();
 
-            prefs.clear();
-
-            Navigator.pushReplacementNamed(context, '/splashScreen');
-            (route) => false;
-          },
-        ),
-        actions: [
-          SoundCntrl(
-            mainAudioPlayer: widget.mainAudioPlayer,
-          ),
-        ],
-      ),
-      body: FutureBuilder<List<Users>>(
-        future: getUsers(user.email),
-        builder: (context, AsyncSnapshot<List<Users>> snapshot) {
-          if (snapshot.hasData == false) {
-            return LoadingScreen();
-          }
-          print('user');
-          print(user.email);
-          print(snapshot.data.length);
-          user = snapshot.data[0];
-          print('user');
-          print(user.email);
-          return Material(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              decoration: BoxDecoration(
-                gradient: myGradiant,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        backgroundColor: Colors.blue,
+        appBar: AppBar(
+          elevation: 0,
+          leading: IconButton(
+            icon: Transform.rotate(
+              angle: 3.15,
+              child: Icon(
+                Icons.logout,
+                color: Colors.white,
+                size: 30,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: sh * 0.025,
-                  ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     IconButton(
-                  //       icon: Transform.rotate(
-                  //         angle: 3.15,
-                  //         child: Icon(
-                  //           Icons.logout,
-                  //           color: Colors.white,
-                  //           size: 30,
-                  //         ),
-                  //       ),
-                  //       onPressed: () async {
-                  //         await Injector.appInstance
-                  //             .get<SupabaseClient>()
-                  //             .auth
-                  //             .signOut();
-                  //         Navigator.pushReplacementNamed(
-                  //             context, '/splashScreen');
-                  //       },
-                  //     ),
-                  //     SoundCntrl(
-                  //       mainAudioPlayer: widget.mainAudioPlayer,
-                  //     ),
-                  //   ],
-                  // ),
-                  SizedBox(
-                    height: sh * 0.01,
-                  ),
-                  Stack(
-                    clipBehavior: Clip.none,
-                    alignment: Alignment.topRight,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          AutoSizeText(
-                            'Salut ${user.name} !',
-                            style: TextStyle(
-                              color: myRed,
-                              fontWeight: FontWeight.w900,
-                              fontSize: 45,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          AutoSizeText(
-                            'Bienvenue dans cette belle aventure',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w100,
-                              fontSize: 15,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Positioned(
-                        bottom: -35,
-                        left: sw * 0.8,
-                        child: Star(angle: 8, scale: 2.8),
-                      ),
-                      Positioned(
-                        top: -28,
-                        right: 115,
-                        child: Star(angle: 8, scale: 2.8),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: sh * 0.0315,
-                  ),
-                  Expanded(
-                    child: ListView(
+            ),
+            onPressed: () async {
+              signOut();
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+
+              prefs.clear();
+              (route) => false;
+              Navigator.pushReplacementNamed(context, '/splashScreen');
+            },
+          ),
+          actions: [
+            IconButton(
+              icon: Icon(
+                Icons.info_outline,
+                size: 35,
+              ),
+              onPressed: () {},
+            ),
+            SoundCntrl(
+              mainAudioPlayer: widget.mainAudioPlayer,
+            ),
+          ],
+        ),
+        body: FutureBuilder<List<Users>>(
+          future: getUsers(user.email),
+          builder: (context, AsyncSnapshot<List<Users>> snapshot) {
+            if (snapshot.hasData == false) {
+              return LoadingScreen();
+            }
+
+            user = snapshot.data[0];
+
+            return Material(
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                decoration: BoxDecoration(
+                  gradient: myGradiant,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: sh * 0.025,
+                    ),
+                    SizedBox(
+                      height: sh * 0.01,
+                    ),
+                    Stack(
+                      clipBehavior: Clip.none,
+                      alignment: Alignment.topRight,
                       children: [
-                        Stack(
-                          clipBehavior: Clip.none,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Column(
-                              children: [
-                                SelectBox(
-                                  image: 'astroReading',
-                                  text: 'Decouvrir',
-                                  color: myRed,
-                                  onPressed: () {
-                                    widget.mainAudioPlayer.pause();
-                                    Navigator.pushNamed(
-                                        context, '/documentation');
-                                  },
-                                ),
-                                SizedBox(
-                                  height: 30,
-                                ),
-                                SelectBox(
-                                    image: 'ridingRocket',
-                                    text: 'Jouer',
-                                    color: Color(0xffAB02E6),
-                                    onPressed: () {
-                                      Navigator.pushNamed(
-                                          context, '/planetChoice');
-                                    }),
-                                SizedBox(
-                                  height: 30,
-                                ),
-                                SelectBox(
-                                    image: 'ridingMoon',
-                                    text: 'Profile',
-                                    color: Color(0xff1759BC),
-                                    onPressed: () {
-                                      Navigator.pushNamed(
-                                          context, '/profilePage');
-                                    }),
-                              ],
+                            AutoSizeText(
+                              'Salut ${user.name} !',
+                              style: TextStyle(
+                                color: myRed,
+                                fontWeight: FontWeight.w900,
+                                fontSize: 45,
+                              ),
                             ),
-                            Positioned(
-                              bottom: -100,
-                              left: 30,
-                              child: Star(angle: 8, scale: 2.8),
+                            SizedBox(
+                              height: 10,
                             ),
-                            Positioned(
-                              bottom: -40,
-                              right: 10,
-                              child: Star(angle: 8, scale: 2.8),
-                            ),
-                            Positioned(
-                              bottom: 130,
-                              left: 0,
-                              child: Star(angle: 8, scale: 2.8),
+                            AutoSizeText(
+                              'Bienvenue dans cette belle aventure',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w100,
+                                fontSize: 15,
+                              ),
                             ),
                           ],
                         ),
+                        Positioned(
+                          bottom: -35,
+                          left: sw * 0.8,
+                          child: Star(angle: 8, scale: 2.8),
+                        ),
+                        Positioned(
+                          top: -28,
+                          right: 115,
+                          child: Star(angle: 8, scale: 2.8),
+                        ),
                       ],
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      height: sh * 0.0315,
+                    ),
+                    Expanded(
+                      child: ListView(
+                        children: [
+                          Stack(
+                            clipBehavior: Clip.none,
+                            children: [
+                              Column(
+                                children: [
+                                  SelectBox(
+                                    image: 'astroReading',
+                                    text: 'Decouvrir',
+                                    color: myRed,
+                                    onPressed: () {
+                                      widget.mainAudioPlayer.pause();
+                                      Navigator.pushNamed(
+                                          context, '/documentation');
+                                    },
+                                  ),
+                                  SizedBox(
+                                    height: 30,
+                                  ),
+                                  SelectBox(
+                                      image: 'ridingRocket',
+                                      text: 'Jouer',
+                                      color: Color(0xffAB02E6),
+                                      onPressed: () {
+                                        Navigator.pushNamed(
+                                            context, '/planetChoice');
+                                      }),
+                                  SizedBox(
+                                    height: 30,
+                                  ),
+                                  SelectBox(
+                                      image: 'ridingMoon',
+                                      text: 'Profile',
+                                      color: Color(0xff1759BC),
+                                      onPressed: () {
+                                        Navigator.pushReplacementNamed(
+                                            context, '/profilePage');
+                                      }),
+                                ],
+                              ),
+                              Positioned(
+                                bottom: -100,
+                                left: 30,
+                                child: Star(angle: 8, scale: 2.8),
+                              ),
+                              Positioned(
+                                bottom: -40,
+                                right: 10,
+                                child: Star(angle: 8, scale: 2.8),
+                              ),
+                              Positioned(
+                                bottom: 130,
+                                left: 0,
+                                child: Star(angle: 8, scale: 2.8),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

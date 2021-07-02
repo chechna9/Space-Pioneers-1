@@ -35,6 +35,15 @@ class _DocumentationState extends State<Documentation> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+
+    widget.docAudioPlayer.pause();
+    widget.mainAudioPlayer.playOrPause();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double sh = MediaQuery.of(context).size.height; //screen height
     double sw = MediaQuery.of(context).size.width; //screen width

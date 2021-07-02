@@ -237,7 +237,7 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                       update_etoiles();
                       etoilesRandom = points;
                       points = 0;
-                      planeteName = "Random";
+                      planeteNAME = "Random";
                       Navigator.pushReplacementNamed(context, '/bravoNiveauR');
                     } else {
                       if (widget.answer == propo[0]) {

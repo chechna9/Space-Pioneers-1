@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:astro01/Screens/bravoNiveau.dart';
-import 'package:astro01/Screens/bravoNiveauR.dart';
 import 'package:astro01/Screens/loading.dart';
 import 'package:astro01/Screens/planetChoice.dart';
 import 'package:astro01/classes/questions.dart';
@@ -18,7 +17,7 @@ import 'package:provider/provider.dart';
 import '../components/InfoSup.dart';
 
 bool vfquestion;
-String planeteName;
+String planeteNAME;
 List<String> propo = ['a', 'b', 'c', 'd'];
 int points = 0;
 bool cliquer = false;
@@ -88,7 +87,7 @@ class _QuizState extends State<Quiz> {
                   RemplirChoices(
                       propo, snapshot.data[ind[0] + 10 * planeteInd]);
 
-                  planeteName = snapshot.data[ind[0] + 10 * planeteInd].planete;
+                  planeteNAME = snapshot.data[ind[0] + 10 * planeteInd].planete;
 
                   int i = 4;
 
@@ -110,7 +109,7 @@ class _QuizState extends State<Quiz> {
                           body: AppbarCustomed(
                             myBlue: myBlue,
                             myRed2: myRed2,
-                            planete: planeteName.inCaps,
+                            planete: planeteNAME.inCaps,
                             numero: questNum,
                           ),
                         ),
@@ -285,11 +284,11 @@ class _AnswerBoxState extends State<AnswerBox> {
 
                       etoiles = points;
                       if (nbTentatives <= 0) {
-                        indicesbravo = planeteInd;
+                        indicesbr = planeteInd;
                         points = 0;
                         Navigator.pushReplacementNamed(context, '/bravoNiveau');
                       }
-                      indicesbravo = planeteInd;
+                      indicesbr = planeteInd;
                       //Navigator.pushReplacementNamed(context, '/planetChoice');
                       questNum = 1;
                       points = 0;

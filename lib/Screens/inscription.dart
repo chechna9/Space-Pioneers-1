@@ -317,8 +317,7 @@ class _RegCardState extends State<RegCard> {
           'avatar': 'default',
           'badges': '000000000001',
         }).execute();
-        Navigator.pushNamed(context, '/homeScreen');
-        (route) => false;
+        Navigator.pushReplacementNamed(context, '/homeScreen');
       } else if (signInResult.error.message != null ||
           _username.text.length > 14) {
         String message;

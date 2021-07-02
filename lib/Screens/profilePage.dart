@@ -106,6 +106,13 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    Navigator.pushReplacementNamed(context, '/homeScreen');
+  }
+
+  @override
   Widget build(BuildContext context) {
     List<BadgeCard> userBagdes = remplireBadge();
     return Scaffold(
@@ -138,7 +145,7 @@ class _ProfilePageState extends State<ProfilePage> {
           color: myRed,
           iconSize: 35,
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushReplacementNamed(context, '/homeScreen');
           },
         ),
         leadingWidth: 45,

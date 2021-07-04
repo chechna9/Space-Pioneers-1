@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:astro01/Screens/bravoNiveau.dart';
-import 'package:astro01/Screens/bravoNiveauR.dart';
 import 'package:astro01/Screens/loading.dart';
 import 'package:astro01/Screens/planetChoice.dart';
 import 'package:astro01/classes/questions.dart';
@@ -18,7 +17,7 @@ import 'package:provider/provider.dart';
 import '../components/InfoSup.dart';
 
 bool vfquestion;
-String planeteName;
+String planeteNAME;
 List<String> propo = ['a', 'b', 'c', 'd'];
 int points = 0;
 bool cliquer = false;
@@ -67,7 +66,6 @@ class _QuizState extends State<Quiz> {
 
   @override
   Widget build(BuildContext context) {
-    print(cliquer);
     return ChangeNotifierProvider<Ind>(
         create: (context) => Ind(),
         child: Scaffold(
@@ -88,9 +86,8 @@ class _QuizState extends State<Quiz> {
                   }
                   RemplirChoices(
                       propo, snapshot.data[ind[0] + 10 * planeteInd]);
-                  print(propo);
 
-                  planeteName = snapshot.data[ind[0] + 10 * planeteInd].planete;
+                  planeteNAME = snapshot.data[ind[0] + 10 * planeteInd].planete;
 
                   int i = 4;
 
@@ -112,7 +109,7 @@ class _QuizState extends State<Quiz> {
                           body: AppbarCustomed(
                             myBlue: myBlue,
                             myRed2: myRed2,
-                            planete: planeteName.inCaps,
+                            planete: planeteNAME.inCaps,
                             numero: questNum,
                           ),
                         ),
@@ -128,7 +125,6 @@ class _QuizState extends State<Quiz> {
                             child: ListView.builder(
                               itemCount: min(4, i),
                               itemBuilder: (BuildContext context, int myindex) {
-                                print(indices);
                                 return Column(children: [
                                   AnswerBox(
                                     answer: propo[indices[myindex]],
@@ -206,7 +202,6 @@ class _AnswerBoxState extends State<AnswerBox> {
               child: ListTile(
                 onTap: () {
                   recompCliquer = cliquer;
-                  print(recompCliquer);
 
                   if (widget.answer == propo[0]) {
                     setState(() {
@@ -217,8 +212,6 @@ class _AnswerBoxState extends State<AnswerBox> {
                       }
                       choiceColor = choiceColors[0];
                       questNum++;
-                      print("points :");
-                      print(points);
 
                       showDialog(
                         barrierDismissible: ind.length != 1,
@@ -246,8 +239,6 @@ class _AnswerBoxState extends State<AnswerBox> {
                       nbTentatives--;
                       Provider.of<Ind>(context, listen: false)
                           .updateInd(ind, nbTentatives);
-                      print("points :");
-                      print(points);
                     });
                   else if (widget.answer == propo[2])
                     setState(() {
@@ -257,8 +248,6 @@ class _AnswerBoxState extends State<AnswerBox> {
                       nbTentatives--;
                       Provider.of<Ind>(context, listen: false)
                           .updateInd(ind, nbTentatives);
-                      print("points :");
-                      print(points);
                     });
                   else if (widget.answer == propo[3]) {
                     setState(() {
@@ -268,8 +257,6 @@ class _AnswerBoxState extends State<AnswerBox> {
                       nbTentatives--;
                       Provider.of<Ind>(context, listen: false)
                           .updateInd(ind, nbTentatives);
-                      print("points :");
-                      print(points);
                     });
                   }
 
@@ -296,13 +283,12 @@ class _AnswerBoxState extends State<AnswerBox> {
                       }
 
                       etoiles = points;
-                      print(points);
                       if (nbTentatives <= 0) {
-                        indicesbravo = planeteInd;
+                        indicesbr = planeteInd;
                         points = 0;
                         Navigator.pushReplacementNamed(context, '/bravoNiveau');
                       }
-                      indicesbravo = planeteInd;
+                      indicesbr = planeteInd;
                       //Navigator.pushReplacementNamed(context, '/planetChoice');
                       questNum = 1;
                       points = 0;
@@ -557,8 +543,7 @@ int verification(int point) {
   if (planeteInd == 0) {
     if (trace.soleil < point) {
       difference = point - trace.soleil;
-      print("difference");
-      print(difference);
+
       trace.soleil = point;
       etoilesMax = point;
       return 1;
@@ -571,8 +556,7 @@ int verification(int point) {
   if (planeteInd == 1) {
     if (trace.mercury < point) {
       difference = point - trace.mercury;
-      print("difference");
-      print(difference);
+
       trace.mercury = point;
       etoilesMax = point;
       return 1;
@@ -585,8 +569,7 @@ int verification(int point) {
   if (planeteInd == 2) {
     if (trace.venus < point) {
       difference = point - trace.venus;
-      print("difference");
-      print(difference);
+
       trace.venus = point;
       etoilesMax = point;
       return 1;
@@ -599,8 +582,7 @@ int verification(int point) {
   if (planeteInd == 3) {
     if (trace.earth < point) {
       difference = point - trace.earth;
-      print("difference");
-      print(difference);
+
       trace.earth = point;
       etoilesMax = point;
       return 1;
@@ -613,8 +595,7 @@ int verification(int point) {
   if (planeteInd == 4) {
     if (trace.mars < point) {
       difference = point - trace.mars;
-      print("difference");
-      print(difference);
+
       trace.mars = point;
       etoilesMax = point;
       return 1;
@@ -627,8 +608,7 @@ int verification(int point) {
   if (planeteInd == 5) {
     if (trace.jupiter < point) {
       difference = point - trace.jupiter;
-      print("difference");
-      print(difference);
+
       trace.jupiter = point;
       etoilesMax = point;
       return 1;
@@ -641,8 +621,7 @@ int verification(int point) {
   if (planeteInd == 6) {
     if (trace.saturn < point) {
       difference = point - trace.saturn;
-      print("difference");
-      print(difference);
+
       trace.saturn = point;
       etoilesMax = point;
       return 1;
@@ -655,8 +634,7 @@ int verification(int point) {
   if (planeteInd == 7) {
     if (trace.uranus < point) {
       difference = point - trace.uranus;
-      print("difference");
-      print(difference);
+
       trace.uranus = point;
       etoilesMax = point;
       return 1;
@@ -669,8 +647,7 @@ int verification(int point) {
   if (planeteInd == 8) {
     if (trace.neptune < point) {
       difference = point - trace.neptune;
-      print("difference");
-      print(difference);
+
       trace.neptune = point;
       etoilesMax = point;
       return 1;

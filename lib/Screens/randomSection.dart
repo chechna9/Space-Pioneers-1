@@ -84,7 +84,6 @@ class _RandomQuizState extends State<RandomQuiz> {
                   }
 
                   RemplirChoices(propo, snapshot.data[ind[0]]);
-                  print(propo);
                   int i = 4;
                   if (propo[2] == null && propo[1] == null) {
                     i = 2;
@@ -117,7 +116,6 @@ class _RandomQuizState extends State<RandomQuiz> {
                             child: ListView.builder(
                               itemCount: min(i, 4),
                               itemBuilder: (BuildContext context, int myindex) {
-                                print(indices);
                                 return Column(children: [
                                   AnswerBoxRandom(
                                     answer: propo[indices[myindex]],
@@ -196,10 +194,6 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                       choiceColor = choiceColors[0];
                       questNumRandom++;
                       vfquestion = false;
-                      print("points :");
-                      print(points);
-                      print("tentatives :");
-                      print(nbTentatives);
                     });
                     ind.removeAt(0);
                     cliquerRandom = false;
@@ -211,10 +205,6 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                       nbTentatives--;
                       Provider.of<Index>(context, listen: false)
                           .updateInd(ind, nbTentatives);
-                      print("points :");
-                      print(points);
-                      print("tentatives :");
-                      print(nbTentatives);
                     });
                   } else if (widget.answer == propo[2]) {
                     setState(() {
@@ -224,10 +214,6 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                       nbTentatives--;
                       Provider.of<Index>(context, listen: false)
                           .updateInd(ind, nbTentatives);
-                      print("points :");
-                      print(points);
-                      print("tentatives :");
-                      print(nbTentatives);
                     });
                   } else if (widget.answer == propo[3]) {
                     setState(() {
@@ -237,10 +223,6 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                       nbTentatives--;
                       Provider.of<Index>(context, listen: false)
                           .updateInd(ind, nbTentatives);
-                      print("points :");
-                      print(points);
-                      print("tentatives :");
-                      print(nbTentatives);
                     });
                   }
                   Timer(Duration(milliseconds: 600), () {
@@ -255,7 +237,7 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                       update_etoiles();
                       etoilesRandom = points;
                       points = 0;
-                      planeteName = "Random";
+                      planeteNAME = "Random";
                       Navigator.pushReplacementNamed(context, '/bravoNiveauR');
                     } else {
                       if (widget.answer == propo[0]) {

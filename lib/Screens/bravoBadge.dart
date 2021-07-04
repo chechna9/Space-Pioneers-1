@@ -5,8 +5,6 @@ import 'package:polygon_clipper/polygon_border.dart';
 import '../components/constants.dart';
 import 'quiz.dart';
 
-String planeteNAME;
-
 class BravoBadge extends StatefulWidget {
   @override
   _BravoBadgeState createState() => _BravoBadgeState();
@@ -15,8 +13,6 @@ class BravoBadge extends StatefulWidget {
 class _BravoBadgeState extends State<BravoBadge> {
   @override
   Widget build(BuildContext context) {
-    print('bravo');
-    planeteNAME = planeteName.inCaps;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -78,15 +74,15 @@ class _BravoBadgeState extends State<BravoBadge> {
                     decoration: ShapeDecoration(
                       shape: PolygonBorder(sides: 6),
                       image: DecorationImage(
-                        image:
-                            AssetImage('assets/images/Badges/$planeteName.png'),
+                        image: AssetImage(
+                            'assets/images/Badges/${planeteNAME.inCaps}.png'),
                       ),
                     ),
                   ),
                 ),
               ),
               Text(
-                '$planeteNAME Pionnier',
+                '${planeteNAME.inCaps} Pionnier',
                 style: TextStyle(
                     color: myYellow,
                     fontSize: 36,

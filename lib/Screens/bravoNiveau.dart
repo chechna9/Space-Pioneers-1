@@ -1,4 +1,3 @@
-import 'package:astro01/Screens/bravoNiveauR.dart';
 import 'package:astro01/Screens/quiz.dart';
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +8,8 @@ import '../main.dart';
 
 int etoiles;
 int etoilesMax;
-int indices;
+int indicesbr;
 int difference;
-String planeteNAME = planeteName.inCaps;
 
 class BravoNiveau extends StatefulWidget {
   @override
@@ -21,9 +19,6 @@ class BravoNiveau extends StatefulWidget {
 class _BravoNiveauState extends State<BravoNiveau> {
   @override
   Widget build(BuildContext context) {
-    print("difference bravo");
-    print(difference);
-
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -39,10 +34,10 @@ class _BravoNiveauState extends State<BravoNiveau> {
               onPressed: () {
                 if (ableToBadge == true &&
                     etoiles == 100 &&
-                    user.badges[indicesbravo] == '0') {
+                    user.badges[indicesbr] == '0') {
                   List<String> badges = user.badges.split("");
 
-                  badges[indicesbravo] = '1';
+                  badges[indicesbr] = '1';
 
                   user.badges = badges.join("");
 
@@ -109,7 +104,7 @@ class _BravoNiveauState extends State<BravoNiveau> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      "Nombre maximale d'étoiles \n collectées dans $planeteNAME :",
+                      "Nombre maximale d'étoiles \n collectées dans ${planeteNAME.inCaps} :",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,

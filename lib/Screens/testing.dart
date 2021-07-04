@@ -122,7 +122,6 @@ class _TestingState extends State<Testing> {
           color: myRed,
           iconSize: 35,
           onPressed: () {
-            print("Go back");
             Navigator.pop(context);
           },
         ),

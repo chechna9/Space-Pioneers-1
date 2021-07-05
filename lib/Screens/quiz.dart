@@ -17,6 +17,8 @@ import 'package:provider/provider.dart';
 import '../components/InfoSup.dart';
 
 bool vfquestion;
+bool verefication = false;
+int verefier = -1;
 String planeteNAME;
 List<String> propo = ['a', 'b', 'c', 'd'];
 int points = 0;
@@ -216,6 +218,7 @@ class _AnswerBoxState extends State<AnswerBox> {
 
                       if (cliquer == false) {
                         points += factRecomp;
+                        etoiles = points;
                       }
                       choiceColor = choiceColors[0];
                       questNum++;
@@ -228,6 +231,14 @@ class _AnswerBoxState extends State<AnswerBox> {
                           recomp: recompCliquer ? 0 : factRecomp,
                           onPressedExiste: ind.length == 0,
                           onPressed: () {
+                            verefier = verification(points);
+                            print(verefier);
+                            print(difference);
+                            setState(() {
+                              verefication = true;
+                            });
+                            update();
+
                             Navigator.pushReplacementNamed(
                                 context, '/bravoNiveau');
                           },
@@ -275,20 +286,35 @@ class _AnswerBoxState extends State<AnswerBox> {
 
                   Timer(Duration(seconds: 1), () {
                     if (ind.isEmpty || nbTentatives <= 0) {
-                      if (verification(points) == 1) {
-                        update();
+                      if (verefication == true) {
+                        if (verefier == 1) {
+                          update();
 
-                        user.etoiles = trace.earth +
-                            trace.jupiter +
-                            trace.mars +
-                            trace.mercury +
-                            trace.neptune +
-                            trace.saturn +
-                            trace.soleil +
-                            trace.uranus +
-                            trace.venus;
+                          user.etoiles = trace.earth +
+                              trace.jupiter +
+                              trace.mars +
+                              trace.mercury +
+                              trace.neptune +
+                              trace.saturn +
+                              trace.soleil +
+                              trace.uranus +
+                              trace.venus;
+                        }
+                      } else {
+                        if (verification(points) == 1) {
+                          update();
+
+                          user.etoiles = trace.earth +
+                              trace.jupiter +
+                              trace.mars +
+                              trace.mercury +
+                              trace.neptune +
+                              trace.saturn +
+                              trace.soleil +
+                              trace.uranus +
+                              trace.venus;
+                        }
                       }
-
                       etoiles = points;
                       if (nbTentatives <= 0) {
                         indicesbr = planeteInd;

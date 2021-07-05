@@ -85,10 +85,17 @@ class _LeaderBoardState extends State<LeaderBoard> {
                           child: ListView.builder(
                             itemCount: min(10, snapshot.data.length),
                             itemBuilder: (BuildContext context, ind) {
+                              String nameuser;
+                              if (snapshot.data[ind].email == user.email) {
+                                nameuser =
+                                    "${snapshot.data[ind].name} ( vous )";
+                              } else {
+                                nameuser = snapshot.data[ind].name;
+                              }
                               return Column(
                                 children: [
                                   ClassementCard(
-                                    name: snapshot.data[ind].name,
+                                    name: nameuser,
                                     photo: snapshot.data[ind].avatar,
                                     rank: ind + 1,
                                     point: snapshot.data[ind].etoiles,
@@ -107,7 +114,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
                             ? ClassementCard(
                                 rank:
                                     leaders(user.email, snapshot.data, ind) + 1,
-                                name: user.name,
+                                name: "${user.name} ( vous )",
                                 photo: user.avatar,
                                 point: user.etoiles,
                               )

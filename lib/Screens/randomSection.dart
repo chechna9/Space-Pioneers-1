@@ -369,7 +369,7 @@ class AppbarCustomedRandom extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'random',
+                  'Random',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,

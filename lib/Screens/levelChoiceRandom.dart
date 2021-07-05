@@ -17,120 +17,139 @@ class LevelChoiceRandom extends StatefulWidget {
 
 class _LevelChoiceRandomState extends State<LevelChoiceRandom> {
   @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    Navigator.pushReplacementNamed(context, '/planetChoice');
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.blue,
-        body: FutureBuilder<List<Trace>>(
-            future: gettrace(user.email),
-            builder: (context, AsyncSnapshot<List<Trace>> snapshot) {
-              if (snapshot.hasData == false) {
-                return LoadingScreen();
-              }
-              trace = snapshot.data[0];
-              return Scaffold(
-                appBar: AppBar(
-                  leading: IconButton(
-                    onPressed: () {
-                      Navigator.pushReplacementNamed(context, '/planetChoice');
-                    },
-                    icon: Icon(
-                      Icons.arrow_back,
-                      size: 30,
-                    ),
-                  ),
-                  elevation: 0,
-                  leadingWidth: 70,
-                  toolbarHeight: 70,
-                ),
-                backgroundColor: myBlue,
-                body: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            AutoSizeText(
-                              'Choisir\nla difficulté !',
-                              style: TextStyle(
-                                color: myRed,
-                                fontWeight: FontWeight.w900,
-                                fontSize: 45,
-                              ),
-                            ),
-                            AutoSizeText(
-                              'Selon votre niveau .',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w100,
-                                letterSpacing: 2,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ],
-                        ),
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pushReplacementNamed(context, '/planetChoice');
+      },
+      child: Scaffold(
+          backgroundColor: Colors.blue,
+          body: FutureBuilder<List<Trace>>(
+              future: gettrace(user.email),
+              builder: (context, AsyncSnapshot<List<Trace>> snapshot) {
+                if (snapshot.hasData == false) {
+                  return LoadingScreen();
+                }
+                trace = snapshot.data[0];
+                return Scaffold(
+                  appBar: AppBar(
+                    leading: IconButton(
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(
+                            context, '/planetChoice');
+                      },
+                      icon: Icon(
+                        Icons.arrow_back,
+                        size: 30,
                       ),
-                      Expanded(
-                        flex: 3,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            SelectLevelBox(
-                              text: 'Facile',
-                              color: Color(0xff1BEFBC),
-                              onPressed: () {
-                                nbTentatives = 25;
-                                indices = [0, 1, 2, 3];
-                                points = 0;
-                                factRecomp = facileRcmpRndm;
-                                ableToBadge = false;
-                                cliquerRandom = true;
-                                Navigator.pushReplacementNamed(
-                                    context, '/random');
-                              },
-                            ),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            SelectLevelBox(
-                                text: 'Moyen',
-                                color: Color(0xff1759BC),
+                    ),
+                    elevation: 0,
+                    leadingWidth: 70,
+                    toolbarHeight: 70,
+                  ),
+                  backgroundColor: myBlue,
+                  body: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AutoSizeText(
+                                'Choisir\nla difficulté !',
+                                style: TextStyle(
+                                  color: myRed,
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: 45,
+                                ),
+                              ),
+                              AutoSizeText(
+                                'Selon votre niveau .',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w100,
+                                  letterSpacing: 2,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          flex: 3,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              SelectLevelBox(
+                                text: 'Facile',
+                                color: Color(0xff1BEFBC),
                                 onPressed: () {
-                                  nbTentatives = 20;
-                                  points = 0;
+                                  nbTentatives = 25;
                                   indices = [0, 1, 2, 3];
-                                  factRecomp = moyenRcmpRndm;
+                                  points = 0;
+                                  factRecomp = facileRcmpRndm;
                                   ableToBadge = false;
                                   cliquerRandom = true;
                                   Navigator.pushReplacementNamed(
                                       context, '/random');
-                                }),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            SelectLevelBox(
-                                text: 'Difficile',
-                                color: Color(0xffE1023C),
-                                onPressed: () {
-                                  nbTentatives = 10;
-                                  points = 0;
-                                  indices = [0, 1, 2, 3];
-                                  factRecomp = difficileRcmpRndm;
-                                  ableToBadge = true;
-                                  cliquerRandom = true;
-                                  Navigator.pushReplacementNamed(
-                                      context, '/random');
-                                }),
-                          ],
+                                },
+                              ),
+                              SizedBox(
+                                height: 30,
+                              ),
+                              SelectLevelBox(
+                                  text: 'Moyen',
+                                  color: Color(0xff1759BC),
+                                  onPressed: () {
+                                    nbTentatives = 20;
+                                    points = 0;
+                                    indices = [0, 1, 2, 3];
+                                    factRecomp = moyenRcmpRndm;
+                                    ableToBadge = false;
+                                    cliquerRandom = true;
+                                    Navigator.pushReplacementNamed(
+                                        context, '/random');
+                                  }),
+                              SizedBox(
+                                height: 30,
+                              ),
+                              SelectLevelBox(
+                                  text: 'Difficile',
+                                  color: Color(0xffE1023C),
+                                  onPressed: () {
+                                    nbTentatives = 10;
+                                    points = 0;
+                                    indices = [0, 1, 2, 3];
+                                    factRecomp = difficileRcmpRndm;
+                                    ableToBadge = true;
+                                    cliquerRandom = true;
+                                    Navigator.pushReplacementNamed(
+                                        context, '/random');
+                                  }),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              );
-            }));
+                );
+              })),
+    );
   }
 }
 

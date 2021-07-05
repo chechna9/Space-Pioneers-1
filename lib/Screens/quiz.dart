@@ -66,82 +66,89 @@ class _QuizState extends State<Quiz> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<Ind>(
-        create: (context) => Ind(),
-        child: Scaffold(
-            backgroundColor: Colors.blue,
-            body: FutureBuilder<List<Question>>(
-                future: fetchQuestions(),
-                builder: (context, AsyncSnapshot<List<Question>> snapshot) {
-                  if (snapshot.hasData == false) {
-                    return LoadingScreen();
-                  }
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pushReplacementNamed(context, '/planetChoice');
+      },
+      child: ChangeNotifierProvider<Ind>(
+          create: (context) => Ind(),
+          child: Scaffold(
+              backgroundColor: Colors.blue,
+              body: FutureBuilder<List<Question>>(
+                  future: fetchQuestions(),
+                  builder: (context, AsyncSnapshot<List<Question>> snapshot) {
+                    if (snapshot.hasData == false) {
+                      return LoadingScreen();
+                    }
 
-                  ind = Provider.of<Ind>(context).ind;
+                    ind = Provider.of<Ind>(context).ind;
 
-                  if (cliquer == false) {
-                    if (vfquestion == false) indices = [0, 1, 2, 3];
-                    indices = shuffle(indices);
-                    ind = shuffle(ind);
-                  }
-                  RemplirChoices(
-                      propo, snapshot.data[ind[0] + 10 * planeteInd]);
+                    if (cliquer == false) {
+                      if (vfquestion == false) indices = [0, 1, 2, 3];
+                      indices = shuffle(indices);
+                      ind = shuffle(ind);
+                    }
+                    RemplirChoices(
+                        propo, snapshot.data[ind[0] + 10 * planeteInd]);
 
-                  planeteNAME = snapshot.data[ind[0] + 10 * planeteInd].planete;
+                    planeteNAME =
+                        snapshot.data[ind[0] + 10 * planeteInd].planete;
 
-                  int i = 4;
+                    int i = 4;
 
-                  if (propo[2] == null && propo[1] == null) {
-                    i = 2;
-                    if (cliquer == false) indices = shuffle([0, 3]);
-                    vfquestion = true;
-                  }
+                    if (propo[2] == null && propo[1] == null) {
+                      i = 2;
+                      if (cliquer == false) indices = shuffle([0, 3]);
+                      vfquestion = true;
+                    }
 
-                  return Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          gradient: myGradiant,
-                        ),
-                        child: Scaffold(
-                          backgroundColor: Colors.transparent,
-                          body: AppbarCustomed(
-                            myBlue: myBlue,
-                            myRed2: myRed2,
-                            planete: planeteNAME.inCaps,
-                            numero: questNum,
+                    return Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            gradient: myGradiant,
                           ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 160),
-                        child: Column(children: [
-                          QuestBox(
-                            quest: snapshot
-                                .data[ind[0] + 10 * planeteInd].question,
-                          ),
-                          Expanded(
-                            child: ListView.builder(
-                              itemCount: min(4, i),
-                              itemBuilder: (BuildContext context, int myindex) {
-                                return Column(children: [
-                                  AnswerBox(
-                                    answer: propo[indices[myindex]],
-                                    answerLetter: '${myindex + 1}',
-                                    infoSup: snapshot
-                                        .data[ind[0] + 10 * planeteInd]
-                                        .infosupp,
-                                  ),
-                                ]);
-                              },
+                          child: Scaffold(
+                            backgroundColor: Colors.transparent,
+                            body: AppbarCustomed(
+                              myBlue: myBlue,
+                              myRed2: myRed2,
+                              planete: planeteNAME.inCaps,
+                              numero: questNum,
                             ),
                           ),
-                        ]),
-                      ),
-                    ],
-                  );
-                })));
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 160),
+                          child: Column(children: [
+                            QuestBox(
+                              quest: snapshot
+                                  .data[ind[0] + 10 * planeteInd].question,
+                            ),
+                            Expanded(
+                              child: ListView.builder(
+                                itemCount: min(4, i),
+                                itemBuilder:
+                                    (BuildContext context, int myindex) {
+                                  return Column(children: [
+                                    AnswerBox(
+                                      answer: propo[indices[myindex]],
+                                      answerLetter: '${myindex + 1}',
+                                      infoSup: snapshot
+                                          .data[ind[0] + 10 * planeteInd]
+                                          .infosupp,
+                                    ),
+                                  ]);
+                                },
+                              ),
+                            ),
+                          ]),
+                        ),
+                      ],
+                    );
+                  }))),
+    );
   }
 }
 

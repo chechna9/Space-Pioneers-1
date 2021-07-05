@@ -152,10 +152,14 @@ class _RegCardState extends State<RegCard> {
                     labelText: "Email",
                     controller: _email,
                     validator: (value) {
+                      setState(() {
+                        _email.text = _email.text.trim();
+                      });
                       if (value == null || value.isEmpty) {
                         return ' please enter your email ';
-                      } else
+                      } else {
                         return null;
+                      }
                     }),
                 SizedBox(
                   height: 12,

@@ -3,6 +3,7 @@ import 'package:astro01/Screens/loading.dart';
 import 'package:astro01/classes/User.dart';
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'package:injector/injector.dart';
@@ -42,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     double sh = MediaQuery.of(context).size.height; //screen height
     double sw = MediaQuery.of(context).size.width; //screen width
+   
 
     return WillPopScope(
       onWillPop: () async => false,
@@ -63,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
               SharedPreferences prefs = await SharedPreferences.getInstance();
 
               prefs.clear();
-              (route) => false;
+
               Navigator.pushReplacementNamed(context, '/splashScreen');
             },
           ),

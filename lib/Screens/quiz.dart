@@ -232,7 +232,12 @@ class _AnswerBoxState extends State<AnswerBox> {
                           onPressedExiste: ind.length == 0,
                           onPressed: () {
                             verefier = verification(points);
-                            verefication = true;
+                            print(verefier);
+                            print(difference);
+                            setState(() {
+                              verefication = true;
+                            });
+                            update();
 
                             Navigator.pushReplacementNamed(
                                 context, '/bravoNiveau');
@@ -295,20 +300,21 @@ class _AnswerBoxState extends State<AnswerBox> {
                               trace.uranus +
                               trace.venus;
                         }
-                      } else if (verification(points) == 1) {
-                        update();
+                      } else {
+                        if (verification(points) == 1) {
+                          update();
 
-                        user.etoiles = trace.earth +
-                            trace.jupiter +
-                            trace.mars +
-                            trace.mercury +
-                            trace.neptune +
-                            trace.saturn +
-                            trace.soleil +
-                            trace.uranus +
-                            trace.venus;
+                          user.etoiles = trace.earth +
+                              trace.jupiter +
+                              trace.mars +
+                              trace.mercury +
+                              trace.neptune +
+                              trace.saturn +
+                              trace.soleil +
+                              trace.uranus +
+                              trace.venus;
+                        }
                       }
-
                       etoiles = points;
                       if (nbTentatives <= 0) {
                         indicesbr = planeteInd;

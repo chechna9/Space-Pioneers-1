@@ -89,7 +89,7 @@ class _ProfilePageState extends State<ProfilePage> {
       user.badges[i] != '0' ? tempBadges.add(badge) : null;
       i++;
     }
-    if (tempBadges.length > 5) {
+    if (tempBadges.length > 5 && user.badges[10] == '0') {
       tempBadges.add(allBadges[10]);
       List<String> badges = user.badges.split("");
 

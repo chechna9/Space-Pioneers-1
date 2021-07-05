@@ -20,62 +20,62 @@ class _ProfilePageState extends State<ProfilePage> {
   List<BadgeCard> remplireBadge() {
     List<BadgeCard> allBadges = <BadgeCard>[
       BadgeCard(
-        name: "Soleil hero",
+        name: "Pionnier du Soleil",
         photo: "soleil",
         color: Color(0xffFFE600),
       ),
       BadgeCard(
-        name: "Mercure hero",
+        name: "Pionnier de Mercure",
         photo: "mercure",
         color: Color(0xff595959),
       ),
       BadgeCard(
-        name: "Venus hero",
+        name: "Pionnier de Venus",
         photo: "venus",
         color: Color(0xffDF8F13),
       ),
       BadgeCard(
-        name: "Terre hero",
+        name: "Pionnier de la Terre",
         photo: "terre",
         color: Color(0xff78E237),
       ),
       BadgeCard(
-        name: "Mars hero",
+        name: "Pionnier de Mars",
         photo: "mars",
         color: Color(0xffD70003),
       ),
       BadgeCard(
-        name: "Jupiter hero",
+        name: "Pionnier de Jupiter",
         photo: "jupiter",
         color: Color(0xffEE6632),
       ),
       BadgeCard(
-        name: "Saturne hero",
+        name: "Pionnier de Saturne",
         photo: "saturne",
         color: Color(0xff87579E),
       ),
       BadgeCard(
-        name: "Uranus hero",
+        name: "Pionnier d'Uranus",
         photo: "uranus",
         color: Color(0xff1A8CA9),
       ),
       BadgeCard(
-        name: "Neptune hero",
+        name: "Pionnier de Neptune",
         photo: "neptune",
         color: Color(0xff37DBD0),
       ),
       BadgeCard(
-        name: "Random",
+        name: "Le maître de la galaxie",
         photo: "random",
         color: Color(0xffFFF16E),
       ),
       BadgeCard(
-        name: "After 5 badges",
+        name: "Après 5 badges",
         photo: "after5Badges",
         color: Color(0xffE1023C),
       ),
       BadgeCard(
-        name: "New",
+        name: "Nouveau",
         photo: "new",
         color: Color(0xffAB02E6),
       ),

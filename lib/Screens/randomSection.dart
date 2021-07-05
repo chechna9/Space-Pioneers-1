@@ -90,6 +90,7 @@ class _RandomQuizState extends State<RandomQuiz> {
                     if (cliquerRandom == false) indices = shuffle([0, 3]);
                     vfquestion = true;
                   }
+                  print(indices);
                   return Stack(
                     fit: StackFit.expand,
                     children: [
@@ -241,7 +242,7 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
                         update_etoiles();
                         etoilesRandom = points;
                         points = 0;
-                        planeteNAME = "Random";
+                        planeteNAME = "random";
                         Navigator.pushReplacementNamed(
                             context, '/bravoNiveauR');
                       } else {

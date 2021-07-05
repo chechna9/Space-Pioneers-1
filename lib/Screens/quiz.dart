@@ -95,13 +95,12 @@ class _QuizState extends State<Quiz> {
                         snapshot.data[ind[0] + 10 * planeteInd].planete;
 
                     int i = 4;
-
                     if (propo[2] == null && propo[1] == null) {
                       i = 2;
                       if (cliquer == false) indices = shuffle([0, 3]);
                       vfquestion = true;
                     }
-
+                    print(indices);
                     return Stack(
                       fit: StackFit.expand,
                       children: [
@@ -216,6 +215,7 @@ class _AnswerBoxState extends State<AnswerBox> {
 
                       if (cliquer == false) {
                         points += factRecomp;
+                        etoiles=points;
                       }
                       choiceColor = choiceColors[0];
                       questNum++;
@@ -228,6 +228,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                           recomp: recompCliquer ? 0 : factRecomp,
                           onPressedExiste: ind.length == 0,
                           onPressed: () {
+                            verification(points);
                             Navigator.pushReplacementNamed(
                                 context, '/bravoNiveau');
                           },

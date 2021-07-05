@@ -156,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Column(
                                 children: [
                                   SelectBox(
-                                    // image: 'astroReading',
+                                    image: 'astroReading',
                                     text: 'Decouvrir',
                                     color: myRed,
                                     onPressed: () {
@@ -169,7 +169,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     height: 30,
                                   ),
                                   SelectBox(
-                                      // image: 'ridingRocket',
+                                      image: 'ridingRocket',
                                       text: 'Jouer',
                                       color: Color(0xffAB02E6),
                                       onPressed: () {
@@ -180,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     height: 30,
                                   ),
                                   SelectBox(
-                                      // image: 'ridingMoon',
+                                      image: 'ridingMoon',
                                       text: 'Profile',
                                       color: Color(0xff1759BC),
                                       onPressed: () {
@@ -278,10 +278,10 @@ class SelectBox extends StatelessWidget {
               Expanded(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
-                  // child: Image(
-                  //   fit: BoxFit.scaleDown,
-                  //   image: AssetImage('assets/images/other/$image.png'),
-                  // ),
+                  child: Image(
+                    fit: BoxFit.scaleDown,
+                    image: AssetImage('assets/images/other/$image.png'),
+                  ),
                 ),
               ),
               SizedBox(

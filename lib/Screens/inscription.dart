@@ -315,7 +315,7 @@ class _RegCardState extends State<RegCard> {
           'badges': '000000000001',
         }).execute();
         Navigator.pushReplacementNamed(context, '/homeScreen');
-      } else if (signInResult.error.message != null ) {
+      } else if (signInResult.error.message != null) {
         String message;
 
         message = signInResult.error.message;

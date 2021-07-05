@@ -171,120 +171,126 @@ class _AnswerBoxRandomState extends State<AnswerBoxRandom> {
   List<Color> choiceColors = [choiceGreen, choiceRed, choiceYellow, choiceBlue];
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 22, left: 20, right: 20),
-          child: Container(
-            width: double.infinity,
-            height: 69,
-            decoration: BoxDecoration(
-              color: choiceColor,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Center(
-              child: ListTile(
-                onTap: () {
-                  if (widget.answer == propo[0]) {
-                    setState(() {
-                      playRandRightMusic();
-                      if (cliquerRandom == false) {
-                        points += factRecomp;
-                      }
-                      choiceColor = choiceColors[0];
-                      questNumRandom++;
-                      vfquestion = false;
-                    });
-                    ind.removeAt(0);
-                    cliquerRandom = false;
-                  } else if (widget.answer == propo[1]) {
-                    setState(() {
-                      playRandWrongMusic();
-                      cliquerRandom = true;
-                      choiceColor = choiceColors[1];
-                      nbTentatives--;
-                      Provider.of<Index>(context, listen: false)
-                          .updateInd(ind, nbTentatives);
-                    });
-                  } else if (widget.answer == propo[2]) {
-                    setState(() {
-                      playRandWrongMusic();
-                      cliquerRandom = true;
-                      choiceColor = choiceColors[2];
-                      nbTentatives--;
-                      Provider.of<Index>(context, listen: false)
-                          .updateInd(ind, nbTentatives);
-                    });
-                  } else if (widget.answer == propo[3]) {
-                    setState(() {
-                      playRandWrongMusic();
-                      cliquerRandom = true;
-                      choiceColor = choiceColors[3];
-                      nbTentatives--;
-                      Provider.of<Index>(context, listen: false)
-                          .updateInd(ind, nbTentatives);
-                    });
-                  }
-                  Timer(Duration(milliseconds: 600), () {
-                    setState(() {
-                      choiceColor = Colors.white;
-                    });
-                  });
-                  Timer(Duration(milliseconds: 700), () {
-                    if (ind.isEmpty || nbTentatives <= 0) {
-                      questNumRandom = 1;
-                      user.etoiles = user.etoiles + points;
-                      update_etoiles();
-                      etoilesRandom = points;
-                      points = 0;
-                      planeteNAME = "Random";
-                      Navigator.pushReplacementNamed(context, '/bravoNiveauR');
-                    } else {
-                      if (widget.answer == propo[0]) {
-                        setState(() {
-                          Provider.of<Index>(context, listen: false)
-                              .updateInd(ind, nbTentatives);
-                        });
-                      }
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pushReplacementNamed(context, '/planetChoice');
+      },
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 22, left: 20, right: 20),
+            child: Container(
+              width: double.infinity,
+              height: 69,
+              decoration: BoxDecoration(
+                color: choiceColor,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Center(
+                child: ListTile(
+                  onTap: () {
+                    if (widget.answer == propo[0]) {
+                      setState(() {
+                        playRandRightMusic();
+                        if (cliquerRandom == false) {
+                          points += factRecomp;
+                        }
+                        choiceColor = choiceColors[0];
+                        questNumRandom++;
+                        vfquestion = false;
+                      });
+                      ind.removeAt(0);
+                      cliquerRandom = false;
+                    } else if (widget.answer == propo[1]) {
+                      setState(() {
+                        playRandWrongMusic();
+                        cliquerRandom = true;
+                        choiceColor = choiceColors[1];
+                        nbTentatives--;
+                        Provider.of<Index>(context, listen: false)
+                            .updateInd(ind, nbTentatives);
+                      });
+                    } else if (widget.answer == propo[2]) {
+                      setState(() {
+                        playRandWrongMusic();
+                        cliquerRandom = true;
+                        choiceColor = choiceColors[2];
+                        nbTentatives--;
+                        Provider.of<Index>(context, listen: false)
+                            .updateInd(ind, nbTentatives);
+                      });
+                    } else if (widget.answer == propo[3]) {
+                      setState(() {
+                        playRandWrongMusic();
+                        cliquerRandom = true;
+                        choiceColor = choiceColors[3];
+                        nbTentatives--;
+                        Provider.of<Index>(context, listen: false)
+                            .updateInd(ind, nbTentatives);
+                      });
                     }
-                  });
-                },
-                selectedTileColor: choiceColor,
-                leading: Padding(
-                  padding: const EdgeInsets.only(
-                      top: 8, left: 8, bottom: 8, right: 15),
-                  child: Container(
-                    width: 41,
-                    height: 41,
-                    decoration: BoxDecoration(
-                      color: myRed2,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Center(
-                      child: Text(
-                        '${widget.answerLetter}',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 20,
+                    Timer(Duration(milliseconds: 600), () {
+                      setState(() {
+                        choiceColor = Colors.white;
+                      });
+                    });
+                    Timer(Duration(milliseconds: 700), () {
+                      if (ind.isEmpty || nbTentatives <= 0) {
+                        questNumRandom = 1;
+                        user.etoiles = user.etoiles + points;
+                        update_etoiles();
+                        etoilesRandom = points;
+                        points = 0;
+                        planeteNAME = "Random";
+                        Navigator.pushReplacementNamed(
+                            context, '/bravoNiveauR');
+                      } else {
+                        if (widget.answer == propo[0]) {
+                          setState(() {
+                            Provider.of<Index>(context, listen: false)
+                                .updateInd(ind, nbTentatives);
+                          });
+                        }
+                      }
+                    });
+                  },
+                  selectedTileColor: choiceColor,
+                  leading: Padding(
+                    padding: const EdgeInsets.only(
+                        top: 8, left: 8, bottom: 8, right: 15),
+                    child: Container(
+                      width: 41,
+                      height: 41,
+                      decoration: BoxDecoration(
+                        color: myRed2,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Center(
+                        child: Text(
+                          '${widget.answerLetter}',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 20,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                title: Text(
-                  '${widget.answer}',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 18,
+                  title: Text(
+                    '${widget.answer}',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 18,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 }

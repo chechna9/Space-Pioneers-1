@@ -64,73 +64,53 @@ class _PlanetChoiceState extends State<PlanetChoice> {
                 mainAxisSpacing: 30,
                 children: [
                   PlanetCard(
-                    credit: credit,
                     image: 'soleil',
                     title: 'soleil',
-                    price: 20,
                     choiceInd: 0,
                   ),
                   PlanetCard(
-                    credit: credit,
-                    image: 'earth',
-                    title: 'terre',
-                    price: 20,
-                    choiceInd: 3,
-                  ),
-                  PlanetCard(
-                    credit: credit,
-                    image: 'jupiter',
-                    title: 'jupiter',
-                    price: 20,
-                    choiceInd: 5,
-                  ),
-                  PlanetCard(
-                    credit: credit,
-                    image: 'mars',
-                    title: 'mars',
-                    price: 20,
-                    choiceInd: 4,
-                  ),
-                  PlanetCard(
-                    credit: credit,
-                    image: 'mercury',
-                    title: 'mercure',
-                    price: 20,
-                    choiceInd: 1,
-                  ),
-                  PlanetCard(
-                    credit: credit,
-                    image: 'neptune',
-                    title: 'neptune',
-                    price: 20,
-                    choiceInd: 8,
-                  ),
-                  PlanetCard(
-                    credit: credit,
-                    image: 'saturn',
-                    title: 'saturne',
-                    price: 20,
-                    choiceInd: 6,
-                  ),
-                  PlanetCard(
-                    credit: credit,
-                    image: 'uranus',
-                    title: 'uranus',
-                    price: 20,
-                    choiceInd: 7,
-                  ),
-                  PlanetCard(
-                    credit: credit,
                     image: 'venus',
                     title: 'venus',
-                    price: 20,
                     choiceInd: 2,
                   ),
                   PlanetCard(
-                    credit: credit,
+                    image: 'mercury',
+                    title: 'mercure',
+                    choiceInd: 1,
+                  ),
+                  PlanetCard(
+                    image: 'earth',
+                    title: 'terre',
+                    choiceInd: 3,
+                  ),
+                  PlanetCard(
+                    image: 'mars',
+                    title: 'mars',
+                    choiceInd: 4,
+                  ),
+                  PlanetCard(
+                    image: 'jupiter',
+                    title: 'jupiter',
+                    choiceInd: 5,
+                  ),
+                  PlanetCard(
+                    image: 'saturn',
+                    title: 'saturne',
+                    choiceInd: 6,
+                  ),
+                  PlanetCard(
+                    image: 'uranus',
+                    title: 'uranus',
+                    choiceInd: 7,
+                  ),
+                  PlanetCard(
+                    image: 'neptune',
+                    title: 'neptune',
+                    choiceInd: 8,
+                  ),
+                  PlanetCard(
                     title: 'Random',
                     image: 'astroInBox',
-                    price: 20,
                     choiceInd: 9,
                   ),
                 ],
@@ -146,15 +126,12 @@ class _PlanetChoiceState extends State<PlanetChoice> {
 class PlanetCard extends StatelessWidget {
   PlanetCard({
     Key key,
-    this.price: 0,
-    this.credit: 0,
     @required this.image,
     this.title,
     this.choiceInd,
   }) : super(key: key);
   final String image;
-  final int price; //we should chnage it
-  final int credit;
+
   final String title;
   final int choiceInd;
 
@@ -186,7 +163,7 @@ class PlanetCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SizedBox(
-              height: credit >= price ? 20 : 0,
+              height: 20,
             ),
             Expanded(
               flex: 7,
@@ -196,17 +173,6 @@ class PlanetCard extends StatelessWidget {
                   Image.asset(
                     'assets/images/planets/$image.png',
                     fit: BoxFit.fitHeight,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/avatars/cadna.png'),
-                        fit: BoxFit.fitWidth,
-                        colorFilter: ColorFilter.mode(
-                            Colors.black.withOpacity(credit >= price ? 0 : 0.5),
-                            BlendMode.dstATop),
-                      ),
-                    ),
                   ),
                 ],
               ),

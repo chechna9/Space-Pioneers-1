@@ -187,7 +187,7 @@ class ShopCard extends StatelessWidget {
                           ),
                         ),
                   Text(
-                    credit >= price ? 'Obtenue' : '$price',
+                    credit >= price ? 'Obtenu' : '$price',
                     style: TextStyle(
                         fontWeight: FontWeight.w500,
                         color: Colors.white,

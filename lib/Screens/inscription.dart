@@ -318,14 +318,13 @@ class _RegCardState extends State<RegCard> {
           'badges': '000000000001',
         }).execute();
         Navigator.pushReplacementNamed(context, '/homeScreen');
-      } else if (signInResult.error.message != null ||
-          _username.text.length > 14) {
+      } else if (signInResult.error.message != null ) {
         String message;
 
         message = signInResult.error.message;
 
         TextButton(
-            onPressed: () {}, child: Text(' erreur dans le mot ed passe'));
+            onPressed: () {}, child: Text(' erreur dans le mot de passe'));
 
         showFlash(
             context: context,

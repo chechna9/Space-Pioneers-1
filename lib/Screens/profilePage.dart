@@ -106,133 +106,132 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    Navigator.pushReplacementNamed(context, '/homeScreen');
-  }
-
-  @override
   Widget build(BuildContext context) {
     List<BadgeCard> userBagdes = remplireBadge();
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        title: Row(
-          children: [
-            Transform.rotate(
-              angle: 8,
-              child: Image.asset(
-                'assets/images/other/star.png',
-                width: 30,
-                fit: BoxFit.scaleDown,
-              ),
-            ),
-            Center(
-              child: Text(
-                '${user.etoiles}',
-                style: TextStyle(
-                  color: myYellow,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 20,
-                ),
-              ),
-            ),
-          ],
-        ),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_outlined),
-          color: myRed,
-          iconSize: 35,
-          onPressed: () {
-            Navigator.pushReplacementNamed(context, '/homeScreen');
-          },
-        ),
-        leadingWidth: 45,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.shopping_cart_outlined),
-            color: myRed,
-            iconSize: 30,
-            onPressed: () {
-              Navigator.pushNamed(context, '/shopPage');
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.leaderboard_outlined),
-            color: myRed,
-            iconSize: 30,
-            onPressed: () {
-              Navigator.pushNamed(context, '/leaderBoard');
-            },
-          ),
-        ],
-      ),
-      backgroundColor: myBlue,
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pushReplacementNamed(context, '/homeScreen');
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          title: Row(
             children: [
-              Stack(
-                alignment: Alignment.topRight,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      border: Border.all(
-                        color: myRed,
-                        width: 4,
-                      ),
-                    ),
-                    child: CircleAvatar(
-                      backgroundImage: AssetImage(
-                          'assets/images/avatars/${user.avatar}.png'),
-                      radius: 70,
-                    ),
-                  ),
-                  Positioned(
-                    child: IconButton(
-                      icon: Icon(Icons.settings),
-                      color: Colors.white,
-                      iconSize: 30,
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/avatarPage');
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              AutoSizeText(
-                userName,
-                style: TextStyle(
-                  fontSize: 30,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w900,
+              Transform.rotate(
+                angle: 8,
+                child: Image.asset(
+                  'assets/images/other/star.png',
+                  width: 30,
+                  fit: BoxFit.scaleDown,
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: userBagdes.length,
-                  itemBuilder: (BuildContext context, int ind) {
-                    return Column(
-                      children: [
-                        userBagdes[ind],
-                        SizedBox(
-                          height: 20,
-                        ),
-                      ],
-                    );
-                  },
+              Center(
+                child: Text(
+                  '${user.etoiles}',
+                  style: TextStyle(
+                    color: myYellow,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 20,
+                  ),
                 ),
               ),
             ],
+          ),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_outlined),
+            color: myRed,
+            iconSize: 35,
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, '/homeScreen');
+            },
+          ),
+          leadingWidth: 45,
+          actions: [
+            IconButton(
+              icon: Icon(Icons.shopping_cart_outlined),
+              color: myRed,
+              iconSize: 30,
+              onPressed: () {
+                Navigator.pushNamed(context, '/shopPage');
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.leaderboard_outlined),
+              color: myRed,
+              iconSize: 30,
+              onPressed: () {
+                Navigator.pushNamed(context, '/leaderBoard');
+              },
+            ),
+          ],
+        ),
+        backgroundColor: myBlue,
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                Stack(
+                  alignment: Alignment.topRight,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        border: Border.all(
+                          color: myRed,
+                          width: 4,
+                        ),
+                      ),
+                      child: CircleAvatar(
+                        backgroundImage: AssetImage(
+                            'assets/images/avatars/${user.avatar}.png'),
+                        radius: 70,
+                      ),
+                    ),
+                    Positioned(
+                      child: IconButton(
+                        icon: Icon(Icons.settings),
+                        color: Colors.white,
+                        iconSize: 30,
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(
+                              context, '/avatarPage');
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                AutoSizeText(
+                  userName,
+                  style: TextStyle(
+                    fontSize: 30,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: userBagdes.length,
+                    itemBuilder: (BuildContext context, int ind) {
+                      return Column(
+                        children: [
+                          userBagdes[ind],
+                          SizedBox(
+                            height: 20,
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

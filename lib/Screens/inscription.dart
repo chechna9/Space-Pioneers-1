@@ -282,10 +282,7 @@ class _RegCardState extends State<RegCard> {
   }
 
   Future _signup() async {
-    //  sendOtp();
-    if (_formKey.currentState.validate() &&
-        _username.text.length <= 14 &&
-        _emailvalidate == true) {
+    if (_formKey.currentState.validate() && _username.text.length <= 14) {
       final signInResult = await Injector.appInstance
           .get<SupabaseClient>()
           .auth
@@ -318,7 +315,7 @@ class _RegCardState extends State<RegCard> {
           'badges': '000000000001',
         }).execute();
         Navigator.pushReplacementNamed(context, '/homeScreen');
-      } else if (signInResult.error.message != null ) {
+      } else if (signInResult.error.message != null) {
         String message;
 
         message = signInResult.error.message;

@@ -90,6 +90,7 @@ class _RandomQuizState extends State<RandomQuiz> {
                     if (cliquerRandom == false) indices = shuffle([0, 3]);
                     vfquestion = true;
                   }
+                  print(indices);
                   return Stack(
                     fit: StackFit.expand,
                     children: [

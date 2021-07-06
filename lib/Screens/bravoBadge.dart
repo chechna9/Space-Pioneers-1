@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'package:astro01/variable_globale/variable.dart';
@@ -13,6 +14,8 @@ class BravoBadge extends StatefulWidget {
 class _BravoBadgeState extends State<BravoBadge> {
   @override
   Widget build(BuildContext context) {
+    String planeteNAME2 = planeteNAME;
+    planeteNAME = BadgePlanete[planeteNAME];
     return WillPopScope(
       onWillPop: () async {
         Navigator.pushReplacementNamed(context, '/planetChoice');
@@ -75,18 +78,26 @@ class _BravoBadgeState extends State<BravoBadge> {
                       shape: PolygonBorder(sides: 6),
                       image: DecorationImage(
                         image: AssetImage(
-                            'assets/images/Badges/${planeteNAME}.png'),
+                            'assets/images/Badges/$planeteNAME2.png'),
                       ),
                     ),
                   ),
                 ),
-                Text(
-                  '${planeteNAME.inCaps} Pionnier',
-                  style: TextStyle(
-                      color: myYellow,
-                      fontSize: 36,
-                      fontWeight: FontWeight.w900,
-                      fontFamily: 'Gotham'),
+            Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                        child: AutoSizeText('$planeteNAME',
+                        style: TextStyle(
+                            color: myYellow,
+                            fontSize: 36,
+                            fontWeight: FontWeight.w900,
+                            fontFamily: 'Gotham'),
+                maxLines: 2,
+                textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
                 ),
                 Spacer(flex: 1),
                 Center(

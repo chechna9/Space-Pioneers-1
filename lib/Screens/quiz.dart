@@ -97,13 +97,12 @@ class _QuizState extends State<Quiz> {
                         snapshot.data[ind[0] + 10 * planeteInd].planete;
 
                     int i = 4;
-
                     if (propo[2] == null && propo[1] == null) {
                       i = 2;
                       if (cliquer == false) indices = shuffle([0, 3]);
                       vfquestion = true;
                     }
-
+                    print(indices);
                     return Stack(
                       fit: StackFit.expand,
                       children: [
@@ -218,6 +217,10 @@ class _AnswerBoxState extends State<AnswerBox> {
 
                       if (cliquer == false) {
                         points += factRecomp;
+<<<<<<< HEAD
+=======
+                        etoiles=points;
+>>>>>>> a4d96cf244b02cc5151b0b3590b8f677940190f8
                       }
                       verefication = true;
 

@@ -1,3 +1,4 @@
+import 'package:astro01/Screens/bravoNiveau.dart';
 import 'package:astro01/Screens/loading.dart';
 import 'package:astro01/Screens/quiz.dart';
 import 'package:astro01/classes/trace.dart';
@@ -88,6 +89,7 @@ class _LevelChoiceState extends State<LevelChoice> {
                                 color: Color(0xff1BEFBC),
                                 onPressed: () {
                                   points = 0;
+                                  etoiles = 0;
                                   verefication = false;
                                   verefier = -1;
 
@@ -112,6 +114,7 @@ class _LevelChoiceState extends State<LevelChoice> {
                                     indices = [0, 1, 2, 3];
                                     verefication = false;
                                     verefier = -1;
+                                    etoiles = 0;
                                     nbTentatives = 6;
                                     factRecomp = moyenRecomp;
                                     ableToBadge = false;
@@ -131,6 +134,7 @@ class _LevelChoiceState extends State<LevelChoice> {
                                     indices = [0, 1, 2, 3];
                                     verefication = false;
                                     verefier = -1;
+                                    etoiles = 0;
                                     nbTentatives = 3;
                                     factRecomp = difficileRecomp;
                                     ableToBadge = true;

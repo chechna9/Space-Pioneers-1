@@ -218,8 +218,13 @@ class _AnswerBoxState extends State<AnswerBox> {
 
                       if (cliquer == false) {
                         points += factRecomp;
-                        etoiles = points;
                       }
+                      verefication = true;
+
+                      etoiles = points;
+                      print(points);
+                      print(trace.earth);
+
                       choiceColor = choiceColors[0];
                       questNum++;
 
@@ -231,12 +236,8 @@ class _AnswerBoxState extends State<AnswerBox> {
                           recomp: recompCliquer ? 0 : factRecomp,
                           onPressedExiste: ind.length == 0,
                           onPressed: () {
-                            verefier = verification(points);
-                            print(verefier);
-                            print(difference);
-                            setState(() {
-                              verefication = true;
-                            });
+                            verefier = verification(etoiles);
+
                             update();
 
                             Navigator.pushReplacementNamed(
@@ -251,6 +252,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                     });
                   } else if (widget.answer == propo[1])
                     setState(() {
+                      verefication = false;
                       playWrongMusic();
                       cliquer = true;
                       choiceColor = choiceColors[1];
@@ -260,6 +262,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                     });
                   else if (widget.answer == propo[2])
                     setState(() {
+                      verefication = false;
                       playWrongMusic();
                       cliquer = true;
                       choiceColor = choiceColors[2];
@@ -269,6 +272,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                     });
                   else if (widget.answer == propo[3]) {
                     setState(() {
+                      verefication = false;
                       playWrongMusic();
                       cliquer = true;
                       choiceColor = choiceColors[3];
@@ -301,6 +305,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                               trace.venus;
                         }
                       } else {
+                        print('else');
                         if (verification(points) == 1) {
                           update();
 

@@ -351,7 +351,7 @@ class _RegCardState extends State<RegCard> {
                   ));
             });
       }
-    } else {
+    } else if (_username.text.length > 14) {
       String message = ' taille maximale du nom est 14';
       showFlash(
           context: context,

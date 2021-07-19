@@ -3,7 +3,7 @@ import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
 
 class Users {
-  // une classe pour contenir es données de lutilisateur
+  // une classe pour contenir les données de lutilisateur
 
   String name;
   String email;

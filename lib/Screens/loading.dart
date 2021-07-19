@@ -9,7 +9,7 @@ class LoadingScreen extends StatefulWidget {
   _LoadingScreenState createState() => _LoadingScreenState();
 }
 
-class _LoadingScreenState extends State<LoadingScreen> {
+class _LoadingScreenState extends State<LoadingScreen> { // animation de chargement (étoile qui tourne) avant de connexion ou d'inscription au compte
   @override
   Widget build(BuildContext context) {
     return Scaffold(

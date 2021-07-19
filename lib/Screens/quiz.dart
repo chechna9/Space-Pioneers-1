@@ -552,6 +552,7 @@ class ProgressBar extends StatelessWidget {
 }
 
 void RemplirChoices(List<String> choices, Question myquestion) {
+  print("hey " + myquestion.correct);
   choices[0] = myquestion.correct;
   choices[1] = myquestion.choice1;
   choices[2] = myquestion.choice2;

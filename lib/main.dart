@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
 import 'Screens/bravoNiveauR.dart';
+import 'Screens/guide.dart';
 import 'Screens/inscription.dart';
 import 'Screens/loading.dart';
 import 'Screens/quiz.dart';
@@ -76,6 +77,7 @@ void main() {
       '/bravoBadge': (context) => BravoBadge(),
       '/random': (context) => RandomQuiz(),
       '/levelChoiceRandom': (context) => LevelChoiceRandom(),
+      '/guide': (context) => Guide(),
     },
   ));
 }

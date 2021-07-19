@@ -61,6 +61,7 @@ class _LevelChoiceState extends State<LevelChoice> {
                             children: [
                               AutoSizeText(
                                 'Choisir\nla difficulté !',
+                                maxLines: 2,
                                 style: TextStyle(
                                   color: myRed,
                                   fontWeight: FontWeight.w900,
@@ -68,12 +69,12 @@ class _LevelChoiceState extends State<LevelChoice> {
                                 ),
                               ),
                               AutoSizeText(
-                                'Selon votre niveau .',
+                                'Seulement le niveau difficile \nqui contient les badges.',
+                                maxLines: 2,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w100,
-                                  letterSpacing: 2,
-                                  fontSize: 20,
+                                  fontSize: 18,
                                 ),
                               ),
                             ],
@@ -81,68 +82,70 @@ class _LevelChoiceState extends State<LevelChoice> {
                         ),
                         Expanded(
                           flex: 3,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              SelectLevelBox(
-                                text: 'Facile',
-                                color: Color(0xff1BEFBC),
-                                onPressed: () {
-                                  points = 0;
-                                  etoiles = 0;
-                                  verefication = false;
-                                  verefier = -1;
-
-                                  indices = [0, 1, 2, 3];
-                                  nbTentatives = 10;
-                                  factRecomp = facileRecomp;
-                                  ableToBadge = false;
-                                  cliquer = false;
-
-                                  Navigator.pushReplacementNamed(
-                                      context, '/quiz');
-                                },
-                              ),
-                              SizedBox(
-                                height: 30,
-                              ),
-                              SelectLevelBox(
-                                  text: 'Moyen',
-                                  color: Color(0xff1759BC),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                SelectLevelBox(
+                                  text: 'Facile',
+                                  color: Color(0xff1BEFBC),
                                   onPressed: () {
                                     points = 0;
-                                    indices = [0, 1, 2, 3];
+                                    etoiles = 0;
                                     verefication = false;
                                     verefier = -1;
-                                    etoiles = 0;
-                                    nbTentatives = 6;
-                                    factRecomp = moyenRecomp;
+
+                                    indices = [0, 1, 2, 3];
+                                    nbTentatives = 10;
+                                    factRecomp = facileRecomp;
                                     ableToBadge = false;
                                     cliquer = false;
 
                                     Navigator.pushReplacementNamed(
                                         context, '/quiz');
-                                  }),
-                              SizedBox(
-                                height: 30,
-                              ),
-                              SelectLevelBox(
-                                  text: 'Difficile',
-                                  color: Color(0xffE1023C),
-                                  onPressed: () {
-                                    points = 0;
-                                    indices = [0, 1, 2, 3];
-                                    verefication = false;
-                                    verefier = -1;
-                                    etoiles = 0;
-                                    nbTentatives = 3;
-                                    factRecomp = difficileRecomp;
-                                    ableToBadge = true;
-                                    cliquer = false;
-                                    Navigator.pushReplacementNamed(
-                                        context, '/quiz');
-                                  }),
-                            ],
+                                  },
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                SelectLevelBox(
+                                    text: 'Moyen',
+                                    color: Color(0xff1759BC),
+                                    onPressed: () {
+                                      points = 0;
+                                      indices = [0, 1, 2, 3];
+                                      verefication = false;
+                                      verefier = -1;
+                                      etoiles = 0;
+                                      nbTentatives = 6;
+                                      factRecomp = moyenRecomp;
+                                      ableToBadge = false;
+                                      cliquer = false;
+
+                                      Navigator.pushReplacementNamed(
+                                          context, '/quiz');
+                                    }),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                SelectLevelBox(
+                                    text: 'Difficile',
+                                    color: Color(0xffE1023C),
+                                    onPressed: () {
+                                      points = 0;
+                                      indices = [0, 1, 2, 3];
+                                      verefication = false;
+                                      verefier = -1;
+                                      etoiles = 0;
+                                      nbTentatives = 3;
+                                      factRecomp = difficileRecomp;
+                                      ableToBadge = true;
+                                      cliquer = false;
+                                      Navigator.pushReplacementNamed(
+                                          context, '/quiz');
+                                    }),
+                              ],
+                            ),
                           ),
                         ),
                       ],

@@ -176,12 +176,16 @@ class ClassementCard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AutoSizeText(
-                      '$name',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 20,
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: AutoSizeText(
+                        '$name',
+                        maxLines: 1,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20,
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -189,6 +193,7 @@ class ClassementCard extends StatelessWidget {
                     ),
                     AutoSizeText(
                       '$point pts',
+                      maxLines: 1,
                       style: TextStyle(
                         color: Colors.white,
                       ),
@@ -197,12 +202,16 @@ class ClassementCard extends StatelessWidget {
                 ),
               ],
             ),
-            AutoSizeText(
-              '#$rank',
-              style: TextStyle(
-                color: myYellow,
-                fontWeight: FontWeight.w500,
-                fontSize: 40,
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.1,
+              child: AutoSizeText(
+                '#$rank',
+                maxLines: 1,
+                style: TextStyle(
+                  color: myYellow,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 40,
+                ),
               ),
             ),
           ],

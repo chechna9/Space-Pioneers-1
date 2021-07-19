@@ -73,7 +73,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 Icons.info_outline,
                 size: 35,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/guide');
+              },
             ),
             SoundCntrl(
               mainAudioPlayer: widget.mainAudioPlayer,
@@ -113,6 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             AutoSizeText(
                               'Salut ${user.name} !',
+                              maxLines: 1,
                               style: TextStyle(
                                 color: myRed,
                                 fontWeight: FontWeight.w900,
@@ -124,6 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             AutoSizeText(
                               'Bienvenue dans cette belle aventure',
+                              maxLines: 1,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w100,
@@ -181,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   SelectBox(
                                       image: 'ridingMoon',
-                                      text: 'Profile',
+                                      text: 'Profil',
                                       color: Color(0xff1759BC),
                                       onPressed: () {
                                         Navigator.pushReplacementNamed(
@@ -291,6 +295,7 @@ class SelectBox extends StatelessWidget {
                 flex: 2,
                 child: AutoSizeText(
                   text,
+                  maxLines: 1,
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w900,

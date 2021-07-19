@@ -30,8 +30,8 @@ class _ProfilePageState extends State<ProfilePage> {
         color: Color(0xff595959),
       ),
       BadgeCard(
-        name: "Pionnier de Venus",
-        photo: "venus",
+        name: "Pionnier de Vénus",
+        photo: "vénus",
         color: Color(0xffDF8F13),
       ),
       BadgeCard(

@@ -67,6 +67,7 @@ flutter:
   assets:
     - assets/
     - assets/images/avatars/
+    - assets/guide/
     - assets/images/other/
     - assets/images/planets/
     - assets/images/Badges/

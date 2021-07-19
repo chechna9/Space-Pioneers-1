@@ -70,7 +70,7 @@ class _PlanetChoiceState extends State<PlanetChoice> {
                   ),
                   PlanetCard(
                     image: 'venus',
-                    title: 'venus',
+                    title: 'vénus',
                     choiceInd: 2,
                   ),
                   PlanetCard(

@@ -72,6 +72,7 @@ class _LevelChoiceRandomState extends State<LevelChoiceRandom> {
                             children: [
                               AutoSizeText(
                                 'Choisir\nla difficulté !',
+                                maxLines: 2,
                                 style: TextStyle(
                                   color: myRed,
                                   fontWeight: FontWeight.w900,
@@ -79,12 +80,12 @@ class _LevelChoiceRandomState extends State<LevelChoiceRandom> {
                                 ),
                               ),
                               AutoSizeText(
-                                'Selon votre niveau .',
+                                'Seulement le niveau difficile \nqui contient les badges.',
+                                maxLines: 2,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w100,
-                                  letterSpacing: 2,
-                                  fontSize: 20,
+                                  fontSize: 18,
                                 ),
                               ),
                             ],
@@ -92,56 +93,58 @@ class _LevelChoiceRandomState extends State<LevelChoiceRandom> {
                         ),
                         Expanded(
                           flex: 3,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              SelectLevelBox(
-                                text: 'Facile',
-                                color: Color(0xff1BEFBC),
-                                onPressed: () {
-                                  nbTentatives = 25;
-                                  indices = [0, 1, 2, 3];
-                                  points = 0;
-                                  factRecomp = facileRcmpRndm;
-                                  ableToBadge = false;
-                                  cliquerRandom = true;
-                                  Navigator.pushReplacementNamed(
-                                      context, '/random');
-                                },
-                              ),
-                              SizedBox(
-                                height: 30,
-                              ),
-                              SelectLevelBox(
-                                  text: 'Moyen',
-                                  color: Color(0xff1759BC),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                SelectLevelBox(
+                                  text: 'Facile',
+                                  color: Color(0xff1BEFBC),
                                   onPressed: () {
-                                    nbTentatives = 20;
-                                    points = 0;
+                                    nbTentatives = 25;
                                     indices = [0, 1, 2, 3];
-                                    factRecomp = moyenRcmpRndm;
+                                    points = 0;
+                                    factRecomp = facileRcmpRndm;
                                     ableToBadge = false;
                                     cliquerRandom = true;
                                     Navigator.pushReplacementNamed(
                                         context, '/random');
-                                  }),
-                              SizedBox(
-                                height: 30,
-                              ),
-                              SelectLevelBox(
-                                  text: 'Difficile',
-                                  color: Color(0xffE1023C),
-                                  onPressed: () {
-                                    nbTentatives = 10;
-                                    points = 0;
-                                    indices = [0, 1, 2, 3];
-                                    factRecomp = difficileRcmpRndm;
-                                    ableToBadge = true;
-                                    cliquerRandom = true;
-                                    Navigator.pushReplacementNamed(
-                                        context, '/random');
-                                  }),
-                            ],
+                                  },
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                SelectLevelBox(
+                                    text: 'Moyen',
+                                    color: Color(0xff1759BC),
+                                    onPressed: () {
+                                      nbTentatives = 20;
+                                      points = 0;
+                                      indices = [0, 1, 2, 3];
+                                      factRecomp = moyenRcmpRndm;
+                                      ableToBadge = false;
+                                      cliquerRandom = true;
+                                      Navigator.pushReplacementNamed(
+                                          context, '/random');
+                                    }),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                SelectLevelBox(
+                                    text: 'Difficile',
+                                    color: Color(0xffE1023C),
+                                    onPressed: () {
+                                      nbTentatives = 10;
+                                      points = 0;
+                                      indices = [0, 1, 2, 3];
+                                      factRecomp = difficileRcmpRndm;
+                                      ableToBadge = true;
+                                      cliquerRandom = true;
+                                      Navigator.pushReplacementNamed(
+                                          context, '/random');
+                                    }),
+                              ],
+                            ),
                           ),
                         ),
                       ],

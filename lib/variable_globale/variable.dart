@@ -21,4 +21,15 @@ extension CapExtension on String {
       this.length > 0 ? '${this[0].toUpperCase()}${this.substring(1)}' : '';
 }
 
-Map<String, String> BadgePlanete = {"soleil": "Pionnier du Soleil", "uranus": "Pionnier d'Uranus", "mercure": "Pionnier de Mercure" , "mars": "Pionnier du Mars" , "terre": "Pionnier de la Terre" , "venus": "Pionnier de Venus" , "jupiter": "Pionnier de Jupiter" , "saturne": "Pionnier de Saturne", "neptune": "Pionnier de Neptune", "random": "Le maître de la Galaxie"};
+Map<String, String> BadgePlanete = {
+  "soleil": "Pionnier du Soleil",
+  "uranus": "Pionnier d'Uranus",
+  "mercure": "Pionnier de Mercure",
+  "mars": "Pionnier du Mars",
+  "terre": "Pionnier de la Terre",
+  "vénus": "Pionnier de Vénus",
+  "jupiter": "Pionnier de Jupiter",
+  "saturne": "Pionnier de Saturne",
+  "neptune": "Pionnier de Neptune",
+  "random": "Le maître de la Galaxie"
+};

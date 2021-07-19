@@ -236,6 +236,15 @@ class _AnswerBoxState extends State<AnswerBox> {
                             verefier = verification(etoiles);
 
                             update();
+                            user.etoiles = trace.earth +
+                                trace.jupiter +
+                                trace.mars +
+                                trace.mercury +
+                                trace.neptune +
+                                trace.saturn +
+                                trace.soleil +
+                                trace.uranus +
+                                trace.venus;
 
                             Navigator.pushReplacementNamed(
                                 context, '/bravoNiveau');
@@ -552,7 +561,6 @@ class ProgressBar extends StatelessWidget {
 }
 
 void RemplirChoices(List<String> choices, Question myquestion) {
-  print("hey " + myquestion.correct);
   choices[0] = myquestion.correct;
   choices[1] = myquestion.choice1;
   choices[2] = myquestion.choice2;

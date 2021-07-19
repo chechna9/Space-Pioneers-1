@@ -9,6 +9,7 @@ import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
 import 'package:email_auth/email_auth.dart';
 
+bool cliqued = false;
 const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
 const supabaseKey =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDQ3OTY4MiwiZXhwIjoxOTM2MDU1NjgyfQ.IoKgpB9APMw5Te9DYgbJZIbYcvPOwl41dl4-IKFjpVk';
@@ -269,7 +270,7 @@ class _RegCardState extends State<RegCard> {
                             ),
                           ),
                           onPressed: () {
-                            _signup();
+                            cliqued ? null : _signup();
                           }),
                     ),
                   ],
@@ -286,20 +287,21 @@ class _RegCardState extends State<RegCard> {
   }
 
   Future _signup() async {
+    cliqued = true;
+
     if (_formKey.currentState.validate() && _username.text.length <= 14) {
       final signInResult = await Injector.appInstance
           .get<SupabaseClient>()
           .auth
-          .signUp(_email.text, _password.text);
+          .signUp(_email.text.split(" ")[0], _password.text);
 
       if (signInResult != null && signInResult.user != null) {
         user.email = _email.text.split(" ")[0];
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('email', user.email);
 
-        ;
         await supabaseclient.from("Trace").insert({
-          "email": _email.text,
+          "email": _email.text.split(" ")[0],
           'earth': 0,
           'jupiter': 0,
           'mars': 0,
@@ -312,7 +314,7 @@ class _RegCardState extends State<RegCard> {
         }).execute();
         await supabaseclient.from("user").insert({
           "name": _username.text,
-          "email": _email.text,
+          "email": _email.text.split(" ")[0],
           'etoiles': 0,
           'naissance': _dateTime.toString().split(" ")[0],
           'avatar': 'default',
@@ -373,5 +375,6 @@ class _RegCardState extends State<RegCard> {
                 ));
           });
     }
+    cliqued = false;
   }
 }

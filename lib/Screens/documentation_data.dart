@@ -1,4 +1,5 @@
 class PlanetInfo {
+  /// déclaration de la classe planete info qui contient les infos sur chaque planéte
   final int position;
   final String name;
   final String iconImage;
@@ -20,6 +21,7 @@ class PlanetInfo {
   });
 }
 
+// creation d'un objet de la classe planete info qui contiens les informations des planétes
 List<PlanetInfo> planets = [
   PlanetInfo(1,
       name: 'Mercure',

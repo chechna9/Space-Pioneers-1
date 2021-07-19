@@ -1,4 +1,5 @@
 class Question {
+  //une classe question pour contenir une question du quiz avec la reponse correcte et les autres proposition avec info suplementaire
   String planete;
   String question;
   String correct;
@@ -7,10 +8,10 @@ class Question {
   String choice3;
   String infosupp;
 
-  Question(this.planete, this.question, this.correct, this.choice1, this.choice2, this.choice3, this.infosupp);
+  Question(this.planete, this.question, this.correct, this.choice1,
+      this.choice2, this.choice3, this.infosupp);
 
-  Question.fromJson(Map<String, dynamic> json)
-  {
+  Question.fromJson(Map<String, dynamic> json) {
     planete = json['planete'];
     question = json['question'];
     correct = json['correct'];
@@ -19,6 +20,4 @@ class Question {
     choice3 = json['choice3'];
     infosupp = json['infosupp'];
   }
-
-  
 }

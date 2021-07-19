@@ -15,6 +15,7 @@ import 'package:http/http.dart' as http;
 import 'package:astro01/variable_globale/variable.dart';
 import 'package:provider/provider.dart';
 
+/// le meme principe que la page quiz mais elle est specifier pour la partie random 1100 question avec meme fonctionalité
 bool vfquestion;
 List<String> propo = ['a', 'b', 'c', 'd'];
 var ind = Iterable<int>.generate(100).toList();

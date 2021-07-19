@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 class Guide extends StatelessWidget {
+  // le guied qui contient les deffirents etapes pour edcouvrir notre application qui contiens des images pour illustrer les deffirentes fonctionalité de l'application
   final docGuide = [
     CardedPhoto(path: "assets/guide/doc/doc1.png"),
     CardedPhoto(path: "assets/guide/doc/doc2.png"),

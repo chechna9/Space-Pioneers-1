@@ -5,6 +5,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 
+// une page ou l'utilisateur peut choisir de se conecter ou ed s'inscrire avec un nouveau compte
 class SplashScreen extends StatefulWidget {
   // final AssetsAudioPlayer mainAudioPlayer;
 
@@ -236,8 +237,8 @@ class Title extends StatelessWidget {
           'SPACE\nPIONEERS',
           style: TextStyle(
             height: 0.9,
-            fontFamily: 'Quartzo',
-            fontSize: 50,
+            fontFamily: 'Quartzo', // secifier le font du texte
+            fontSize: 50, // secifier la taille du texte
             foreground: Paint()
               ..color = myBlue
               ..style = PaintingStyle.stroke
@@ -277,7 +278,7 @@ class Star extends StatelessWidget {
         duration: Duration(milliseconds: 1500),
         curve: Curves.linear,
         child: Image.asset(
-          'assets/images/other/star.png',
+          'assets/images/other/star.png', //affichage de l'image de l'astreau
           scale: scale,
         ),
       ),
@@ -317,6 +318,7 @@ class SeConnecter extends StatelessWidget {
         ),
       ),
       onPressed: () {
+        // un boutton pour aller a la page sconexion a un compte existent
         Navigator.pushNamed(context, '/login');
       },
     );
@@ -355,6 +357,7 @@ class Inscrire extends StatelessWidget {
           ),
         ),
         onPressed: () {
+          // un boutton pour aller a la page d'inscription avec un nouveau compte
           Navigator.pushNamed(context, '/inscription');
         });
   }

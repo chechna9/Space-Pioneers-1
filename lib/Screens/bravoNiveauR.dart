@@ -4,6 +4,7 @@ import 'package:astro01/components/constants.dart';
 import '../components/constants.dart';
 import '../main.dart';
 
+// une page pour encourager l'utilisateur a jouer plus et apprendre ( afficher le nb ed points collectées dans la planéte "Random")
 int etoilesRandom;
 int indicesbravo;
 
@@ -35,7 +36,8 @@ class _BravoNiveauRState extends State<BravoNiveauR> {
                   if (ableToBadge == true &&
                       etoilesRandom == 300 &&
                       user.badges[9] == '0') {
-                    List<String> badges = user.badges.split("");
+                    List<String> badges = user.badges.split(
+                        ""); // verfier s'il faut aller ala page braveau badge de random ou aller a planéte choice
                     badges[9] = '1';
                     user.badges = badges.join("");
                     update_badges();
@@ -59,8 +61,12 @@ class _BravoNiveauRState extends State<BravoNiveauR> {
                 style: TextStyle(
                     color: myYellow,
                     fontSize: 40,
+
+                    /// specifier la taille du texte
                     fontWeight: FontWeight.w900,
                     fontFamily: 'Gotham'),
+
+                /// specifier le font du texte
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 5),
@@ -71,8 +77,12 @@ class _BravoNiveauRState extends State<BravoNiveauR> {
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 24,
+
+                          /// specifier la taille du texte
                           fontWeight: FontWeight.normal,
                           fontFamily: 'Gotham'),
+
+                      /// specifier le font du texte
                       textAlign: TextAlign.center,
                     ),
                     Text(
@@ -80,8 +90,12 @@ class _BravoNiveauRState extends State<BravoNiveauR> {
                       style: TextStyle(
                           color: myYellow,
                           fontSize: 24,
+
+                          /// specifier la taille du texte
                           fontWeight: FontWeight.w700,
                           fontFamily: 'Gotham'),
+
+                      /// specifier le font du texte
                       textAlign: TextAlign.center,
                     ),
                   ],
@@ -102,6 +116,7 @@ class _BravoNiveauRState extends State<BravoNiveauR> {
 }
 
 void update_badges() async {
+  // metre a jour les badges obtenue dans la base de données
   await supabaseclient
       .from("user")
       .update({"badges": user.badges})

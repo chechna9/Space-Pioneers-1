@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase/supabase.dart';
 import 'splashScreen.dart';
 
+/// la page home ou l'utilisateur peut choisir aller decouvrir ou jouer ou voir son profil
 class HomeScreen extends StatefulWidget {
   final AssetsAudioPlayer mainAudioPlayer;
   HomeScreen({@required this.mainAudioPlayer});
@@ -20,6 +21,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Future<void> _getseremail() async {
+    /// une fonction pour lire les données de l'utilisateur a partir ed la base de données
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     setState(() {
@@ -59,11 +61,12 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             onPressed: () async {
+              // un boutton pour se  déconecter
               signOut();
               SharedPreferences prefs = await SharedPreferences.getInstance();
 
               prefs.clear();
-
+              // allez a la page splalchscreen pour se conecter de nouveau ou creer un nouveau compte
               Navigator.pushReplacementNamed(context, '/splashScreen');
             },
           ),
@@ -238,6 +241,7 @@ class _SoundCntrlState extends State<SoundCntrl> {
     return IconButton(
       onPressed: () {
         setState(() {
+          // un boutton pour muter la music ou  bien le contraire
           mute
               ? widget.mainAudioPlayer.setVolume(0.8)
               : widget.mainAudioPlayer.setVolume(0);
@@ -312,6 +316,7 @@ class SelectBox extends StatelessWidget {
 }
 
 Future<List<Users>> getUsers(String email_) async {
+  // fonction pour lire les données de l'utilisateur a partir de la base de données
   final response = await Injector.appInstance
       .get<SupabaseClient>()
       .from('user')
@@ -325,5 +330,6 @@ Future<List<Users>> getUsers(String email_) async {
 }
 
 void signOut() async {
+  // une fonction pour que l'utilisateur puisse se déconecter
   await Injector.appInstance.get<SupabaseClient>().auth.signOut();
 }

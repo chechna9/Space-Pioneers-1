@@ -8,13 +8,16 @@ import 'package:audioplayer/audioplayer.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-Users user = new Users();
-Trace trace = new Trace();
+// la page variable qui contien les variables global
+Users user =
+    new Users(); // contient les données de l'utulisateur(nb etoiles avatar ...)
+Trace trace = new Trace(); // contient la trace de l'utulisateur
 bool mute = false;
 int indice = 0;
 int nbTentatives;
 int factRecomp;
-bool ableToBadge = false;
+bool ableToBadge =
+    false; // possibilité d'avoir un badges et a vrai juste dans la section deficile
 
 extension CapExtension on String {
   String get inCaps =>
@@ -22,6 +25,7 @@ extension CapExtension on String {
 }
 
 Map<String, String> BadgePlanete = {
+  //une map qui contiens les noms des badges avec leurs clées de recherche
   "soleil": "Pionnier du Soleil",
   "uranus": "Pionnier d'Uranus",
   "mercure": "Pionnier de Mercure",

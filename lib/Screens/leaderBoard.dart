@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:astro01/Screens/loading.dart';
 import 'package:astro01/classes/User.dart';
 import 'package:astro01/variable_globale/variable.dart';
@@ -9,6 +8,7 @@ import 'package:astro01/components/constants.dart';
 import 'package:injector/injector.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase/supabase.dart';
+// page de classement
 
 class LeaderBoard extends StatefulWidget {
   @override
@@ -17,6 +17,7 @@ class LeaderBoard extends StatefulWidget {
 
 class _LeaderBoardState extends State<LeaderBoard> {
   Future<void> _getseremail() async {
+    // lire l'email de l'utilisateur a partir du local
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     setState(() {
@@ -46,6 +47,8 @@ class _LeaderBoardState extends State<LeaderBoard> {
         backgroundColor: Colors.blue,
         body: FutureBuilder<List<Users>>(
             future: getleaders(),
+
+            /// pour selectiones les utilisateures dans l'ordre croissant par rapport au nombre d'etoiles colletctées
             builder: (context, AsyncSnapshot<List<Users>> snapshot) {
               // list = snapshot.data;
               if (snapshot.hasData == false) {
@@ -59,6 +62,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
                     color: myRed,
                     iconSize: 35,
                     onPressed: () {
+                      // un boutton pour retourner en arriére
                       Navigator.pop(context);
                     },
                   ),
@@ -112,6 +116,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
                                     min(10, snapshot.data.length)) !=
                                 -1)
                             ? ClassementCard(
+                                // si l'utilisateures n'est pas classer parmis les 10 premiers son classement sera afficher au dessous de la page (fixé)
                                 rank:
                                     leaders(user.email, snapshot.data, ind) + 1,
                                 name: "${user.name} ( vous )",
@@ -225,6 +230,7 @@ class ClassementCard extends StatelessWidget {
 }
 
 Future<List<Users>> getleaders() async {
+  // une fonction pour recuperer les utilisateures de la base de données ordonnées selon le nombre d'étoiles colléctées par chaque utilisateur
   final response = await Injector.appInstance
       .get<SupabaseClient>()
       .from('user')
@@ -236,6 +242,7 @@ Future<List<Users>> getleaders() async {
 }
 
 int leaders(String email, List<Users> list, int indice) {
+  // pou recuperer le classement de l'utilisateur actuelle
   bool trouv = false;
   int i = 0;
 

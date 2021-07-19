@@ -2,6 +2,7 @@ import 'package:astro01/variable_globale/variable.dart';
 import 'package:flutter/material.dart';
 import '../components/constants.dart';
 
+// la page shop c'est la page ou l'utilisateur peut consulter les badges ( obtenues et non obtenues)
 class ShopPage extends StatefulWidget {
   @override
   SshopPageState createState() => SshopPageState();
@@ -15,6 +16,7 @@ class SshopPageState extends State<ShopPage> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
+            // un boutton pour retourner en arriére
             Navigator.pop(context);
           },
           icon: Icon(
@@ -29,8 +31,10 @@ class SshopPageState extends State<ShopPage> {
             fontWeight: FontWeight.w100,
           ),
         ),
-        backgroundColor: Color(0xff160030),
-        elevation: 10,
+        backgroundColor:
+            Color(0xff160030), // specifier la couleur du background
+        elevation:
+            10, // specifier les deffirentes tailles des elements de  la page
         leadingWidth: 70,
         toolbarHeight: 70,
         actions: [
@@ -70,9 +74,9 @@ class SshopPageState extends State<ShopPage> {
             mainAxisSpacing: 30,
             children: [
               ShopCard(
-                credit: credit,
-                image: 'ridingRocket',
-                price: 50,
+                credit: credit, // le credit
+                image: 'ridingRocket', // le nom ed l'avatar
+                price: 50, // le prix de l'avatar
               ),
               ShopCard(
                 credit: credit,
@@ -181,13 +185,15 @@ class ShopCard extends StatelessWidget {
                       : Transform.rotate(
                           angle: 8,
                           child: Image.asset(
-                            'assets/images/other/star.png',
+                            'assets/images/other/star.png', // inserer une etoiles
                             width: 30,
                             fit: BoxFit.scaleDown,
                           ),
                         ),
                   Text(
-                    credit >= price ? 'Obtenu' : '$price',
+                    credit >= price
+                        ? 'Obtenu'
+                        : '$price', // afficher si le badge et obtenue ou non(afficher le prix sinon)
                     style: TextStyle(
                         fontWeight: FontWeight.w500,
                         color: Colors.white,

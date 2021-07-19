@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../components/constants.dart';
 import '../main.dart';
 
+// une page pour voir les avatars
 String avatar = user.avatar;
 
 class TempAvatar extends ChangeNotifier {
@@ -32,6 +33,7 @@ class AvatarPageState extends State<AvatarPage> {
         appBar: AppBar(
           leading: IconButton(
             onPressed: () {
+              // un boutton pour retourner a la page profile
               Navigator.pushReplacementNamed(context, '/profilePage');
             },
             icon: Icon(
@@ -56,6 +58,8 @@ class AvatarPageState extends State<AvatarPage> {
               onPressed: () {
                 user.avatar = avatar;
                 update_avatar(user.avatar);
+
+                /// modifier l'avatar actuelle de l'utilisateur dans la base de données en cliquant sur le boutton de sauvgarde
               },
             ),
             SizedBox(
@@ -215,6 +219,7 @@ class AvatarCard extends StatelessWidget {
 }
 
 void update_avatar(String nouveaua_vatar) async {
+  // modifier l'avatar de l'utilisateur dans la base de données
   supabaseclient
       .from("user")
       .update({

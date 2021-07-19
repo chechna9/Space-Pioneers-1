@@ -5,6 +5,7 @@ import 'package:astro01/components/constants.dart';
 import '../components/constants.dart';
 import 'quiz.dart';
 import '../main.dart';
+// une page pour encourager l'utilisateur a jouer plus et apprendre ( afficher le nb ed points collectées dans cette planéte)
 
 int etoiles;
 int etoilesMax;
@@ -21,6 +22,7 @@ class _BravoNiveauState extends State<BravoNiveau> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
+        // un boutton pour retourner a la page planete choice
         Navigator.pushReplacementNamed(context, '/planetChoice');
       },
       child: Scaffold(
@@ -39,6 +41,7 @@ class _BravoNiveauState extends State<BravoNiveau> {
                   if (ableToBadge == true &&
                       etoiles == 100 &&
                       user.badges[indicesbr] == '0') {
+                    /// verefier s'il faut allez a la page de braveau de badge sinon retourer a planetechoice
                     List<String> badges = user.badges.split("");
 
                     badges[indicesbr] = '1';
@@ -67,8 +70,13 @@ class _BravoNiveauState extends State<BravoNiveau> {
                 style: TextStyle(
                     color: myYellow,
                     fontSize: 40,
+
+                    /// specifier le taille du texte
+
                     fontWeight: FontWeight.w900,
                     fontFamily: 'Gotham'),
+
+                /// specifier le font du texte
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 5),
@@ -79,8 +87,12 @@ class _BravoNiveauState extends State<BravoNiveau> {
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 24,
+
+                          /// specifier le taille du texte
                           fontWeight: FontWeight.normal,
                           fontFamily: 'Gotham'),
+
+                      /// specifier le font du texte
                       textAlign: TextAlign.center,
                     ),
                     Text(
@@ -88,8 +100,12 @@ class _BravoNiveauState extends State<BravoNiveau> {
                       style: TextStyle(
                           color: myYellow,
                           fontSize: 24,
+
+                          /// specifier le taille du texte
                           fontWeight: FontWeight.w700,
                           fontFamily: 'Gotham'),
+
+                      /// specifier le font du texte
                       textAlign: TextAlign.center,
                     ),
                   ],
@@ -112,8 +128,12 @@ class _BravoNiveauState extends State<BravoNiveau> {
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 18,
+
+                            /// specifier la taille du texte
                             fontWeight: FontWeight.normal,
                             fontFamily: 'Gotham'),
+
+                        /// specifier le font du texte
                         textAlign: TextAlign.center,
                       ),
                       Text(
@@ -121,8 +141,12 @@ class _BravoNiveauState extends State<BravoNiveau> {
                         style: TextStyle(
                             color: myYellow,
                             fontSize: 18,
+
+                            /// specifier la taille du texte
                             fontWeight: FontWeight.w900,
                             fontFamily: 'Gotham'),
+
+                        /// specifier le font du texte
                         textAlign: TextAlign.center,
                       ),
                     ],
@@ -135,8 +159,12 @@ class _BravoNiveauState extends State<BravoNiveau> {
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
+
+                              /// specifier la taille du texte
                               fontWeight: FontWeight.normal,
                               fontFamily: 'Gotham'),
+
+                          /// specifier le font du texte
                           textAlign: TextAlign.center,
                         ),
                         Text(
@@ -144,8 +172,12 @@ class _BravoNiveauState extends State<BravoNiveau> {
                           style: TextStyle(
                               color: myYellow,
                               fontSize: 18,
+
+                              /// specifier la taille du texte
                               fontWeight: FontWeight.w900,
                               fontFamily: 'Gotham'),
+
+                          /// specifier le font du texte
                           textAlign: TextAlign.center,
                         ),
                       ])
@@ -160,6 +192,7 @@ class _BravoNiveauState extends State<BravoNiveau> {
 }
 
 void update_badges() async {
+  // modifier les badges obtenue par l'utilisateur dans la base de données
   await supabaseclient
       .from("user")
       .update({"badges": user.badges})

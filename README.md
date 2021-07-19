@@ -5,6 +5,7 @@
 This game was developed using flutter, and it was tested on android devices .
 ## Prototype 
 You can find  [here](http://handlebarsjs.com/) the link of the Figma UI and the prototype . 
+[CONCEPTION GRAPHIQUE.pdf](https://github.com/nadir-ogd/Space-Pioneers/files/6844434/CONCEPTION.GRAPHIQUE.pdf)
 
 ## Functionalities 
 Our main **implemented features** are :
@@ -23,3 +24,9 @@ Our main **implemented features** are :
 
 Change the **active avatar** according to the player's choice .
 
+## Team's Members :
+@nadir-ogd
+@chechna9
+@mohamedaminebentayeb
+@muhammedBkf
+@Daliamhr

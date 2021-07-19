@@ -5,6 +5,7 @@ import 'package:astro01/variable_globale/variable.dart';
 import 'package:polygon_clipper/polygon_border.dart';
 import '../components/constants.dart';
 import 'quiz.dart';
+// une page pour encourager l'utilisateur a jouer plus et apprendre ( afficherdans le cas ou il a obtenue le badge ed cette planéte)
 
 class BravoBadge extends StatefulWidget {
   @override
@@ -18,6 +19,7 @@ class _BravoBadgeState extends State<BravoBadge> {
     planeteNAME = BadgePlanete[planeteNAME];
     return WillPopScope(
       onWillPop: () async {
+        // un boutton pour retourner a la page planete choice
         Navigator.pushReplacementNamed(context, '/planetChoice');
       },
       child: Scaffold(
@@ -32,8 +34,8 @@ class _BravoBadgeState extends State<BravoBadge> {
                 icon: Icon(Icons.cancel_outlined),
                 color: myGrey,
                 iconSize: 30,
-                onPressed: () =>
-                    Navigator.pushReplacementNamed(context, '/planetChoice'),
+                onPressed: () => Navigator.pushReplacementNamed(context,
+                    '/planetChoice'), // un boutton pour retourner a la page planete choice
               ),
             ),
           ],
@@ -52,8 +54,12 @@ class _BravoBadgeState extends State<BravoBadge> {
                   style: TextStyle(
                       color: myYellow,
                       fontSize: 40,
+
+                      /// specifier le taille du texte
                       fontWeight: FontWeight.w900,
                       fontFamily: 'Gotham'),
+
+                  /// specifier le font du texte
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 5),
@@ -62,8 +68,12 @@ class _BravoBadgeState extends State<BravoBadge> {
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 24,
+
+                        /// specifier le taille du texte
                         fontWeight: FontWeight.normal,
                         fontFamily: 'Gotham'),
+
+                    /// specifier le font du texte
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -78,23 +88,28 @@ class _BravoBadgeState extends State<BravoBadge> {
                       shape: PolygonBorder(sides: 6),
                       image: DecorationImage(
                         image: AssetImage(
-                            'assets/images/Badges/$planeteNAME2.png'),
+                            'assets/images/Badges/$planeteNAME2.png'), //l'image du badge obtenu
                       ),
                     ),
                   ),
                 ),
-            Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
-                        child: AutoSizeText('$planeteNAME',
+                      child: AutoSizeText(
+                        '$planeteNAME',
                         style: TextStyle(
                             color: myYellow,
                             fontSize: 36,
+
+                            /// specifier le taille du texte
                             fontWeight: FontWeight.w900,
                             fontFamily: 'Gotham'),
-                maxLines: 2,
-                textAlign: TextAlign.center,
+
+                        /// specifier le font du texte
+                        maxLines: 2,
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ],
@@ -109,8 +124,12 @@ class _BravoBadgeState extends State<BravoBadge> {
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 18,
+
+                            /// specifier le taille du texte
                             fontWeight: FontWeight.normal,
                             fontFamily: 'Gotham'),
+
+                        /// specifier le font du texte
                         textAlign: TextAlign.center,
                       ),
                       IconButton(
@@ -118,6 +137,7 @@ class _BravoBadgeState extends State<BravoBadge> {
                           color: Colors.white,
                           iconSize: 30,
                           onPressed: () => {
+                                //// un boutton pour aller voir les badges obtenues
                                 Navigator.pushReplacementNamed(
                                     context, '/profilePage'),
                               }),

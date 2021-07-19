@@ -3,6 +3,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:astro01/components/constants.dart';
 import 'documentation_data.dart';
 
+//une page pour definir la page de documentaion ( front)
 class DetailPage extends StatelessWidget {
   final PlanetInfo planetInfo;
 
@@ -10,6 +11,7 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // definir les tailles des deffirents objets
     double sh = MediaQuery.of(context).size.height; //screen height
     double sw = MediaQuery.of(context).size.width; //screen width
 

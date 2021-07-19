@@ -1,4 +1,5 @@
 class Trace {
+  // une classe pour contenir la trace de lutilisateur
   String email;
   int earth;
   int jupiter;

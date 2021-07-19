@@ -9,6 +9,7 @@ import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
 import 'package:email_auth/email_auth.dart';
 
+// une page pour que l'utilisateur puisse inscrire dans l'application
 bool cliqued = false;
 const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
 const supabaseKey =
@@ -124,6 +125,7 @@ class _RegCardState extends State<RegCard> {
 
   @override
   Widget build(BuildContext context) {
+    // definir les deffirent champ de la page inscrire nom / email / mot de passe / datte de naissance
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Card(
@@ -136,9 +138,11 @@ class _RegCardState extends State<RegCard> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 CustomTextForm(
+                    // champ username
                     labelText: "Username",
                     controller: _username,
                     validator: (value) {
+                      //valieder le nom de l'utilisateur s'il est correcte ou non
                       if (value == null || value.isEmpty) {
                         return ' please enter your name ';
                       }
@@ -150,6 +154,7 @@ class _RegCardState extends State<RegCard> {
                 ),
 
                 CustomTextForm(
+                    // valider l'email ed l'utilisateur s'il est bien formé
                     labelText: "Email",
                     controller: _email,
                     validator: (value) {
@@ -166,6 +171,7 @@ class _RegCardState extends State<RegCard> {
                   height: 12,
                 ),
                 CustomTextForm(
+                    // champ pour le mot de passe de l'utilisateur
                     obscured: true,
                     labelText: "Mot de Passe",
                     controller: _password,
@@ -182,6 +188,7 @@ class _RegCardState extends State<RegCard> {
                 ),
                 //date de naissance
                 FormField(
+                  /// champ pour selectioner la date de naissance de l'utilisateur
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (e) {
                     _dateValidate = _dateTime == null
@@ -270,6 +277,7 @@ class _RegCardState extends State<RegCard> {
                             ),
                           ),
                           onPressed: () {
+                            // verefier si deja cliquer dans le boutton il ne fonctionne pas sinon il fonctionne bien pour s'inscrire
                             cliqued ? null : _signup();
                           }),
                     ),
@@ -287,6 +295,7 @@ class _RegCardState extends State<RegCard> {
   }
 
   Future _signup() async {
+    /// une fonction pour inscrire avec un nouveau compte
     cliqued = true;
 
     if (_formKey.currentState.validate() && _username.text.length <= 14) {
@@ -322,6 +331,7 @@ class _RegCardState extends State<RegCard> {
         }).execute();
         Navigator.pushReplacementNamed(context, '/homeScreen');
       } else if (signInResult.error.message != null) {
+        // pour afficher les message d'erreures
         String message;
 
         message = signInResult.error.message;
@@ -375,8 +385,6 @@ class _RegCardState extends State<RegCard> {
                 ));
           });
     }
-    setState(() {
-      cliqued = false;
-    });
+    cliqued = false;
   }
 }

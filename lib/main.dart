@@ -29,6 +29,7 @@ import 'Screens/planetChoice.dart';
 import 'Screens/documentation_swiper.dart';
 import 'Screens/levelChoiceRandom.dart';
 
+// la page main pour definir les deffirentes routes de l'application et ele est la page du demarage de l'app
 const supabaseUrl = 'https://ltsahdljhuochhecajen.supabase.co';
 const supabaseKey =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMDQ3OTY4MiwiZXhwIjoxOTM2MDU1NjgyfQ.IoKgpB9APMw5Te9DYgbJZIbYcvPOwl41dl4-IKFjpVk';
@@ -48,9 +49,10 @@ void main() {
       // to change calendar color
       primarySwatch: calendarColor,
     ),
-    initialRoute: '/splash',
+    initialRoute: '/splash', // initialisation de la route
     routes: {
-      '/splashScreen': (context) => SplashScreen(),
+      '/splashScreen': (context) =>
+          SplashScreen(), // definition eds autres routes
       '/splash': (context) => Splash(
             mainAudioPlayer: mainAudioPlayer,
           ),

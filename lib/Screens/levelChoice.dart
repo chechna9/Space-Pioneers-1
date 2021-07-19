@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:astro01/components/constants.dart';
 import 'package:injector/injector.dart';
 import 'package:supabase/supabase.dart';
-
+// une page pour choisir la defficulté du jeux
 //int planeteInd;
 
 class LevelChoice extends StatefulWidget {
@@ -21,6 +21,7 @@ class _LevelChoiceState extends State<LevelChoice> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
+        /// une condition pour retourner a la page planete choice
         Navigator.pushReplacementNamed(context, '/planetChoice');
       },
       child: Scaffold(
@@ -37,6 +38,7 @@ class _LevelChoiceState extends State<LevelChoice> {
                   appBar: AppBar(
                     leading: IconButton(
                       onPressed: () {
+                        //un boutton pour retourner a la page planete choice
                         Navigator.pushReplacementNamed(
                             context, '/planetChoice');
                       },
@@ -194,6 +196,7 @@ class SelectLevelBox extends StatelessWidget {
 }
 
 Future<List<Trace>> gettrace(String email_) async {
+  // une pfonction pour recuperer la trace de l'utilisateur a partir de la base de données
   final response = await Injector.appInstance
       .get<SupabaseClient>()
       .from('Trace')

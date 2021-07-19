@@ -8,6 +8,7 @@ import 'documentation_data.dart';
 import 'documentation_details.dart';
 import 'splashScreen.dart';
 
+// une page pour permeter a l'utilisateur de choisir une planéte pour documenter
 class Documentation extends StatefulWidget {
   final AssetsAudioPlayer docAudioPlayer;
   final AssetsAudioPlayer mainAudioPlayer;
@@ -36,11 +37,13 @@ class _DocumentationState extends State<Documentation> {
 
   @override
   Widget build(BuildContext context) {
+    //definir les deffirents tailles de os objects
     double sh = MediaQuery.of(context).size.height; //screen height
     double sw = MediaQuery.of(context).size.width; //screen width
 
     return WillPopScope(
       onWillPop: () async {
+        // un boutton pour retourner a la page home
         widget.docAudioPlayer.pause();
         widget.mainAudioPlayer.playOrPause();
         Navigator.pushReplacementNamed(context, '/homeScreen');
@@ -62,6 +65,7 @@ class _DocumentationState extends State<Documentation> {
             iconSize: 35,
             onPressed: () {
               setState(() {
+                // arreter ou demmarer la music
                 widget.docAudioPlayer.pause();
                 widget.mainAudioPlayer.playOrPause();
               });

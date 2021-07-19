@@ -102,7 +102,6 @@ class _QuizState extends State<Quiz> {
                       if (cliquer == false) indices = shuffle([0, 3]);
                       vfquestion = true;
                     }
-                    print(indices);
                     return Stack(
                       fit: StackFit.expand,
                       children: [
@@ -217,16 +216,11 @@ class _AnswerBoxState extends State<AnswerBox> {
 
                       if (cliquer == false) {
                         points += factRecomp;
-<<<<<<< HEAD
-=======
-                        etoiles=points;
->>>>>>> a4d96cf244b02cc5151b0b3590b8f677940190f8
+                        etoiles = points;
                       }
                       verefication = true;
 
                       etoiles = points;
-                      print(points);
-                      print(trace.earth);
 
                       choiceColor = choiceColors[0];
                       questNum++;
@@ -308,7 +302,6 @@ class _AnswerBoxState extends State<AnswerBox> {
                               trace.venus;
                         }
                       } else {
-                        print('else');
                         if (verification(points) == 1) {
                           update();
 

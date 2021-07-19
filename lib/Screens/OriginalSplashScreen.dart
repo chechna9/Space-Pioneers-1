@@ -19,6 +19,7 @@ Future<void> _setuseremail(String _useremail) async {
   });*/
 }
 
+//récuperer le mail du local si il existe alors envoyer l'utilisateur vers le HomeScreen sinon vers le splashScreen
 Future<void> _clearremail() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -78,7 +79,7 @@ class _SplashState extends State<Splash> {
 
     _getseremail();
 
-    Timer(Duration(seconds: 5), () {
+    Timer(Duration(seconds: 5), () { 
       Future.microtask(() async {
         await Duration(seconds: 5);
         if (user.email == null) {

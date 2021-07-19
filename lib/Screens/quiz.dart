@@ -23,10 +23,10 @@ String planeteNAME;
 List<String> propo = ['a', 'b', 'c', 'd'];
 int points = 0;
 bool cliquer = false;
-List<int> ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-List<int> indices = [0, 1, 2, 3];
-AssetsAudioPlayer wrongAnswerPlayer = AssetsAudioPlayer();
-AssetsAudioPlayer rightAnswerPlayer = AssetsAudioPlayer();
+List<int> ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]; //tableau d'indices des 10 questions (pour les afficher aléatoirement)
+List<int> indices = [0, 1, 2, 3]; //tableau d'indices des 4 propositions de chaque question (pour les afficher aléatoirement)
+AssetsAudioPlayer wrongAnswerPlayer = AssetsAudioPlayer(); //son de mauvaise réponse 
+AssetsAudioPlayer rightAnswerPlayer = AssetsAudioPlayer(); //son de réponse correcte
 
 class Ind extends ChangeNotifier {
   List<int> ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -52,8 +52,8 @@ class Quiz extends StatefulWidget {
 class _QuizState extends State<Quiz> {
   List<Question> _questions = <Question>[];
   Future<List<Question>> fetchQuestions() async {
-    var url = Uri.parse('https://nadir-ogd.github.io/Quiz-API/questions.json');
-    var response = await http.get(url);
+    var url = Uri.parse('https://nadir-ogd.github.io/Quiz-API/questions.json'); //importation de contenu (questions + 4 propositions) en utilisant le fichier JSON
+    var response = await http.get(url); //lien disponible sur la plateform Github (public)
 
 // ignore: deprecated_member_use
     var questions = List<Question>();
@@ -87,8 +87,8 @@ class _QuizState extends State<Quiz> {
 
                     if (cliquer == false) {
                       if (vfquestion == false) indices = [0, 1, 2, 3];
-                      indices = shuffle(indices);
-                      ind = shuffle(ind);
+                      indices = shuffle(indices);//fonction qui mélange les indices du tableau (les réponses de chaque question sont affichés aléatoirement)
+                      ind = shuffle(ind);//fonction qui mélange les indices du tableau (les questions de chaque planète sont affichés aléatoirement)
                     }
                     RemplirChoices(
                         propo, snapshot.data[ind[0] + 10 * planeteInd]);
@@ -97,7 +97,7 @@ class _QuizState extends State<Quiz> {
                         snapshot.data[ind[0] + 10 * planeteInd].planete;
 
                     int i = 4;
-                    if (propo[2] == null && propo[1] == null) {
+                    if (propo[2] == null && propo[1] == null) { //le cas d'une question (avec vrai ou faux)
                       i = 2;
                       if (cliquer == false) indices = shuffle([0, 3]);
                       vfquestion = true;
@@ -225,7 +225,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                       choiceColor = choiceColors[0];
                       questNum++;
 
-                      showDialog(
+                      showDialog(//afficher la fenetre qui contient les infos complémentaire lorsque l'utilisateur réponds à une question quelconque
                         barrierDismissible: ind.length != 1,
                         context: context,
                         builder: (context) => InfoSup(
@@ -235,7 +235,7 @@ class _AnswerBoxState extends State<AnswerBox> {
                           onPressed: () {
                             verefier = verification(etoiles);
 
-                            update();
+                            update();//mettre la trace à jour (les points ajoutés)
                             user.etoiles = trace.earth +
                                 trace.jupiter +
                                 trace.mars +
@@ -252,11 +252,12 @@ class _AnswerBoxState extends State<AnswerBox> {
                         ),
                       );
 
-                      ind.removeAt(0);
+                      ind.removeAt(0);//enlever l'indice de la question répondu du tableau (arreter lorque le tableau est vide : 10 questions répondues)
                       vfquestion = false;
                       cliquer = false;
                     });
-                  } else if (widget.answer == propo[1])
+                    //mettre la couleur, les étoiles et le nombre de tentatives à jour
+                  } else if (widget.answer == propo[1]) 
                     setState(() {
                       verefication = false;
                       playWrongMusic();
@@ -560,14 +561,14 @@ class ProgressBar extends StatelessWidget {
   }
 }
 
-void RemplirChoices(List<String> choices, Question myquestion) {
+void RemplirChoices(List<String> choices, Question myquestion) { //une fonction qui permet de remplir le tableau des indices des 4 réponses d'une question à partir de fichier JSON
   choices[0] = myquestion.correct;
   choices[1] = myquestion.choice1;
   choices[2] = myquestion.choice2;
   choices[3] = myquestion.choice3;
 }
 
-List shuffle(List<int> indices) {
+List shuffle(List<int> indices) {//fonction qui mélange les indices d'un tableau donné (pour que les réponses et les questions seront toujours affichées aléatoirement)
   var random = new Random();
 
   // Go through all elements.
@@ -582,7 +583,7 @@ List shuffle(List<int> indices) {
   return indices;
 }
 
-int verification(int point) {
+int verification(int point) {//vérification l'ancien nombre d'étoiles colléctées avec le nouveau et mettre la trace à jour
   if (planeteInd == 0) {
     if (trace.soleil < point) {
       difference = point - trace.soleil;
@@ -702,7 +703,7 @@ int verification(int point) {
   }
 }
 
-void update() async {
+void update() async {//mettre la trace d'utilisateur à jour
   await supabaseclient
       .from("Trace")
       .update({

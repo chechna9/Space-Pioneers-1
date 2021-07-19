@@ -21,7 +21,7 @@ class Login extends StatefulWidget {
   _LoginState createState() => _LoginState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginState extends State<Login> { //traitement de processus "connexion" ou "login"
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   GlobalKey _formKey;
@@ -189,7 +189,7 @@ class _LogCardState extends State<LogCard> {
     } else if (signInResult.error.message != null) {
       TextButton(
           onPressed: () {},
-          child: Text(' erreur dans le mot ed passe ou le mail'));
+          child: Text(' erreur dans le mot de passe ou le mail'));
       showFlash(
           context: context,
           duration: const Duration(seconds: 2),
@@ -214,7 +214,7 @@ class _LogCardState extends State<LogCard> {
   }
 }
 
-Future<void> _clearremail() async {
+Future<void> _clearremail() async { //enlever le mail d'utilisateur de local
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
   prefs.clear();

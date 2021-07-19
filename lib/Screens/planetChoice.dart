@@ -11,8 +11,8 @@ class PlanetChoice extends StatefulWidget {
   _PlanetChoiceState createState() => _PlanetChoiceState();
 }
 
-int planeteInd;
-
+int planeteInd;//un indice est défini pour chaque planete pour la bonne gestion d'autres fonctionnalités
+//afficher les planetes pour que l'utilisateur peut choisir et jouer le quiz
 class _PlanetChoiceState extends State<PlanetChoice> {
   int credit = 75;
   @override

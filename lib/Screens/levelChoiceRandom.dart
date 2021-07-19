@@ -31,7 +31,7 @@ class _LevelChoiceRandomState extends State<LevelChoiceRandom> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
+    return WillPopScope( //arreter le fonctionnement de bouton arrière du téléphone  
       onWillPop: () async {
         Navigator.pushReplacementNamed(context, '/planetChoice');
       },
@@ -192,7 +192,7 @@ class SelectLevelBox extends StatelessWidget {
   }
 }
 
-Future<List<Trace>> gettrace(String email_) async {
+Future<List<Trace>> gettrace(String email_) async { //récuperer la tace d'utilisateur 
   final response = await Injector.appInstance
       .get<SupabaseClient>()
       .from('Trace')

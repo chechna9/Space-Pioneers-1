@@ -24,8 +24,8 @@ Our main **implemented features** are :
 - Change the **active avatar** according to the player's choice .
 
 ## Team's Members :
-@nadir-ogd 
-@chechna9 
-@mohamedaminebentayeb 
-@Daliamhr 
-@muhammedBkf 
+- **@nadir-ogd** 
+- **@chechna9** 
+- **@mohamedaminebentayeb** 
+- **@Daliamhr** 
+- **@muhammedBkf** 

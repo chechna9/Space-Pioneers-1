@@ -4,8 +4,7 @@
 
 This game was developed using flutter, and it was tested on android devices .
 ## Prototype 
-You can find  [here](http://handlebarsjs.com/) the link of the Figma UI and the prototype . 
-[CONCEPTION GRAPHIQUE.pdf](https://github.com/nadir-ogd/Space-Pioneers/files/6844434/CONCEPTION.GRAPHIQUE.pdf)
+You can find  [here](https://www.figma.com/file/TDxUvo22iGmvY282r6bwB5/SPACE-PIONEERS?node-id=0%3A1) the link of the Figma UI and the prototype . 
 
 ## Functionalities 
 Our main **implemented features** are :

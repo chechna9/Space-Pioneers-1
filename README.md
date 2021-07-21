@@ -14,7 +14,7 @@ You can find  [here](https://www.figma.com/file/TDxUvo22iGmvY282r6bwB5/SPACE-PIO
 <p align="center">
   <img src="https://user-images.githubusercontent.com/58882164/126244675-93f38bc3-a4fb-4db6-9ef5-73252c5856a9.png">
 </p>
-Our main **implemented features** are :
+Our main **implemented features** are:
 
 - **Authentication**: Divided into two sections the first for new users and a second for users with an existing account.
 

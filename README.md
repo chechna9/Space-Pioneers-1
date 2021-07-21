@@ -3,7 +3,7 @@
 **Space Pioneers** is a quiz game divided into three sections (documentation, game, profile), on the theme of space and especially the solar system, a subject that is very interesting for teenagers .
 
 <p align="center">
-  <img width="460" height="300" src="https://user-images.githubusercontent.com/58882164/126245076-44be1541-5620-43b9-b08d-3b34162ffb60.png">
+  <img src="https://user-images.githubusercontent.com/58882164/126245076-44be1541-5620-43b9-b08d-3b34162ffb60.png">
 </p>
 
 This game was developed using flutter, and it was tested on android devices .
